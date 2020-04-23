@@ -1,5 +1,5 @@
 <div align="center">
- <h3>Ian's Emacs Configuration</h3>
+ <h3>Ian's Emacs Configuration (on Windows 10 + WSL Ubuntu 18.04)</h3>
 </div>
 
 <hr>
@@ -9,9 +9,10 @@
 </p>
 
 ### Thanks for dropping by!
-This is my personal Emacs configuration (on GNU Emacs 28.0.50). If you
-prefer an unopinionated Emacs "distro" that you could build upon,
-check out [this page](https://github.com/ianpan870102/yay-evil-emacs).
+This is my personal Emacs 26.3 configuration when I'm using Windows 10
+and WSL Ubuntu 18.04. If you prefer an unopinionated Emacs "distro"
+that you could build upon, check out [this
+page](https://github.com/ianpan870102/yay-evil-emacs).
 
 ### Installation
 Back up your `~/.emacs.d/` first (if you have one):

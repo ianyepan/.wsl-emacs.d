@@ -76,7 +76,7 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(fringe                                       ((t (:foreground ,fg :background ,bg))))
    `(line-number                                  ((t (:foreground ,fg :background ,bg-alt2))))
    `(line-number-current-line                     ((t (:foreground ,fg :background ,bg-alt2))))
-   `(header-line                                  ((t (:foreground ,fg :background ,cyan-light :box t))))
+   `(header-line                                  ((t (:foreground ,fg :background ,blue-light :box t))))
    `(highlight                                    ((t (:background ,highlight))))
    `(success                                      ((t (:foreground ,green :weight normal))))
    `(warning                                      ((t (:foreground ,red :weight normal))))
@@ -312,7 +312,7 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(indent-guide-face                            ((t (:foreground ,highlight))))
 
 ;;;;; ivy
-   `(ivy-current-match                            ((t (:background ,cyan-light))))
+   `(ivy-current-match                            ((t (:background ,blue-light :underline t :extend t))))
    `(ivy-minibuffer-match-face-1                  ((t (:background ,bg-alt2))))
    `(ivy-minibuffer-match-face-2                  ((t (:background ,cyan-light))))
    `(ivy-minibuffer-match-face-3                  ((t (:background ,purple-light))))

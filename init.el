@@ -515,7 +515,7 @@
   :hook (prog-mode . company-mode)
   :config
   (setq company-minimum-prefix-length 1)
-  (setq company-idle-delay 0.4)
+  (setq company-idle-delay 0.3)
   (setq company-selection-wrap-around t)
   (setq company-tooltip-align-annotations t)
   (setq company-frontends '(company-pseudo-tooltip-frontend ; show tooltip even for single candidate

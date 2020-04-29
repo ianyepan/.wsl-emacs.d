@@ -311,9 +311,12 @@
    `(diff-hl-delete                           ((t (:foreground ,tw-r))))
    `(diff-hl-change                           ((t (:foreground ,tw-b))))
 
-   `(git-gutter-fr:added                      ((t (:foreground ,tw-g))))
-   `(git-gutter-fr:modified                   ((t (:foreground ,tw-b))))
-   `(git-gutter-fr:deleted                    ((t (:foreground ,tw-r))))
+   `(git-gutter:added                         ((t (:background ,tw-g :foreground ,tw-g :weight normal))))
+   `(git-gutter:modified                      ((t (:background ,tw-b :foreground ,tw-b :weight normal))))
+   `(git-gutter:deleted                       ((t (:background ,tw-r :foreground ,tw-r :weight normal))))
+   `(git-gutter-fr:added                      ((t (:background ,tw-g :foreground ,tw-g :weight normal))))
+   `(git-gutter-fr:modified                   ((t (:background ,tw-b :foreground ,tw-b :weight normal))))
+   `(git-gutter-fr:deleted                    ((t (:background ,tw-r :foreground ,tw-r :weight normal))))
 
    `(sml/global                               ((t :foreground ,keyword :weight normal)))
    `(sml/filename                             ((t :foreground ,accent  :weight normal)))

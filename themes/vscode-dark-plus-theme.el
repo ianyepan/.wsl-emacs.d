@@ -329,9 +329,12 @@
    `(swiper-match-face-4                      ((t (:inherit ivy-minibuffer-match-face-4))))
    `(swiper-line-face                         ((t (:foreground ,fg0 :background ,bg4 :extend t))))
 
-   `(git-gutter:added                         ((t (:foreground ,tw-g :weight normal))))
-   `(git-gutter:deleted                       ((t (:foreground ,tw-r :weight normal))))
-   `(git-gutter:modified                      ((t (:foreground ,tw-b :weight normal))))
+   `(git-gutter:added                         ((t (:background ,tw-g :foreground ,tw-g :weight normal))))
+   `(git-gutter:deleted                       ((t (:background ,tw-r :foreground ,tw-r :weight normal))))
+   `(git-gutter:modified                      ((t (:background ,tw-b :foreground ,tw-b :weight normal))))
+   `(git-gutter-fr:added                      ((t (:background ,tw-g :foreground ,tw-g :weight normal))))
+   `(git-gutter-fr:deleted                    ((t (:background ,tw-r :foreground ,tw-r :weight normal))))
+   `(git-gutter-fr:modified                   ((t (:background ,tw-b :foreground ,tw-b :weight normal))))
 
    `(diff-hl-insert                           ((t (:foreground ,tw-g))))
    `(diff-hl-delete                           ((t (:foreground ,tw-r))))

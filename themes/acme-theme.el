@@ -76,7 +76,7 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(default                                      ((t (:foreground ,fg :background ,bg))))
    `(cursor                                       ((t (:foreground ,bg :background ,fg))))
    `(escape-glyph                                 ((t (:foreground ,cyan-light :bold nil))))
-   `(fringe                                       ((t (:foreground ,fg :background ,cyan-light))))
+   `(fringe                                       ((t (:foreground ,fg :background ,bg))))
    `(line-number                                  ((t (:foreground ,fg :background ,bg-alt2))))
    `(line-number-current-line                     ((t (:foreground ,fg :background ,bg-alt2))))
    `(header-line                                  ((t (:foreground ,fg :background ,blue-light :box t))))

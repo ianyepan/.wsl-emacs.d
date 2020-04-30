@@ -2,9 +2,9 @@
 
 ;;; Commentary:
 ;;
-;; This theme strives to have as few lines as possible, only
-;; tweaking the colors that are hinder readability in the
-;; default dark theme
+;; This theme strives to have as few lines as possible, only tweaking
+;; the colors that hinder readability/consistency in the default dark
+;; theme
 
 ;;; Usage:
 ;;
@@ -17,17 +17,18 @@
 (custom-theme-set-faces
  'default-dark
  '(default                    ((t (:background "#060606" :foreground "#eeeeee"))))
- '(company-scrollbar-bg       ((t (:background "gray20"))))
- '(company-scrollbar-fg       ((t (:background "gray50"))))
+ '(region                     ((t (:background "gray30"))))
  '(company-tooltip            ((t (:inherit default :background "gray20"))))
- '(company-tooltip-common     ((t (:inherit font-lock-constant-face))))
+ '(company-tooltip-common     ((t (:inherit font-lock-comment-face))))
  '(company-tooltip-annotation ((t (:inherit font-lock-builtin-face))))
  '(company-tooltip-selection  ((t (:inherit highlight))))
+ '(company-scrollbar-bg       ((t (:background "gray20"))))
+ '(company-scrollbar-fg       ((t (:background "gray50"))))
  '(ivy-current-match          ((t (:inherit highlight))))
  '(vterm-color-blue           ((t (:foreground "dodgerblue"))))
- '(git-gutter-fr:modified     ((t (:foreground "skyblue"))))
- '(line-number                ((t (:foreground "#666666" :background nil))))
- '(line-number-current-line   ((t (:foreground "#666666" :background nil))))
+ '(git-gutter-fr:added        ((t (:background "green" :foreground "green" :weight normal))))
+ '(git-gutter-fr:deleted      ((t (:background "red" :foreground "red" :weight normal))))
+ '(git-gutter-fr:modified     ((t (:background "skyblue" :foreground "skyblue" :weight normal))))
  )
 
 (provide-theme 'default-dark)

@@ -256,7 +256,7 @@
 ;; GUI enhancements
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-(load-theme 'acme t)
+(load-theme 'default-light t)
 
 (use-package highlight-symbol
   :hook (prog-mode . highlight-symbol-mode)

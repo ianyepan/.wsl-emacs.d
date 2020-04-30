@@ -74,10 +74,10 @@
   :config
   (setq custom-file "~/.emacs.d/to-be-dumped.el"))
 
-(use-package scroll-bar
-  :ensure nil
-  :config
-  (scroll-bar-mode -1))
+;; (use-package scroll-bar
+;;   :ensure nil
+;;   :config
+;;   (scroll-bar-mode -1))
 
 (use-package simple
   :ensure nil

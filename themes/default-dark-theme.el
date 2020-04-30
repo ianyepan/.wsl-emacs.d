@@ -17,7 +17,7 @@
 (custom-theme-set-faces
  'default-dark
  '(default                    ((t (:background "#060606" :foreground "#eeeeee"))))
- '(region                     ((t (:background "gray30"))))
+ '(region                     ((t (:background "#113366"))))
  '(company-tooltip            ((t (:inherit default :background "gray20"))))
  '(company-tooltip-common     ((t (:inherit font-lock-comment-face))))
  '(company-tooltip-annotation ((t (:inherit font-lock-builtin-face))))

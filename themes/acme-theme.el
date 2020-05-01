@@ -40,14 +40,12 @@
     ("cyan-light"    . "#a8efeb")
     ("red"           . "#880000")
     ("red-light"     . "#f8e8e8")
-    ("red-alt"       . "#cc0000")
     ("yellow"        . "#888838")
     ("yellow-light"  . "#f8fce8")
     ("green"         . "#005500")
-    ("green-alt"     . "#00cc00")
+    ("green-alt"     . "#006600")
     ("green-light"   . "#e8fce8")
     ("blue"          . "#1054af")
-    ("blue-alt"      . "#5588ff")
     ("blue-light"    . "#e1faff")
     ("purple"        . "#555599")
     ("purple-light"  . "#ffeaff")))
@@ -183,12 +181,6 @@ Also bind `class' to ((class color) (min-colors 89))."
                                                    (t (:foreground ,fg :background ,cyan-light :weight normal))))
    `(diff-hunk-header                             ((,class (:foreground ,green :weight normal))
                                                    (t (:foreground ,green :weight normal))))
-
-;;;;; diff-hl
-   `(diff-hl-insert                               ((t (:foreground ,fg :background ,green-light))))
-   `(diff-hl-delete                               ((t (:foreground ,fg :background ,red-light))))
-   `(diff-hl-change                               ((t (:foreground ,fg :background ,yellow-light))))
-
 ;;;;; dired/dired+/dired-subtree
    `(dired-directory                              ((t (:foreground ,blue :weight bold))))
    `(diredp-display-msg                           ((t (:foreground ,blue))))
@@ -461,11 +453,16 @@ Also bind `class' to ((class color) (min-colors 89))."
 
 ;;;;; git-gutter
    `(git-gutter:added                             ((t (:background ,green-alt :foreground ,green-alt :weight normal))))
-   `(git-gutter:deleted                           ((t (:background ,red-alt :foreground ,red-alt :weight normal))))
-   `(git-gutter:modified                          ((t (:background ,blue-alt :foreground ,blue-alt :weight normal))))
+   `(git-gutter:deleted                           ((t (:background ,red :foreground ,red :weight normal))))
+   `(git-gutter:modified                          ((t (:background ,yellow :foreground ,yellow :weight normal))))
    `(git-gutter-fr:added                          ((t (:background ,green-alt :foreground ,green-alt :weight normal))))
-   `(git-gutter-fr:deleted                        ((t (:background ,red-alt :foreground ,red-alt :weight normal))))
-   `(git-gutter-fr:modified                       ((t (:background ,blue-alt :foreground ,blue-alt :weight normal))))
+   `(git-gutter-fr:deleted                        ((t (:background ,red :foreground ,red :weight normal))))
+   `(git-gutter-fr:modified                       ((t (:background ,yellow :foreground ,yellow :weight normal))))
+
+;;;;; diff-hl
+   `(diff-hl-insert                               ((t (:background ,green-alt :foreground ,green-alt))))
+   `(diff-hl-delete                               ((t (:background ,red :foreground ,red))))
+   `(diff-hl-change                               ((t (:background ,yellow :foreground ,yellow))))
 
 ;;;;; mu4e, mail
    `(mu4e-header-highlight-face                   ((t (:background ,highlight))))

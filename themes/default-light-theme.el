@@ -18,7 +18,16 @@
  'default-light
  '(region                       ((t (:background "#ddeeff"))))
  '(font-lock-keyword-face       ((t (:foreground "purple" :bold t))))
+ '(font-lock-type-face          ((t (:foreground "ForestGreen" :bold t))))
  '(font-lock-variable-name-face ((t (:foreground "black"))))
+
+ '(company-tooltip              ((t (:foreground "black" :background "gray90"))))
+ '(company-tooltip-common       ((t (:foreground "blue3" :bold t))))
+ '(company-tooltip-annotation   ((t (:italic t))))
+ '(company-tooltip-selection    ((t (:background "gray85" :bold t))))
+ '(company-scrollbar-bg         ((t (:background "gray85"))))
+ '(company-scrollbar-fg         ((t (:background "gray80"))))
+
  '(line-number                  ((t (:background "grey90" :foreground "black"))))
  '(line-number-current-line     ((t (:background "grey90" :foreground "black"))))
  '(git-gutter-fr:added          ((t (:background "#00cc00" :foreground "#00cc00" :weight normal))))

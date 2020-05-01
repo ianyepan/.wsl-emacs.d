@@ -58,7 +58,7 @@
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
   (tool-bar-mode -1)
   (menu-bar-mode -1)
-  (setq-default line-spacing 0)
+  (setq-default line-spacing 3)
   (setq-default indent-tabs-mode nil)
   (setq-default tab-width ian/indent-width))
 
@@ -256,7 +256,11 @@
 ;; GUI enhancements
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-(load-theme 'default-light t)
+(load-theme 'acme t)
+
+(use-package color-theme-sanityinc-tomorrow
+  :config
+  (load-theme 'sanityinc-tomorrow-blue t))
 
 (use-package highlight-symbol
   :hook (prog-mode . highlight-symbol-mode)
@@ -318,20 +322,26 @@
   :config
   (add-hook 'with-editor-mode-hook #'evil-insert-state))
 
-(use-package git-gutter
-  :hook (prog-mode . git-gutter-mode)
+(use-package diff-hl
+  :hook ((prog-mode . diff-hl-mode)
+         (diff-hl-mode . diff-hl-flydiff-mode))
   :config
-  (setq git-gutter:update-interval 0.1))
+  (setq diff-hl-flydiff-delay 0.05))
 
-(use-package git-gutter-fringe
-  :config
-  (setq-default fringes-outside-margins t)
-  (define-fringe-bitmap 'git-gutter-fr:added [224]
-    nil nil '(center repeated))
-  (define-fringe-bitmap 'git-gutter-fr:modified [224]
-    nil nil '(center repeated))
-  (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240]
-    nil nil 'bottom))
+;; (use-package git-gutter
+;;   :hook (prog-mode . git-gutter-mode)
+;;   :config
+;;   (setq git-gutter:update-interval 0.1))
+
+;; (use-package git-gutter-fringe
+;;   :config
+;;   (setq-default fringes-outside-margins t)
+;;   (define-fringe-bitmap 'git-gutter-fr:added [224]
+;;     nil nil '(center repeated))
+;;   (define-fringe-bitmap 'git-gutter-fr:modified [224]
+;;     nil nil '(center repeated))
+;;   (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240]
+;;     nil nil 'bottom))
 
 ;; Searching/sorting enhancements & project management
 

@@ -259,6 +259,12 @@
 ;; (load-theme 'acme t)
 
 (use-package color-theme-sanityinc-tomorrow
+  :custom-face
+  (cursor                     ((t (:background "white"))))
+  (company-tooltip-selection  ((t (:foreground "white" :background "blue" :inverse-video nil :bold t))))
+  (company-tooltip-annotation ((t (:italic t))))
+  (show-paren-match           ((t (:foreground "white" :background "blue" :bold t))))
+  (hl-todo                    ((t (:inverse-video t))))
   :config
   (load-theme 'sanityinc-tomorrow-blue t))
 

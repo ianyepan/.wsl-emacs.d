@@ -39,6 +39,7 @@
  '(ediff-odd-diff-A           ((t (:background "#222222"))))
  '(ediff-odd-diff-B           ((t (:background "#222222"))))
  '(ediff-odd-diff-C           ((t (:background "#222222"))))
+ '(hl-todo                    ((t (:inverse-video t))))
  )
 
 (provide-theme 'default-dark)

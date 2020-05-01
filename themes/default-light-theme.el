@@ -33,6 +33,7 @@
  '(git-gutter-fr:added          ((t (:background "#00cc00" :foreground "#00cc00" :weight normal))))
  '(git-gutter-fr:deleted        ((t (:background "#cc0000" :foreground "#cc0000" :weight normal))))
  '(git-gutter-fr:modified       ((t (:background "#5588ff" :foreground "#5588ff" :weight normal))))
+ '(hl-todo                      ((t (:inverse-video t))))
  )
 
 (provide-theme 'default-light)

@@ -256,17 +256,11 @@
 ;; GUI enhancements
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-;; (load-theme 'acme t)
+(load-theme 'vscode-dark-plus t)
 
-(use-package color-theme-sanityinc-tomorrow
-  :custom-face
-  (cursor                     ((t (:background "white"))))
-  (company-tooltip-selection  ((t (:foreground "white" :background "blue" :inverse-video nil :bold t))))
-  (company-tooltip-annotation ((t (:italic t))))
-  (show-paren-match           ((t (:foreground "white" :background "blue" :bold t))))
-  (hl-todo                    ((t (:inverse-video t))))
-  :config
-  (load-theme 'sanityinc-tomorrow-blue t))
+;; (use-package color-theme-sanityinc-tomorrow
+;;   :config
+;;   (load-theme 'sanityinc-tomorrow-blue t))
 
 (use-package highlight-symbol
   :hook (prog-mode . highlight-symbol-mode)
@@ -602,7 +596,7 @@
   (add-to-list 'hl-todo-keyword-faces '("DOING" . "#94bff3"))
   (global-hl-todo-mode +1))
 
-;;; Dired
+;;; Dired enhancements
 
 (use-package dired-single
   :preface

@@ -329,7 +329,6 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(magit-tag                                    ((t (:foreground ,purple :weight normal))))
    `(magit-refname                                ((t (:foreground ,purple :weight normal))))
    `(magit-head                                   ((t (:foreground ,green :weight normal))))
-
    `(magit-branch-local                           ((t (:foreground ,blue :background ,blue-light
                                                                    :weight normal))))
    `(magit-branch-remote                          ((t (:foreground ,green :background ,green-light

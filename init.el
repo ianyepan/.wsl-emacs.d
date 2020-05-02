@@ -64,10 +64,10 @@
 
 ;;; Built-in packages
 
-(use-package "startup"
-  :ensure nil
-  :config
-  (setq inhibit-startup-screen t))
+;; (use-package "startup"
+;;   :ensure nil
+;;   :config
+;;   (setq inhibit-startup-screen t))
 
 (use-package cus-edit
   :ensure nil
@@ -384,10 +384,10 @@
   (setq swiper-action-recenter t)
   (setq swiper-goto-start-of-match t))
 
-(use-package ivy-rich
-  :config
-  (ivy-rich-mode +1)
-  (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
+;; (use-package ivy-rich
+;;   :config
+;;   (ivy-rich-mode +1)
+;;   (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
 
 (use-package projectile
   :config

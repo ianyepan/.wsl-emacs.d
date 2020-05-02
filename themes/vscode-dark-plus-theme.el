@@ -71,8 +71,17 @@
       (str               "#CE9178")
       (type              "#4ec9b0")
       (var               "#9cdcfe")
-      (numeric           "#b5cea8")
-      (warning           "#f44747"))
+      (warning           "#f44747")
+      (ms-yellow         "#DCDCAA")
+      (ms-bluegreen      "#4EC9B0")
+      (ms-magenta        "#C586C0")
+      (ms-lightblue      "#9CDCFE")
+      (ms-orange         "#CE9178")
+      (ms-red            "#d16969")
+      (ms-blue           "#569cd6")
+      (ms-lightgreen     "#b5cea8")
+      (ms-green          "#6A9955")
+      )
   (custom-theme-set-faces
    'vscode-dark-plus
    `(default                                  ((,class (:background ,bg1 :foreground ,fg1))))
@@ -110,7 +119,8 @@
    `(minibuffer-prompt                        ((,class (:foreground ,type :bold nil))))
    `(default-italic                           ((,class (:italic t))))
    `(link                                     ((,class (:foreground ,const :underline t))))
-   `(warning                                  ((,class (:foreground ,warning))))
+   `(warning                                  ((,class (:foreground ,ms-magenta))))
+   `(success                                  ((,class (:foreground ,ms-bluegreen))))
    `(dired-directory                          ((t (:inherit (font-lock-keyword-face)))))
    `(line-number                              ((,class (:foreground ,line-num :background nil))))
    `(line-number-current-line                 ((,class (:foreground ,fg1 :background nil))))
@@ -377,7 +387,7 @@
    `(evil-ex-substitute-replacement           ((t (:foreground ,type :weight normal))))
 
    `(hl-todo                                  ((t (:inverse-video t))))
-   `(highlight-numbers-number                 ((t (:foreground ,numeric))))
+   `(highlight-numbers-number                 ((t (:foreground ,ms-lightgreen))))
    `(highlight-operators-face                 ((t (:foreground ,fg1))))
    ))
 

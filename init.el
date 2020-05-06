@@ -571,7 +571,7 @@
   (setq web-mode-css-indent-offset ian/indent-width)
   (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'"))))
 
-(use-package sml-mode
+(use-package sml-mode ; Standard ML of New Jersey
   :mode (("\\.ml\\'" . sml-mode)))
 
 (use-package emmet-mode

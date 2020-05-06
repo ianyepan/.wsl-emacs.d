@@ -19,18 +19,19 @@
  '(default                    ((t (:background "#060606" :foreground "#eeeeee"))))
  '(region                     ((t (:background "#113386"))))
 
- '(company-tooltip            ((t (:foreground "black" :background "gray75"))))
+ '(company-tooltip            ((t (:foreground "black" :background "gray55"))))
  '(company-tooltip-common     ((t (:foreground "blue3" :bold t))))
  '(company-tooltip-annotation ((t (:italic t))))
- '(company-tooltip-selection  ((t (:background "gray65" :bold t))))
- '(company-scrollbar-bg       ((t (:background "gray65"))))
- '(company-scrollbar-fg       ((t (:background "gray50"))))
+ '(company-tooltip-selection  ((t (:background "gray40" :bold t))))
+ '(company-scrollbar-bg       ((t (:background "gray55"))))
+ '(company-scrollbar-fg       ((t (:background "gray40"))))
 
  '(ivy-current-match          ((t (:inherit highlight))))
  '(vterm-color-blue           ((t (:foreground "dodgerblue"))))
  '(git-gutter-fr:added        ((t (:background "green4" :foreground "green4" :weight normal))))
  '(git-gutter-fr:deleted      ((t (:background "red4" :foreground "red4" :weight normal))))
  '(git-gutter-fr:modified     ((t (:background "yellow4" :foreground "yellow4" :weight normal))))
+
  '(ediff-even-diff-Ancestor   ((t (:background "#222222"))))
  '(ediff-even-diff-A          ((t (:background "#222222"))))
  '(ediff-even-diff-B          ((t (:background "#222222"))))

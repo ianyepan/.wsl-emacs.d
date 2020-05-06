@@ -168,7 +168,7 @@
 
 (use-package prolog
   :ensure nil
-  ;; :mode (("\\.pl\\'" . prolog-mode))
+  :mode (("\\.pl\\'" . prolog-mode))
   :config
   (setq prolog-indent-width ian/indent-width))
 
@@ -256,11 +256,15 @@
 ;; GUI enhancements
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-(load-theme 'vscode-dark-plus t)
+;; (load-theme 'vscode-dark-plus t)
 
-;; (use-package color-theme-sanityinc-tomorrow
-;;   :config
-;;   (load-theme 'sanityinc-tomorrow-blue t))
+(use-package color-theme-sanityinc-tomorrow
+  :custom-face
+  (cursor                    ((t (:background "white"))))
+  (show-paren-match          ((t (:background "blue" :foreground "white" :bold t))))
+  (company-tooltip-selection ((t (:inverse-video nil :foreground "white" :background "RoyalBlue3"))))
+  :config
+  (load-theme 'sanityinc-tomorrow-blue t))
 
 (use-package highlight-symbol
   :hook (prog-mode . highlight-symbol-mode)
@@ -287,6 +291,11 @@
     (save-buffer)
     (kill-this-buffer))
   :config
+  (setq-default cursor-type '(hbar . 5))
+  (setq evil-normal-state-cursor '(hbar . 5))
+  (setq evil-insert-state-cursor '(hbar . 5))
+  (setq evil-visual-state-cursor '(hbar . 5))
+  (setq evil-emacs-state-cursor '(hbar . 5))
   (with-eval-after-load 'evil-maps
     (define-key evil-normal-state-map (kbd "gd") #'xref-find-definitions)
     (define-key evil-insert-state-map (kbd "C-n") nil); avoid conflict with company tooltip selection
@@ -381,10 +390,10 @@
   (setq swiper-action-recenter t)
   (setq swiper-goto-start-of-match t))
 
-;; (use-package ivy-rich
-;;   :config
-;;   (ivy-rich-mode +1)
-;;   (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
+(use-package ivy-rich
+  :config
+  (ivy-rich-mode +1)
+  (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
 
 (use-package projectile
   :config
@@ -561,6 +570,9 @@
   (setq web-mode-code-indent-offset ian/indent-width)
   (setq web-mode-css-indent-offset ian/indent-width)
   (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'"))))
+
+(use-package sml-mode
+  :mode (("\\.ml\\'" . sml-mode)))
 
 (use-package emmet-mode
   :hook ((html-mode   . emmet-mode)

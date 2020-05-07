@@ -291,11 +291,11 @@
     (save-buffer)
     (kill-this-buffer))
   :config
-  (setq-default cursor-type '(hbar . 5))
-  (setq evil-normal-state-cursor '(hbar . 5))
-  (setq evil-insert-state-cursor '(hbar . 5))
-  (setq evil-visual-state-cursor '(hbar . 5))
-  (setq evil-emacs-state-cursor '(hbar . 5))
+  ;; (setq-default cursor-type '(hbar . 5))
+  ;; (setq evil-normal-state-cursor '(hbar . 5))
+  ;; (setq evil-insert-state-cursor '(hbar . 5))
+  ;; (setq evil-visual-state-cursor '(hbar . 5))
+  ;; (setq evil-emacs-state-cursor '(hbar . 5))
   (with-eval-after-load 'evil-maps
     (define-key evil-normal-state-map (kbd "gd") #'xref-find-definitions)
     (define-key evil-insert-state-map (kbd "C-n") nil); avoid conflict with company tooltip selection

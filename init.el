@@ -98,7 +98,7 @@
     (split-window-right)
     (other-window 1))
   :config
-  (setq split-width-threshold 140)
+  (setq split-width-threshold 100)
   (global-set-key (kbd "C-x 2") #'ian/split-and-follow-horizontally)
   (global-set-key (kbd "C-x 3") #'ian/split-and-follow-vertically))
 
@@ -196,7 +196,7 @@
   (defun ian/set-default-font ()
     (interactive)
     (when (member "Px437 IBM VGA8" (font-family-list))
-      (set-face-attribute 'default nil :family "Consolas"))
+      (set-face-attribute 'default nil :family "Hack"))
     (set-face-attribute 'default nil
                         :height 120
                         :weight 'normal))
@@ -256,13 +256,14 @@
 ;; GUI enhancements
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-;; (load-theme 'vscode-dark-plus t)
+;; (load-theme 'acme t)
 
 (use-package color-theme-sanityinc-tomorrow
   :custom-face
   (cursor                    ((t (:background "white"))))
-  (show-paren-match          ((t (:background "blue" :foreground "white" :bold t))))
-  (company-tooltip-selection ((t (:inverse-video nil :foreground "white" :background "RoyalBlue3"))))
+  (show-paren-match          ((t (:foreground "white" :background "blue" :bold nil))))
+  (company-tooltip-selection ((t (:foreground "white" :background "RoyalBlue3" :inverse-video nil ))))
+  (hl-todo                   ((t (:inverse-video t))))
   :config
   (load-theme 'sanityinc-tomorrow-blue t))
 
@@ -572,7 +573,9 @@
   (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'"))))
 
 (use-package sml-mode ; Standard ML of New Jersey
-  :mode (("\\.ml\\'" . sml-mode)))
+  :mode (("\\.s?ml\\'" . sml-mode))
+  :config
+  (setq sml-indent-level ian/indent-width))
 
 (use-package emmet-mode
   :hook ((html-mode   . emmet-mode)

@@ -114,7 +114,7 @@
    `(fringe                                   ((,class (:background ,bg1 :foreground ,fg4))))
    `(cursor                                   ((,class (:background ,fg1))))
    `(show-paren-match-face                    ((,class (:background ,warning))))
-   `(show-paren-match                         ((t (:foreground ,accent :background ,bg4 :bold t ))))
+   `(show-paren-match                         ((t (:foreground ,accent :background ,bg4 :bold t))))
    `(show-paren-mismatch                      ((t (:background ,warning))))
    `(isearch                                  ((,class (:bold nil :foreground ,accent :background ,bg4))))
    `(vertical-border                          ((,class (:foreground ,bg3))))

@@ -256,16 +256,17 @@
 ;; GUI enhancements
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-;; (load-theme 'acme t)
+;; (load-theme 'default-light t)
 
 (use-package color-theme-sanityinc-tomorrow
   :custom-face
   (cursor                    ((t (:background "white"))))
   (show-paren-match          ((t (:foreground "white" :background "blue" :bold nil))))
-  (company-tooltip-selection ((t (:foreground "white" :background "RoyalBlue3" :inverse-video nil ))))
+  (company-tooltip-selection ((t (:foreground "white" :background "RoyalBlue3" :inverse-video nil :bold t))))
   (hl-todo                   ((t (:inverse-video t))))
   :config
   (load-theme 'sanityinc-tomorrow-blue t))
+
 
 (use-package highlight-symbol
   :hook (prog-mode . highlight-symbol-mode)

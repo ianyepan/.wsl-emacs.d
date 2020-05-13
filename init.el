@@ -546,7 +546,7 @@
 (use-package flycheck
   :hook ((prog-mode   . flycheck-mode))
   :config
-  (setq flycheck-check-syntax-automatically '(save mode-enabled newline))
+  ;; (setq flycheck-check-syntax-automatically '(save mode-enabled newline))
   (setq flycheck-display-errors-delay 0.1)
   (setq flycheck-flake8rc "~/.config/flake8"))
 

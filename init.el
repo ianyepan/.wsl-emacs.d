@@ -256,16 +256,26 @@
 ;; GUI enhancements
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-;; (load-theme 'default-light t)
+;; (load-theme 'vscode-dark-plus t)
 
-(use-package color-theme-sanityinc-tomorrow
+(use-package doom-themes
   :custom-face
-  (cursor                    ((t (:background "white"))))
-  (show-paren-match          ((t (:foreground "white" :background "blue" :bold nil))))
-  (company-tooltip-selection ((t (:foreground "white" :background "RoyalBlue3" :inverse-video nil :bold t))))
-  (hl-todo                   ((t (:inverse-video t))))
+  (font-lock-constant-face      ((t (:foreground "#2aa198")))) ; cyan
+  (highlight-numbers-number     ((t (:foreground "#2aa198")))) ; cyan
+  (show-paren-match             ((t (:foreground "white"))))
   :config
-  (load-theme 'sanityinc-tomorrow-blue t))
+  (setq doom-themes-enable-bold nil)
+  (setq doom-solarized-dark-brighter-text t)
+  (load-theme 'doom-solarized-dark t))
+
+;; (use-package color-theme-sanityinc-tomorrow
+;;   :custom-face
+;;   (cursor                    ((t (:background "white"))))
+;;   (show-paren-match          ((t (:foreground "white" :background "RoyalBlue3" :bold nil))))
+;;   (company-tooltip-selection ((t (:foreground "white" :background "RoyalBlue3" :inverse-video nil))))
+;;   (hl-todo                   ((t (:inverse-video t))))
+;;   :config
+;;   (load-theme 'sanityinc-tomorrow-blue t))
 
 
 (use-package highlight-symbol

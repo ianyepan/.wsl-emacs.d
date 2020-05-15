@@ -258,24 +258,24 @@
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 ;; (load-theme 'vscode-dark-plus t)
 
-(use-package doom-themes
-  :custom-face
-  (font-lock-constant-face      ((t (:foreground "#2aa198")))) ; cyan
-  (highlight-numbers-number     ((t (:foreground "#2aa198")))) ; cyan
-  (show-paren-match             ((t (:foreground "white"))))
-  :config
-  (setq doom-themes-enable-bold nil)
-  (setq doom-solarized-dark-brighter-text t)
-  (load-theme 'doom-solarized-dark t))
-
-;; (use-package color-theme-sanityinc-tomorrow
+;; (use-package doom-themes
 ;;   :custom-face
-;;   (cursor                    ((t (:background "white"))))
-;;   (show-paren-match          ((t (:foreground "white" :background "RoyalBlue3" :bold nil))))
-;;   (company-tooltip-selection ((t (:foreground "white" :background "RoyalBlue3" :inverse-video nil))))
-;;   (hl-todo                   ((t (:inverse-video t))))
+;;   (font-lock-constant-face      ((t (:foreground "#2aa198")))) ; cyan
+;;   (highlight-numbers-number     ((t (:foreground "#2aa198")))) ; cyan
+;;   (show-paren-match             ((t (:foreground "white"))))
 ;;   :config
-;;   (load-theme 'sanityinc-tomorrow-blue t))
+;;   (setq doom-themes-enable-bold nil)
+;;   (setq doom-solarized-dark-brighter-text t)
+;;   (load-theme 'doom-solarized-dark t))
+
+(use-package color-theme-sanityinc-tomorrow
+  :custom-face
+  (cursor                    ((t (:background "white"))))
+  (show-paren-match          ((t (:foreground "white" :background "RoyalBlue3" :bold nil))))
+  (company-tooltip-selection ((t (:foreground "white" :background "RoyalBlue3" :inverse-video nil))))
+  (hl-todo                   ((t (:inverse-video t))))
+  :config
+  (load-theme 'sanityinc-tomorrow-blue t))
 
 
 (use-package highlight-symbol
@@ -303,16 +303,11 @@
     (save-buffer)
     (kill-this-buffer))
   :config
-  ;; (setq-default cursor-type '(hbar . 5))
-  ;; (setq evil-normal-state-cursor '(hbar . 5))
-  ;; (setq evil-insert-state-cursor '(hbar . 5))
-  ;; (setq evil-visual-state-cursor '(hbar . 5))
-  ;; (setq evil-emacs-state-cursor '(hbar . 5))
   (with-eval-after-load 'evil-maps
     (define-key evil-normal-state-map (kbd "gd") #'xref-find-definitions)
-    (define-key evil-insert-state-map (kbd "C-n") nil); avoid conflict with company tooltip selection
+    (define-key evil-insert-state-map (kbd "C-n") nil) ; avoid conflict with company tooltip selection
     (define-key evil-insert-state-map (kbd "C-p") nil)
-    (define-key evil-normal-state-map (kbd "C-p") nil)
+    (define-key evil-normal-state-map (kbd "C-p") nil) ; avoid conflict with WSL find-file
     (define-key evil-insert-state-map (kbd "C-S-C") #'evil-yank)         ; for WSL
     (define-key evil-normal-state-map (kbd "C-S-C") #'evil-yank)         ; for WSL
     (define-key evil-insert-state-map (kbd "C-S-V") #'evil-paste-before) ; for WSL
@@ -345,21 +340,6 @@
          (diff-hl-mode . diff-hl-flydiff-mode))
   :config
   (setq diff-hl-flydiff-delay 0.05))
-
-;; (use-package git-gutter
-;;   :hook (prog-mode . git-gutter-mode)
-;;   :config
-;;   (setq git-gutter:update-interval 0.1))
-
-;; (use-package git-gutter-fringe
-;;   :config
-;;   (setq-default fringes-outside-margins t)
-;;   (define-fringe-bitmap 'git-gutter-fr:added [224]
-;;     nil nil '(center repeated))
-;;   (define-fringe-bitmap 'git-gutter-fr:modified [224]
-;;     nil nil '(center repeated))
-;;   (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240]
-;;     nil nil 'bottom))
 
 ;; Searching/sorting enhancements & project management
 
@@ -458,7 +438,7 @@
           js-jsx-mode     ; ts-ls (tsserver wrapper)
           typescript-mode ; ts-ls (tsserver wrapper)
           python-mode     ; pyls
-          web-mode
+          web-mode        ; ts-ls/HTML/CSS
           ) . lsp)
   :commands lsp
   :config
@@ -507,38 +487,6 @@
            ("\\.cbl\\'" . cobol-mode))
          auto-mode-alist)))
 
-;; (use-package company-lsp
-;;   :commands company-lsp
-;;   :config
-;;   (setq company-lsp-cache-candidates 'auto)
-;;   (push 'company-lsp company-backends)
-;;   (add-to-list 'company-lsp-filter-candidates '(mspyls . t))
-;;   (defun company-lsp--on-completion (response prefix)
-;;     "Note: This is a (hack) workaround for candidate filtering issues in mspyls.
-;;  Handle completion RESPONSE.
-;;  PREFIX is a string of the prefix when the completion is requested.
-;;  Return a list of strings as the completion candidates."
-;;     (let* ((incomplete (and (hash-table-p response) (gethash "isIncomplete" response)))
-;;            (items (cond ((hash-table-p response) (gethash "items" response))
-;;                         ((sequencep response) response)))
-;;            (candidates (mapcar (lambda (item)
-;;                                  (company-lsp--make-candidate item prefix))
-;;                                (lsp--sort-completions items)))
-;;            (server-id (lsp--client-server-id (lsp--workspace-client lsp--cur-workspace)))
-;;            (should-filter (or (eq company-lsp-cache-candidates 'auto) ; change from t to 'auto
-;;                               (and (null company-lsp-cache-candidates)
-;;                                    (company-lsp--get-config company-lsp-filter-candidates server-id)))))
-;;       (when (null company-lsp--completion-cache)
-;;         (add-hook 'company-completion-cancelled-hook #'company-lsp--cleanup-cache nil t)
-;;         (add-hook 'company-completion-finished-hook #'company-lsp--cleanup-cache nil t))
-;;       (when (eq company-lsp-cache-candidates 'auto)
-;;         ;; Only cache candidates on auto mode. If it's t company caches the
-;;         ;; candidates for us.
-;;         (company-lsp--cache-put prefix (company-lsp--cache-item-new candidates incomplete)))
-;;       (if should-filter
-;;           (company-lsp--filter-candidates candidates prefix)
-;;         candidates))))
-
 (use-package company
   :hook (prog-mode . company-mode)
   :config
@@ -556,7 +504,7 @@
 (use-package flycheck
   :hook ((prog-mode   . flycheck-mode))
   :config
-  ;; (setq flycheck-check-syntax-automatically '(save mode-enabled newline))
+  (setq flycheck-check-syntax-automatically '(save mode-enabled newline))
   (setq flycheck-display-errors-delay 0.1)
   (setq flycheck-flake8rc "~/.config/flake8"))
 
@@ -589,13 +537,14 @@
   (setq sml-indent-level ian/indent-width))
 
 (use-package emmet-mode
-  :hook ((html-mode   . emmet-mode)
-         (css-mode    . emmet-mode)
-         (js-mode     . emmet-mode)
-         (js-jsx-mode . emmet-mode)
-         (web-mode    . emmet-mode))
+  :hook ((html-mode       . emmet-mode)
+         (css-mode        . emmet-mode)
+         (js-mode         . emmet-mode)
+         (js-jsx-mode     . emmet-mode)
+         (typescript-mode . emmet-mode)
+         (web-mode        . emmet-mode))
   :config
-  (setq emmet-insert-flash-time 0.001) ; basically disabling it
+  (setq emmet-insert-flash-time 0.001) ; effectively disabling it
   (add-hook 'js-jsx-mode-hook #'(lambda ()
                                   (setq-local emmet-expand-jsx-className? t)))
   (add-hook 'web-mode-hook #'(lambda ()

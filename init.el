@@ -256,27 +256,25 @@
 ;; GUI enhancements
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-;; (load-theme 'vscode-dark-plus t)
+(load-theme 'atom-one-dark t)
 
 ;; (use-package doom-themes
-;;   :custom-face
-;;   (font-lock-constant-face      ((t (:foreground "#2aa198")))) ; cyan
-;;   (highlight-numbers-number     ((t (:foreground "#2aa198")))) ; cyan
-;;   (show-paren-match             ((t (:foreground "white"))))
+;;   :custom-face ; solarized dark
+;;   (show-paren-match         ((t (:bold t))))
+;;   (font-lock-constant-face  ((t (:foreground "#2aa198"))))
+;;   (highlight-numbers-number ((t (:foreground "#2aa198"))))
 ;;   :config
 ;;   (setq doom-themes-enable-bold nil)
 ;;   (setq doom-solarized-dark-brighter-text t)
 ;;   (load-theme 'doom-solarized-dark t))
 
-(use-package color-theme-sanityinc-tomorrow
-  :custom-face
-  (cursor                    ((t (:background "white"))))
-  (show-paren-match          ((t (:foreground "white" :background "RoyalBlue3" :bold nil))))
-  (company-tooltip-selection ((t (:foreground "white" :background "RoyalBlue3" :inverse-video nil))))
-  (hl-todo                   ((t (:inverse-video t))))
-  :config
-  (load-theme 'sanityinc-tomorrow-blue t))
-
+;; (use-package color-theme-sanityinc-tomorrow
+;;   :custom-face
+;;   (cursor                    ((t (:background "white"))))
+;;   (show-paren-match          ((t (:foreground "white" :background "RoyalBlue3" :bold nil))))
+;;   (company-tooltip-selection ((t (:foreground "white" :background "RoyalBlue3" :inverse-video nil))))
+;;   :config
+;;   (load-theme 'sanityinc-tomorrow-blue t))
 
 (use-package highlight-symbol
   :hook (prog-mode . highlight-symbol-mode)
@@ -491,7 +489,6 @@
   :hook (prog-mode . company-mode)
   :config
   (setq company-minimum-prefix-length 1)
-  (setq company-idle-delay 0.3)
   (setq company-selection-wrap-around t)
   (setq company-tooltip-align-annotations t)
   (setq company-frontends '(company-pseudo-tooltip-frontend ; show tooltip even for single candidate

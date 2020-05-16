@@ -16,29 +16,24 @@
 
 (custom-theme-set-faces
  'default-dark
- '(default                          ((t (:background "#111111" :foreground "#eeeeee"))))
- '(region                           ((t (:background "#114f86"))))
+ '(default                          ((t (:background "grey10" :foreground "grey90"))))
+ '(region                           ((t (:background "grey35" :distant-foreground "grey70"))))
+ '(font-lock-comment-face           ((t (:foreground "grey45" :italic t))))
 
- '(company-tooltip                  ((t (:foreground "black" :background "gray75"))))
- '(company-tooltip-common           ((t (:foreground "blue" :bold t))))
- '(company-tooltip-selection        ((t (:foreground "black" :background "gray60" :inverse-video nil :bold t))))
- '(company-tooltip-common-selection ((t (:foreground "blue" :background "gray60" :inverse-video nil :bold t))))
- '(company-scrollbar-bg             ((t (:background "gray75"))))
- '(company-scrollbar-fg             ((t (:background "gray60"))))
+ '(company-tooltip                  ((t (:foreground "gray90" :background "black"))))
+ '(company-tooltip-common           ((t (:foreground "LightSalmon" :bold t))))
+ '(company-tooltip-selection        ((t (:background "gray15"))))
+ '(company-scrollbar-bg             ((t (:background "gray15"))))
+ '(company-scrollbar-fg             ((t (:background "gray30"))))
 
- '(diff-hl-insert                   ((t (:background "#4a7f00" :foreground "#4a7f00"))))
- '(diff-hl-delete                   ((t (:background "#a41511":foreground "#a41511"))))
- '(diff-hl-change                   ((t (:background "#207fa1" :foreground "#207fa1"))))
+ '(hl-line                          ((t (:background "grey20"))))
+ '(ivy-current-match                ((t (:background "grey30"))))
 
- '(ediff-even-diff-Ancestor         ((t (:background "#222222"))))
- '(ediff-even-diff-A                ((t (:background "#222222"))))
- '(ediff-even-diff-B                ((t (:background "#222222"))))
- '(ediff-even-diff-C                ((t (:background "#222222"))))
- '(ediff-odd-diff-Ancestor          ((t (:background "#222222"))))
- '(ediff-odd-diff-A                 ((t (:background "#222222"))))
- '(ediff-odd-diff-B                 ((t (:background "#222222"))))
- '(ediff-odd-diff-C                 ((t (:background "#222222"))))
+ '(diff-hl-insert                   ((t (:background "forestgreen" :foreground "forestgreen"))))
+ '(diff-hl-delete                   ((t (:background "red3" :foreground "red3"))))
+ '(diff-hl-change                   ((t (:background "royalblue3" :foreground "royalblue3"))))
 
+ '(highlight-symbol-face            ((t (:background "grey30"))))
  '(hl-todo                          ((t (:inverse-video t))))
  )
 

@@ -1,4 +1,4 @@
-;;; vscode-dark-plus-theme.el --- A complete port of the default Visual Studio Code Dark+ theme for Emacs
+;;; jetbrains-darcula-theme.el --- A complete port of the default JetBrains Darcula theme for Emacs
 
 ;; Copyright (C) 2020 , Ian Y.E. Pan
 
@@ -21,71 +21,82 @@
 
 ;;; Commentary:
 
-;; Official colors from Microsoft's Visual Studio Code:
-;; "#DCDCAA"
-;; "#4EC9B0"
-;; "#C586C0"
-;; "#9CDCFE"
-;; "#51B6C4",
-;; "#CE9178"
-;; "#d16969"
-;; "#d7ba7d"
-;; "#569cd6"
-;; "#C8C8C8"
-;; "#d4d4d4"
-;; "#b5cea8"
-;; "#f44747"
-;; "#6A9955"
-
 ;;; Code:
 
-(deftheme vscode-dark-plus)
-(let ((class '((class color) (min-colors 89)))
-      (fg0               "#AEAFAD")
-      (fg1               "#d4d4d4") ; default fg
-      (fg2               "#e8e8e8")
-      (fg3               "#f4f4f4")
-      (fg4               "#fafafa")
-      (bg00              "#000000")
-      (bg0               "#111111")
-      (bg1               "#1e1e1e") ; default bg
-      (bg2               "#252526")
-      (bg3               "#313131")
-      (bg4               "#4b474c")
-      (bg-hl             "#124f7b")
-      (tw-r              "#A41511")
-      (tw-g              "#4A7F00")
-      (tw-b              "#207FA1")
-      (key2              "#CE9178")
-      (key3              "#9cdcfe")
-      (accent            "#ffffff")
-      (mode-line-bg      "#007acc")
-      (mode-line-bg-dark "#005Aa3")
-      (line-num          "#838383")
-      (builtin           "#C586C0")
-      (keyword           "#569cd6")
-      (const             "#4EC9B0")
-      (comment           "#6A9955")
-      (doc               "#888888")
-      (func              "#DCDCAA")
-      (str               "#CE9178")
-      (type              "#4ec9b0")
-      (var               "#9cdcfe")
-      (warning           "#f44747")
+(deftheme jetbrains-darcula)
 
-      ;; standardized palette
-      (ms-yellow         "#DCDCAA")
-      (ms-bluegreen      "#4EC9B0")
-      (ms-magenta        "#C586C0")
-      (ms-lightblue      "#9CDCFE")
-      (ms-orange         "#CE9178")
-      (ms-red            "#d16969")
-      (ms-blue           "#569cd6")
-      (ms-lightgreen     "#b5cea8")
-      (ms-green          "#6A9955")
-      )
+;;;###autoload
+(defcustom jetbrains-darcula-override-colors-alist '()
+  "Place to override default theme colors.
+
+You can override a subset of the theme's default colors by
+defining them in this alist."
+  :group 'jetbrains-darcula-theme
+  :type '(alist
+          :key-type (string :tag "Name")
+          :value-type (string :tag " Hex")))
+
+;;; Color Palette
+
+(defvar jetbrains-darcula-default-colors-alist
+  '(("fg0"               . "#8997a6")
+    ("fg1"               . "#a9b7c6") ; default fg
+    ("fg2"               . "#cccccc")
+    ("fg3"               . "#e8e8e8")
+    ("fg4"               . "#fafafa")
+    ("bg00"              . "#000000")
+    ("bg0"               . "#111111")
+    ("bg1"               . "#2b2b2b") ; default bg
+    ("bg2"               . "#303030")
+    ("bg3"               . "#313335") ; hl-line
+    ("bg4"               . "#383c3f")
+    ("bg-hl"             . "#214283")
+    ("jb-r"              . "#8c0909")
+    ("jb-g"              . "#365546")
+    ("jb-b"              . "#214283")
+    ("key2"              . "#c57825")
+    ("key3"              . "#d0d0ff")
+    ("accent"            . "#ffffff")
+    ("mode-line-bg"      . "#3c3f41")
+    ("mode-line-bg-dark" . "#2c2f31")
+    ("line-num"          . "#606366")
+    ("builtin"           . "#c57825")
+    ("keyword"           . "#c57825")
+    ("const"             . "#9676ac")
+    ("comment"           . "#8e9292")
+    ("doc"               . "#5e8759")
+    ("func"              . "#ffc66d")
+    ("str"               . "#5e8759")
+    ("type"              . "#c57825")
+    ("var"               . "#9676ac")
+    ("warning"           . "#990000")
+
+    ;; standardized palette
+    ("jb-yellow"     . "#ffc66d")
+    ("jb-bluegreen"  . "#318495")
+    ("jb-magenta"    . "#9676ac")
+    ("jb-lightblue"  . "#d0d0ff")
+    ("jb-orange"     . "#c57825")
+    ("jb-red"        . "#8c0909")
+    ("jb-blue"       . "#7ca8c6")
+    ("jb-lightgreen" . "#aeae80")
+    ("jb-green"      . "#5e8759")
+    ))
+
+(defmacro jetbrains-darcula-with-color-variables (&rest body)
+  "`let' bind all colors around BODY.
+Also bind `class' to ((class color) (min-colors 89))."
+  (declare (indent 0))
+  `(let ((class '((class color) (min-colors 89)))
+         ,@(mapcar (lambda (cons)
+                     (list (intern (car cons)) (cdr cons)))
+                   (append jetbrains-darcula-default-colors-alist
+                           jetbrains-darcula-override-colors-alist)))
+     ,@body))
+
+(jetbrains-darcula-with-color-variables
   (custom-theme-set-faces
-   'vscode-dark-plus
+   'jetbrains-darcula
    `(default                                  ((,class (:background ,bg1 :foreground ,fg1))))
 
    `(font-lock-builtin-face                   ((,class (:foreground ,builtin))))
@@ -107,19 +118,21 @@
    `(fringe                                   ((,class (:background ,bg1 :foreground ,fg4))))
    `(cursor                                   ((,class (:background ,fg1))))
    `(show-paren-match-face                    ((,class (:background ,warning))))
-   `(show-paren-match                         ((t (:foreground ,accent :background ,bg4 :bold nil))))
+   `(show-paren-match                         ((t (:foreground "yellow" :background ,bg4 :bold t))))
    `(show-paren-mismatch                      ((t (:background ,warning))))
-   `(isearch                                  ((,class (:bold nil :foreground ,accent :background ,bg4))))
+   `(isearch                                  ((t (:foreground ,accent :background ,jb-green))))
+   `(isearch-fail                             ((t (:foreground ,accent :background ,jb-red))))
+   `(lazy-highlight                           ((t (:foreground ,accent :background ,jb-b))))
    `(vertical-border                          ((,class (:foreground ,bg3))))
-   `(minibuffer-prompt                        ((,class (:foreground ,ms-bluegreen :weight normal))))
+   `(minibuffer-prompt                        ((,class (:foreground ,jb-blue :weight normal))))
    `(default-italic                           ((,class (:italic t))))
-   `(link                                     ((,class (:foreground ,const :underline t))))
-   `(error                                    ((,class (:foreground ,ms-orange))))
-   `(warning                                  ((,class (:foreground ,ms-magenta))))
-   `(success                                  ((,class (:foreground ,ms-bluegreen))))
+   `(link                                     ((,class (:foreground ,jb-blue :underline t))))
+   `(error                                    ((,class (:foreground ,jb-orange))))
+   `(warning                                  ((,class (:foreground ,jb-magenta))))
+   `(success                                  ((,class (:foreground ,jb-bluegreen))))
    `(dired-directory                          ((t (:inherit (font-lock-keyword-face)))))
-   `(line-number                              ((,class (:foreground ,line-num :background nil))))
-   `(line-number-current-line                 ((,class (:foreground ,fg1 :background nil))))
+   `(line-number                              ((,class (:foreground ,line-num :background ,bg3))))
+   `(line-number-current-line                 ((,class (:foreground ,fg1 :background ,bg3))))
 
    `(mode-line                                ((,class (:bold nil :foreground ,fg4 :background ,mode-line-bg))))
    `(mode-line-inactive                       ((,class (:bold nil :foreground ,fg1 :background ,mode-line-bg-dark))))
@@ -127,25 +140,25 @@
    `(mode-line-highlight                      ((,class (:foreground ,keyword :box nil :weight normal))))
    `(mode-line-emphasis                       ((,class (:foreground ,fg1))))
 
-   `(company-preview-common                   ((t (:foreground unspecified :background ,bg2))))
-   `(company-scrollbar-bg                     ((t (:background ,bg2))))
-   `(company-scrollbar-fg                     ((t (:background ,bg3))))
-   `(company-tooltip                          ((t (:inherit default :background ,bg2))))
-   `(company-tooltip-common                   ((t (:foreground ,ms-blue :bold t))))
+   `(company-tooltip                          ((t (:foreground ,fg2 :background ,bg4))))
+   `(company-preview-common                   ((t (:foreground unspecified :background ,bg4))))
+   `(company-scrollbar-bg                     ((t (:background ,bg4))))
+   `(company-scrollbar-fg                     ((t (:background ,bg0))))
+   `(company-tooltip-common                   ((t (:foreground "#926297" :bold t))))
    `(company-tooltip-selection                ((t (:background ,bg-hl))))
    `(company-tooltip-annotation               ((t (:foreground ,doc)))) ; parameter hints etc.
 
-   `(org-document-title                       ((,class (:foreground ,type :height 1.2 :bold t))))
-   `(org-level-1                              ((,class (:bold nil :foreground ,ms-bluegreen :height 1.1))))
-   `(org-level-2                              ((,class (:bold nil :foreground ,ms-lightblue))))
-   `(org-level-3                              ((,class (:bold nil :foreground ,ms-blue))))
-   `(org-level-4                              ((,class (:bold nil :foreground ,ms-bluegreen))))
+   `(org-document-title                       ((,class (:foreground ,jb-orange :height 1.2 :bold t))))
+   `(org-level-1                              ((,class (:bold nil :foreground ,jb-orange :height 1.1))))
+   `(org-level-2                              ((,class (:bold nil :foreground ,jb-magenta))))
+   `(org-level-3                              ((,class (:bold nil :foreground ,jb-green))))
+   `(org-level-4                              ((,class (:bold nil :foreground ,jb-bluegreen))))
    `(org-code                                 ((,class (:foreground ,fg2))))
    `(org-hide                                 ((,class (:foreground ,fg4))))
-   `(org-date                                 ((,class (:underline t :foreground ,var) )))
+   `(org-date                                 ((,class (:underline t :foreground ,jb-green) )))
    `(org-footnote                             ((,class (:underline t :foreground ,fg4))))
    `(org-link                                 ((,class (:underline t :foreground ,type ))))
-   `(org-special-keyword                      ((,class (:foreground ,ms-green))))
+   `(org-special-keyword                      ((,class (:foreground ,jb-green))))
    `(org-block                                ((,class (:foreground ,fg2 :background ,bg0 :extend t))))
    `(org-quote                                ((,class (:inherit org-block :slant italic))))
    `(org-verse                                ((,class (:inherit org-block :slant italic))))
@@ -161,7 +174,7 @@
    `(org-scheduled-today                      ((,class (:foreground ,func :weight normal :height 1.2))))
    `(org-ellipsis                             ((,class (:foreground ,builtin))))
    `(org-verbatim                             ((,class (:foreground ,fg4))))
-   `(org-document-info-keyword                ((,class (:foreground ,ms-green))))
+   `(org-document-info-keyword                ((,class (:foreground ,jb-green))))
    `(org-sexp-date                            ((,class (:foreground ,fg4))))
 
    `(font-latex-bold-face                     ((,class (:foreground ,type))))
@@ -216,7 +229,6 @@
 
    `(slime-repl-inputed-output-face           ((,class (:foreground ,type))))
    `(trailing-whitespace                      ((,class :foreground nil :background ,warning)))
-   `(lazy-highlight                           ((,class (:foreground ,fg2 :background ,bg3))))
 
    `(undo-tree-visualizer-current-face        ((,class :foreground ,builtin)))
    `(undo-tree-visualizer-default-face        ((,class :foreground ,fg2)))
@@ -254,69 +266,69 @@
    `(magit-item-highlight                     ((,class :background ,bg3)))
    `(magit-hunk-heading                       ((,class (:background ,bg3))))
    `(magit-hunk-heading-highlight             ((,class (:background ,bg3))))
-   `(magit-bisect-bad                         ((t (:foreground ,ms-red))))
-   `(magit-bisect-good                        ((t (:foreground ,ms-green))))
-   `(magit-bisect-skip                        ((t (:foreground ,ms-orange))))
-   `(magit-blame-date                         ((t (:foreground ,ms-red))))
-   `(magit-blame-heading                      ((t (:foreground ,ms-orange :background ,bg3 :extend t))))
-   `(magit-branch                             ((,class (:foreground ,ms-blue :weight normal))))
-   `(magit-branch-current                     ((t (:foreground ,ms-blue))))
-   `(magit-branch-local                       ((t (:foreground ,ms-bluegreen))))
-   `(magit-branch-remote                      ((t (:foreground ,ms-green))))
-   `(magit-cherry-equivalent                  ((t (:foreground ,ms-magenta))))
-   `(magit-cherry-unmatched                   ((t (:foreground ,ms-bluegreen))))
-   ;; `(magit-diff-added                         ((t (:foreground ,ms-green :extend t))))
-   ;; `(magit-diff-added-highlight               ((t (:foreground ,ms-green :background ,bg3 :extend t))))
-   ;; `(magit-diff-base                          ((t (:foreground ,bg1 :background ,ms-orange :extend t))))
-   ;; `(magit-diff-base-highlight                ((t (:foreground ,ms-orange :background ,bg3 :extend t))))
+   `(magit-bisect-bad                         ((t (:foreground ,jb-red))))
+   `(magit-bisect-good                        ((t (:foreground ,jb-green))))
+   `(magit-bisect-skip                        ((t (:foreground ,jb-orange))))
+   `(magit-blame-date                         ((t (:foreground ,jb-red))))
+   `(magit-blame-heading                      ((t (:foreground ,jb-orange :background ,bg3 :extend t))))
+   `(magit-branch                             ((,class (:foreground ,jb-blue :weight normal))))
+   `(magit-branch-current                     ((t (:foreground ,jb-blue))))
+   `(magit-branch-local                       ((t (:foreground ,jb-bluegreen))))
+   `(magit-branch-remote                      ((t (:foreground ,jb-green))))
+   `(magit-cherry-equivalent                  ((t (:foreground ,jb-magenta))))
+   `(magit-cherry-unmatched                   ((t (:foreground ,jb-bluegreen))))
+   ;; `(magit-diff-added                         ((t (:foreground ,jb-green :extend t))))
+   ;; `(magit-diff-added-highlight               ((t (:foreground ,jb-green :background ,bg3 :extend t))))
+   ;; `(magit-diff-base                          ((t (:foreground ,bg1 :background ,jb-orange :extend t))))
+   ;; `(magit-diff-base-highlight                ((t (:foreground ,jb-orange :background ,bg3 :extend t))))
    ;; `(magit-diff-context                       ((t (:foreground ,comment :extend t))))
    ;; `(magit-diff-file-header                   ((,class (:foreground ,fg2 :background ,bg3))))
    ;; `(magit-diff-file-heading                  ((t (:foreground ,fg1 :extend t))))
    ;; `(magit-diff-file-heading-highlight        ((t (:background ,bg3 :extend t))))
-   ;; `(magit-diff-file-heading-selection        ((t (:foreground ,ms-orange :background ,bg3 :extend t))))
+   ;; `(magit-diff-file-heading-selection        ((t (:foreground ,jb-orange :background ,bg3 :extend t))))
    ;; `(magit-diff-hunk-heading                  ((t (:foreground ,fg1 :background ,bg3 :extend t))))
    ;; `(magit-diff-hunk-heading-highlight        ((t (:background ,bg3 :extend t))))
-   ;; `(magit-diff-lines-heading                 ((t (:foreground ,ms-yellow :background ,ms-red :extend t))))
-   ;; `(magit-diff-removed                       ((t (:foreground ,ms-orange :extend t))))
-   ;; `(magit-diff-removed-highlight             ((t (:foreground ,ms-orange :background ,bg3 :extend t))))
+   ;; `(magit-diff-lines-heading                 ((t (:foreground ,jb-yellow :background ,jb-red :extend t))))
+   ;; `(magit-diff-removed                       ((t (:foreground ,jb-orange :extend t))))
+   ;; `(magit-diff-removed-highlight             ((t (:foreground ,jb-orange :background ,bg3 :extend t))))
    `(magit-diff-context-highlight             ((,class (:background ,bg3 :foreground ,fg3))))
-   `(magit-diffstat-added                     ((t (:foreground ,ms-green))))
-   `(magit-diffstat-removed                   ((t (:foreground ,ms-orange))))
+   `(magit-diffstat-added                     ((t (:foreground ,jb-green))))
+   `(magit-diffstat-removed                   ((t (:foreground ,jb-orange))))
    `(magit-dimmed                             ((t (:foreground ,comment))))
-   `(magit-filename                           ((t (:foreground ,ms-magenta))))
+   `(magit-filename                           ((t (:foreground ,jb-magenta))))
    `(magit-hash                               ((t (:foreground ,comment))))
    `(magit-header-line                        ((t (:inherit nil))))
-   `(magit-log-author                         ((t (:foreground ,ms-orange))))
-   `(magit-log-date                           ((t (:foreground ,ms-blue))))
+   `(magit-log-author                         ((t (:foreground ,jb-orange))))
+   `(magit-log-date                           ((t (:foreground ,jb-blue))))
    `(magit-log-graph                          ((t (:foreground ,comment))))
-   `(magit-mode-line-process                  ((t (:foreground ,ms-orange))))
-   `(magit-mode-line-process-error            ((t (:foreground ,ms-red))))
+   `(magit-mode-line-process                  ((t (:foreground ,jb-orange))))
+   `(magit-mode-line-process-error            ((t (:foreground ,jb-red))))
    `(magit-process-ok                         ((t (:inherit success))))
    `(magit-process-ng                         ((t (:inherit error))))
-   `(magit-reflog-amend                       ((t (:foreground ,ms-magenta))))
-   `(magit-reflog-checkout                    ((t (:foreground ,ms-blue))))
-   `(magit-reflog-cherry-pick                 ((t (:foreground ,ms-green))))
-   `(magit-reflog-commit                      ((t (:foreground ,ms-green))))
-   `(magit-reflog-merge                       ((t (:foreground ,ms-green))))
-   `(magit-reflog-other                       ((t (:foreground ,ms-bluegreen))))
-   `(magit-reflog-rebase                      ((t (:foreground ,ms-magenta))))
-   `(magit-reflog-remote                      ((t (:foreground ,ms-bluegreen))))
+   `(magit-reflog-amend                       ((t (:foreground ,jb-magenta))))
+   `(magit-reflog-checkout                    ((t (:foreground ,jb-blue))))
+   `(magit-reflog-cherry-pick                 ((t (:foreground ,jb-green))))
+   `(magit-reflog-commit                      ((t (:foreground ,jb-green))))
+   `(magit-reflog-merge                       ((t (:foreground ,jb-green))))
+   `(magit-reflog-other                       ((t (:foreground ,jb-bluegreen))))
+   `(magit-reflog-rebase                      ((t (:foreground ,jb-magenta))))
+   `(magit-reflog-remote                      ((t (:foreground ,jb-bluegreen))))
    `(magit-reflog-reset                       ((t (:inherit error))))
    `(magit-refname                            ((t (:foreground ,comment))))
-   `(magit-section-heading                    ((t (:foreground ,ms-magenta))))
-   `(magit-section-heading-selection          ((t (:foreground ,ms-orange :extend t))))
+   `(magit-section-heading                    ((t (:foreground ,jb-magenta))))
+   `(magit-section-heading-selection          ((t (:foreground ,jb-orange :extend t))))
    `(magit-section-highlight                  ((t (:background ,bg3 :extend t))))
-   `(magit-sequence-drop                      ((t (:foreground ,ms-red))))
-   `(magit-sequence-head                      ((t (:foreground ,ms-blue))))
-   `(magit-sequence-part                      ((t (:foreground ,ms-orange))))
-   `(magit-sequence-stop                      ((t (:foreground ,ms-green))))
+   `(magit-sequence-drop                      ((t (:foreground ,jb-red))))
+   `(magit-sequence-head                      ((t (:foreground ,jb-blue))))
+   `(magit-sequence-part                      ((t (:foreground ,jb-orange))))
+   `(magit-sequence-stop                      ((t (:foreground ,jb-green))))
    `(magit-signature-bad                      ((t (:inherit error))))
    `(magit-signature-error                    ((t (:inherit error))))
-   `(magit-signature-expims-red               ((t (:foreground ,ms-orange))))
+   `(magit-signature-expijb-red               ((t (:foreground ,jb-orange))))
    `(magit-signature-good                     ((t (:inherit success))))
-   `(magit-signature-revoked                  ((t (:foreground ,ms-magenta))))
-   `(magit-signature-untrusted                ((t (:foreground ,ms-bluegreen))))
-   `(magit-tag                                ((t (:foreground ,ms-yellow))))
+   `(magit-signature-revoked                  ((t (:foreground ,jb-magenta))))
+   `(magit-signature-untrusted                ((t (:foreground ,jb-bluegreen))))
+   `(magit-tag                                ((t (:foreground ,jb-yellow))))
 
    `(term                                     ((,class (:foreground ,fg1 :background ,bg1))))
    `(term-color-black                         ((,class (:foreground ,bg3 :background ,bg3))))
@@ -357,17 +369,17 @@
    `(helm-source-go-package-godoc-description ((,class (:foreground ,str))))
    `(helm-bookmark-w3m                        ((,class (:foreground ,type))))
 
-   `(web-mode-html-bracket-face               ((,class (:foreground "#808080"))))
-   `(web-mode-html-tag-face                   ((,class (:foreground ,keyword))))
+   `(web-mode-html-bracket-face               ((,class (:foreground ,jb-yellow))))
+   `(web-mode-html-tag-face                   ((,class (:foreground ,jb-yellow))))
    `(web-mode-html-attr-name-face             ((,class (:foreground ,var))))
    `(web-mode-html-attr-value-face            ((,class (:foreground ,str))))
    `(web-mode-builtin-face                    ((,class (:inherit ,font-lock-builtin-face))))
    `(web-mode-comment-face                    ((,class (:inherit ,font-lock-comment-face))))
    `(web-mode-constant-face                   ((,class (:inherit ,font-lock-constant-face))))
-   `(web-mode-keyword-face                    ((,class (:foreground ,keyword))))
+   `(web-mode-keyword-face                    ((,class (:inherit ,font-lock-keyword-face))))
    `(web-mode-doctype-face                    ((,class (:inherit ,font-lock-doc-face))))
    `(web-mode-function-name-face              ((,class (:inherit ,font-lock-function-name-face))))
-   `(web-mode-string-face                     ((,class (:foreground ,str))))
+   `(web-mode-string-face                     ((,class (:inherit ,font-lock-string-face))))
    `(web-mode-type-face                       ((,class (:inherit ,font-lock-type-face))))
    `(web-mode-warning-face                    ((,class (:inherit ,font-lock-warning-face))))
 
@@ -410,7 +422,6 @@
    `(solaire-hl-line-face                     ((t (:inherit hl-line :background ,bg3))))
    `(solaire-org-hide-face                    ((t (:inherit org-hide :background ,bg2))))
 
-
    `(ivy-confirm-face                         ((t (:inherit minibuffer-prompt :foreground ,keyword))))
    `(ivy-current-match                        ((t (:background ,bg-hl :extend t))))
    `(ivy-highlight-face                       ((t (:inherit font-lock-builtin-face))))
@@ -432,16 +443,16 @@
    `(swiper-match-face-4                      ((t (:inherit ivy-minibuffer-match-face-4))))
    `(swiper-line-face                         ((t (:foreground ,fg0 :background ,bg4 :extend t))))
 
-   `(git-gutter:added                         ((t (:background ,tw-g :foreground ,tw-g :weight normal))))
-   `(git-gutter:deleted                       ((t (:background ,tw-r :foreground ,tw-r :weight normal))))
-   `(git-gutter:modified                      ((t (:background ,tw-b :foreground ,tw-b :weight normal))))
-   `(git-gutter-fr:added                      ((t (:background ,tw-g :foreground ,tw-g :weight normal))))
-   `(git-gutter-fr:deleted                    ((t (:background ,tw-r :foreground ,tw-r :weight normal))))
-   `(git-gutter-fr:modified                   ((t (:background ,tw-b :foreground ,tw-b :weight normal))))
+   `(git-gutter:added                         ((t (:background ,jb-g :foreground ,jb-g :weight normal))))
+   `(git-gutter:deleted                       ((t (:background ,jb-r :foreground ,jb-r :weight normal))))
+   `(git-gutter:modified                      ((t (:background ,jb-b :foreground ,jb-b :weight normal))))
+   `(git-gutter-fr:added                      ((t (:background ,jb-g :foreground ,jb-g :weight normal))))
+   `(git-gutter-fr:deleted                    ((t (:background ,jb-r :foreground ,jb-r :weight normal))))
+   `(git-gutter-fr:modified                   ((t (:background ,jb-b :foreground ,jb-b :weight normal))))
 
-   `(diff-hl-insert                           ((t (:background ,tw-g :foreground ,tw-g))))
-   `(diff-hl-delete                           ((t (:background ,tw-r :foreground ,tw-r))))
-   `(diff-hl-change                           ((t (:background ,tw-b :foreground ,tw-b))))
+   `(diff-hl-insert                           ((t (:background ,jb-g :foreground ,jb-g))))
+   `(diff-hl-delete                           ((t (:background ,jb-r :foreground ,jb-r))))
+   `(diff-hl-change                           ((t (:background ,jb-b :foreground ,jb-b))))
 
    `(neo-dir-link-face                        ((t (:foreground "#cccccc" :family "Sans Serif"))))
    `(neo-header-face                          ((t (:foreground "#cccccc" :family "Sans Serif"))))
@@ -457,14 +468,21 @@
    `(sml/modes                                ((t (:foreground ,fg1 :weight normal))))
 
    `(evil-ex-substitute-matches               ((t (:foreground ,warning :weight normal :strike-through t))))
-   `(evil-ex-substitute-replacement           ((t (:foreground ,ms-bluegreen :weight normal))))
+   `(evil-ex-substitute-replacement           ((t (:foreground ,jb-bluegreen :weight normal))))
 
    `(hl-todo                                  ((t (:inverse-video t))))
-   `(highlight-numbers-number                 ((t (:foreground ,ms-lightgreen))))
+   `(highlight-numbers-number                 ((t (:foreground ,jb-blue))))
    `(highlight-operators-face                 ((t (:inherit default))))
    `(highlight-symbol-face                    ((t (:background "#343a40"))))
    ))
 
-(provide-theme 'vscode-dark-plus)
+;;; Footer
 
-;;; vscode-dark-plus-theme.el ends here
+;;;###autoload
+(when (and (boundp 'custom-theme-load-path) load-file-name)
+  (add-to-list 'custom-theme-load-path
+               (file-name-as-directory (file-name-directory load-file-name))))
+
+(provide-theme 'jetbrains-darcula)
+
+;;; jetbrains-darcula-theme.el ends here

@@ -547,6 +547,9 @@
   (add-hook 'web-mode-hook #'(lambda ()
                                (setq-local emmet-expand-jsx-className? t))))
 
+(use-package cpp-auto-include ; Copyright (C) 2015 by Syohei Yoshida / Ben Deane
+  :bind (:map c++-mode-map ("C-c i" . cpp-auto-include/ensure-includes-for-file)))
+
 (use-package format-all
   :preface
   (defun ian/format-code ()

@@ -51,10 +51,11 @@
   (setq ring-bell-function 'ignore)
   (setq default-directory "/mnt/c/Users/bquine/")
   (setq frame-resize-pixelwise t)
-  (setq scroll-conservatively 10000)
+  (setq scroll-conservatively 101) ; > 100
   (setq scroll-preserve-screen-position t)
   (setq auto-window-vscroll nil)
   (setq load-prefer-newer t)
+  (setq inhibit-compacting-font-caches t)
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
   (tool-bar-mode -1)
   (menu-bar-mode -1)
@@ -150,8 +151,12 @@
   (setq c-default-style '((java-mode . "java")
                           (awk-mode  . "awk")
                           (other     . "k&r")))
-  (setq-default c-basic-offset ian/indent-width)
-  (define-key c++-mode-map ":" nil)) ; don't indent std:: on-the-fly etc.
+  (setq-default c-basic-offset ian/indent-width))
+
+(use-package cc-mode
+  :ensure nil
+  :config
+  (define-key c++-mode-map ":" nil)) ; don't indent namespace:: on-the-fly etc.
 
 (use-package perl-mode
   :ensure nil
@@ -163,12 +168,11 @@
   :config
   (defalias 'perl-mode 'cperl-mode)
   (setq cperl-invalid-face nil)
-  ;; (setq cperl-invalid-face (quote off))
   (setq cperl-indent-level ian/indent-width))
 
 (use-package prolog
   :ensure nil
-  :mode (("\\.pl\\'" . prolog-mode))
+  :mode (("\\.pl\\'" . prolog-mode)) ; if commented, ".pl" will become perl/cperl mode
   :config
   (setq prolog-indent-width ian/indent-width))
 
@@ -256,23 +260,21 @@
 ;; GUI enhancements
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-(load-theme 'atom-one-dark t)
+;; (load-theme 'tron-legacy t)
 
-;; (use-package doom-themes
-;;   :custom-face ; solarized dark
-;;   (show-paren-match         ((t (:bold t))))
-;;   (font-lock-constant-face  ((t (:foreground "#2aa198"))))
-;;   (highlight-numbers-number ((t (:foreground "#2aa198"))))
-;;   :config
-;;   (setq doom-themes-enable-bold nil)
-;;   (setq doom-solarized-dark-brighter-text t)
-;;   (load-theme 'doom-solarized-dark t))
+(use-package doom-themes
+  :custom-face
+  (default ((t (:background "#1d2021"))))
+  :config
+  (setq doom-themes-enable-bold nil)
+  (load-theme 'doom-gruvbox t))
 
 ;; (use-package color-theme-sanityinc-tomorrow
 ;;   :custom-face
 ;;   (cursor                    ((t (:background "white"))))
 ;;   (show-paren-match          ((t (:foreground "white" :background "RoyalBlue3" :bold nil))))
 ;;   (company-tooltip-selection ((t (:foreground "white" :background "RoyalBlue3" :inverse-video nil))))
+;;   (company-template-field    ((t (:foreground "white" :background "RoyalBlue3"))))
 ;;   :config
 ;;   (load-theme 'sanityinc-tomorrow-blue t))
 
@@ -304,7 +306,7 @@
   (with-eval-after-load 'evil-maps
     (define-key evil-normal-state-map (kbd "gd") #'xref-find-definitions)
     (define-key evil-insert-state-map (kbd "C-n") nil) ; avoid conflict with company tooltip selection
-    (define-key evil-insert-state-map (kbd "C-p") nil)
+    (define-key evil-insert-state-map (kbd "C-p") nil) ; avoid conflict with company tooltip selection
     (define-key evil-normal-state-map (kbd "C-p") nil) ; avoid conflict with WSL find-file
     (define-key evil-insert-state-map (kbd "C-S-C") #'evil-yank)         ; for WSL
     (define-key evil-normal-state-map (kbd "C-S-C") #'evil-yank)         ; for WSL

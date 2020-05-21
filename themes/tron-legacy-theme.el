@@ -23,10 +23,18 @@
 
 ;;; Code:
 
+(defcustom tron-legacy-dark-fg-bright-comments nil
+  "If non-nil, default foreground will be dimmed and comments will be boosted to be brighter than the normal foreground."
+  :type 'boolean)
+
+(defcustom tron-legacy-vivid-cursor nil
+  "If non-nil, the cursor will be bright golden, making it easier to spot."
+  :type 'boolean)
+
 (deftheme tron-legacy)
 (let ((class '((class color) (min-colors 89)))
       (fg0               "#5A7387")
-      (fg1               "#B0CCDC") ; default fg
+      (fg1               (if tron-legacy-dark-fg-bright-comments "#5A7387" "#B0CCDC")) ; default fg
       (fg2               "#8BaCbF")
       (fg3               "#bBECeF")
       (fg4               "#CBECFF")
@@ -46,10 +54,11 @@
       (mode-line-bg      "#3D5666")
       (mode-line-bg-dark "#1e1e1e")
       (line-num          "#5A7387")
+      (cursor            (if tron-legacy-vivid-cursor "#DEB45B" "#B0CCDC"))
       (builtin           "#8Fd4FF")
       (keyword           "#8Fd4FF")
       (const             "#B62D66")
-      (comment           "#5A7387")
+      (comment           (if tron-legacy-dark-fg-bright-comments "#B0CCDC" "#5A7387"))
       (doc               "#6a8397")
       (type              "#4BB5BE")
       (str               "#387AAA")
@@ -89,7 +98,7 @@
    `(highlight                                ((,class (:foreground ,bg3 :background ,fg3))))
    `(hl-line                                  ((,class (:background "#0E2638"))))
    `(fringe                                   ((,class (:background ,bg1 :foreground ,fg4))))
-   `(cursor                                   ((,class (:background ,fg1))))
+   `(cursor                                   ((,class (:background ,cursor))))
    `(show-paren-match-face                    ((,class (:background ,warning))))
    `(show-paren-match                         ((t (:foreground ,accent :background ,bg4 :bold t))))
    `(show-paren-mismatch                      ((t (:background ,warning))))
@@ -118,10 +127,11 @@
    `(company-tooltip-common                   ((t (:foreground ,tron-blue :bold t))))
    `(company-tooltip-selection                ((t (:background ,bg-hl))))
    `(company-tooltip-annotation               ((t (:foreground ,doc)))) ; parameter hints etc.
+   `(company-template-field                   ((t (:foreground ,fg1 :background ,bg-hl))))
 
    `(org-document-title                       ((,class (:foreground ,type :height 1.2 :bold t))))
    `(org-level-1                              ((,class (:bold nil :foreground ,tron-bluegreen :height 1.1))))
-   `(org-level-2                              ((,class (:bold nil :foreground ,tron-lightblue))))
+   `(org-level-2                              ((,class (:bold nil :foreground ,tron-yellow))))
    `(org-level-3                              ((,class (:bold nil :foreground ,tron-blue))))
    `(org-level-4                              ((,class (:bold nil :foreground ,tron-bluegreen))))
    `(org-code                                 ((,class (:foreground ,fg2))))
@@ -399,7 +409,7 @@
    `(ivy-current-match                        ((t (:background ,bg-hl :extend t))))
    `(ivy-highlight-face                       ((t (:inherit font-lock-builtin-face))))
    `(ivy-match-required-face                  ((t (:inherit minibuffer-prompt :foreground ,warning))))
-   `(ivy-minibuffer-match-face-1              ((t (:inherit isearch))))
+   `(ivy-minibuffer-match-face-1              ((t (:foreground ,tron-lightblue))))
    `(ivy-minibuffer-match-face-2              ((t (:inherit ivy-minibuffer-match-face-1))))
    `(ivy-minibuffer-match-face-3              ((t (:inherit ivy-minibuffer-match-face-2))))
    `(ivy-minibuffer-match-face-4              ((t (:inherit ivy-minibuffer-match-face-2))))

@@ -1,8 +1,10 @@
-;;; tron-legacy-theme.el --- A complete port of the Tron Legacy theme for Emacs
+;;; tron-legacy-theme.el --- An orginal theme inspired by Tron: Legacy
 
 ;; Copyright (C) 2018-2020 Ian Y.E. Pan
 
 ;; Author: Ian Y.E. Pan
+;; URL: https://github.com/ianpan870102/tron-legacy-emacs-theme
+;; Version: 2.0.0
 
 ;; This program is free software: you can redistribute it and/or modify
 ;; it under the tertron of the GNU General Public License as published by
@@ -20,15 +22,27 @@
 ;; This file is not part of Emacs.
 
 ;;; Commentary:
+;; An original theme for Emacs 24+ inspired by the look and feel of Tron: Legacy, with further inspirations drawn from Base16-Black-Metal, Grayscale and City Lights.
+
+;; MELPA recipe
+;; (tron-legacy-theme
+;;  :fetcher github
+;;  :repo "ianpan870102/tron-legacy-emacs-theme")
 
 ;;; Code:
 
+(defgroup tron-legacy nil
+  "Options for tron-legacy."
+  :group 'faces)
+
 (defcustom tron-legacy-dark-fg-bright-comments nil
   "If non-nil, default foreground will be dimmed and comments will be boosted to be brighter than the normal foreground."
+  :group 'tron-legacy
   :type 'boolean)
 
 (defcustom tron-legacy-vivid-cursor nil
   "If non-nil, the cursor will be bright golden, making it easier to spot."
+  :group 'tron-legacy
   :type 'boolean)
 
 (deftheme tron-legacy)
@@ -52,14 +66,14 @@
       (key2              "#9BBDD6")
       (key3              "#AAAAAA")
       (accent            "#FFFFFF")
-      (numeric           "#B62D66")
+      (numeric           "#4bb5be")
       (mode-line-bg      "#3D5666")
       (mode-line-bg-dark "#1E1E1E")
       (line-num          "#5A7387")
       (cursor            (if tron-legacy-vivid-cursor "#EEC45B" "#B0CCDC"))
       (builtin           "#8Fd4FF")
       (keyword           "#8Fd4FF")
-      (const             "#B62D66")
+      (const             "#BBF0EF")
       (comment           (if tron-legacy-dark-fg-bright-comments "#B0CCDC" "#5A7387"))
       (doc               "#6A8397")
       (type              "#4BB5BE")
@@ -84,8 +98,8 @@
       (tron-green-bg       "#03353E")
       (tron-red-bghl       "#462026")
       (tron-blue-bghl      "#141E4F")
-      (tron-green-bghl     "#13454E")
-      )
+      (tron-green-bghl     "#13454E"))
+
   (custom-theme-set-faces
    'tron-legacy
    `(default                                  ((,class (:background ,bg1 :foreground ,fg1))))
@@ -112,7 +126,7 @@
    `(show-paren-match                         ((t (:foreground ,accent :background ,bg4 :bold t))))
    `(show-paren-mismatch                      ((t (:background ,warning))))
    `(isearch                                  ((,class (:bold nil :foreground ,accent :background ,bg4))))
-   `(vertical-border                          ((,class (:foreground ,bg3))))
+   `(vertical-border                          ((,class (:foreground ,fg4))))
    `(minibuffer-prompt                        ((,class (:foreground ,tron-bluegreen :weight normal))))
    `(default-italic                           ((,class (:italic t))))
    `(link                                     ((,class (:foreground ,const :underline t))))
@@ -123,9 +137,9 @@
    `(line-number                              ((,class (:foreground ,line-num :background nil))))
    `(line-number-current-line                 ((,class (:foreground ,fg1 :background nil))))
 
-   `(mode-line                                ((,class (:bold nil :foreground ,fg3 :background ,mode-line-bg))))
-   `(mode-line-inactive                       ((,class (:bold nil :foreground ,fg1 :background ,mode-line-bg-dark))))
-   `(mode-line-buffer-id                      ((,class (:bold nil :foreground ,fg3 :background nil))))
+   `(mode-line                                ((,class (:bold nil :foreground ,fg4 :background ,mode-line-bg))))
+   `(mode-line-inactive                       ((,class (:bold nil :foreground ,fg0 :background ,mode-line-bg-dark))))
+   `(mode-line-buffer-id                      ((,class (:bold nil :foreground ,fg4 :background nil))))
    `(mode-line-highlight                      ((,class (:foreground ,keyword :box nil :weight normal))))
    `(mode-line-emphasis                       ((,class (:foreground ,fg1))))
 
@@ -226,15 +240,15 @@
    `(undo-tree-visualizer-unmodified-face     ((,class :foreground ,var)))
    `(undo-tree-visualizer-register-face       ((,class :foreground ,type)))
 
-   `(rainbow-delimiters-depth-1-face          ((,class :foreground "gold")))
-   `(rainbow-delimiters-depth-2-face          ((,class :foreground "orchid")))
-   `(rainbow-delimiters-depth-3-face          ((,class :foreground "LightSkyBlue")))
-   `(rainbow-delimiters-depth-4-face          ((,class :foreground "gold")))
-   `(rainbow-delimiters-depth-5-face          ((,class :foreground "orchid")))
-   `(rainbow-delimiters-depth-6-face          ((,class :foreground "LightSkyBlue")))
-   `(rainbow-delimiters-depth-7-face          ((,class :foreground "gold")))
-   `(rainbow-delimiters-depth-8-face          ((,class :foreground "orchid")))
-   `(rainbow-delimiters-depth-9-face          ((,class :foreground "LightSkyBlue")))
+   `(rainbow-delimiters-depth-1-face          ((,class :foreground "#BBECEF")))
+   `(rainbow-delimiters-depth-2-face          ((,class :foreground "#BBCCDD")))
+   `(rainbow-delimiters-depth-3-face          ((,class :foreground "#8Fd4FF")))
+   `(rainbow-delimiters-depth-4-face          ((,class :foreground "#BBECEF")))
+   `(rainbow-delimiters-depth-5-face          ((,class :foreground "#BBCCDD")))
+   `(rainbow-delimiters-depth-6-face          ((,class :foreground "#8Fd4FF")))
+   `(rainbow-delimiters-depth-7-face          ((,class :foreground "#BBECEF")))
+   `(rainbow-delimiters-depth-8-face          ((,class :foreground "#BBCCDD")))
+   `(rainbow-delimiters-depth-9-face          ((,class :foreground "#8Fd4FF")))
    `(rainbow-delimiters-unmatched-face        ((,class :foreground ,warning)))
 
    `(magit-item-highlight                     ((,class (:background ,bg3))))
@@ -343,7 +357,7 @@
    `(helm-source-go-package-godoc-description ((,class (:foreground ,str))))
    `(helm-bookmark-w3m                        ((,class (:foreground ,type))))
 
-   `(web-mode-html-bracket-face               ((,class (:foreground ,doc))))
+   `(web-mode-html-tag-bracket-face           ((,class (:foreground ,doc))))
    `(web-mode-html-tag-face                   ((,class (:foreground ,type))))
    `(web-mode-html-attr-name-face             ((,class (:foreground ,var))))
    `(web-mode-html-attr-value-face            ((,class (:foreground ,str))))
@@ -457,8 +471,7 @@
    `(hl-todo                                  ((t (:inverse-video t))))
    `(highlight-numbers-number                 ((t (:foreground ,numeric))))
    `(highlight-operators-face                 ((t (:inherit default))))
-   `(highlight-symbol-face                    ((t (:background ,bg3 :distant-foreground ,fg0))))
-   ))
+   `(highlight-symbol-face                    ((t (:background ,bg3 :distant-foreground ,fg0))))))
 
 ;;;###autoload
 (when (and (boundp 'custom-theme-load-path) load-file-name)
@@ -466,5 +479,6 @@
                (file-name-as-directory (file-name-directory load-file-name))))
 
 (provide-theme 'tron-legacy)
+(provide 'tron-legacy-theme)
 
 ;;; tron-legacy-theme.el ends here

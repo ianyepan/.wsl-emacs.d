@@ -260,14 +260,13 @@
 ;; GUI enhancements
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-;; (load-theme 'tron-legacy t)
+(load-theme 'tron-legacy t)
 
-(use-package doom-themes
-  :custom-face
-  (default ((t (:background "#1d2021"))))
-  :config
-  (setq doom-themes-enable-bold nil)
-  (load-theme 'doom-gruvbox t))
+;; (use-package doom-themes
+;;   :config
+;;   (setq doom-themes-enable-bold nil)
+;;   (setq doom-gruvbox-dark-variant "hard")
+;;   (load-theme 'doom-gruvbox t))
 
 ;; (use-package color-theme-sanityinc-tomorrow
 ;;   :custom-face

@@ -1,4 +1,4 @@
-;;; tron-legacy-theme.el --- An orginal theme inspired by Tron: Legacy
+;;; tron-legacy-theme.el --- An orginal retro-futuristic theme inspired by Tron: Legacy
 
 ;; Copyright (C) 2018-2020 Ian Y.E. Pan
 
@@ -50,27 +50,27 @@
       (fg0               "#90ACBC")
       (fg1               (if tron-legacy-dark-fg-bright-comments "#5A7387" "#B0CCDC")) ; default fg
       (fg2               "#BBCCDD")
-      (fg3               "#BBECEF")
+      (fg3               "#BBF0EF")
       (fg4               "#CBECFF")
       (bg00              "#000000")
       (bg0               "#000000")
       (bg1               "#000000") ; default bg
-      (bg2               "#112131")
+      (bg2               "#17181b")
       (bg3               "#1B324B")
       (bg4               "#2B4255")
       (hl-line           "#0E2638") ; hl-line
       (bg-hl             "#2B4255") ; region, selection
-      (tw-r              "#B62D66")
-      (tw-g              "#4BB5BE")
-      (tw-b              "#387AAA")
+      (vc-r              "#B62D66")
+      (vc-g              "#4BB5BE")
+      (vc-b              "#387AAA")
       (key2              "#9BBDD6")
       (key3              "#AAAAAA")
       (accent            "#FFFFFF")
-      (numeric           "#4bb5be")
+      (numeric           "#4BB5BE")
       (mode-line-bg      "#3D5666")
       (mode-line-bg-dark "#1E1E1E")
       (line-num          "#5A7387")
-      (cursor            (if tron-legacy-vivid-cursor "#EEC45B" "#B0CCDC"))
+      (cursor            (if tron-legacy-vivid-cursor "#DEB45B" "#B0CCDC"))
       (builtin           "#8Fd4FF")
       (keyword           "#8Fd4FF")
       (const             "#BBF0EF")
@@ -79,7 +79,7 @@
       (type              "#4BB5BE")
       (str               "#387AAA")
       (func              "#DEB45B")
-      (var               "#9BBDD6")
+      (var               (if tron-legacy-dark-fg-bright-comments "#5A7387" "#B0CCDC")) ; var = fg
       (warning           "#880000")
 
       ;; standardized palette
@@ -88,11 +88,11 @@
       (tron-magenta        "#B62D66")
       (tron-orange         "#DEB45B")
       (tron-red            "#B62D66")
-      (tron-blue           "#5EC4FF")
+      (tron-blue           "#8Fd4FF")
       (tron-green          "#4BB5BE")
       (tron-lightred       "#FF7DBB")
-      (tron-lightblue      "#A0DCFC")
-      (tron-lightgreen     "#ABDCDF")
+      (tron-lightblue      "#A0DCFF")
+      (tron-lightgreen     "#BBF0EF")
       (tron-red-bg         "#361016")
       (tron-blue-bg        "#040E3F")
       (tron-green-bg       "#03353E")
@@ -441,16 +441,16 @@
    `(swiper-match-face-4                      ((t (:inherit ivy-minibuffer-match-face-4))))
    `(swiper-line-face                         ((t (:foreground ,fg3 :background ,bg-hl :extend t))))
 
-   `(git-gutter:added                         ((t (:background ,tw-g :foreground ,tw-g :weight normal))))
-   `(git-gutter:deleted                       ((t (:background ,tw-r :foreground ,tw-r :weight normal))))
-   `(git-gutter:modified                      ((t (:background ,tw-b :foreground ,tw-b :weight normal))))
-   `(git-gutter-fr:added                      ((t (:background ,tw-g :foreground ,tw-g :weight normal))))
-   `(git-gutter-fr:deleted                    ((t (:background ,tw-r :foreground ,tw-r :weight normal))))
-   `(git-gutter-fr:modified                   ((t (:background ,tw-b :foreground ,tw-b :weight normal))))
+   `(git-gutter:added                         ((t (:background ,vc-g :foreground ,vc-g :weight normal))))
+   `(git-gutter:deleted                       ((t (:background ,vc-r :foreground ,vc-r :weight normal))))
+   `(git-gutter:modified                      ((t (:background ,vc-b :foreground ,vc-b :weight normal))))
+   `(git-gutter-fr:added                      ((t (:background ,vc-g :foreground ,vc-g :weight normal))))
+   `(git-gutter-fr:deleted                    ((t (:background ,vc-r :foreground ,vc-r :weight normal))))
+   `(git-gutter-fr:modified                   ((t (:background ,vc-b :foreground ,vc-b :weight normal))))
 
-   `(diff-hl-insert                           ((t (:background ,tw-g :foreground ,tw-g))))
-   `(diff-hl-delete                           ((t (:background ,tw-r :foreground ,tw-r))))
-   `(diff-hl-change                           ((t (:background ,tw-b :foreground ,tw-b))))
+   `(diff-hl-insert                           ((t (:background ,vc-g :foreground ,vc-g))))
+   `(diff-hl-delete                           ((t (:background ,vc-r :foreground ,vc-r))))
+   `(diff-hl-change                           ((t (:background ,vc-b :foreground ,vc-b))))
 
    `(neo-dir-link-face                        ((t (:foreground "#cccccc" :family "Sans Serif"))))
    `(neo-header-face                          ((t (:foreground "#cccccc" :family "Sans Serif"))))
@@ -459,11 +459,16 @@
    `(neo-file-link-face                       ((t (:foreground "#aaaaaa" :family "Sans Serif"))))
    `(neo-expand-btn-face                      ((t (:foreground "#aaaaaa"))))
 
-   `(sml/global                               ((t (:foreground ,fg1 :weight normal))))
-   `(sml/filename                             ((t (:foreground ,fg1 :weight normal))))
-   `(sml/prefix                               ((t (:foreground ,fg1 :weight normal))))
-   `(sml/read-only                            ((t (:foreground ,fg1 :weight normal))))
-   `(sml/modes                                ((t (:foreground ,fg1 :weight normal))))
+   `(sml/line-number                          ((t (:foreground ,fg4 :bold nil))))
+   `(sml/modified                             ((t (:foreground ,tron-yellow :bold t))))
+   `(sml/outside-modified                     ((t (:foreground ,tron-lightred :background ,tron-red-bghl :bold nil))))
+   `(sml/global                               ((t (:foreground ,fg1 :bold nil))))
+   `(sml/filename                             ((t (:foreground ,fg4 :bold t))))
+   `(sml/prefix                               ((t (:foreground ,fg1 :bold nil))))
+   `(sml/read-only                            ((t (:foreground ,fg1 :bold nil))))
+   `(sml/modes                                ((t (:foreground ,fg1 :bold nil))))
+   `(sml/charging                             ((t (:foreground ,tron-green :bold nil))))
+   `(sml/discharging                          ((t (:foreground ,tron-lightred :background ,tron-red-bghl :bold nil))))
 
    `(evil-ex-substitute-matches               ((t (:foreground ,warning :weight normal :strike-through t))))
    `(evil-ex-substitute-replacement           ((t (:foreground ,tron-bluegreen :weight normal))))

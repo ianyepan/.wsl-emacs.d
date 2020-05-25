@@ -18,6 +18,7 @@
               (setq gc-cons-threshold ian/gc-cons-threshold
                     gc-cons-percentage 0.1
                     file-name-handler-alist file-name-handler-alist-original)))
+
 (add-hook 'minibuffer-setup-hook #'(lambda ()
                                      (setq gc-cons-threshold most-positive-fixnum)))
 (add-hook 'minibuffer-exit-hook #'(lambda ()
@@ -391,6 +392,7 @@
   (setq projectile-sort-order 'recentf)
   (setq projectile-indexing-method 'hybrid)
   (setq projectile-completion-system 'ivy)
+  (setq projectile-mode-line-prefix " ")
   (projectile-mode +1)
   (define-key projectile-mode-map (kbd "C-c p") #'projectile-command-map)
   (define-key projectile-mode-map (kbd "s-p") #'projectile-find-file)
@@ -588,6 +590,12 @@
   :config
   (setq dired-subtree-use-backgrounds nil)
   :bind (:map dired-mode-map ("<tab>" . dired-subtree-toggle)))
+
+(use-package minions
+  :config
+  (push 'projectile-mode minions-direct)
+  (push 'flycheck-mode minions-direct)
+  (minions-mode +1))
 
 (provide 'init)
 ;;; init.el ends here

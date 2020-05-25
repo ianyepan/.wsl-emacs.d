@@ -55,7 +55,6 @@ background contrast. All other values default to \"medium\"."
 
    ;; Standardized official colours from gruvbox
    (grey       '("#928374" "#909090" "brightblack"))   ; gray
-   (gray       '("#928374" "#909090" "brightblack"))   ; gray
    (red        '("#fb4934" "#e74c3c" "red"))           ; bright-red
    (magenta    '("#cc241d" "#cc241d" "magenta"))       ; red
    (violet     '("#d3869b" "#d3869b" "brightmagenta")) ; bright-purple

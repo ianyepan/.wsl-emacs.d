@@ -287,8 +287,12 @@ background contrast. All other values default to \"medium\"."
    (org-tag :foreground yellow :bold nil)
    ((org-quote &override) :inherit 'italic :foreground base7 :background org-quote)
    (org-todo :foreground yellow :bold 'inherit)
-   (org-list-dt :foreground yellow))
+   (org-list-dt :foreground yellow)
 
+   ;; web-mode
+   (web-mode-html-tag-bracket-face :foreground blue)
+   (web-mode-html-tag-face         :foreground aqua)
+   (web-mode-html-attr-name-face   :foreground aqua))
   ;; --- extra variables --------------------
   ;; ()
   )

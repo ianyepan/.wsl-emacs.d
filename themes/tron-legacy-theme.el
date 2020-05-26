@@ -1,4 +1,4 @@
-;;; tron-legacy-theme.el --- An orginal retro-futuristic theme inspired by Tron: Legacy
+;;; tron-legacy-theme.el --- An orginal retro-futuristic theme inspired by Tron: Legacy -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2018-2020 Ian Y.E. Pan
 
@@ -17,7 +17,7 @@
 ;; GNU General Public License for more details.
 
 ;; You should have received a copy of the GNU General Public License
-;; along with this program. If not, see <http://www.gnu.org/licenses/>.
+;; along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 ;; This file is not part of Emacs.
 
@@ -31,31 +31,35 @@
 
 ;;; Code:
 
-(defgroup tron-legacy nil
-  "Options for tron-legacy."
+(defgroup tron-legacy-theme nil
+  "Options for tron-legacy theme."
   :group 'faces)
 
-(defcustom tron-legacy-dark-fg-bright-comments nil
+(defcustom tron-legacy-theme-dark-fg-bright-comments nil
   "If non-nil, default foreground will be dimmed and comments will be boosted to be brighter than the normal foreground."
-  :group 'tron-legacy
+  :group 'tron-legacy-theme
   :type 'boolean)
 
-(defcustom tron-legacy-vivid-cursor nil
+(defcustom tron-legacy-theme-vivid-cursor nil
   "If non-nil, the cursor will be bright golden, making it easier to spot."
-  :group 'tron-legacy
+  :group 'tron-legacy-theme
+  :type 'boolean)
+
+(defcustom tron-legacy-theme-softer-bg nil
+  "If non-nil, the contrast of the background will be slightly lower, instead of being pure black."
+  :group 'tron-legacy-theme
   :type 'boolean)
 
 (deftheme tron-legacy)
 (let ((class '((class color) (min-colors 89)))
       (fg0               "#90ACBC")
-      (fg1               (if tron-legacy-dark-fg-bright-comments "#5A7387" "#B0CCDC")) ; default fg
+      (fg1               (if tron-legacy-theme-dark-fg-bright-comments "#5A7387" "#B0CCDC")) ; default fg
       (fg2               "#BBCCDD")
       (fg3               "#BBF0EF")
       (fg4               "#CBECFF")
-      (bg00              "#000000")
       (bg0               "#000000")
-      (bg1               "#000000") ; default bg
-      (bg2               "#17181b")
+      (bg1               (if tron-legacy-theme-softer-bg "#17181b" "#000000")) ; default bg
+      (bg2               (if tron-legacy-theme-softer-bg "#192533" "#0E1926"))
       (bg3               "#1B324B")
       (bg4               "#2B4255")
       (hl-line           "#0E2638") ; hl-line
@@ -70,16 +74,16 @@
       (mode-line-bg      "#3D5666")
       (mode-line-bg-dark "#1E1E1E")
       (line-num          "#5A7387")
-      (cursor            (if tron-legacy-vivid-cursor "#DEB45B" "#B0CCDC"))
+      (cursor            (if tron-legacy-theme-vivid-cursor "#DEB45B" "#B0CCDC"))
       (builtin           "#8Fd4FF")
       (keyword           "#8Fd4FF")
       (const             "#BBF0EF")
-      (comment           (if tron-legacy-dark-fg-bright-comments "#B0CCDC" "#5A7387"))
+      (comment           (if tron-legacy-theme-dark-fg-bright-comments "#B0CCDC" "#5A7387"))
       (doc               "#6A8397")
       (type              "#4BB5BE")
       (str               "#387AAA")
       (func              "#DEB45B")
-      (var               (if tron-legacy-dark-fg-bright-comments "#5A7387" "#B0CCDC")) ; var = fg
+      (var               (if tron-legacy-theme-dark-fg-bright-comments "#5A7387" "#B0CCDC")) ; var = fg
       (warning           "#880000")
 
       ;; standardized palette
@@ -460,7 +464,7 @@
    `(neo-expand-btn-face                      ((t (:foreground "#aaaaaa"))))
 
    `(sml/line-number                          ((t (:foreground ,fg4 :bold nil))))
-   `(sml/modified                             ((t (:foreground ,tron-yellow :bold t))))
+   `(sml/modified                             ((t (:foreground ,tron-lightred :background ,tron-red-bghl :bold t))))
    `(sml/outside-modified                     ((t (:foreground ,tron-lightred :background ,tron-red-bghl :bold nil))))
    `(sml/global                               ((t (:foreground ,fg1 :bold nil))))
    `(sml/filename                             ((t (:foreground ,fg4 :bold t))))

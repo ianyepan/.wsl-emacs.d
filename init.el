@@ -593,11 +593,5 @@
   (setq dired-subtree-use-backgrounds nil)
   :bind (:map dired-mode-map ("<tab>" . dired-subtree-toggle)))
 
-(use-package minions
-  :config
-  (push 'projectile-mode minions-direct)
-  (push 'flycheck-mode minions-direct)
-  (minions-mode +1))
-
 (provide 'init)
 ;;; init.el ends here

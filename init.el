@@ -468,6 +468,9 @@
 ;;         "~/python-language-server/output/bin/Release/osx-x64/publish/Microsoft.Python.LanguageServer")
 ;;   (setq lsp-python-ms-python-executable-cmd "python3"))
 
+(use-package modern-cpp-font-lock
+  :hook (c++-mode . modern-c++-font-lock-mode))
+
 (use-package pyvenv
   :config
   (setq pyvenv-mode-line-indicator '(pyvenv-virtual-env-name ("[venv:" pyvenv-virtual-env-name "] ")))

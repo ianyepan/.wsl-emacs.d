@@ -200,10 +200,10 @@
   :preface
   (defun ian/set-default-font ()
     (interactive)
-    (when (member "Px437 IBM VGA8" (font-family-list))
-      (set-face-attribute 'default nil :family "Hack"))
+    (when (member "Consolas" (font-family-list))
+      (set-face-attribute 'default nil :family "Consolas"))
     (set-face-attribute 'default nil
-                        :height 120
+                        :height 130
                         :weight 'normal))
   :ensure nil
   :config
@@ -261,13 +261,13 @@
 ;; GUI enhancements
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-(load-theme 'tron-legacy t)
+;; (load-theme 'tron-legacy t)
 
-;; (use-package doom-themes
-;;   :config
-;;   (setq doom-themes-enable-bold nil)
-;;   (setq doom-gruvbox-dark-variant "hard")
-;;   (load-theme 'doom-gruvbox t))
+(use-package doom-themes
+  :config
+  (setq doom-themes-enable-bold nil)
+  (setq doom-gruvbox-dark-variant "hard")
+  (load-theme 'doom-gruvbox t))
 
 ;; (use-package color-theme-sanityinc-tomorrow
 ;;   :custom-face
@@ -383,10 +383,10 @@
   (setq swiper-action-recenter t)
   (setq swiper-goto-start-of-match t))
 
-(use-package ivy-rich
-  :config
-  (ivy-rich-mode +1)
-  (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
+;; (use-package ivy-rich
+;;   :config
+;;   (ivy-rich-mode +1)
+;;   (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
 
 (use-package projectile
   :config

@@ -113,6 +113,7 @@
   :ensure nil
   :config
   (setq confirm-kill-processes nil)
+  (setq create-lockfiles nil) ; don't create .# files (crashes 'npm start')
   (setq make-backup-files nil))
 
 (use-package autorevert

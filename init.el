@@ -598,5 +598,26 @@
   (setq dired-subtree-use-backgrounds nil)
   :bind (:map dired-mode-map ("<tab>" . dired-subtree-toggle)))
 
+;; Terminal integration
+
+(use-package vterm
+  :hook (vterm-mode . (lambda ()
+                        (setq-local global-hl-line-mode nil)
+                        (setq-local line-spacing nil))))
+
+(use-package vterm-toggle
+  :after evil
+  :config
+  (setq vterm-toggle-fullscreen-p nil)
+  (setq vterm-toggle-cd-auto-create-buffer nil)
+  (with-eval-after-load 'evil
+    (evil-set-initial-state 'vterm-mode 'emacs))
+  (global-set-key (kbd "C-`") #'vterm-toggle-cd)
+  (add-to-list 'display-buffer-alist
+               '("^v?term.*"
+                 (display-buffer-reuse-window display-buffer-at-bottom)
+                 (reusable-frames . visible)
+                 (window-height . 0.5))))
+
 (provide 'init)
 ;;; init.el ends here

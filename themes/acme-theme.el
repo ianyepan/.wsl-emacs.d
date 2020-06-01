@@ -415,6 +415,8 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(web-mode-whitespaces-face                    ((t (:background ,acme-red-light))))
    `(web-mode-block-face                          ((t (:background ,acme-green-light))))
    `(web-mode-current-element-highlight-face      ((t (:foreground ,fg :background ,acme-blue-light))))
+   `(web-mode-json-key-face                       ((,class (:inherit font-lock-string-face))))
+   `(web-mode-json-context-face                   ((,class (:inherit font-lock-string-face :bold t))))
 
 ;;;;; which-func-mode
    `(which-func                                   ((t (:foreground ,acme-purple :background ,acme-purple-light))))

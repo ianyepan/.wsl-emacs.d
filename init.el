@@ -11,7 +11,7 @@
       file-name-handler-alist nil
       site-run-file nil)
 
-(defvar ian/gc-cons-threshold 100000000)
+(defvar ian/gc-cons-threshold (* 100 1024 1024))
 
 (add-hook 'emacs-startup-hook ; hook run after loading init files
           #'(lambda ()

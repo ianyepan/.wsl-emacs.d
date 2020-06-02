@@ -208,7 +208,9 @@
                         :weight 'normal))
   :ensure nil
   :config
-  (setq initial-frame-alist '((fullscreen . maximized)))
+  (setq default-frame-alist
+        (append (list '(width  . 75) '(height . 35)
+                      '(internal-border-width . 2))))
   (blink-cursor-mode -1)
   (ian/set-default-font))
 

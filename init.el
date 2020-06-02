@@ -330,6 +330,9 @@
 
 (use-package evil-magit)
 
+(use-package evil-matchit
+  :hook (web-mode . turn-on-evil-matchit-mode))
+
 ;; Git integration
 
 (use-package magit

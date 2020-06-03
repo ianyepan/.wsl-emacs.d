@@ -76,10 +76,10 @@
   :config
   (setq custom-file "~/.emacs.d/to-be-dumped.el"))
 
-;; (use-package scroll-bar
-;;   :ensure nil
-;;   :config
-;;   (scroll-bar-mode -1))
+(use-package scroll-bar
+  :ensure nil
+  :config
+  (scroll-bar-mode -1))
 
 (use-package simple
   :ensure nil
@@ -514,7 +514,7 @@
     (define-key company-active-map (kbd "C-p") #'company-select-previous)))
 
 (use-package flycheck
-  :hook ((prog-mode   . flycheck-mode))
+  :hook ((prog-mode . flycheck-mode))
   :config
   (setq flycheck-check-syntax-automatically '(save mode-enabled newline))
   (setq flycheck-display-errors-delay 0.1)

@@ -630,5 +630,12 @@
   :mode (("\\.pdf\\'" . pdf-view-mode))
   :config
   (pdf-loader-install))
+
+(use-package minions
+  :config
+  (setq minions-mode-line-lighter "")
+  (setq minions-mode-line-delimiters '("" . ""))
+  (minions-mode +1))
+
 (provide 'init)
 ;;; init.el ends here

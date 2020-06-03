@@ -624,5 +624,11 @@
                  (reusable-frames . visible)
                  (window-height . 0.5))))
 
+;; Misc
+
+(use-package pdf-tools
+  :mode (("\\.pdf\\'" . pdf-view-mode))
+  :config
+  (pdf-loader-install))
 (provide 'init)
 ;;; init.el ends here

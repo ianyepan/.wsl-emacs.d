@@ -64,12 +64,17 @@
   (setq-default indent-tabs-mode nil)
   (setq-default tab-width ian/indent-width))
 
-;;; Built-in packages
+(use-package "startup"
+  :ensure nil
+  :config
+  (setq initial-scratch-message ""))
 
-;; (use-package "startup"
-;;   :ensure nil
-;;   :config
-;;   (setq inhibit-startup-screen t))
+;; Overriding built-in function
+(defun use-fancy-splash-screens-p ()
+  "Always display splash screen with Emacs PNG logo."
+  t)
+
+;;; Built-in packages
 
 (use-package cus-edit
   :ensure nil

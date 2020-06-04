@@ -268,14 +268,26 @@
 
 ;; GUI enhancements
 
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-;; (load-theme 'tron-legacy t)
+;; (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+;; (load-theme 'acme t)
 
-(use-package doom-themes
+;; (use-package tron-legacy-theme
+;;   :config
+;;   (load-theme 'tron-legacy t))
+
+;; (use-package doom-themes
+;;   :config
+;;   (setq doom-themes-enable-bold nil)
+;;   (setq doom-gruvbox-dark-variant "hard")
+;;   (load-theme 'doom-gruvbox t))
+
+(use-package spacemacs-common
+  :ensure spacemacs-theme
   :config
-  (setq doom-themes-enable-bold nil)
-  (setq doom-gruvbox-dark-variant "hard")
-  (load-theme 'doom-gruvbox t))
+  (setq spacemacs-theme-comment-bg nil)
+  (setq spacemacs-theme-comment-italic t)
+  (setq spacemacs-theme-org-height nil)
+  (load-theme 'spacemacs-light t))
 
 ;; (use-package color-theme-sanityinc-tomorrow
 ;;   :custom-face

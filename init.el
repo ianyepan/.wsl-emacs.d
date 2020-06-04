@@ -50,7 +50,7 @@
   (setq user-full-name "Ian Y.E. Pan")
   (setq frame-title-format '("Emacs"))
   (setq ring-bell-function 'ignore)
-  (setq default-directory "/mnt/c/Users/bquine/")
+  (setq-default default-directory "~/")
   (setq frame-resize-pixelwise t)
   (setq scroll-conservatively 101) ; > 100
   (setq scroll-preserve-screen-position t)

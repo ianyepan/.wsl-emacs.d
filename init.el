@@ -289,15 +289,6 @@
   (setq spacemacs-theme-org-height nil)
   (load-theme 'spacemacs-light t))
 
-;; (use-package color-theme-sanityinc-tomorrow
-;;   :custom-face
-;;   (cursor                    ((t (:background "white"))))
-;;   (show-paren-match          ((t (:foreground "white" :background "RoyalBlue3" :bold nil))))
-;;   (company-tooltip-selection ((t (:foreground "white" :background "RoyalBlue3" :inverse-video nil))))
-;;   (company-template-field    ((t (:foreground "white" :background "RoyalBlue3"))))
-;;   :config
-;;   (load-theme 'sanityinc-tomorrow-blue t))
-
 (use-package highlight-symbol
   :hook (prog-mode . highlight-symbol-mode)
   :config

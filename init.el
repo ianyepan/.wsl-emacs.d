@@ -314,6 +314,7 @@
     (save-buffer)
     (kill-this-buffer))
   :config
+  (setq evil-emacs-state-cursor '(hbar . 6))
   (with-eval-after-load 'evil-maps
     (define-key evil-normal-state-map (kbd "gd") #'xref-find-definitions)
     (define-key evil-normal-state-map (kbd "<f12>") #'xref-find-definitions)

@@ -427,7 +427,7 @@
   (prescient-persist-mode +1))
 
 (use-package ivy-prescient
-  :after (prescient ivy)
+  :after (prescient ivy counsel)
   :config
   (setq ivy-prescient-sort-commands
         '(:not swiper

@@ -620,15 +620,15 @@
                         (setq-local line-spacing nil))))
 
 (use-package vterm-toggle
-  :after evil
+  :after (projectile vterm evil)
   :config
   (setq vterm-toggle-fullscreen-p nil)
-  (setq vterm-toggle-cd-auto-create-buffer nil)
+  (setq vterm-toggle-scope 'projectile)
   (with-eval-after-load 'evil
     (evil-set-initial-state 'vterm-mode 'emacs))
-  (global-set-key (kbd "C-`") #'vterm-toggle-cd)
+  (global-set-key (kbd "C-`") #'vterm-toggle)
   (add-to-list 'display-buffer-alist
-               '("^v?term.*"
+               '((lambda (bufname _) (with-current-buffer bufname (equal major-mode 'vterm-mode)))
                  (display-buffer-reuse-window display-buffer-at-bottom)
                  (reusable-frames . visible)
                  (window-height . 0.5))))

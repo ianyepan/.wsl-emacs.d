@@ -466,6 +466,7 @@
   (setq lsp-enable-symbol-highlighting nil)
   (setq lsp-enable-on-type-formatting nil)
   (setq lsp-signature-auto-activate nil)
+  (setq lsp-modeline-code-actions-mode nil)
   (setq lsp-enable-folding nil)
   (setq lsp-enable-snippet nil)
   (setq lsp-enable-completion-at-point nil)

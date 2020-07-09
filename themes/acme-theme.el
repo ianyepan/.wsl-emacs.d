@@ -1,9 +1,9 @@
-;;; acme-theme.el --- A color theme based on Acme & Sam from Plan 9
+;;; acme-theme.el --- A color theme based on Acme & Sam from Plan 9  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2020 Ian Yi-En Pan
 
 ;; Author: Ian Y.E. Pan
-;; URL: https://github.com/ianpan870102/vscode-dark-plus-emacs-theme
+;; URL: https://github.com/ianpan870102/acme-emacs-theme
 ;; Version: 1.0.0
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -23,58 +23,49 @@
 ;; A color theme for Emacs based on Acme & Sam from Plan 9
 
 ;;; Credits:
-;; This theme was modified from plan9-theme.el by John Louis Del Rosario
+;; This theme was modified from John Louis Del Rosario's plan9-theme.el
 
 ;;; Code:
 
-(deftheme acme "Theme inspired by Acme")
+(deftheme acme "A color theme based on Acme & Sam")
 
 ;;; Color Palette
 
-(defvar acme-theme-colors-alist
-  '(("bg"            . "#FFFFE8") ; default bg
-    ("bg-alt"        . "#FFFFD8")
-    ("bg-alt2"       . "#eFeFd8")
-    ("bg-dark"       . "#E5E5D0")
-    ("fg"            . "#444444") ; default fg
-    ("fg-alt"        . "#B8B09A")
-    ("fg-alt-dark"   . "#988d6d")
-    ("fg-light"      . "#CCCCB7")
-    ("highlight"     . "#e8eb98")
+(let ((class '((class color) (min-colors 89)))
+    (bg              "#FFFFE8") ; default bg
+    ;; (bg-alt          "#FFFFD8")
+    (bg-alt2         "#eFeFd8")
+    (bg-dark         "#E5E5D0")
+    (fg              "#444444") ; default fg
+    (fg-alt          "#B8B09A")
+    (fg-alt-dark     "#988d6d")
+    (fg-light        "#CCCCB7")
+    (highlight       "#e8eb98")
+    (highlight-alt   "#e8ebc8")
 
-    ("acme-cyan"          . "#007777")
-    ("acme-cyan-light"    . "#a8efeb")
-    ("acme-red"           . "#880000")
-    ("acme-red-light"     . "#f8e8e8")
-    ("acme-yellow"        . "#888838")
-    ("acme-yellow-light"  . "#f8fce8")
-    ("acme-green"         . "#005500")
-    ("acme-green-alt"     . "#006600")
-    ("acme-green-light"   . "#e8fce8")
-    ("acme-blue"          . "#1054af")
-    ("acme-blue-light"    . "#e1faff")
-    ("acme-purple"        . "#555599")
-    ("acme-purple-light"  . "#ffeaff")))
-
-(defmacro acme-theme-with-color-variables (&rest body)
-  "`let' bind all colors defined in `acme-theme-colors-alist' around BODY.
-Also bind `class' to ((class color) (min-colors 89))."
-  (declare (indent 0))
-  `(let ((class '((class color) (min-colors 89)))
-         ,@(mapcar (lambda (cons)
-                     (list (intern (car cons)) (cdr cons)))
-                   acme-theme-colors-alist))
-     ,@body))
+    ;; standardized palette
+    (acme-cyan            "#007777")
+    (acme-cyan-light      "#a8efeb")
+    (acme-red             "#880000")
+    (acme-red-light       "#f8e8e8")
+    (acme-yellow          "#888838")
+    (acme-yellow-light    "#f8fce8")
+    (acme-green           "#005500")
+    (acme-green-alt       "#006600")
+    (acme-green-light     "#e8fce8")
+    (acme-blue            "#1054af")
+    (acme-blue-light      "#e1faff")
+    (acme-purple          "#555599")
+    (acme-purple-light    "#ffeaff"))
 
 ;;; Theme Faces
-(acme-theme-with-color-variables
- (custom-theme-set-faces
+(custom-theme-set-faces
   'acme
 
 ;;;; Built-in
 
 ;;;;; basic coloring
-  '(button                                       ((t (:underline t))))
+  `(button                                       ((t (:underline t))))
   `(link                                         ((t (:foreground ,acme-blue :underline t :weight normal))))
   `(link-visited                                 ((t (:foreground ,acme-purple :underline t :weight normal))))
   `(default                                      ((t (:foreground ,fg :background ,bg))))
@@ -143,10 +134,10 @@ Also bind `class' to ((class color) (min-colors 89))."
   `(font-lock-regexp-grouping-backslash          ((t (:foreground ,acme-purple :weight normal))))
   `(font-lock-warning-face                       ((t (:foreground ,acme-red :weight normal))))
 
- ;;;; table
+;;;;; table
   `(table-cell                                   ((t (:background ,bg-alt2))))
 
- ;;;; ledger
+;;;;; ledger
   `(ledger-font-directive-face                   ((t (:foreground ,acme-cyan))))
   `(ledger-font-periodic-xact-face               ((t (:inherit ledger-font-directive-face))))
   `(ledger-font-posting-account-face             ((t (:foreground ,acme-blue))))
@@ -238,15 +229,15 @@ Also bind `class' to ((class color) (min-colors 89))."
   `(erc-direct-msg-face                          ((t (:inherit erc-default))))
   `(erc-notice-face                              ((t (:foreground ,fg-light))))
   `(erc-highlight-face                           ((t (:background ,highlight))))
-
   `(erc-input-face                               ((t (:foreground ,fg :background ,bg-alt2))))
-  `(erc-current-nick-face                        ((t (:foreground ,fg :background ,acme-cyan-light :weight normal :box (:line-width 1 :style released-button)))))
+  `(erc-current-nick-face                        ((t (:foreground ,fg :background ,acme-cyan-light :weight normal
+                                                                  :box (:line-width 1 :style released-button)))))
   `(erc-nick-default-face                        ((t (:weight normal :background ,bg-alt2))))
-  `(erc-my-nick-face                             ((t (:foreground ,fg :background ,acme-cyan-light :weight normal :box (:line-width 1 :style released-button)))))
+  `(erc-my-nick-face                             ((t (:foreground ,fg :background ,acme-cyan-light :weight normal
+                                                                  :box (:line-width 1 :style released-button)))))
   `(erc-nick-msg-face                            ((t (:inherit erc-default))))
   `(erc-fool-face                                ((t (:inherit erc-default))))
   `(erc-pal-face                                 ((t (:foreground ,acme-purple :weight normal))))
-
   `(erc-dangerous-host-face                      ((t (:inherit font-lock-warning-face))))
   `(erc-keyword-face                             ((t (:foreground ,acme-yellow :weight normal))))
 
@@ -254,7 +245,8 @@ Also bind `class' to ((class color) (min-colors 89))."
   `(evil-search-highlight-persist-highlight-face ((t (:inherit lazy-highlight))))
 
 ;;;;; flx
-  `(flx-highlight-face                           ((t (:foreground ,acme-yellow :background ,acme-green-light :weight normal :underline t))))
+  `(flx-highlight-face                           ((t (:foreground ,acme-yellow :background ,acme-green-light
+                                                                  :weight normal :underline t))))
 
 ;;;;; company
   `(company-tooltip                              ((t (:background ,acme-blue-light))))
@@ -297,7 +289,8 @@ Also bind `class' to ((class color) (min-colors 89))."
 ;;;;; ido-vertical
   `(ido-vertical-first-match-face                ((t (:foreground ,fg :background ,acme-cyan-light :weight normal))))
   `(ido-vertical-only-match-face                 ((t (:foreground ,acme-red :background ,acme-red-light :weight normal))))
-  `(ido-vertical-match-face                      ((t (:foreground ,fg :background ,acme-green-light :weight normal :underline t))))
+  `(ido-vertical-match-face                      ((t (:foreground ,fg :background ,acme-green-light
+                                                                  :weight normal :underline t))))
 
 ;;;;; indent-guide
   `(indent-guide-face                            ((t (:foreground ,highlight))))
@@ -327,7 +320,8 @@ Also bind `class' to ((class color) (min-colors 89))."
   `(lsp-face-highlight-write                     ((t (:background ,acme-green-light))))
 
 ;;;;; magit
-  `(magit-section-heading                        ((t (:foreground ,acme-cyan :background ,acme-blue-light :weight normal :underline t))))
+  `(magit-section-heading                        ((t (:foreground ,acme-cyan :background ,acme-blue-light
+                                                                  :weight normal :underline t))))
   `(magit-section-highlight                      ((t (:background ,bg-alt2))))
   `(magit-section-heading-selection              ((t (:background ,highlight))))
   `(magit-filename                               ((t (:foreground ,fg))))
@@ -428,7 +422,8 @@ Also bind `class' to ((class color) (min-colors 89))."
 
 ;;;;; yascroll
   `(yascroll:thumb-text-area                     ((t (:background ,highlight))))
-  `(yascroll:thumb-fringe                        ((t (:background ,bg :foreground ,bg :box (:line-width 1 :style released-button)))))
+  `(yascroll:thumb-fringe                        ((t (:background ,bg :foreground ,bg
+                                                                  :box (:line-width 1 :style released-button)))))
 
 ;;;;; Org
   `(org-level-1                                  ((t (:background ,acme-blue-light :foreground ,acme-blue :weight bold :overline t))))
@@ -485,41 +480,18 @@ Also bind `class' to ((class color) (min-colors 89))."
   `(message-header-to                            ((t (:foreground ,acme-blue))))
   `(message-header-subject                       ((t (:foreground ,acme-blue))))
   `(message-header-other                         ((t (:foreground ,acme-blue))))
-  `(message-cited-text                           ((t (:inherit font-lock-comment-face))))))
-
-;;; Theme Variables
-(acme-theme-with-color-variables
- (custom-theme-set-variables
-  'acme
+  `(message-cited-text                           ((t (:inherit font-lock-comment-face))))
 
 ;;;;; fill-column-indicator
-  `(fci-rule-color ,acme-yellow-light)
-
-;;;;; highlight-parentheses
-  `(hl-paren-colors '(,acme-green ,acme-blue ,acme-red))
-  `(hl-paren-background-colors '(,acme-green-light ,acme-blue-light ,acme-red-light))
-
-;;;;; sml-mode-line
-  `(sml/active-foreground-color ,fg)
-  `(sml/active-background-color ,acme-blue-light)
-  `(sml/inactive-foreground-color ,fg)
-  `(sml/inactive-background-color ,acme-blue)))
-
-
-;;; Footer
+  `(fci-rule-color                               ((t (:foreground ,highlight-alt))))
+  `(fill-column-indicator                        ((t (:foreground ,highlight-alt))))))
 
 ;;;###autoload
-(and load-file-name
-     (boundp 'custom-theme-load-path)
-     (add-to-list 'custom-theme-load-path
-                  (file-name-as-directory
-                   (file-name-directory load-file-name))))
+(when (and (boundp 'custom-theme-load-path) load-file-name)
+  (add-to-list 'custom-theme-load-path
+               (file-name-as-directory (file-name-directory load-file-name))))
 
 (provide-theme 'acme)
 (provide 'acme-theme)
 
-;; Local Variables:
-;; no-byte-compile: t
-;; indent-tabs-mode: nil
-;; End:
 ;;; acme-theme.el ends here

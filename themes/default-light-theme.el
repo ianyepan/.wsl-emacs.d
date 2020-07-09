@@ -35,8 +35,8 @@
  '(company-scrollbar-bg             ((t (:background "grey95"))))
  '(company-scrollbar-fg             ((t (:background "grey90"))))
 
- '(diff-hl-insert                   ((t (:background "green3" :foreground "green3"))))
- '(diff-hl-delete                   ((t (:background "orangered" :foreground "orangered"))))
+ '(diff-hl-insert                   ((t (:background "ForestGreen" :foreground "ForestGreen"))))
+ '(diff-hl-delete                   ((t (:background "#980000" :foreground "#980000"))))
  '(diff-hl-change                   ((t (:background "royalblue" :foreground "royalblue"))))
  )
 

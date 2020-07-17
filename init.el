@@ -209,7 +209,8 @@
     (when (member "Consolas" (font-family-list))
       (set-face-attribute 'default nil :family "Consolas"))
     (set-face-attribute 'default nil
-                        :height 130
+                        :height 130 ; X1 Carbon
+                        ;; :height 90 ; Asus monitor
                         :weight 'normal))
   :ensure nil
   :config
@@ -269,11 +270,7 @@
 ;; GUI enhancements
 
 ;; (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-;; (load-theme 'acme t)
-
-;; (use-package tron-legacy-theme
-;;   :config
-;;   (load-theme 'tron-legacy t))
+;; (load-theme 'atom-one-dark t)
 
 ;; (use-package doom-themes
 ;;   :config
@@ -283,9 +280,9 @@
 
 (use-package spacemacs-common
   :ensure spacemacs-theme
+  :custom-face
+  (diff-hl-delete ((t (:background "#980000" :foreground "#980000"))))
   :config
-  (setq spacemacs-theme-comment-bg nil)
-  (setq spacemacs-theme-comment-italic t)
   (setq spacemacs-theme-org-height nil)
   (load-theme 'spacemacs-light t))
 

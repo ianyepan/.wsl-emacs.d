@@ -478,13 +478,6 @@
 (use-package lsp-java
   :after lsp)
 
-;; (use-package lsp-python-ms
-;;   :hook (python-mode . (lambda () (require 'lsp-python-ms)))
-;;   :config
-;;   (setq lsp-python-ms-executable
-;;         "~/python-language-server/output/bin/Release/osx-x64/publish/Microsoft.Python.LanguageServer")
-;;   (setq lsp-python-ms-python-executable-cmd "python3"))
-
 (use-package modern-cpp-font-lock
   :hook (c++-mode . modern-c++-font-lock-mode))
 
@@ -495,11 +488,6 @@
             #'(lambda ()
                 (call-interactively #'lsp-workspace-restart)))
   (pyvenv-mode +1))
-
-;; (use-package typescript-mode
-;;   :mode ("\\.tsx?\\'" . typescript-mode)
-;;   :config
-;;   (setq typescript-indent-level ian/indent-width))
 
 (use-package cobol-mode
   :config

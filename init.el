@@ -647,5 +647,27 @@
   (setq minions-mode-line-delimiters '("" . ""))
   (minions-mode +1))
 
+;; LaTeX export
+; Ubuntu needs to have these installed:
+; 1. texlive-latex-extra
+; 2. texlive-fonts-extra
+
+(use-package ox
+  :ensure nil
+  :config
+  (setq org-export-with-smart-quotes t))
+
+(use-package ox-latex
+  :ensure nil
+  :config
+  (setq org-latex-packages-alist '(("margin=1in" "geometry" nil)
+                                   ("bitstream-charter" "mathdesign" nil)
+                                   ("" "inconsolata" nil)))
+  (setq org-latex-pdf-process
+        '("/usr/bin/pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+          "/usr/bin/pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+          "/usr/bin/pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f")))
+
+
 (provide 'init)
 ;;; init.el ends here

@@ -461,14 +461,14 @@
   :commands lsp
   :config
   (setq lsp-auto-guess-root t)
-  (setq lsp-diagnostic-package :none)   ; disable flycheck-lsp for most modes
-  (add-hook 'web-mode-hook #'(lambda () ; enable flycheck-lsp for web-mode (locally)
-                               (setq-local lsp-diagnostic-package :auto)))
+  (setq lsp-diagnostic-package :none)             ; disable flycheck-lsp for most modes
+  (add-hook 'web-mode-hook #'lsp-flycheck-enable) ; enable flycheck-lsp for web-mode locally
   (setq lsp-enable-symbol-highlighting nil)
   (setq lsp-enable-on-type-formatting nil)
   (setq lsp-signature-auto-activate nil)
-  (setq lsp-modeline-code-actions-mode nil)
+  (setq lsp-modeline-code-actions-enable nil)
   (setq lsp-enable-folding nil)
+  (setq lsp-enable-imenu nil)
   (setq lsp-enable-snippet nil)
   (setq lsp-enable-completion-at-point nil)
   (setq read-process-output-max (* 1024 1024)) ;; 1mb

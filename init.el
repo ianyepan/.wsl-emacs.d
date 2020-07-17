@@ -534,7 +534,11 @@
   :hook ((org-mode . visual-line-mode)
          (org-mode . auto-fill-mode)
          (org-mode . org-indent-mode)
-         (org-mode . (lambda () (setq-local evil-auto-indent nil)))))
+         (org-mode . (lambda () (setq-local evil-auto-indent nil))))
+  :config
+  (setq org-startup-folded nil)
+  (setq org-todo-keywords '((sequence "TODO" "DOING" "DONE")))
+  (setq org-html-checkbox-type 'html))
 
 (use-package org-bullets
   :hook (org-mode . org-bullets-mode))

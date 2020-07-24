@@ -1,10 +1,9 @@
-;;; fluent-edge-theme.el --- A Dark Theme Inspired by Microsoft's Edge Browser -*- lexical-binding: t; -*-
+;;; fluent-edge-theme.el --- A Dark Theme Inspired By Microsoft's Edge Browser -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2020 Ian Y.E. Pan
 
 ;; Author: Ian Y.E. Pan
-;; URL: https://github.com/ianpan870102/fluent-edge-emacs-theme
-;; Version: 1.5.0
+;; Version: 0.5.0
 
 ;; This program is free software: you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -22,7 +21,7 @@
 ;; This file is not part of Emacs.
 
 ;;; Commentary:
-;; A dark theme inspired by Microsoft's Edge Browser and the Fluent Design Language.
+;; A dark theme inspired by Microsoft's Edge browser and the Fluent Design Language.
 
 ;;; Code:
 
@@ -39,14 +38,14 @@
       (bg2               "#3f3f3f")
       (bg3               "#444444")
       (bg4               "#4f4f4f")
-      (bg-hl             "#18578c")
+      (bg-hl             "#264f78")
       (vc-r              "#f28b82")
       (vc-g              "#b5cea8")
       (vc-b              "#58b8fe")
       (key2              "#f28b82")
       (key3              "#b3d6f2")
       (accent            "#b3d6f2")
-      (numeric           "#b5cea8")
+      (numeric           "#b3d6f2")
       (mode-line-bg      "#1e1e1e")
       (mode-line-bg-dark "#101010")
       (line-num          "#777777")
@@ -56,7 +55,7 @@
       (comment           "#777777")
       (doc               "#b5cea8")
       (doc-alt           "#777777")
-      (func              "#58b8fe")
+      (func              "#b3d6f2")
       (str               "#b5cea8")
       (type              "#f0f0f0")
       (var               "#f0f0f0")
@@ -128,10 +127,10 @@
    `(mode-line-emphasis                       ((,class (:foreground ,fg1))))
 
    `(company-preview-common                   ((t (:foreground unspecified :background ,bg2))))
-   `(company-scrollbar-bg                     ((t (:background ,bg2))))
-   `(company-scrollbar-fg                     ((t (:background ,bg3))))
+   `(company-scrollbar-bg                     ((t (:background ,bg0))))
+   `(company-scrollbar-fg                     ((t (:background ,line-num))))
    `(company-tooltip                          ((t (:inherit default :background ,bg2))))
-   `(company-tooltip-common                   ((t (:foreground ,ms-blue :bold t))))
+   `(company-tooltip-common                   ((t (:foreground ,ms-blue))))
    `(company-tooltip-selection                ((t (:background ,bg-hl))))
    `(company-tooltip-annotation               ((t (:foreground ,doc-alt)))) ; parameter hints etc.
 

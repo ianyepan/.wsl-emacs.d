@@ -204,14 +204,17 @@
 
 (use-package frame
   :preface
+  (defun ian/normal-fontsize ()
+    (interactive)
+    (set-face-attribute 'default nil :height 120 :weight 'normal))
+  (defun ian/small-fontsize ()
+    (interactive)
+    (set-face-attribute 'default nil :height 90 :weight 'normal))
   (defun ian/set-default-font ()
     (interactive)
     (when (member "Consolas" (font-family-list))
       (set-face-attribute 'default nil :family "Consolas"))
-    (set-face-attribute 'default nil
-                        :height 130 ; X1 Carbon
-                        ;; :height 90 ; Asus monitor
-                        :weight 'normal))
+    (ian/normal-fontsize))
   :ensure nil
   :config
   (setq default-frame-alist

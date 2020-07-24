@@ -189,6 +189,11 @@
   (setq python-indent-offset ian/indent-width)
   (setq python-shell-interpreter "python3"))
 
+(use-package css-mode ; inerited by less-css-mode
+  :ensure nil
+  :config
+  (setq css-indent-offset ian/indent-width))
+
 (use-package mwheel
   :ensure nil
   :config

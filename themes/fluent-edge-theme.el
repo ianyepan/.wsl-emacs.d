@@ -162,6 +162,7 @@
    `(org-verbatim                             ((,class (:foreground ,fg4))))
    `(org-document-info-keyword                ((,class (:foreground ,ms-green))))
    `(org-sexp-date                            ((,class (:foreground ,fg4))))
+   `(org-table                                ((,class (:foreground ,ms-green :background ,bg2))))
 
    `(font-latex-bold-face                     ((,class (:foreground ,type))))
    `(font-latex-italic-face                   ((,class (:foreground ,key3 :italic t))))
@@ -364,7 +365,7 @@
    `(helm-source-go-package-godoc-description ((,class (:foreground ,str))))
    `(helm-bookmark-w3m                        ((,class (:foreground ,type))))
 
-   `(web-mode-html-tag-bracket-face           ((,class (:foreground "#808080"))))
+   `(web-mode-html-tag-bracket-face           ((,class (:foreground ,fg3))))
    `(web-mode-html-tag-face                   ((,class (:foreground ,keyword))))
    `(web-mode-html-attr-name-face             ((,class (:foreground ,var))))
    `(web-mode-html-attr-value-face            ((,class (:foreground ,str))))

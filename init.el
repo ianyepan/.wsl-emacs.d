@@ -209,17 +209,19 @@
 
 (use-package frame
   :preface
-  (defun ian/normal-fontsize ()
+  (defun ian/fontsize-normal ()
     (interactive)
-    (set-face-attribute 'default nil :height 120 :weight 'normal))
-  (defun ian/small-fontsize ()
+    (set-face-attribute 'default nil :height 120))
+  (defun ian/fontsize-small ()
     (interactive)
-    (set-face-attribute 'default nil :height 90 :weight 'normal))
+    (set-face-attribute 'default nil :height 90))
   (defun ian/set-default-font ()
     (interactive)
     (when (member "Consolas" (font-family-list))
-      (set-face-attribute 'default nil :family "Consolas"))
-    (ian/normal-fontsize))
+      (set-face-attribute 'default nil :family "Consolas" :weight 'normal))
+    (ian/fontsize-normal))
+  (defalias 'ian/normal-fontsize #'ian/fontsize-normal)
+  (defalias 'ian/small-fontsize #'ian/fontsize-small)
   :ensure nil
   :config
   (setq default-frame-alist

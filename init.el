@@ -675,6 +675,12 @@
   (setq minions-mode-line-delimiters '("" . ""))
   (minions-mode +1))
 
+(use-package smart-mode-line
+  :config
+  (setq sml/no-confirm-load-theme t)
+  (setq sml/modified-char "*")
+  (sml/setup))
+
 ;; LaTeX export
 ; Ubuntu needs to have these installed:
 ; 1. texlive-latex-extra

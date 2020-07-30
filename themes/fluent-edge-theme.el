@@ -484,6 +484,8 @@
    `(evil-ex-substitute-matches               ((t (:foreground ,warning :weight normal :strike-through t))))
    `(evil-ex-substitute-replacement           ((t (:foreground ,ms-bluegreen :weight normal))))
 
+   `(markdown-code-face                       ((t (:inherit nil))))
+
    `(hl-todo                                  ((t (:inverse-video t))))
    `(highlight-numbers-number                 ((t (:foreground ,numeric))))
    `(highlight-operators-face                 ((t (:inherit default))))

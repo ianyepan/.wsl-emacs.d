@@ -666,6 +666,9 @@
 
 (use-package pdf-tools
   :mode (("\\.pdf\\'" . pdf-view-mode))
+  :bind ((:map pdf-view-mode-map ("C--" . pdf-view-shrink))
+         (:map pdf-view-mode-map ("C-=" . pdf-view-enlarge))
+         (:map pdf-view-mode-map ("C-0" . pdf-view-scale-reset)))
   :config
   (pdf-loader-install))
 

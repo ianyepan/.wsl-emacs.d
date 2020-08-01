@@ -60,7 +60,7 @@
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
   (tool-bar-mode -1)
   (menu-bar-mode -1)
-  (setq-default line-spacing 3)
+  (setq-default line-spacing 0)
   (setq-default indent-tabs-mode nil)
   (setq-default tab-width ian/indent-width))
 
@@ -145,10 +145,7 @@
                 (let* ((root (locate-dominating-file
                               (or (buffer-file-name) default-directory)
                               "node_modules"))
-                       (eslint
-                        (and root
-                             (expand-file-name "node_modules/.bin/eslint"
-                                               root))))
+                       (eslint (and root (expand-file-name "node_modules/.bin/eslint" root))))
                   (when (and eslint (file-executable-p eslint))
                     (setq-local flycheck-javascript-eslint-executable eslint))))))
 
@@ -211,21 +208,21 @@
   :preface
   (defun ian/fontsize-normal ()
     (interactive)
-    (set-face-attribute 'default nil :height 120))
+    (set-face-attribute 'default nil :height 110))
   (defun ian/fontsize-small ()
     (interactive)
-    (set-face-attribute 'default nil :height 90))
+    (set-face-attribute 'default nil :height 80))
   (defun ian/set-default-font ()
     (interactive)
-    (when (member "Consolas" (font-family-list))
-      (set-face-attribute 'default nil :family "Consolas" :weight 'normal))
+    (when (member "Roboto Mono" (font-family-list))
+      (set-face-attribute 'default nil :family "Roboto Mono" :weight 'normal))
     (ian/fontsize-normal))
   (defalias 'ian/normal-fontsize #'ian/fontsize-normal)
   (defalias 'ian/small-fontsize #'ian/fontsize-small)
   :ensure nil
   :config
   (setq default-frame-alist
-        (append (list '(width  . 75) '(height . 35)
+        (append (list '(width  . 75) '(height . 30)
                       '(internal-border-width . 2))))
   (blink-cursor-mode -1)
   (ian/set-default-font))
@@ -274,6 +271,12 @@
   :hook (prog-mode . display-line-numbers-mode)
   :config
   (setq-default display-line-numbers-width 3))
+
+(use-package faces
+  :ensure nil
+  :config
+  (when (member "Segoe UI" (font-family-list))
+    (set-face-attribute 'variable-pitch nil :family "Segoe UI" :weight 'normal :height 1.1)))
 
 ;;; Third-party Packages
 
@@ -660,7 +663,7 @@
                '((lambda (bufname _) (with-current-buffer bufname (equal major-mode 'vterm-mode)))
                  (display-buffer-reuse-window display-buffer-at-bottom)
                  (reusable-frames . visible)
-                 (window-height . 0.5))))
+                 (window-height . 0.62))))
 
 ;; Misc
 

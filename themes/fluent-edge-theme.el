@@ -47,7 +47,7 @@
       (accent            "#b3d6f2")
       (numeric           "#b3d6f2")
       (mode-line-bg      "#1e1e1e")
-      (mode-line-bg-dark "#101010")
+      (mode-line-bg-dark "#1a1a1a")
       (line-num          "#777777")
       (builtin           "#b3d6f2")
       (keyword           "#b3d6f2")

@@ -60,7 +60,7 @@
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
   (tool-bar-mode -1)
   (menu-bar-mode -1)
-  ;; (setq-default line-spacing 3)
+  (setq-default line-spacing 3)
   (setq-default indent-tabs-mode nil)
   (setq-default tab-width ian/indent-width))
 
@@ -208,21 +208,21 @@
   :preface
   (defun ian/fontsize-normal ()
     (interactive)
-    (set-face-attribute 'default nil :height 110))
+    (set-face-attribute 'default nil :height 120))
   (defun ian/fontsize-small ()
     (interactive)
-    (set-face-attribute 'default nil :height 80))
+    (set-face-attribute 'default nil :height 90))
   (defun ian/set-default-font ()
     (interactive)
-    (when (member "Roboto Mono" (font-family-list))
-      (set-face-attribute 'default nil :family "Roboto Mono" :weight 'normal))
+    (when (member "Consolas" (font-family-list))
+      (set-face-attribute 'default nil :family "Consolas" :weight 'normal))
     (ian/fontsize-normal))
   (defalias 'ian/normal-fontsize #'ian/fontsize-normal)
   (defalias 'ian/small-fontsize #'ian/fontsize-small)
   :ensure nil
   :config
   (setq default-frame-alist
-        (append (list '(width  . 75) '(height . 30)
+        (append (list '(width  . 75) '(height . 35)
                       '(internal-border-width . 2))))
   (blink-cursor-mode -1)
   (ian/set-default-font))

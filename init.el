@@ -276,7 +276,7 @@
   :ensure nil
   :config
   (when (member "Segoe UI" (font-family-list))
-    (set-face-attribute 'variable-pitch nil :family "Segoe UI" :weight 'normal :height 1.1)))
+    (set-face-attribute 'variable-pitch nil :family "Segoe UI" :weight 'normal :height 1.0)))
 
 ;;; Third-party Packages
 

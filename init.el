@@ -558,6 +558,7 @@
          (org-mode . org-indent-mode)
          (org-mode . (lambda () (setq-local evil-auto-indent nil))))
   :config
+  (setq org-descriptive-links nil)
   (setq org-startup-folded nil)
   (setq org-todo-keywords '((sequence "TODO" "DOING" "DONE")))
   (setq org-html-checkbox-type 'html))

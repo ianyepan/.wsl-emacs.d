@@ -48,6 +48,10 @@
  '(sml/modes                        ((t (:foreground "black"))))
  '(sml/modified                     ((t (:foreground "red3"))))
  '(sml/charging                     ((t (:foreground "green3"))))
+
+ '(term-color-blue                  ((t (:foreground "LightSteelBlue"))))
+ '(term-color-green                 ((t (:foreground "PaleGreen"))))
+ '(term-color-yellow                ((t (:foreground "LightGoldenrod"))))
  )
 
 (provide-theme 'default-dark)

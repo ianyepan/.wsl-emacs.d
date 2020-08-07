@@ -35,6 +35,17 @@
 
  '(highlight-symbol-face            ((t (:background "grey25"))))
  '(hl-todo                          ((t (:inverse-video t))))
+
+ '(sml/global                       ((t (:foreground "black"))))
+ '(sml/filename                     ((t (:foreground "black"))))
+ '(sml/folder                       ((t (:foreground "black"))))
+ '(sml/projectile                   ((t (:foreground "black"))))
+ '(sml/line-number                  ((t (:foreground "black"))))
+ '(sml/prefix                       ((t (:foreground "black"))))
+ '(sml/read-only                    ((t (:foreground "black"))))
+ '(sml/modes                        ((t (:foreground "black"))))
+ '(sml/modified                     ((t (:foreground "red3"))))
+ '(sml/charging                     ((t (:foreground "green3"))))
  )
 
 (provide-theme 'default-dark)

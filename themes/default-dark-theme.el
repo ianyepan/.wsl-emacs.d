@@ -23,11 +23,13 @@
 
  '(company-tooltip                  ((t (:foreground "gray90" :background "black"))))
  '(company-tooltip-common           ((t (:foreground "LightSalmon" :bold t))))
- '(company-tooltip-selection        ((t (:background "gray15"))))
+ '(company-tooltip-annotation       ((t (:foreground "gray50" :italic t))))
+ '(company-tooltip-selection        ((t (:background "gray20"))))
  '(company-scrollbar-bg             ((t (:background "gray15"))))
  '(company-scrollbar-fg             ((t (:background "gray30"))))
 
  '(hl-line                          ((t (:background "grey20"))))
+ '(ivy-current-match                ((t (:background "LightSteelBlue" :foreground "black"))))
 
  '(diff-hl-insert                   ((t (:background "DarkOliveGreen2" :foreground "DarkOliveGreen2"))))
  '(diff-hl-delete                   ((t (:background "red3" :foreground "red3"))))

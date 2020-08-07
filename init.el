@@ -57,6 +57,7 @@
   (setq auto-window-vscroll nil)
   (setq load-prefer-newer t)
   (setq inhibit-compacting-font-caches t)
+  (setq echo-keystrokes 0.02)
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
   (tool-bar-mode -1)
   (menu-bar-mode -1)

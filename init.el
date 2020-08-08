@@ -223,7 +223,7 @@
   :ensure nil
   :config
   (setq default-frame-alist
-        (append (list '(width  . 75) '(height . 35)
+        (append (list '(width  . 75) '(height . 30)
                       '(internal-border-width . 2))))
   (blink-cursor-mode -1)
   (ian/set-default-font))
@@ -309,10 +309,6 @@
 ;;   (setq doom-gruvbox-dark-variant "hard")
 ;;   (setq doom-solarized-dark-brighter-text t)
 ;;   (load-theme 'doom-tomorrow-night t))
-
-;; (use-package vscode-dark-plus-theme
-;;   :config
-;;   (load-theme 'vscode-dark-plus t))
 
 ;; (use-package spacemacs-common
 ;;   :ensure spacemacs-theme

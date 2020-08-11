@@ -215,7 +215,7 @@
     (set-face-attribute 'default nil :height 85))
   (defun ian/set-default-font ()
     (interactive)
-    (when (member "Consolas" (font-family-list))
+    (when (member "Cascadia Code" (font-family-list))
       (set-face-attribute 'default nil :family "Cascadia Code" :weight 'light))
     (ian/fontsize-normal))
   (defalias 'ian/normal-fontsize #'ian/fontsize-normal)
@@ -661,7 +661,7 @@
                '((lambda (bufname _) (with-current-buffer bufname (equal major-mode 'vterm-mode)))
                  (display-buffer-reuse-window display-buffer-at-bottom)
                  (reusable-frames . visible)
-                 (window-height . 0.62))))
+                 (window-height . 0.7))))
 
 ;; Misc
 

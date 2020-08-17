@@ -286,30 +286,6 @@
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 (load-theme 'fluent-edge t)
 
-;; (use-package doom-themes
-
-;;   ;; :custom-face ; solarized dark
-;;   ;; (font-lock-constant-face  ((t (:foreground "#2aa198"))))
-;;   ;; (highlight-numbers-number ((t (:foreground "#2aa198"))))
-;;   ;; (highlight-symbol-face    ((t (:background "#174052"))))
-;;   ;; (region                   ((t (:background "#074662" :extend nil))))
-
-;;   :custom-face ; tomorrow night
-;;   (mode-line                  ((t (:foreground "#c5c8c6"))))
-;;   (font-lock-comment-face     ((t (:foreground "#666867" :italic t))))
-;;   (font-lock-doc-face         ((t (:foreground "#b5bd68"))))
-;;   (web-mode-json-key-face     ((t (:foreground "#b5bd68"))))
-;;   (web-mode-json-context-face ((t (:foreground "#b5bd68"))))
-;;   (highlight-symbol-face      ((t (:background "#333537"))))
-;;   (region                     ((t (:background "#30455c" :extend nil))))
-;;   (show-paren-match           ((t (:background nil :underline t))))
-
-;;   :config
-;;   (setq doom-themes-enable-bold nil)
-;;   (setq doom-gruvbox-dark-variant "hard")
-;;   (setq doom-solarized-dark-brighter-text t)
-;;   (load-theme 'doom-tomorrow-night t))
-
 ;; (use-package spacemacs-common
 ;;   :ensure spacemacs-theme
 ;;   :custom-face

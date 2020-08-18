@@ -360,6 +360,7 @@
 (use-package ivy
   :hook (after-init . ivy-mode)
   :config
+  (setcdr (assoc t ivy-format-functions-alist) #'ivy-format-function-line)
   (setq ivy-height 12)
   (setq ivy-display-style nil)
   (setq ivy-re-builders-alist

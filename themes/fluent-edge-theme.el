@@ -36,9 +36,9 @@
       (bg0               "#1e1e1e")
       (bg1               "#2e2e2e") ; default bg
       (bg2               "#3f3f3f")
-      (bg3               "#444444")
-      (bg4               "#4f4f4f")
-      (bg-hl             "#264f78")
+      (bg3               "#4a4a4a")
+      (bg4               "#5f5f5f")
+      (bg-hl             "#264f7a")
       (vc-r              "#f28b82")
       (vc-g              "#b5cea8")
       (vc-b              "#b3d6f2")
@@ -127,7 +127,7 @@
    `(mode-line-emphasis                       ((,class (:foreground ,fg1))))
 
    `(company-preview-common                   ((t (:foreground unspecified :background ,bg2))))
-   `(company-scrollbar-bg                     ((t (:background ,bg0))))
+   `(company-scrollbar-bg                     ((t (:background ,bg1))))
    `(company-scrollbar-fg                     ((t (:background ,line-num))))
    `(company-tooltip                          ((t (:inherit default :background ,bg2))))
    `(company-tooltip-common                   ((t (:foreground ,ms-blue))))
@@ -432,7 +432,7 @@
    `(solaire-org-hide-face                    ((t (:inherit org-hide :background ,bg2))))
 
    `(ivy-confirm-face                         ((t (:inherit minibuffer-prompt :foreground ,keyword))))
-   `(ivy-current-match                        ((t (:background ,accent :foreground ,bg00 :extend t))))
+   `(ivy-current-match                        ((t (:background ,bg4 :foreground ,fg1 :extend t))))
    `(ivy-highlight-face                       ((t (:inherit font-lock-builtin-face))))
    `(ivy-match-required-face                  ((t (:inherit minibuffer-prompt :foreground ,warning))))
    `(ivy-minibuffer-match-face-1              ((t (:inherit isearch))))

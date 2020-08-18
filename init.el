@@ -286,14 +286,6 @@
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 (load-theme 'fluent-edge t)
 
-;; (use-package spacemacs-common
-;;   :ensure spacemacs-theme
-;;   :custom-face
-;;   (diff-hl-delete ((t (:background "#980000" :foreground "#980000"))))
-;;   :config
-;;   (setq spacemacs-theme-org-height nil)
-;;   (load-theme 'spacemacs-light t))
-
 (use-package highlight-symbol
   :hook (prog-mode . highlight-symbol-mode)
   :config

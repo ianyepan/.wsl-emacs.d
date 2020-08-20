@@ -297,6 +297,10 @@
 (use-package highlight-escape-sequences
   :hook (prog-mode . hes-mode))
 
+(use-package emojify
+  :config
+  :hook (after-init . global-emojify-mode))
+
 ;; Vi keybindings
 
 (use-package evil

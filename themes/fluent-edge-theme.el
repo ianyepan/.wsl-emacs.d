@@ -489,7 +489,7 @@
    `(hl-todo                                  ((t (:inverse-video t))))
    `(highlight-numbers-number                 ((t (:foreground ,numeric))))
    `(highlight-operators-face                 ((t (:inherit default))))
-   `(highlight-symbol-face                    ((t (:background ,bg4))))))
+   `(highlight-symbol-face                    ((t (:background ,bg4 :distant-foreground ,fg0))))))
 
 ;;;###autoload
 (when (and (boundp 'custom-theme-load-path) load-file-name)

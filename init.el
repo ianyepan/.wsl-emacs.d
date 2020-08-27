@@ -58,6 +58,7 @@
   (setq load-prefer-newer t)
   (setq inhibit-compacting-font-caches t)
   (setq echo-keystrokes 0.02)
+  (setq kill-buffer-query-functions nil)
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
   (tool-bar-mode -1)
   (menu-bar-mode -1)

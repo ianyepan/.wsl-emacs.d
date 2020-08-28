@@ -604,13 +604,6 @@
       (ian/dired-single-init)
     (add-hook 'dired-load-hook #'ian/dired-single-init)))
 
-(use-package dired-subtree
-  :ensure t
-  :after dired
-  :config
-  (setq dired-subtree-use-backgrounds nil)
-  :bind (:map dired-mode-map ("<tab>" . dired-subtree-toggle)))
-
 ;; Terminal integration
 
 (use-package vterm

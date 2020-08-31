@@ -18,7 +18,7 @@
  'default-dark
  '(default                          ((t (:background "grey10" :foreground "grey90"))))
  '(region                           ((t (:background "#204a72" :distant-foreground "grey75" :extend nil))))
- '(font-lock-comment-face           ((t (:foreground "grey45" :italic t))))
+ '(font-lock-comment-face           ((t (:foreground "grey45"))))
  '(line-number                      ((t (:foreground "grey45"))))
 
  '(company-tooltip                  ((t (:foreground "gray90" :background "black"))))
@@ -31,9 +31,9 @@
  '(hl-line                          ((t (:background "grey20"))))
  '(ivy-current-match                ((t (:background "LightSteelBlue" :foreground "black"))))
 
- '(diff-hl-insert                   ((t (:background "DarkOliveGreen2" :foreground "DarkOliveGreen2"))))
+ '(diff-hl-insert                   ((t (:background "green4" :foreground "green4"))))
  '(diff-hl-delete                   ((t (:background "red3" :foreground "red3"))))
- '(diff-hl-change                   ((t (:background "LightSteelBlue" :foreground "LightSteelBlue"))))
+ '(diff-hl-change                   ((t (:background "yellow3" :foreground "yellow3"))))
 
  '(highlight-symbol-face            ((t (:background "grey25"))))
  '(hl-todo                          ((t (:inverse-video t))))

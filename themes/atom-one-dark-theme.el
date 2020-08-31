@@ -104,6 +104,18 @@
    `(mode-line-emphasis                      ((t (:weight normal))))
    `(mode-line-inactive                      ((t (:background ,atom-one-dark-border :foreground ,atom-one-dark-gray :box (:color ,atom-one-dark-border :line-width 1)))))
 
+   ;; smart-mode-line
+   `(sml/global                               ((t (:foreground ,atom-one-dark-fg :weight normal))))
+   `(sml/filename                             ((t (:foreground "#ffffff" :weight normal))))
+   `(sml/folder                               ((t (:foreground ,atom-one-dark-silver :weight normal))))
+   `(sml/projectile                           ((t (:foreground ,atom-one-dark-silver :weight normal))))
+   `(sml/line-number                          ((t (:foreground ,atom-one-dark-fg :weight normal))))
+   `(sml/prefix                               ((t (:foreground ,atom-one-dark-fg :weight normal))))
+   `(sml/read-only                            ((t (:foreground ,atom-one-dark-fg :weight normal))))
+   `(sml/modes                                ((t (:foreground ,atom-one-dark-fg :weight normal))))
+   `(sml/modified                             ((t (:foreground "#ffffff" :weight bold))))
+   `(sml/charging                             ((t (:foreground ,atom-one-dark-green :weight normal))))
+
    ;; window-divider
    `(window-divider                          ((t (:foreground ,atom-one-dark-border))))
    `(window-divider-first-pixel              ((t (:foreground ,atom-one-dark-border))))

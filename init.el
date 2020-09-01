@@ -210,21 +210,21 @@
   :preface
   (defun ian/fontsize-normal ()
     (interactive)
-    (set-face-attribute 'default nil :height 115))
+    (set-face-attribute 'default nil :height 120))
   (defun ian/fontsize-small ()
     (interactive)
-    (set-face-attribute 'default nil :height 85))
+    (set-face-attribute 'default nil :height 90))
   (defun ian/set-default-font ()
     (interactive)
-    (when (member "Cascadia Code" (font-family-list))
-      (set-face-attribute 'default nil :family "Cascadia Code" :weight 'light))
+    (when (member "Consolas" (font-family-list))
+      (set-face-attribute 'default nil :family "Consolas" :weight 'normal))
     (ian/fontsize-normal))
   (defalias 'ian/normal-fontsize #'ian/fontsize-normal)
   (defalias 'ian/small-fontsize #'ian/fontsize-small)
   :ensure nil
   :config
   (setq default-frame-alist
-        (append (list '(width  . 75) '(height . 30)
+        (append (list '(width  . 75) '(height . 35)
                       '(internal-border-width . 2))))
   (blink-cursor-mode -1)
   (ian/set-default-font))
@@ -284,8 +284,16 @@
 
 ;; GUI enhancements
 
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-(load-theme 'fluent-edge t)
+;; (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+;; (load-theme 'fluent-edge t)
+
+(use-package doom-themes
+  :custom-face
+  (region ((t (:extend nil))))
+  :config
+  (setq doom-themes-enable-bold nil)
+  (setq doom-gruvbox-dark-variant "hard")
+  (load-theme 'doom-gruvbox t))
 
 (use-package highlight-symbol
   :hook (prog-mode . highlight-symbol-mode)
@@ -650,6 +658,7 @@
   :config
   (setq sml/no-confirm-load-theme t)
   (setq sml/modified-char "*")
+  (setq sml/theme 'respectful)
   (sml/setup))
 
 ;; LaTeX export

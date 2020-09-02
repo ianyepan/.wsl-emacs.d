@@ -224,7 +224,7 @@
   :ensure nil
   :config
   (setq default-frame-alist
-        (append (list '(width  . 75) '(height . 35)
+        (append (list '(width . 75) '(height . 35)
                       '(internal-border-width . 2))))
   (blink-cursor-mode -1)
   (ian/set-default-font))
@@ -278,7 +278,7 @@
   :ensure nil
   :config
   (when (member "Segoe UI" (font-family-list))
-    (set-face-attribute 'variable-pitch nil :family "Segoe UI" :weight 'normal :height 1.0)))
+    (set-face-attribute 'variable-pitch nil :family "Segoe UI" :height 0.9)))
 
 ;;; Third-party Packages
 

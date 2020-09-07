@@ -81,7 +81,7 @@
 (use-package cus-edit
   :ensure nil
   :config
-  (setq custom-file "~/.emacs.d/to-be-dumped.el"))
+  (setq custom-file (concat user-emacs-directory "to-be-dumped.el")))
 
 (use-package scroll-bar
   :ensure nil
@@ -264,8 +264,8 @@
 (use-package recentf
   :ensure nil
   :config
-  (add-to-list 'recentf-exclude
-               (format "%s/\\.emacs.d/elpa/.*" (getenv "HOME")))
+  (add-to-list 'recentf-exclude (format "%s/\\.emacs.d/elpa/.*" (getenv "HOME")))
+  (add-to-list 'recentf-exclude (format "%s/\\.config/emacs/elpa/.*" (getenv "HOME")))
   (recentf-mode +1))
 
 (use-package display-line-numbers
@@ -284,7 +284,7 @@
 
 ;; GUI enhancements
 
-;; (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+;; (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
 ;; (load-theme 'fluent-edge t)
 
 (use-package doom-themes

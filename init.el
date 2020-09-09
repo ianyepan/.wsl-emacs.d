@@ -307,8 +307,7 @@
   :hook (prog-mode . hes-mode))
 
 (use-package emojify
-  :config
-  :hook (after-init . global-emojify-mode))
+  :hook (vterm-mode . emojify-mode))
 
 ;; Vi keybindings
 

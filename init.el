@@ -307,7 +307,9 @@
   :hook (prog-mode . hes-mode))
 
 (use-package emojify
-  :hook (vterm-mode . emojify-mode))
+  :hook (after-init . global-emojify-mode)
+  :config
+  (setq emojify-emoji-styles '(unicode)))
 
 ;; Vi keybindings
 

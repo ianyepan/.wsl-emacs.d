@@ -163,7 +163,9 @@
 (use-package cc-mode
   :ensure nil
   :config
-  (define-key c++-mode-map ":" nil)) ; don't indent namespace:: on-the-fly etc.
+  (define-key c++-mode-map ":" nil) ; don't indent namespace:: on-the-fly etc.
+  (with-eval-after-load 'lsp-java
+    (define-key java-mode-map (kbd "C-c i") #'lsp-java-add-import)))
 
 (use-package perl-mode
   :ensure nil

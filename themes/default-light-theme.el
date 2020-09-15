@@ -16,7 +16,7 @@
 
 (custom-theme-set-faces
  'default-light
- '(default                          ((t (:background "white" :foreground "grey35"))))
+ '(default                          ((t (:background "white" :foreground "grey25"))))
  '(region                           ((t (:background "#ddeeff"))))
  '(font-lock-keyword-face           ((t (:foreground "royalblue3"))))
  '(font-lock-function-name-face     ((t (:foreground "royalblue3"))))

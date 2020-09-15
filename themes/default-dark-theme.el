@@ -28,8 +28,8 @@
  '(company-scrollbar-bg             ((t (:background "gray15"))))
  '(company-scrollbar-fg             ((t (:background "gray30"))))
 
- '(hl-line                          ((t (:background "grey20"))))
- '(ivy-current-match                ((t (:background "LightSteelBlue" :foreground "black"))))
+ ;; '(hl-line                          ((t (:background "grey20"))))
+ ;; '(ivy-current-match                ((t (:background "LightSteelBlue" :foreground "black"))))
 
  '(diff-hl-insert                   ((t (:background "green4" :foreground "green4"))))
  '(diff-hl-delete                   ((t (:background "red3" :foreground "red3"))))
@@ -37,17 +37,6 @@
 
  '(highlight-symbol-face            ((t (:background "grey25"))))
  '(hl-todo                          ((t (:inverse-video t))))
-
- '(sml/global                       ((t (:foreground "black"))))
- '(sml/filename                     ((t (:foreground "black"))))
- '(sml/folder                       ((t (:foreground "black"))))
- '(sml/projectile                   ((t (:foreground "black"))))
- '(sml/line-number                  ((t (:foreground "black"))))
- '(sml/prefix                       ((t (:foreground "black"))))
- '(sml/read-only                    ((t (:foreground "black"))))
- '(sml/modes                        ((t (:foreground "black"))))
- '(sml/modified                     ((t (:foreground "red3"))))
- '(sml/charging                     ((t (:foreground "green3"))))
 
  '(term-color-blue                  ((t (:foreground "LightSteelBlue"))))
  '(term-color-green                 ((t (:foreground "PaleGreen"))))

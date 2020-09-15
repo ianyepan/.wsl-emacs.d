@@ -281,18 +281,24 @@
   :ensure nil
   :config
   (when (member "Segoe UI" (font-family-list))
-    (set-face-attribute 'variable-pitch nil :family "Segoe UI" :height 0.9)))
+    (set-face-attribute 'variable-pitch nil :family "Segoe UI" :height 115 :weight 'normal)))
 
 ;;; Third-party Packages
 
 ;; GUI enhancements
 
 ;; (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
-;; (load-theme 'fluent-edge t)
+;; (load-theme 'default-dark t)
+
+;; (use-package vscode-dark-plus-theme
+;;   :config
+;;   (load-theme 'vscode-dark-plus t))
 
 (use-package doom-themes
   :custom-face
-  (region ((t (:extend nil))))
+  (region                ((t (:extend nil))))
+  (sml/modified          ((t (:foreground "white"))))
+  (hl-todo               ((t (:inverse-video t))))
   :config
   (setq doom-themes-enable-bold nil)
   (setq doom-gruvbox-dark-variant "hard")

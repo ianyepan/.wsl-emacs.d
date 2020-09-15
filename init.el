@@ -331,6 +331,7 @@
   (with-eval-after-load 'evil-maps
     (define-key evil-normal-state-map (kbd "gd") #'xref-find-definitions)
     (define-key evil-normal-state-map (kbd "<f12>") #'xref-find-definitions)
+    (define-key evil-normal-state-map (kbd "gD") #'xref-find-references)
     (define-key evil-insert-state-map (kbd "C-n") nil) ; avoid conflict with company tooltip selection
     (define-key evil-insert-state-map (kbd "C-p") nil) ; avoid conflict with company tooltip selection
     (define-key evil-normal-state-map (kbd "C-p") nil) ; avoid conflict with WSL find-file

@@ -62,7 +62,7 @@
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
   (tool-bar-mode -1)
   (menu-bar-mode -1)
-  (setq-default line-spacing 3)
+  (setq-default line-spacing 2)
   ;; (setq-default tab-width ian/indent-width)
   (setq-default indent-tabs-mode nil))
 
@@ -290,19 +290,19 @@
 ;; (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
 ;; (load-theme 'default-dark t)
 
-;; (use-package vscode-dark-plus-theme
-;;   :config
-;;   (load-theme 'vscode-dark-plus t))
-
-(use-package doom-themes
-  :custom-face
-  (region                ((t (:extend nil))))
-  (sml/modified          ((t (:foreground "white"))))
-  (hl-todo               ((t (:inverse-video t))))
+(use-package vscode-dark-plus-theme
   :config
-  (setq doom-themes-enable-bold nil)
-  (setq doom-gruvbox-dark-variant "hard")
-  (load-theme 'doom-gruvbox t))
+  (load-theme 'vscode-dark-plus t))
+
+;; (use-package doom-themes
+;;   :custom-face
+;;   (region                ((t (:extend nil))))
+;;   (sml/modified          ((t (:foreground "white"))))
+;;   (hl-todo               ((t (:inverse-video t))))
+;;   :config
+;;   (setq doom-themes-enable-bold nil)
+;;   (setq doom-gruvbox-dark-variant "hard")
+;;   (load-theme 'doom-gruvbox t))
 
 (use-package highlight-symbol
   :hook (prog-mode . highlight-symbol-mode)
@@ -403,12 +403,12 @@
   :hook (ivy-mode . counsel-mode)
   :config
   (setq counsel-rg-base-command "rg --vimgrep %s")
-  (global-set-key (kbd "s-P") #'counsel-M-x)
-  (global-set-key (kbd "C-S-p") #'counsel-M-x)
-  (global-set-key (kbd "M-x") 'counsel-M-x)
-  (global-set-key (kbd "C-x <C-right>") 'counsel-find-file) ; autohotkey fix
-  (global-set-key (kbd "C-x <right>") 'counsel-find-file) ; autohotkey fix
-  (global-set-key (kbd "s-f") #'counsel-grep-or-swiper)) ; C-c p f
+  (global-set-key (kbd "s-P")           #'counsel-M-x)
+  (global-set-key (kbd "C-S-p")         #'counsel-M-x)
+  (global-set-key (kbd "M-x")           #'counsel-M-x)
+  (global-set-key (kbd "C-x <C-right>") #'counsel-find-file) ; autohotkey fix
+  (global-set-key (kbd "C-x <right>")   #'counsel-find-file) ; autohotkey fix
+  (global-set-key (kbd "C-s")           #'counsel-grep-or-swiper))
 
 (use-package counsel-projectile
   :config
@@ -417,14 +417,8 @@
 (use-package swiper
   :after ivy
   :config
-  (global-set-key (kbd "C-s") #'counsel-grep-or-swiper)
   (setq swiper-action-recenter t)
   (setq swiper-goto-start-of-match t))
-
-;; (use-package ivy-rich
-;;   :config
-;;   (ivy-rich-mode +1)
-;;   (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
 
 (use-package projectile
   :config
@@ -467,7 +461,7 @@
   :config
   (company-prescient-mode +1))
 
-;; Programming language support and utilities
+;; Programming support and utilities
 
 (use-package lsp-mode
   :hook ((c-mode          ; clangd
@@ -494,7 +488,7 @@
   (setq lsp-enable-imenu nil)
   (setq lsp-enable-snippet nil)
   (setq lsp-enable-completion-at-point nil)
-  (setq read-process-output-max (* 1024 1024)) ;; 1mb
+  (setq read-process-output-max (* 1024 1024)) ;; 1MB
   (setq lsp-idle-delay 0.5)
   (setq lsp-prefer-capf t) ; prefer lsp's company-capf over company-lsp
   (add-to-list 'lsp-language-id-configuration '(js-jsx-mode . "javascriptreact")))
@@ -522,6 +516,11 @@
            ("\\.cbl\\'" . cobol-mode))
          auto-mode-alist)))
 
+(use-package sml-mode ; Standard ML of New Jersey
+  :mode (("\\.s?ml\\'" . sml-mode))
+  :config
+  (setq sml-indent-level ian/indent-width))
+
 (use-package company
   :hook (prog-mode . company-mode)
   :config
@@ -542,20 +541,6 @@
   (setq flycheck-display-errors-delay 0.1)
   (setq flycheck-flake8rc "~/.config/flake8"))
 
-(use-package org
-  :hook ((org-mode . visual-line-mode)
-         (org-mode . auto-fill-mode)
-         (org-mode . org-indent-mode)
-         (org-mode . (lambda () (setq-local evil-auto-indent nil))))
-  :config
-  (setq org-descriptive-links nil)
-  (setq org-startup-folded nil)
-  (setq org-todo-keywords '((sequence "TODO" "DOING" "DONE")))
-  (setq org-html-checkbox-type 'html))
-
-(use-package org-bullets
-  :hook (org-mode . org-bullets-mode))
-
 (use-package markdown-mode)
 
 (use-package web-mode
@@ -569,11 +554,6 @@
   (setq web-mode-code-indent-offset ian/indent-width)
   (setq web-mode-css-indent-offset ian/indent-width)
   (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'"))))
-
-(use-package sml-mode ; Standard ML of New Jersey
-  :mode (("\\.s?ml\\'" . sml-mode))
-  :config
-  (setq sml-indent-level ian/indent-width))
 
 (use-package emmet-mode
   :hook ((html-mode       . emmet-mode)
@@ -672,10 +652,24 @@
   (setq sml/theme 'respectful)
   (sml/setup))
 
-;; LaTeX export
+;; Org and LaTeX export
 ; Ubuntu needs to have these installed:
 ; 1. texlive-latex-extra
 ; 2. texlive-fonts-extra
+
+(use-package org
+  :hook ((org-mode . visual-line-mode)
+         (org-mode . auto-fill-mode)
+         (org-mode . org-indent-mode)
+         (org-mode . (lambda () (setq-local evil-auto-indent nil))))
+  :config
+  (setq org-descriptive-links nil)
+  (setq org-startup-folded nil)
+  (setq org-todo-keywords '((sequence "TODO" "DOING" "DONE")))
+  (setq org-html-checkbox-type 'html))
+
+(use-package org-bullets
+  :hook (org-mode . org-bullets-mode))
 
 (use-package ox
   :ensure nil

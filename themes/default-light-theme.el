@@ -1,10 +1,9 @@
-;;; default-light-theme.el --- The default light theme that came with Emacs
+;;; default-light-theme.el --- A pleasant light theme
 
 ;;; Commentary:
 ;;
-;; This theme strives to have as few lines as possible, only tweaking
-;; the colors that hinder readability/consistency in the default light
-;; theme
+;; This light theme is inspired by Eclipse IDE and Visual Studio
+;; Code's default light themes
 
 ;;; Usage:
 ;;
@@ -16,35 +15,36 @@
 
 (custom-theme-set-faces
  'default-light
- '(default                          ((t (:background "white" :foreground "grey25"))))
- '(region                           ((t (:background "#ddeeff"))))
+ '(region                           ((t (:background "#bbddff" :extend nil))))
  '(font-lock-keyword-face           ((t (:foreground "#7f0055" :bold t))))
- '(font-lock-variable-name-face     ((t (:foreground "grey25"))))
+ '(font-lock-type-face              ((t (:foreground "#7f0055"))))
+ '(font-lock-constant-face          ((t (:foreground "blue"))))
+ '(font-lock-string-face            ((t (:foreground "#a31515"))))
+ '(font-lock-variable-name-face     ((t (:foreground "black"))))
  '(minibuffer-prompt                ((t (:inherit default))))
- '(font-lock-comment-face           ((t (:foreground "grey60" :italic t))))
+ '(font-lock-comment-face           ((t (:foreground "#528000" :italic t))))
  '(font-lock-doc-face               ((t (:inherit font-lock-comment-face))))
 
  '(hl-line                          ((t (:background "grey95"))))
  '(highlight                        ((t (:background "grey90"))))
  '(ivy-current-match                ((t (:background "grey90"))))
- '(highlight-symbol-face            ((t (:background "#eef8ff"))))
+ '(highlight-symbol-face            ((t (:background "#ddeeff"))))
  '(show-paren-match                 ((t (:background "grey85"))))
- '(isearch                          ((t (:foreground "white" :background "grey35"))))
- '(lazy-highlight                   ((t (:foreground "white" :background "grey65"))))
 
- '(company-tooltip                  ((t (:foreground "grey35" :background "grey97"))))
- '(company-tooltip-common           ((t (:foreground "blue" :bold t))))
+ '(company-tooltip                  ((t (:foreground "grey20" :background "grey97"))))
+ '(company-tooltip-common           ((t (:foreground "SkyBlue3" :bold t))))
  '(company-tooltip-annotation       ((t (:foreground "grey55"))))
  '(company-tooltip-selection        ((t (:background "grey90" :bold nil))))
  '(company-scrollbar-bg             ((t (:background "grey95"))))
  '(company-scrollbar-fg             ((t (:background "grey90"))))
 
  '(diff-hl-insert                   ((t (:background "ForestGreen" :foreground "ForestGreen"))))
- '(diff-hl-delete                   ((t (:background "#980000" :foreground "#980000"))))
+ '(diff-hl-delete                   ((t (:background "#a80000" :foreground "#a80000"))))
  '(diff-hl-change                   ((t (:background "yellow2" :foreground "yellow2"))))
 
  '(mode-line                        ((t (:foreground "grey25" :background "grey90" :box (:color "grey75" :line-width 1)))))
  '(mode-line-inactive               ((t (:foreground "grey25" :background "grey90" :box (:color "grey75" :line-width 1)))))
+ '(sml/modified                     ((t (:foreground "black" :bold t))))
  )
 
 (provide-theme 'default-light)

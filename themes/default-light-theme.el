@@ -18,9 +18,9 @@
  'default-light
  '(default                          ((t (:background "white" :foreground "grey25"))))
  '(region                           ((t (:background "#ddeeff"))))
- '(font-lock-keyword-face           ((t (:foreground "royalblue3"))))
- '(font-lock-function-name-face     ((t (:foreground "royalblue3"))))
- '(minibuffer-prompt                ((t (:foreground "royalblue3"))))
+ '(font-lock-keyword-face           ((t (:foreground "#7f0055" :bold t))))
+ '(font-lock-variable-name-face     ((t (:foreground "grey25"))))
+ '(minibuffer-prompt                ((t (:inherit default))))
  '(font-lock-comment-face           ((t (:foreground "grey60" :italic t))))
  '(font-lock-doc-face               ((t (:inherit font-lock-comment-face))))
 

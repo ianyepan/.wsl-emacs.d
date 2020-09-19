@@ -16,6 +16,7 @@
 (custom-theme-set-faces
  'default-light
  '(region                           ((t (:background "#bbddff" :extend nil))))
+ '(fringe                           ((t (:background nil))))
  '(font-lock-keyword-face           ((t (:foreground "#7f0055" :bold t))))
  '(font-lock-type-face              ((t (:foreground "#7f0055"))))
  '(font-lock-constant-face          ((t (:foreground "blue"))))

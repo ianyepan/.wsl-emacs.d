@@ -673,8 +673,8 @@
   (neo-banner-face    ((t (:family "Segoe UI" :height 110))))
   (neo-root-dir-face  ((t (:family "Segoe UI" :height 110))))
   (neo-file-link-face ((t (:family "Segoe UI" :height 110))))
-  :hook (neotree-mode . hl-line-mode)
   :config
+  (add-hook 'neotree-mode-hook (lambda () (hl-line-mode +1)))
   (global-set-key (kbd "C-S-e") #'ian/neotree-project-toggle)
   (setq neo-theme 'nerd)
   (setq neo-window-width 30))

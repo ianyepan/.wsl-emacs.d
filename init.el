@@ -290,19 +290,19 @@
 ;; (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
 ;; (load-theme 'default-dark t)
 
-(use-package vscode-dark-plus-theme
-  :config
-  (load-theme 'vscode-dark-plus t))
-
-;; (use-package doom-themes
-;;   :custom-face
-;;   (region                ((t (:extend nil))))
-;;   (sml/modified          ((t (:foreground "white"))))
-;;   (hl-todo               ((t (:inverse-video t))))
+;; (use-package vscode-dark-plus-theme
 ;;   :config
-;;   (setq doom-themes-enable-bold nil)
-;;   (setq doom-gruvbox-dark-variant "hard")
-;;   (load-theme 'doom-gruvbox t))
+;;   (load-theme 'vscode-dark-plus t))
+
+(use-package doom-themes
+  :custom-face
+  (region                ((t (:extend nil))))
+  (sml/modified          ((t (:foreground "white"))))
+  (hl-todo               ((t (:inverse-video t))))
+  :config
+  (setq doom-themes-enable-bold nil)
+  (setq doom-gruvbox-dark-variant "hard")
+  (load-theme 'doom-gruvbox t))
 
 (use-package highlight-symbol
   :hook (prog-mode . highlight-symbol-mode)
@@ -651,6 +651,33 @@
   (setq sml/modified-char "*")
   (setq sml/theme 'respectful)
   (sml/setup))
+
+(use-package neotree
+  :after projectile
+  :preface
+  (defun ian/neotree-project-toggle ()
+    "Open NeoTree using the projectile root."
+    (interactive)
+    (let ((project-dir (projectile-project-root))
+          (file-name (buffer-file-name)))
+      (neotree-toggle)
+      (if project-dir
+          (if (neo-global--window-exists-p)
+              (progn
+                (neotree-dir project-dir)
+                (neotree-find file-name)))
+        (message "Could not find projectile project root."))))
+  :custom-face
+  (neo-dir-link-face  ((t (:family "Segoe UI" :height 110))))
+  (neo-header-face    ((t (:family "Segoe UI" :height 110))))
+  (neo-banner-face    ((t (:family "Segoe UI" :height 110))))
+  (neo-root-dir-face  ((t (:family "Segoe UI" :height 110))))
+  (neo-file-link-face ((t (:family "Segoe UI" :height 110))))
+  :hook (neotree-mode . hl-line-mode)
+  :config
+  (global-set-key (kbd "C-S-e") #'ian/neotree-project-toggle)
+  (setq neo-theme 'nerd)
+  (setq neo-window-width 30))
 
 ;; Org and LaTeX export
 ; Ubuntu needs to have these installed:

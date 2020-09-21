@@ -677,6 +677,7 @@
   (add-hook 'neotree-mode-hook (lambda () (hl-line-mode +1)))
   (global-set-key (kbd "C-S-e") #'ian/neotree-project-toggle)
   (setq neo-theme 'nerd)
+  (setq neo-show-hidden-files t)
   (setq neo-window-width 30))
 
 ;; Org and LaTeX export

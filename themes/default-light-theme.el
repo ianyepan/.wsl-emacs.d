@@ -18,15 +18,16 @@
  '(region                           ((t (:background "#bbddff" :extend nil))))
  '(fringe                           ((t (:background nil))))
  '(font-lock-keyword-face           ((t (:foreground "#7f0055" :bold t))))
+ '(font-lock-builtin-face           ((t (:foreground "#7f0055"))))
  '(font-lock-type-face              ((t (:foreground "#7f0055"))))
  '(font-lock-constant-face          ((t (:foreground "blue"))))
- '(font-lock-string-face            ((t (:foreground "#a31515"))))
+ '(font-lock-string-face            ((t (:foreground "MediumBlue"))))
  '(font-lock-variable-name-face     ((t (:foreground "black"))))
  '(minibuffer-prompt                ((t (:inherit default))))
- '(font-lock-comment-face           ((t (:foreground "#528000" :italic t))))
+ '(font-lock-comment-face           ((t (:foreground "#3F7F5F"))))
  '(font-lock-doc-face               ((t (:inherit font-lock-comment-face))))
 
- '(hl-line                          ((t (:background "grey95"))))
+ '(hl-line                          ((t (:background "#e9f1fd"))))
  '(highlight                        ((t (:background "grey90"))))
  '(ivy-current-match                ((t (:background "grey90"))))
  '(highlight-symbol-face            ((t (:background "#ddeeff"))))
@@ -41,7 +42,7 @@
 
  '(diff-hl-insert                   ((t (:background "ForestGreen" :foreground "ForestGreen"))))
  '(diff-hl-delete                   ((t (:background "#a80000" :foreground "#a80000"))))
- '(diff-hl-change                   ((t (:background "yellow2" :foreground "yellow2"))))
+ '(diff-hl-change                   ((t (:background "#d3e2f8" :foreground "#d3e2f8"))))
 
  '(mode-line                        ((t (:foreground "grey25" :background "grey90" :box (:color "grey75" :line-width 1)))))
  '(mode-line-inactive               ((t (:foreground "grey25" :background "grey90" :box (:color "grey75" :line-width 1)))))

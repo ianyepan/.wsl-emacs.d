@@ -27,9 +27,9 @@
  '(font-lock-comment-face           ((t (:foreground "#3F7F5F"))))
  '(font-lock-doc-face               ((t (:inherit font-lock-comment-face))))
 
- '(hl-line                          ((t (:background "#e9f1fd"))))
- '(highlight                        ((t (:background "grey90"))))
- '(ivy-current-match                ((t (:background "grey90"))))
+ '(hl-line                          ((t (:background "#e8f0ff"))))
+ '(highlight                        ((t (:background "#e8f0ff"))))
+ '(ivy-current-match                ((t (:background "#e8f0ff"))))
  '(highlight-symbol-face            ((t (:background "#ddeeff"))))
  '(show-paren-match                 ((t (:background "grey85"))))
 
@@ -42,7 +42,7 @@
 
  '(diff-hl-insert                   ((t (:background "ForestGreen" :foreground "ForestGreen"))))
  '(diff-hl-delete                   ((t (:background "#a80000" :foreground "#a80000"))))
- '(diff-hl-change                   ((t (:background "#d3e2f8" :foreground "#d3e2f8"))))
+ '(diff-hl-change                   ((t (:background "#bbddff" :foreground "#bbddff"))))
 
  '(mode-line                        ((t (:foreground "grey25" :background "grey90" :box (:color "grey75" :line-width 1)))))
  '(mode-line-inactive               ((t (:foreground "grey25" :background "grey90" :box (:color "grey75" :line-width 1)))))

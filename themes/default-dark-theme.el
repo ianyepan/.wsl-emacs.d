@@ -18,7 +18,7 @@
  'default-dark
  '(default                          ((t (:background "grey10" :foreground "grey90"))))
  '(region                           ((t (:background "#204a72" :distant-foreground "grey75" :extend nil))))
- '(font-lock-comment-face           ((t (:foreground "grey45"))))
+ '(font-lock-comment-face           ((t (:foreground "grey55"))))
  '(line-number                      ((t (:foreground "grey45"))))
 
  '(company-tooltip                  ((t (:foreground "gray90" :background "black"))))
@@ -31,16 +31,25 @@
  ;; '(hl-line                          ((t (:background "grey20"))))
  ;; '(ivy-current-match                ((t (:background "LightSteelBlue" :foreground "black"))))
 
- '(diff-hl-insert                   ((t (:background "green4" :foreground "green4"))))
- '(diff-hl-delete                   ((t (:background "red3" :foreground "red3"))))
- '(diff-hl-change                   ((t (:background "yellow3" :foreground "yellow3"))))
+ '(diff-hl-insert                   ((t (:background "#36a546" :foreground "#36a546"))))
+ '(diff-hl-delete                   ((t (:background "#ac0909" :foreground "#ac0909"))))
+ '(diff-hl-change                   ((t (:background "#f1eb7f" :foreground "#f1eb7f"))))
 
- '(highlight-symbol-face            ((t (:background "grey25"))))
+ '(highlight-symbol-face            ((t (:background "#354a32"))))
  '(hl-todo                          ((t (:inverse-video t))))
 
  '(term-color-blue                  ((t (:foreground "LightSteelBlue"))))
  '(term-color-green                 ((t (:foreground "PaleGreen"))))
  '(term-color-yellow                ((t (:foreground "LightGoldenrod"))))
+
+ '(mode-line                        ((t (:foreground "black" :background "grey75" :box (:line-width -1 :style released-button)))))
+ '(mode-line-inactive               ((t (:foreground "black" :background "grey55" :box (:line-width -1 :style released-button)))))
+ '(sml/global                       ((t (:foreground "black" :weight normal))))
+ '(sml/filename                     ((t (:foreground "black" :weight bold))))
+ '(sml/prefix                       ((t (:foreground "black" :weight normal))))
+ '(sml/read-only                    ((t (:foreground "black" :weight normal))))
+ '(sml/modes                        ((t (:foreground "black" :weight normal))))
+ '(sml/modified                     ((t (:foreground "black" :weight normal))))
  )
 
 (provide-theme 'default-dark)

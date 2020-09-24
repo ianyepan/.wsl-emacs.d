@@ -496,6 +496,9 @@
 (use-package lsp-java
   :after lsp)
 
+(use-package lsp-pyright
+  :hook (python-mode . (lambda () (require 'lsp-pyright))))
+
 (use-package modern-cpp-font-lock
   :hook (c++-mode . modern-c++-font-lock-mode))
 

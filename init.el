@@ -678,7 +678,9 @@
   (neo-root-dir-face  ((t (:family "Segoe UI" :height 110))))
   (neo-file-link-face ((t (:family "Segoe UI" :height 110))))
   :config
-  (add-hook 'neotree-mode-hook (lambda () (hl-line-mode +1)))
+  (add-hook 'neotree-mode-hook (lambda ()
+                                 (hl-line-mode +1)
+                                 (setq-local line-spacing nil)))
   (global-set-key (kbd "C-S-e") #'ian/neotree-project-toggle)
   (setq neo-theme 'nerd)
   (setq neo-show-hidden-files t)

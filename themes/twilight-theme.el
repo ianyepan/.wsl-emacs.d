@@ -75,13 +75,13 @@
    `(font-lock-variable-name-face             ((,class (:foreground ,var))))
    `(font-lock-warning-face                   ((,class (:foreground ,warning :background ,bg2))))
 
-   `(region                                   ((,class (:background ,bg3))))
+   `(region                                   ((,class (:background ,bg3 :extend nil))))
    `(highlight                                ((,class (:foreground ,bg3 :background ,fg3))))
    `(hl-line                                  ((,class (:background ,bg2))))
    `(fringe                                   ((,class (:background ,bg1 :foreground ,fg4))))
    `(cursor                                   ((,class (:background ,fg1))))
    `(show-paren-match-face                    ((,class (:background ,warning))))
-   `(show-paren-match                         ((t (:foreground ,accent :bold nil :underline t))))
+   `(show-paren-match                         ((t (:foreground ,accent :bold t :underline t))))
    `(show-paren-mismatch                      ((t (:background ,warning))))
    `(isearch                                  ((,class (:bold nil :foreground ,accent :background ,bg4))))
    `(vertical-border                          ((,class (:foreground ,bg3))))
@@ -93,8 +93,8 @@
    `(line-number                              ((,class (:foreground ,bg4))))
    `(line-number-current-line                 ((,class (:foreground ,comment))))
 
-   `(mode-line                                ((,class (:bold nil :foreground ,fg1 :background ,bg1))))
-   `(mode-line-inactive                       ((,class (:bold nil :foreground ,fg2 :background ,bg1))))
+   `(mode-line                                ((,class (:bold nil :foreground ,fg1 :background ,bg2))))
+   `(mode-line-inactive                       ((,class (:bold nil :foreground ,fg2 :background ,bg2))))
    `(mode-line-buffer-id                      ((,class (:bold nil :foreground ,func :background nil))))
    `(mode-line-highlight                      ((,class (:foreground ,keyword :box nil :weight normal))))
    `(mode-line-emphasis                       ((,class (:foreground ,fg1))))
@@ -307,9 +307,9 @@
    `(swiper-match-face-4                      ((t (:inherit ivy-minibuffer-match-face-4))))
    `(swiper-line-face                         ((t (:foreground ,fg0 :background ,bg3 :extend t))))
 
-   `(diff-hl-insert                           ((t (:foreground ,tw-g))))
-   `(diff-hl-delete                           ((t (:foreground ,tw-r))))
-   `(diff-hl-change                           ((t (:foreground ,tw-b))))
+   `(diff-hl-insert                           ((t (:foreground ,tw-g :background ,tw-g))))
+   `(diff-hl-delete                           ((t (:foreground ,tw-r :background ,tw-r))))
+   `(diff-hl-change                           ((t (:foreground ,tw-b :background ,tw-b))))
 
    `(git-gutter:added                         ((t (:background ,tw-g :foreground ,tw-g :weight normal))))
    `(git-gutter:modified                      ((t (:background ,tw-b :foreground ,tw-b :weight normal))))
@@ -336,6 +336,8 @@
    `(vterm-color-magenta                      ((t (:foreground "#B4BE7C"))))
    `(vterm-color-cyan                         ((t (:foreground "#7F9F98"))))
    `(vterm-color-white                        ((t (:foreground "#E0E0DF"))))
+
+   `(highlight-symbol-face                    ((t (:background "#203a1d"))))
   ))
 
 (provide-theme 'twilight)

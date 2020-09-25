@@ -17,6 +17,7 @@
 (custom-theme-set-faces
  'default-dark
  '(default                          ((t (:background "grey10" :foreground "grey90"))))
+ '(cursor                           ((t (:background "white"))))
  '(region                           ((t (:background "#204a72" :distant-foreground "grey75" :extend nil))))
  '(font-lock-comment-face           ((t (:foreground "grey55"))))
  '(line-number                      ((t (:foreground "grey45"))))
@@ -38,9 +39,7 @@
  '(highlight-symbol-face            ((t (:background "#354a32"))))
  '(hl-todo                          ((t (:inverse-video t))))
 
- '(term-color-blue                  ((t (:foreground "LightSteelBlue"))))
- '(term-color-green                 ((t (:foreground "PaleGreen"))))
- '(term-color-yellow                ((t (:foreground "LightGoldenrod"))))
+ '(term-color-blue                  ((t (:foreground "#0782f0"))))
 
  '(mode-line                        ((t (:foreground "black" :background "grey75" :box (:line-width -1 :style released-button)))))
  '(mode-line-inactive               ((t (:foreground "black" :background "grey55" :box (:line-width -1 :style released-button)))))

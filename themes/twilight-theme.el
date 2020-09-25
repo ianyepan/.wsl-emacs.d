@@ -58,9 +58,11 @@
    `(company-preview-common                   ((t (:foreground unspecified :background ,bg2))))
    `(company-scrollbar-bg                     ((t (:background ,bg00))))
    `(company-scrollbar-fg                     ((t (:background ,comment))))
+   `(company-tooltip-annotation               ((t (:foreground ,comment))))
    `(company-tooltip                          ((t (:inherit default :background ,bg00))))
    `(company-tooltip-common                   ((t (:inherit font-lock-constant-face))))
    `(company-tooltip-selection                ((t (:background ,bg3))))
+   `(company-template-field                   ((t (:inherit region))))
 
    `(font-lock-builtin-face                   ((,class (:foreground ,builtin))))
    `(font-lock-comment-face                   ((,class (:slant italic :foreground ,comment))))

@@ -672,11 +672,11 @@
                 (neotree-find file-name)))
         (message "Could not find projectile project root."))))
   :custom-face
-  (neo-dir-link-face  ((t (:family "Segoe UI" :height 110))))
-  (neo-header-face    ((t (:family "Segoe UI" :height 110))))
-  (neo-banner-face    ((t (:family "Segoe UI" :height 110))))
-  (neo-root-dir-face  ((t (:family "Segoe UI" :height 110))))
-  (neo-file-link-face ((t (:family "Segoe UI" :height 110))))
+  (neo-dir-link-face  ((t (:family "Segoe UI" :height 105))))
+  (neo-header-face    ((t (:family "Segoe UI" :height 105))))
+  (neo-banner-face    ((t (:family "Segoe UI" :height 105))))
+  (neo-root-dir-face  ((t (:family "Segoe UI" :height 105))))
+  (neo-file-link-face ((t (:family "Segoe UI" :height 105))))
   :config
   (add-hook 'neotree-mode-hook (lambda ()
                                  (hl-line-mode +1)

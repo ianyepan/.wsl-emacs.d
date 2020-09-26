@@ -477,8 +477,8 @@
   :commands lsp
   :config
   (setq lsp-auto-guess-root t)
-  (setq lsp-diagnostic-package :none)             ; disable flycheck-lsp for most modes
-  (add-hook 'web-mode-hook #'lsp-flycheck-enable) ; enable flycheck-lsp for web-mode locally
+  ;; (setq lsp-diagnostics-provider :none)                       ; disable flycheck-lsp for most modes
+  ;; (add-hook 'web-mode-hook #'lsp-diagnostics-flycheck-enable) ; enable flycheck-lsp for web-mode locally
   (setq lsp-enable-symbol-highlighting nil)
   (setq lsp-enable-on-type-formatting nil)
   (setq lsp-signature-auto-activate nil)

@@ -127,8 +127,11 @@
    `(org-scheduled-today                      ((,class (:foreground ,func :weight normal :height 1.2))))
    `(org-ellipsis                             ((,class (:foreground ,builtin))))
    `(org-verbatim                             ((,class (:foreground ,fg4))))
-   `(org-document-info-keyword                ((,class (:foreground ,func))))
+   `(org-document-title                       ((,class (:foreground ,keyword :height 1.2 :bold t))))
+   `(org-document-info                        ((,class (:foreground ,var))))
+   `(org-document-info-keyword                ((,class (:foreground ,builtin))))
    `(org-sexp-date                            ((,class (:foreground ,fg4))))
+   `(org-table                                ((,class (:foreground ,fg2 :background ,bg00))))
 
    `(font-latex-bold-face                     ((,class (:foreground ,type))))
    `(font-latex-italic-face                   ((,class (:foreground ,key3 :italic t))))

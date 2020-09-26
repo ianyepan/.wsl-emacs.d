@@ -16,6 +16,7 @@
 (custom-theme-set-faces
  'default-light
  '(region                           ((t (:background "#bbddff" :extend nil))))
+ '(secondary-selection              ((t (:inherit region))))
  '(fringe                           ((t (:background nil))))
  '(font-lock-keyword-face           ((t (:foreground "#7f0055" :bold t))))
  '(font-lock-builtin-face           ((t (:foreground "#7f0055"))))
@@ -39,6 +40,7 @@
  '(company-tooltip-selection        ((t (:background "grey90" :bold nil))))
  '(company-scrollbar-bg             ((t (:background "grey95"))))
  '(company-scrollbar-fg             ((t (:background "grey90"))))
+ '(company-template-field           ((t (:inherit region))))
 
  '(diff-hl-insert                   ((t (:background "ForestGreen" :foreground "ForestGreen"))))
  '(diff-hl-delete                   ((t (:background "#a80000" :foreground "#a80000"))))

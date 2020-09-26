@@ -490,7 +490,6 @@
   (setq lsp-enable-completion-at-point nil)
   (setq read-process-output-max (* 1024 1024)) ;; 1MB
   (setq lsp-idle-delay 0.5)
-  (setq lsp-prefer-capf t) ; prefer lsp's company-capf over company-lsp
   (add-to-list 'lsp-language-id-configuration '(js-jsx-mode . "javascriptreact")))
 
 (use-package lsp-java

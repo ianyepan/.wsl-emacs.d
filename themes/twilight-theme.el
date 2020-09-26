@@ -255,6 +255,8 @@
    `(magit-signature-untrusted                ((t (:foreground ,tw-b))))
    `(magit-tag                                ((t (:foreground ,keyword))))
 
+   `(git-commit-summary                       ((t (:inherit default)))) ; magit commit message face
+
    `(term                                     ((,class (:foreground ,fg1 :background ,bg1))))
    `(term-color-black                         ((,class (:foreground ,bg3 :background ,bg3))))
    `(term-color-blue                          ((,class (:foreground ,func :background ,func))))

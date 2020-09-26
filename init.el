@@ -545,7 +545,9 @@
   (setq-default flycheck-disabled-checkers '(python-pylint))
   (setq flycheck-flake8rc "~/.config/flake8"))
 
-(use-package markdown-mode)
+(use-package markdown-mode
+  :config
+  (set-face-attribute 'markdown-code-face nil :inherit 'org-block))
 
 (use-package web-mode
   :mode (("\\.html?\\'" . web-mode)

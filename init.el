@@ -343,10 +343,9 @@
     (define-key evil-insert-state-map (kbd "C-n") nil) ; avoid conflict with company tooltip selection
     (define-key evil-insert-state-map (kbd "C-p") nil) ; avoid conflict with company tooltip selection
     (define-key evil-normal-state-map (kbd "C-p") nil) ; avoid conflict with WSL find-file
-    (define-key evil-insert-state-map (kbd "C-S-C") #'evil-yank)         ; for WSL
-    (define-key evil-normal-state-map (kbd "C-S-C") #'evil-yank)         ; for WSL
-    (define-key evil-insert-state-map (kbd "C-S-V") #'evil-paste-before) ; for WSL
-    )
+    (define-key evil-insert-state-map (kbd "C-S-C") #'evil-yank)          ; for WSL
+    (define-key evil-normal-state-map (kbd "C-S-C") #'evil-yank)          ; for WSL
+    (define-key evil-insert-state-map (kbd "C-S-V") #'evil-paste-before)) ; for WSL
   (evil-ex-define-cmd "q" #'kill-this-buffer)
   (evil-ex-define-cmd "wq" #'ian/save-and-kill-this-buffer))
 
@@ -487,7 +486,7 @@
   (setq lsp-enable-folding nil)
   (setq lsp-enable-imenu nil)
   (setq lsp-enable-snippet nil)
-  (setq lsp-enable-completion-at-point nil)
+  (setq lsp-completion-enable nil)
   (setq read-process-output-max (* 1024 1024)) ;; 1MB
   (setq lsp-idle-delay 0.5)
   (add-to-list 'lsp-language-id-configuration '(js-jsx-mode . "javascriptreact")))
@@ -698,7 +697,7 @@
          (org-mode . org-indent-mode)
          (org-mode . (lambda () (setq-local evil-auto-indent nil))))
   :config
-  (setq org-descriptive-links nil)
+  (setq org-link-descriptive nil)
   (setq org-startup-folded nil)
   (setq org-todo-keywords '((sequence "TODO" "DOING" "DONE")))
   (setq org-html-checkbox-type 'html))

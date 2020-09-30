@@ -29,7 +29,7 @@
 (let ((class '((class color) (min-colors 89)))
       (fg0               "#bbbbbb")
       (fg1               "#f0f0f0") ; default fg
-      (fg2               "#888888")
+      (fg2               "#999999")
       (fg3               "#aaaaaa")
       (fg4               "#bbbbbb")
       (bg00              "#000000")
@@ -133,8 +133,8 @@
    `(company-tooltip-common                   ((t (:foreground ,ms-blue))))
    `(company-tooltip-selection                ((t (:background ,bg-hl))))
    `(company-tooltip-annotation               ((t (:foreground ,doc-alt)))) ; parameter hints etc.
+   `(company-template-field                   ((t (:inherit region))))
 
-   `(org-document-title                       ((,class (:foreground ,type :height 1.2 :bold t))))
    `(org-level-1                              ((,class (:bold nil :foreground ,ms-bluegreen :height 1.1))))
    `(org-level-2                              ((,class (:bold nil :foreground ,ms-lightblue))))
    `(org-level-3                              ((,class (:bold nil :foreground ,ms-blue))))
@@ -160,6 +160,8 @@
    `(org-scheduled-today                      ((,class (:foreground ,func :weight normal :height 1.2))))
    `(org-ellipsis                             ((,class (:foreground ,builtin))))
    `(org-verbatim                             ((,class (:foreground ,fg4))))
+   `(org-document-title                       ((,class (:foreground ,type :height 1.2 :bold t))))
+   `(org-document-info                        ((,class (:foreground ,ms-yellow)))) ; author, date etc.
    `(org-document-info-keyword                ((,class (:foreground ,ms-green))))
    `(org-sexp-date                            ((,class (:foreground ,fg4))))
    `(org-table                                ((,class (:foreground ,ms-green :background ,bg2))))
@@ -300,6 +302,8 @@
    `(magit-signature-revoked                  ((t (:foreground ,ms-magenta))))
    `(magit-signature-untrusted                ((t (:foreground ,ms-bluegreen))))
    `(magit-tag                                ((t (:foreground ,ms-yellow))))
+
+   `(git-commit-summary                       ((t (:inherit default)))) ; magit commit message face
 
    `(term                                     ((,class (:foreground ,fg1 :background ,bg1))))
    `(term-color-black                         ((,class (:foreground ,bg3 :background ,bg3))))

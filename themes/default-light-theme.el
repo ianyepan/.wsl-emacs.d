@@ -49,7 +49,7 @@
  '(mode-line                        ((t (:foreground "grey25" :background "grey90" :box (:color "grey75" :line-width 1)))))
  '(mode-line-inactive               ((t (:foreground "grey25" :background "grey90" :box (:color "grey75" :line-width 1)))))
  '(sml/modified                     ((t (:foreground "black" :bold t))))
- '(vterm-color-white                ((t (:foreground "#999999"))))
+ '(term-color-white                 ((t (:foreground "#999999"))))
 
  '(lsp-lsp-flycheck-info-unnecessary-face ((t (:foreground "#999999" :underline (:style wave :color "DarkOrange")))))
  )

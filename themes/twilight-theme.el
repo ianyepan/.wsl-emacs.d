@@ -90,11 +90,13 @@
    `(vertical-border                          ((,class (:foreground ,bg3))))
    `(minibuffer-prompt                        ((,class (:bold nil :foreground ,keyword))))
    `(default-italic                           ((,class (:italic t))))
-   `(link                                     ((,class (:foreground ,const :underline t))))
+   `(link                                     ((,class (:foreground "#3794ff"))))
    `(warning                                  ((,class (:foreground ,warning))))
    `(dired-directory                          ((t (:inherit (font-lock-keyword-face)))))
    `(line-number                              ((,class (:foreground ,bg4))))
    `(line-number-current-line                 ((,class (:foreground ,comment))))
+   `(error                                    ((,class (:foreground ,tw-r))))
+   `(warning                                  ((,class (:foreground ,tw-r))))
 
    `(mode-line                                ((,class (:bold nil :foreground ,fg1 :background ,bg2))))
    `(mode-line-inactive                       ((,class (:bold nil :foreground ,fg2 :background ,bg2))))
@@ -202,6 +204,8 @@
    `(rainbow-delimiters-depth-8-face          ((,class :foreground ,key2)))
    `(rainbow-delimiters-depth-9-face          ((,class :foreground ,tw-b)))
    `(rainbow-delimiters-unmatched-face        ((,class :foreground ,warning)))
+
+   `(diff-header                              ((,class (:background ,bg3))))
 
    `(magit-item-highlight                     ((,class :background ,bg3)))
    `(magit-hunk-heading                       ((,class (:background ,bg3))))

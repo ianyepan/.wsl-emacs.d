@@ -79,7 +79,7 @@
 
    `(region                                   ((,class (:background ,bg3 :extend nil))))
    `(secondary-selection                      ((,class (:inherit region))))
-   `(highlight                                ((,class (:foreground ,bg3 :background ,fg3))))
+   `(highlight                                ((,class (:foreground "#4db2ff" :underline t)))) ; link hover
    `(hl-line                                  ((,class (:background ,bg2))))
    `(fringe                                   ((,class (:background ,bg1 :foreground ,fg4))))
    `(cursor                                   ((,class (:background ,fg1))))

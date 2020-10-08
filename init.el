@@ -59,7 +59,6 @@
   (setq inhibit-compacting-font-caches t)
   (setq echo-keystrokes 0.02)
   (setq kill-buffer-query-functions nil)
-  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
   (tool-bar-mode -1)
   (menu-bar-mode -1)
   (setq-default line-spacing 2)
@@ -525,6 +524,7 @@
 (use-package company
   :hook (prog-mode . company-mode)
   :config
+  (setq company-idle-delay 0.3)
   (setq company-minimum-prefix-length 1)
   (setq company-selection-wrap-around t)
   (setq company-tooltip-align-annotations t)

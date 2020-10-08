@@ -3,7 +3,7 @@
 ;;; Commentary:
 ;;
 ;; This light theme is inspired by Eclipse IDE and Visual Studio
-;; Code's default light themes
+;; Code's default Light+
 
 ;;; Usage:
 ;;
@@ -29,10 +29,11 @@
  '(font-lock-doc-face               ((t (:inherit font-lock-comment-face))))
 
  '(hl-line                          ((t (:background "#e8f0ff"))))
- '(highlight                        ((t (:background "#e8f0ff"))))
  '(ivy-current-match                ((t (:background "#e8f0ff"))))
  '(highlight-symbol-face            ((t (:background "#ddeeff"))))
  '(show-paren-match                 ((t (:background "grey85"))))
+ '(highlight                        ((t (:foreground "#0065c2" :underline t)))) ; link hover
+ '(link                             ((t (:foreground "#0065c2"))))
 
  '(company-tooltip                  ((t (:foreground "grey20" :background "grey97"))))
  '(company-tooltip-common           ((t (:foreground "SkyBlue3" :bold t))))
@@ -41,6 +42,12 @@
  '(company-scrollbar-bg             ((t (:background "grey95"))))
  '(company-scrollbar-fg             ((t (:background "grey90"))))
  '(company-template-field           ((t (:inherit region))))
+
+ '(neo-dir-link-face                ((t (:foreground "#555555"))))
+ '(neo-header-face                  ((t (:foreground "#555555"))))
+ '(neo-banner-face                  ((t (:foreground "#555555"))))
+ '(neo-root-dir-face                ((t (:foreground "#555555"))))
+ '(neo-file-link-face               ((t (:foreground "#555555"))))
 
  '(diff-hl-insert                   ((t (:background "ForestGreen" :foreground "ForestGreen"))))
  '(diff-hl-delete                   ((t (:background "#a80000" :foreground "#a80000"))))

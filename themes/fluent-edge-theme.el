@@ -34,7 +34,7 @@
       (fg4               "#bbbbbb")
       (bg00              "#000000")
       (bg0               "#1e1e1e")
-      (bg1               "#2e2e2e") ; default bg
+      (bg1               "#242424") ; default bg
       (bg2               "#3f3f3f")
       (bg3               "#4a4a4a")
       (bg4               "#5f5f5f")
@@ -101,7 +101,7 @@
    `(font-lock-regexp-grouping-construct      ((,class (:foreground ,ms-lightorange))))
 
    `(region                                   ((,class (:background ,bg-hl :distant-foreground ,fg0 :extend nil))))
-   `(highlight                                ((,class (:foreground ,fg3 :background ,bg3))))
+   `(highlight                                ((,class (:foreground "#4db2ff" :underline t)))) ; link hover
    `(hl-line                                  ((,class (:background ,bg3))))
    `(fringe                                   ((,class (:background ,bg1 :foreground ,fg4))))
    `(cursor                                   ((,class (:background ,fg1))))
@@ -112,7 +112,7 @@
    `(vertical-border                          ((,class (:foreground ,bg00))))
    `(minibuffer-prompt                        ((,class (:foreground ,ms-bluegreen :weight normal))))
    `(default-italic                           ((,class (:italic t))))
-   `(link                                     ((,class (:foreground ,const :underline t))))
+   `(link                                     ((,class (:foreground "#3794ff"))))
    `(error                                    ((,class (:foreground ,ms-orange))))
    `(warning                                  ((,class (:foreground ,ms-red))))
    `(success                                  ((,class (:foreground ,ms-bluegreen))))
@@ -467,12 +467,12 @@
    `(diff-hl-delete                           ((t (:background ,vc-r :foreground ,vc-r))))
    `(diff-hl-change                           ((t (:background ,vc-b :foreground ,vc-b))))
 
-   `(neo-dir-link-face                        ((t (:foreground "#cccccc" :family "Sans Serif"))))
-   `(neo-header-face                          ((t (:foreground "#cccccc" :family "Sans Serif"))))
-   `(neo-banner-face                          ((t (:foreground "#cccccc" :family "Sans Serif"))))
-   `(neo-root-dir-face                        ((t (:foreground "#cccccc" :family "Sans Serif"))))
-   `(neo-file-link-face                       ((t (:foreground "#aaaaaa" :family "Sans Serif"))))
-   `(neo-expand-btn-face                      ((t (:foreground "#aaaaaa"))))
+   `(neo-dir-link-face                        ((t (:foreground "#dddddd" :family "Sans Serif"))))
+   `(neo-header-face                          ((t (:foreground "#dddddd" :family "Sans Serif"))))
+   `(neo-banner-face                          ((t (:foreground "#dddddd" :family "Sans Serif"))))
+   `(neo-root-dir-face                        ((t (:foreground "#dddddd" :family "Sans Serif"))))
+   `(neo-file-link-face                       ((t (:foreground "#dddddd" :family "Sans Serif"))))
+   `(neo-expand-btn-face                      ((t (:foreground "#dddddd"))))
 
    `(sml/global                               ((t (:foreground ,fg1 :weight normal))))
    `(sml/filename                             ((t (:foreground ,accent :weight normal))))

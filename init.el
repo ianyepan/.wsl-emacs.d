@@ -212,14 +212,14 @@
   :preface
   (defun ian/fontsize-normal ()
     (interactive)
-    (set-face-attribute 'default nil :height 120))
+    (set-face-attribute 'default nil :height 105))
   (defun ian/fontsize-small ()
     (interactive)
     (set-face-attribute 'default nil :height 90))
   (defun ian/set-default-font ()
     (interactive)
     (when (member "Consolas" (font-family-list))
-      (set-face-attribute 'default nil :family "Consolas" :weight 'normal))
+      (set-face-attribute 'default nil :family "SF Mono" :weight 'normal))
     (ian/fontsize-normal))
   (defalias 'ian/normal-fontsize #'ian/fontsize-normal)
   (defalias 'ian/small-fontsize #'ian/fontsize-small)
@@ -286,22 +286,28 @@
 
 ;; GUI enhancements
 
-;; (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
-;; (load-theme 'default-dark t)
+(add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
+(load-theme 'default-light t)
 
 ;; (use-package vscode-dark-plus-theme
 ;;   :config
 ;;   (load-theme 'vscode-dark-plus t))
 
-(use-package doom-themes
-  :custom-face
-  (region                ((t (:extend nil))))
-  (sml/modified          ((t (:foreground "white"))))
-  (hl-todo               ((t (:inverse-video t))))
-  :config
-  (setq doom-themes-enable-bold nil)
-  (setq doom-gruvbox-dark-variant "hard")
-  (load-theme 'doom-gruvbox t))
+;; (use-package doom-themes
+;;   :custom-face
+;;   (cursor                         ((t (:background "white"))))
+;;   (region                         ((t (:extend nil))))
+;;   (sml/modified                   ((t (:foreground "white" :bold t))))
+;;   (hl-todo                        ((t (:inverse-video t))))
+;;   (highlight-symbol-face          ((t (:background "#355266" :distant-foreground "#bbbbbb"))))
+;;   (show-paren-match               ((t (:foreground "white" :background "#444444" :bold t))))
+;;   (highlight                      ((t (:foreground "#4db2ff" :background nil :underline t)))) ; link hover
+;;   (link                           ((t (:foreground "#3794ff"))))
+;;   (evil-ex-substitute-replacement ((t (:strike-through nil))))
+;;   :config
+;;   (setq doom-themes-enable-bold nil)
+;;   (setq doom-gruvbox-dark-variant "hard")
+;;   (load-theme 'doom-Iosvkem t))
 
 (use-package highlight-symbol
   :hook (prog-mode . highlight-symbol-mode)

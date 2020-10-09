@@ -1,10 +1,10 @@
-;;; xcode-classic-theme.el --- XCode 8/9 -*- lexical-binding: t; -*-
+;;; xcode-civic-theme.el --- XCode's Civic Theme  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2020 Ian Y.E. Pan
 
 ;; Author: Ian Y.E. Pan
-;; URL: https://github.com/ianpan870102/xcode-classic-emacs-theme
-;; Version: 1.5.0
+;; URL: https://github.com/ianpan870102/xcode-civic-emacs-theme
+;; Version: 0.5.0
 
 ;; This program is free software: you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -22,56 +22,56 @@
 ;; This file is not part of Emacs.
 
 ;;; Commentary:
-;; A complete port of the default Visual Studio Dark+ theme.
+;; A port of XCode's Civic theme
 
 ;;; Code:
 
-(deftheme xcode-classic)
+(deftheme xcode-civic)
 (let ((class '((class color) (min-colors 89)))
       (fg0               "#aeafad")
-      (fg1               "#ffffff") ; default fg
-      (fg2               "#e8e8e8")
+      (fg1               "#e7e8e0") ; default fg
+      (fg2               "#ffffff")
       (fg3               "#f4f4f4")
       (fg4               "#fafafa")
       (bg0               "#111111")
-      (bg1               "#22252e") ; default bg
-      (bg2               "#252526")
-      (bg3               "#313841")
-      (bg4               "#4b474c")
-      (bg-hl             "#264f78")
+      (bg1               "#21222b") ; default bg
+      (bg2               "#383944")
+      (bg3               "#474852")
+      (bg4               "#565861")
+      (bg-hl             "#474852")
       (vc-r              "#a41511")
       (vc-g              "#4a7f00")
       (vc-b              "#207fa1")
-      (key2              "#1aafb0")
-      (key3              "#1aafb0")
+      (key2              "#28b5b1")
+      (key3              "#28b5b1")
       (accent            "#ffffff")
       (numeric           "#9f96cf")
       (mode-line-bg      "#161626")
       (mode-line-bg-dark "#161626")
       (line-num          "#838383")
-      (builtin           "#1aafb0")
-      (keyword           "#db2d97")
-      (const             "#db2d97")
-      (comment           "#51c44f")
-      (doc               "#90c564")
-      (doc-alt           "#90c564")
-      (func              "#1aafb0")
-      (str               "#f15333")
-      (type              "#1aafb0")
-      (var               "#ffffff")
-      (warning           "#ff9300")
+      (builtin           "#28b5b1")
+      (keyword           "#df349f")
+      (const             "#28b5b1")
+      (comment           "#56c255")
+      (doc               "#77c869")
+      (doc-alt           "#77c869")
+      (func              "#e7e8e0")
+      (str               "#db3b3d")
+      (type              "#28b5b1")
+      (var               "#e7e8e0")
+      (warning           "#ea8f5a")
 
       ;; standardized palette
-      (ms-yellow         "#eeee00")
-      (ms-bluegreen      "#1aafb0")
+      (ms-yellow         "#fef935")
+      (ms-bluegreen      "#28b5b1")
       (ms-magenta        "#db2d97")
-      (ms-orange         "#f15333")
-      (ms-lightorange    "#d7ba7d")
-      (ms-red            "#f15333")
-      (ms-green          "#70c467")
-      (ms-blue           "#1aafb0")
-      (ms-lightred       "#f15333")
-      (ms-lightgreen     "#90c564")
+      (ms-orange         "#ea8f5a")
+      (ms-lightorange    "#ea8f5a")
+      (ms-red            "#fe373c")
+      (ms-green          "#4cbe55")
+      (ms-blue           "#657be5")
+      (ms-lightred       "#fe373c")
+      (ms-lightgreen     "#93c86a")
       (ms-lightblue      "#9cdcfe")
       (ms-red-bg         "#551b1e")
       (ms-green-bg       "#39422a")
@@ -81,24 +81,24 @@
       (ms-blue-bghl      "#141e4f"))
 
   (custom-theme-set-faces
-   'xcode-classic
+   'xcode-civic
    `(default                                  ((,class (:background ,bg1 :foreground ,fg1))))
 
    `(font-lock-builtin-face                   ((,class (:foreground ,builtin))))
    `(font-lock-comment-face                   ((,class (:foreground ,comment))))
-   `(font-lock-negation-char-face             ((,class (:foreground ,const))))
+   `(font-lock-negation-char-face             ((,class (:foreground ,fg1))))
    `(font-lock-reference-face                 ((,class (:foreground ,const))))
    `(font-lock-constant-face                  ((,class (:foreground ,const))))
    `(font-lock-doc-face                       ((,class (:foreground ,doc))))
-   `(font-lock-function-name-face             ((,class (:foreground ,func :bold nil))))
-   `(font-lock-keyword-face                   ((,class (:foreground ,keyword :bold t))))
+   `(font-lock-function-name-face             ((,class (:foreground ,func))))
+   `(font-lock-keyword-face                   ((,class (:foreground ,keyword))))
    `(font-lock-string-face                    ((,class (:foreground ,str))))
    `(font-lock-type-face                      ((,class (:foreground ,type))))
    `(font-lock-preprocessor-face              ((,class (:foreground ,str))))
    `(font-lock-variable-name-face             ((,class (:foreground ,var))))
    `(font-lock-warning-face                   ((,class (:foreground ,warning :background ,bg2))))
-   `(font-lock-regexp-grouping-backslash      ((,class (:foreground ,ms-lightorange))))
-   `(font-lock-regexp-grouping-construct      ((,class (:foreground ,ms-lightorange))))
+   `(font-lock-regexp-grouping-backslash      ((,class (:foreground ,ms-lightorange :bold t))))
+   `(font-lock-regexp-grouping-construct      ((,class (:foreground ,ms-lightorange :bold t))))
 
    `(region                                   ((,class (:background ,bg-hl :distant-foreground ,fg0 :extend nil))))
    `(secondary-selection                      ((,class (:inherit region))))
@@ -128,12 +128,12 @@
    `(mode-line-highlight                      ((,class (:foreground ,keyword :box nil :weight normal))))
    `(mode-line-emphasis                       ((,class (:foreground ,fg1))))
 
-   `(company-preview-common                   ((t (:foreground unspecified :background ,bg2))))
+   `(company-preview-common                   ((t (:foreground ,keyword :background ,bg2))))
    `(company-scrollbar-bg                     ((t (:background ,bg2))))
    `(company-scrollbar-fg                     ((t (:background ,bg3))))
    `(company-tooltip                          ((t (:inherit default :background ,bg2))))
-   `(company-tooltip-common                   ((t (:foreground ,ms-blue :bold t))))
-   `(company-tooltip-selection                ((t (:background ,bg-hl))))
+   `(company-tooltip-common                   ((t (:foreground ,keyword :bold t))))
+   `(company-tooltip-selection                ((t (:background ,bg4))))
    `(company-tooltip-annotation               ((t (:foreground ,doc-alt)))) ; parameter hints etc.
    `(company-template-field                   ((t (:inherit region))))
 
@@ -485,20 +485,20 @@
    `(sml/modified                             ((t (:foreground ,accent :weight bold))))
    `(sml/charging                             ((t (:foreground ,ms-green :weight normal))))
 
-   `(evil-ex-substitute-matches               ((t (:foreground ,warning :weight normal :strike-through t))))
-   `(evil-ex-substitute-replacement           ((t (:foreground ,ms-bluegreen :weight normal))))
+   `(evil-ex-substitute-matches               ((t (:foreground ,ms-red :weight bold :strike-through t))))
+   `(evil-ex-substitute-replacement           ((t (:foreground ,ms-green :weight bold))))
 
    `(hl-todo                                  ((t (:inverse-video t))))
    `(highlight-numbers-number                 ((t (:foreground ,numeric))))
    `(highlight-operators-face                 ((t (:inherit default))))
-   `(highlight-symbol-face                    ((t (:background "#343a40"))))))
+   `(highlight-symbol-face                    ((t (:background "#394f65"))))))
 
 ;;;###autoload
 (when (and (boundp 'custom-theme-load-path) load-file-name)
   (add-to-list 'custom-theme-load-path
                (file-name-as-directory (file-name-directory load-file-name))))
 
-(provide-theme 'xcode-classic)
-(provide 'xcode-classic-theme)
+(provide-theme 'xcode-civic)
+(provide 'xcode-civic-theme)
 
-;;; xcode-classic-theme.el ends here
+;;; xcode-civic-theme.el ends here

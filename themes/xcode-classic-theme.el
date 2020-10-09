@@ -24,22 +24,6 @@
 ;;; Commentary:
 ;; A complete port of the default Visual Studio Dark+ theme.
 
-;; Official colors from Microsoft's Visual Studio Code:
-;; "#DCDCAA"
-;; "#4EC9B0"
-;; "#C586C0"
-;; "#9CDCFE"
-;; "#51B6C4",
-;; "#CE9178"
-;; "#d16969"
-;; "#d7ba7d"
-;; "#569cd6"
-;; "#C8C8C8"
-;; "#d4d4d4"
-;; "#b5cea8"
-;; "#f44747"
-;; "#6A9955"
-
 ;;; Code:
 
 (deftheme xcode-classic)
@@ -58,36 +42,36 @@
       (vc-r              "#a41511")
       (vc-g              "#4a7f00")
       (vc-b              "#207fa1")
-      (key2              "#44adc8")
-      (key3              "#44adc8")
+      (key2              "#1aafb0")
+      (key3              "#1aafb0")
       (accent            "#ffffff")
-      (numeric           "#9393c9")
+      (numeric           "#9f96cf")
       (mode-line-bg      "#161626")
       (mode-line-bg-dark "#161626")
       (line-num          "#838383")
-      (builtin           "#44adc8")
-      (keyword           "#e35090")
-      (const             "#e35090")
-      (comment           "#70c467")
-      (doc               "#8fb964")
-      (doc-alt           "#8fb964")
-      (func              "#44adc8")
+      (builtin           "#1aafb0")
+      (keyword           "#db2d97")
+      (const             "#db2d97")
+      (comment           "#51c44f")
+      (doc               "#90c564")
+      (doc-alt           "#90c564")
+      (func              "#1aafb0")
       (str               "#f15333")
-      (type              "#44adc8")
+      (type              "#1aafb0")
       (var               "#ffffff")
-      (warning           "#f16969")
+      (warning           "#ff9300")
 
       ;; standardized palette
       (ms-yellow         "#eeee00")
-      (ms-bluegreen      "#44adc8")
-      (ms-magenta        "#e35090")
+      (ms-bluegreen      "#1aafb0")
+      (ms-magenta        "#db2d97")
       (ms-orange         "#f15333")
       (ms-lightorange    "#d7ba7d")
       (ms-red            "#f15333")
       (ms-green          "#70c467")
-      (ms-blue           "#44adc8")
+      (ms-blue           "#1aafb0")
       (ms-lightred       "#f15333")
-      (ms-lightgreen     "#8fb964")
+      (ms-lightgreen     "#90c564")
       (ms-lightblue      "#9cdcfe")
       (ms-red-bg         "#551b1e")
       (ms-green-bg       "#39422a")
@@ -109,13 +93,14 @@
    `(font-lock-function-name-face             ((,class (:foreground ,func :bold nil))))
    `(font-lock-keyword-face                   ((,class (:foreground ,keyword :bold t))))
    `(font-lock-string-face                    ((,class (:foreground ,str))))
-   `(font-lock-type-face                      ((,class (:foreground ,type ))))
+   `(font-lock-type-face                      ((,class (:foreground ,type))))
+   `(font-lock-preprocessor-face              ((,class (:foreground ,str))))
    `(font-lock-variable-name-face             ((,class (:foreground ,var))))
    `(font-lock-warning-face                   ((,class (:foreground ,warning :background ,bg2))))
    `(font-lock-regexp-grouping-backslash      ((,class (:foreground ,ms-lightorange))))
    `(font-lock-regexp-grouping-construct      ((,class (:foreground ,ms-lightorange))))
 
-   `(region                                   ((,class (:background ,bg-hl :extend nil))))
+   `(region                                   ((,class (:background ,bg-hl :distant-foreground ,fg0 :extend nil))))
    `(secondary-selection                      ((,class (:inherit region))))
    `(highlight                                ((,class (:foreground "#4db2ff" :underline t)))) ; link hover
    `(hl-line                                  ((,class (:background ,bg3))))
@@ -129,8 +114,8 @@
    `(minibuffer-prompt                        ((,class (:foreground ,ms-bluegreen :weight normal))))
    `(default-italic                           ((,class (:italic t))))
    `(link                                     ((,class (:foreground "#3794ff"))))
-   `(error                                    ((,class (:foreground ,ms-orange))))
-   `(warning                                  ((,class (:foreground ,ms-magenta))))
+   `(error                                    ((,class (:foreground ,warning))))
+   `(warning                                  ((,class (:foreground ,warning))))
    `(success                                  ((,class (:foreground ,ms-bluegreen))))
    `(dired-directory                          ((t (:inherit (font-lock-keyword-face)))))
    `(line-number                              ((,class (:foreground ,line-num :background nil))))

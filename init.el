@@ -212,14 +212,14 @@
   :preface
   (defun ian/fontsize-normal ()
     (interactive)
-    (set-face-attribute 'default nil :height 105))
+    (set-face-attribute 'default nil :height 120))
   (defun ian/fontsize-small ()
     (interactive)
     (set-face-attribute 'default nil :height 90))
   (defun ian/set-default-font ()
     (interactive)
     (when (member "Consolas" (font-family-list))
-      (set-face-attribute 'default nil :family "SF Mono" :weight 'normal))
+      (set-face-attribute 'default nil :family "Consolas" :weight 'normal))
     (ian/fontsize-normal))
   (defalias 'ian/normal-fontsize #'ian/fontsize-normal)
   (defalias 'ian/small-fontsize #'ian/fontsize-small)
@@ -307,7 +307,8 @@
 ;;   :config
 ;;   (setq doom-themes-enable-bold nil)
 ;;   (setq doom-gruvbox-dark-variant "hard")
-;;   (load-theme 'doom-Iosvkem t))
+;;   (setq doom-solarized-dark-brighter-text t)
+;;   (load-theme 'doom-solarized-dark t))
 
 (use-package highlight-symbol
   :hook (prog-mode . highlight-symbol-mode)

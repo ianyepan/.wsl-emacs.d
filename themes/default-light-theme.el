@@ -27,6 +27,8 @@
  '(minibuffer-prompt                ((t (:inherit default))))
  '(font-lock-comment-face           ((t (:foreground "#3F7F5F"))))
  '(font-lock-doc-face               ((t (:inherit font-lock-comment-face))))
+ '(error                            ((t (:foreground "#c80000" :bold t))))
+ '(warning                          ((t (:inherit error))))
 
  '(hl-line                          ((t (:background "#e8f0ff"))))
  '(ivy-current-match                ((t (:background "#e8f0ff"))))

@@ -721,7 +721,8 @@
   :ensure nil
   :config
   (setq org-latex-packages-alist '(("margin=1in" "geometry" nil)
-                                   ("bitstream-charter" "mathdesign" nil)
+                                   ;; ("bitstream-charter" "mathdesign" nil)
+                                   ("" "tinos" nil)
                                    ("" "inconsolata" nil)))
   (setq org-latex-pdf-process
         '("/usr/bin/pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"

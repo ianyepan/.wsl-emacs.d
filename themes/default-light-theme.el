@@ -15,7 +15,7 @@
 
 (custom-theme-set-faces
  'default-light
- '(region                           ((t (:background "#bbddff" :extend nil))))
+ '(region                           ((t (:background "#bfdfff" :extend nil))))
  '(secondary-selection              ((t (:inherit region))))
  '(fringe                           ((t (:background nil))))
  '(font-lock-keyword-face           ((t (:foreground "#7f0055" :bold t))))

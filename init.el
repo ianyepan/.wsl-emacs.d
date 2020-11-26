@@ -366,8 +366,6 @@
   :config
   (evil-commentary-mode +1))
 
-(use-package evil-magit)
-
 (use-package evil-matchit
   :hook (web-mode . turn-on-evil-matchit-mode))
 

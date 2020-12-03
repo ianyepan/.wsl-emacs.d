@@ -628,7 +628,7 @@
   :after (projectile vterm evil)
   :config
   (setq vterm-toggle-fullscreen-p nil)
-  (setq vterm-toggle-scope 'projectile)
+  (setq vterm-toggle-scope 'project)
   (with-eval-after-load 'evil
     (evil-set-initial-state 'vterm-mode 'emacs))
   (global-set-key (kbd "C-`") #'vterm-toggle)

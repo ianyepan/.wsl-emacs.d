@@ -3,7 +3,7 @@
 ;;; Commentary:
 ;;
 ;; This light theme is inspired by Eclipse IDE and Visual Studio
-;; Code's default Light+
+;; Code's default Light+ theme
 
 ;;; Usage:
 ;;
@@ -15,7 +15,8 @@
 
 (custom-theme-set-faces
  'default-light
- '(region                           ((t (:background "#bfdfff" :extend nil))))
+ '(default                          ((t (:background "#f5f5f5"))))
+ '(region                           ((t (:background "#d7d4f0" :extend nil))))
  '(secondary-selection              ((t (:inherit region))))
  '(fringe                           ((t (:background nil))))
  '(font-lock-keyword-face           ((t (:foreground "#7f0055" :bold t))))
@@ -31,16 +32,16 @@
  '(warning                          ((t (:inherit error))))
 
  '(hl-line                          ((t (:background "#e8f0ff"))))
- '(ivy-current-match                ((t (:background "#e8f0ff"))))
- '(highlight-symbol-face            ((t (:background "#ddeeff"))))
+ '(ivy-current-match                ((t (:background "#c8e0fe"))))
+ '(highlight-symbol-face            ((t (:background "#d5e5f5"))))
  '(show-paren-match                 ((t (:background "grey85"))))
  '(highlight                        ((t (:foreground "#0065c2" :underline t)))) ; link hover
  '(link                             ((t (:foreground "#0065c2"))))
 
- '(company-tooltip                  ((t (:foreground "grey20" :background "grey97"))))
- '(company-tooltip-common           ((t (:foreground "SkyBlue3" :bold t))))
+ '(company-tooltip                  ((t (:foreground "grey20" :background "grey94"))))
+ '(company-tooltip-common           ((t (:foreground "#0065c2" :bold t))))
  '(company-tooltip-annotation       ((t (:foreground "grey55"))))
- '(company-tooltip-selection        ((t (:background "grey90" :bold nil))))
+ '(company-tooltip-selection        ((t (:background "#d8e5f5" :bold nil))))
  '(company-scrollbar-bg             ((t (:background "grey95"))))
  '(company-scrollbar-fg             ((t (:background "grey90"))))
  '(company-template-field           ((t (:inherit region))))
@@ -53,7 +54,7 @@
 
  '(diff-hl-insert                   ((t (:background "ForestGreen" :foreground "ForestGreen"))))
  '(diff-hl-delete                   ((t (:background "#a80000" :foreground "#a80000"))))
- '(diff-hl-change                   ((t (:background "#bbddff" :foreground "#bbddff"))))
+ '(diff-hl-change                   ((t (:background "#b5d5ff" :foreground "#bbddff"))))
 
  '(mode-line                        ((t (:foreground "grey25" :background "grey90" :box (:color "grey75" :line-width 1)))))
  '(mode-line-inactive               ((t (:foreground "grey25" :background "grey90" :box (:color "grey75" :line-width 1)))))

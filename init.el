@@ -180,7 +180,7 @@
 
 (use-package prolog
   :ensure nil
-  :mode (("\\.pl\\'" . prolog-mode)) ; if commented, ".pl" will become perl/cperl mode
+  ;; :mode (("\\.pl\\'" . prolog-mode)) ; if commented, ".pl" will become perl/cperl mode
   :config
   (setq prolog-indent-width ian/indent-width))
 
@@ -286,29 +286,29 @@
 
 ;; GUI enhancements
 
-(add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
-(load-theme 'default-light t)
+;; (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
+;; (load-theme 'default-light t)
 
 ;; (use-package vscode-dark-plus-theme
 ;;   :config
 ;;   (load-theme 'vscode-dark-plus t))
 
-;; (use-package doom-themes
-;;   :custom-face
-;;   (cursor                         ((t (:background "white"))))
-;;   (region                         ((t (:extend nil))))
-;;   (sml/modified                   ((t (:foreground "white" :bold t))))
-;;   (hl-todo                        ((t (:inverse-video t))))
-;;   (highlight-symbol-face          ((t (:background "#355266" :distant-foreground "#bbbbbb"))))
-;;   (show-paren-match               ((t (:foreground "white" :background "#444444" :bold t))))
-;;   (highlight                      ((t (:foreground "#4db2ff" :background nil :underline t)))) ; link hover
-;;   (link                           ((t (:foreground "#3794ff"))))
-;;   (evil-ex-substitute-replacement ((t (:strike-through nil))))
-;;   :config
-;;   (setq doom-themes-enable-bold nil)
-;;   (setq doom-gruvbox-dark-variant "hard")
-;;   (setq doom-solarized-dark-brighter-text t)
-;;   (load-theme 'doom-solarized-dark t))
+(use-package doom-themes
+  :custom-face
+  (cursor                         ((t (:background "white"))))
+  (region                         ((t (:extend nil))))
+  (sml/modified                   ((t (:foreground "white" :bold t))))
+  (hl-todo                        ((t (:inverse-video t))))
+  (highlight-symbol-face          ((t (:background "#355266" :distant-foreground "#bbbbbb"))))
+  (show-paren-match               ((t (:foreground "white" :background "#444444" :bold t))))
+  (highlight                      ((t (:foreground "#4db2ff" :background nil :underline t)))) ; link hover
+  (link                           ((t (:foreground "#3794ff"))))
+  (evil-ex-substitute-replacement ((t (:strike-through nil))))
+  :config
+  (setq doom-themes-enable-bold nil)
+  (setq doom-gruvbox-dark-variant "hard")
+  (setq doom-solarized-dark-brighter-text t)
+  (load-theme 'doom-gruvbox t))
 
 (use-package highlight-symbol
   :hook (prog-mode . highlight-symbol-mode)
@@ -328,11 +328,17 @@
 
 ;; Vi keybindings
 
+(use-package undo-tree
+  :config
+  (global-undo-tree-mode))
+
 (use-package evil
+  :after undo-tree
   :init
   (setq evil-want-C-u-scroll t
         evil-want-keybinding nil
-        evil-shift-width ian/indent-width)
+        evil-shift-width ian/indent-width
+        evil-undo-system 'undo-tree)
   :hook (after-init . evil-mode)
   :preface
   (defun ian/save-and-kill-this-buffer ()
@@ -487,6 +493,7 @@
   (setq lsp-signature-auto-activate nil)
   (setq lsp-modeline-code-actions-enable nil)
   (setq lsp-modeline-diagnostics-enable nil)
+  (setq lsp-headerline-breadcrumb-enable nil)
   (setq lsp-enable-folding nil)
   (setq lsp-enable-imenu nil)
   (setq lsp-enable-snippet nil)
@@ -512,14 +519,14 @@
                 (call-interactively #'lsp-workspace-restart)))
   (pyvenv-mode +1))
 
-(use-package cobol-mode
-  :config
-  (setq cobol-tab-width ian/indent-width)
-  (setq auto-mode-alist
-        (append
-         '(("\\.cob\\'" . cobol-mode)
-           ("\\.cbl\\'" . cobol-mode))
-         auto-mode-alist)))
+;; (use-package cobol-mode
+;;   :config
+;;   (setq cobol-tab-width ian/indent-width)
+;;   (setq auto-mode-alist
+;;         (append
+;;          '(("\\.cob\\'" . cobol-mode)
+;;            ("\\.cbl\\'" . cobol-mode))
+;;          auto-mode-alist)))
 
 (use-package sml-mode ; Standard ML of New Jersey
   :mode (("\\.s?ml\\'" . sml-mode))
@@ -589,7 +596,9 @@
     (if (derived-mode-p 'prolog-mode)
         (prolog-indent-buffer)
       (format-all-buffer)))
-  (defalias 'format-document #'ian/format-code))
+  (defalias 'format-document #'ian/format-code)
+  :config
+  (add-hook 'prog-mode-hook 'format-all-ensure-formatter))
 
 (use-package rainbow-mode
   :hook (web-mode . rainbow-mode))
@@ -730,3 +739,4 @@
 
 (provide 'init)
 ;;; init.el ends here
+(put 'upcase-region 'disabled nil)

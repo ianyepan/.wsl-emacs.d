@@ -9,8 +9,8 @@
 </p>
 
 ### Thanks for dropping by!
-This is my personal Emacs 26.3 configuration when I'm using Windows 10
-and WSL Ubuntu 20.04. If you prefer an unopinionated Emacs "distro"
+This is my personal Emacs 27.1.50 configuration when I'm using Windows
+10 and WSL Ubuntu 20.04. If you prefer an unopinionated Emacs "distro"
 that you could build upon, check out [this
 page](https://github.com/ianpan870102/yay-evil-emacs).
 

@@ -307,8 +307,7 @@
   :config
   (setq doom-themes-enable-bold nil)
   (setq doom-gruvbox-dark-variant "hard")
-  (setq doom-solarized-dark-brighter-text t)
-  (load-theme 'doom-gruvbox t))
+  (load-theme 'doom-one t))
 
 (use-package highlight-symbol
   :hook (prog-mode . highlight-symbol-mode)
@@ -528,10 +527,10 @@
 ;;            ("\\.cbl\\'" . cobol-mode))
 ;;          auto-mode-alist)))
 
-(use-package sml-mode ; Standard ML of New Jersey
-  :mode (("\\.s?ml\\'" . sml-mode))
-  :config
-  (setq sml-indent-level ian/indent-width))
+;; (use-package sml-mode ; Standard ML of New Jersey
+;;   :mode (("\\.s?ml\\'" . sml-mode))
+;;   :config
+;;   (setq sml-indent-level ian/indent-width))
 
 (use-package company
   :hook (prog-mode . company-mode)
@@ -696,6 +695,7 @@
                                  (hl-line-mode +1)
                                  (setq-local line-spacing nil)))
   (global-set-key (kbd "C-S-e") #'ian/neotree-project-toggle)
+  (setq neo-autorefresh t)
   (setq neo-theme 'nerd)
   (setq neo-show-hidden-files t)
   (setq neo-window-width 30))

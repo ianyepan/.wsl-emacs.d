@@ -18,8 +18,8 @@
  'default-dark
  '(default                          ((t (:background "grey10" :foreground "grey90"))))
  '(cursor                           ((t (:background "white"))))
- '(region                           ((t (:background "#204a72" :distant-foreground "grey75" :extend nil))))
- '(font-lock-comment-face           ((t (:foreground "grey55"))))
+ '(region                           ((t (:background "#b0c4de" :foreground "black" :extend nil))))
+ ;; '(font-lock-comment-face           ((t (:foreground "grey55"))))
  '(line-number                      ((t (:foreground "grey45"))))
 
  '(company-tooltip                  ((t (:foreground "gray90" :background "black"))))
@@ -29,14 +29,11 @@
  '(company-scrollbar-bg             ((t (:background "gray15"))))
  '(company-scrollbar-fg             ((t (:background "gray30"))))
 
- ;; '(hl-line                          ((t (:background "grey20"))))
- ;; '(ivy-current-match                ((t (:background "LightSteelBlue" :foreground "black"))))
-
  '(diff-hl-insert                   ((t (:background "#36a546" :foreground "#36a546"))))
  '(diff-hl-delete                   ((t (:background "#ac0909" :foreground "#ac0909"))))
  '(diff-hl-change                   ((t (:background "#f1eb7f" :foreground "#f1eb7f"))))
 
- '(highlight-symbol-face            ((t (:background "#354a32"))))
+ '(highlight-symbol-face            ((t (:background "#355266" :distant-foreground "white"))))
  '(hl-todo                          ((t (:inverse-video t))))
 
  '(term-color-blue                  ((t (:foreground "#0782f0"))))

@@ -287,7 +287,7 @@
 ;; GUI enhancements
 
 ;; (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
-;; (load-theme 'default-light t)
+;; (load-theme 'powershell t)
 
 ;; (use-package vscode-dark-plus-theme
 ;;   :config
@@ -295,12 +295,13 @@
 
 (use-package doom-themes
   :custom-face
-  (cursor                         ((t (:background "white"))))
+  (cursor                         ((t (:background "#528bff"))))
   (region                         ((t (:extend nil))))
+  (font-lock-comment-face         ((t (:italic t))))
   (sml/modified                   ((t (:foreground "white" :bold t))))
   (hl-todo                        ((t (:inverse-video t))))
   (highlight-symbol-face          ((t (:background "#355266" :distant-foreground "#bbbbbb"))))
-  (show-paren-match               ((t (:foreground "white" :background "#444444" :bold t))))
+  (show-paren-match               ((t (:foreground "#eeeeee" :background "#444444" :bold t))))
   (highlight                      ((t (:foreground "#4db2ff" :background nil :underline t)))) ; link hover
   (link                           ((t (:foreground "#3794ff"))))
   (evil-ex-substitute-replacement ((t (:strike-through nil))))
@@ -369,7 +370,8 @@
 (use-package evil-commentary
   :after evil
   :config
-  (evil-commentary-mode +1))
+  (evil-commentary-mode +1)
+  (add-hook 'c-mode-hook #'(lambda () (c-toggle-comment-style -1))))
 
 (use-package evil-matchit
   :hook (web-mode . turn-on-evil-matchit-mode))
@@ -484,9 +486,12 @@
           ) . lsp)
   :commands lsp
   :config
+  (define-key lsp-mode-map (kbd "C-c l <tab>") #'lsp-execute-code-action)
   (setq lsp-auto-guess-root t)
   ;; (setq lsp-diagnostics-provider :none)                       ; disable flycheck-lsp for most modes
   ;; (add-hook 'web-mode-hook #'lsp-diagnostics-flycheck-enable) ; enable flycheck-lsp for web-mode locally
+  (setq lsp-log-io nil)
+  (setq lsp-restart 'auto-restart)
   (setq lsp-enable-symbol-highlighting nil)
   (setq lsp-enable-on-type-formatting nil)
   (setq lsp-signature-auto-activate nil)
@@ -500,6 +505,23 @@
   (setq read-process-output-max (* 1024 1024)) ;; 1MB
   (setq lsp-idle-delay 0.5)
   (add-to-list 'lsp-language-id-configuration '(js-jsx-mode . "javascriptreact")))
+
+(use-package lsp-ui
+  :preface
+  (defun ian/lsp-ui-doc-show ()
+    "Sometimes lsp-ui-doc-show needs more than 1 call to display correctly."
+    (interactive)
+    (lsp-ui-doc-hide)
+    (lsp-ui-doc-show)
+    (lsp-ui-doc-show))
+  :commands lsp-ui-mode
+  :config
+  (define-key lsp-ui-mode-map (kbd "C-c l s") #'ian/lsp-ui-doc-show)
+  (define-key lsp-ui-mode-map (kbd "C-c l h") #'lsp-ui-doc-hide)
+  (custom-set-faces '(lsp-ui-sideline-global ((t (:italic t)))))
+  (setq lsp-ui-doc-enable nil)
+  (setq lsp-ui-sideline-show-code-actions nil)
+  (setq lsp-ui-sideline-delay 0.05))
 
 (use-package lsp-java
   :after lsp)
@@ -605,6 +627,7 @@
 (use-package hl-todo
   :config
   (add-to-list 'hl-todo-keyword-faces '("DOING" . "#94bff3"))
+  (add-to-list 'hl-todo-keyword-faces '("WHY" . "#7cb8bb"))
   (global-hl-todo-mode +1))
 
 ;;; Dired enhancements
@@ -695,7 +718,7 @@
                                  (hl-line-mode +1)
                                  (setq-local line-spacing nil)))
   (global-set-key (kbd "C-S-e") #'ian/neotree-project-toggle)
-  (setq neo-autorefresh t)
+  ;; (setq neo-autorefresh t)
   (setq neo-theme 'nerd)
   (setq neo-show-hidden-files t)
   (setq neo-window-width 30))

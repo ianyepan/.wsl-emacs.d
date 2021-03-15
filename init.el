@@ -72,8 +72,8 @@
 
 ;; Overriding built-in function
 (defun use-fancy-splash-screens-p ()
-  "Always display splash screen with Emacs PNG logo."
-  t)
+  "Never display splash screen with Emacs PNG logo."
+  nil)
 
 ;;; Built-in packages
 
@@ -487,6 +487,7 @@
   :commands lsp
   :config
   (define-key lsp-mode-map (kbd "C-c l <tab>") #'lsp-execute-code-action)
+  (define-key lsp-mode-map (kbd "C-c l TAB") #'lsp-execute-code-action)
   (setq lsp-auto-guess-root t)
   ;; (setq lsp-diagnostics-provider :none)                       ; disable flycheck-lsp for most modes
   ;; (add-hook 'web-mode-hook #'lsp-diagnostics-flycheck-enable) ; enable flycheck-lsp for web-mode locally
@@ -520,7 +521,7 @@
   (define-key lsp-ui-mode-map (kbd "C-c l h") #'lsp-ui-doc-hide)
   (custom-set-faces '(lsp-ui-sideline-global ((t (:italic t)))))
   (setq lsp-ui-doc-enable nil)
-  (setq lsp-ui-sideline-show-code-actions nil)
+  (setq lsp-ui-sideline-show-code-actions t)
   (setq lsp-ui-sideline-delay 0.05))
 
 (use-package lsp-java

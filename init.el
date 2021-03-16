@@ -198,7 +198,7 @@
 (use-package mwheel
   :ensure nil
   :config
-  (setq mouse-wheel-scroll-amount '(3 ((shift) . 1) ((control) . nil)))
+  (setq mouse-wheel-scroll-amount '(4 ((shift) . 1) ((control) . nil)))
   (setq mouse-wheel-progressive-speed nil))
 
 (use-package paren

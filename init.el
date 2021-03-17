@@ -530,8 +530,19 @@
 (use-package lsp-pyright
   :hook (python-mode . (lambda () (require 'lsp-pyright))))
 
-(use-package modern-cpp-font-lock
-  :hook (c++-mode . modern-c++-font-lock-mode))
+(use-package tree-sitter
+  :custom-face
+  (tree-sitter-hl-face:method.call   ((t (:inherit font-lock-function-name-face))))
+  (tree-sitter-hl-face:function.call ((t (:inherit font-lock-function-name-face))))
+  (tree-sitter-hl-face:operator      ((t (:inherit default))))
+  :config
+  (global-tree-sitter-mode)
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+
+(use-package tree-sitter-langs)
+
+;; (use-package modern-cpp-font-lock
+;;   :hook (c++-mode . modern-c++-font-lock-mode))
 
 (use-package pyvenv
   :config

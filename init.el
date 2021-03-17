@@ -592,17 +592,21 @@
   :config
   (set-face-attribute 'markdown-code-face nil :inherit 'org-block))
 
-(use-package web-mode
-  :mode (("\\.html?\\'" . web-mode)
-         ("\\.css\\'"   . web-mode)
-         ("\\.jsx?\\'"  . web-mode)
-         ("\\.tsx?\\'"  . web-mode)
-         ("\\.json\\'"  . web-mode))
-  :config
-  (setq web-mode-markup-indent-offset ian/indent-width)
-  (setq web-mode-code-indent-offset ian/indent-width)
-  (setq web-mode-css-indent-offset ian/indent-width)
-  (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'"))))
+(use-package typescript-mode)
+
+(use-package json-mode)
+
+;; (use-package web-mode
+;;   :mode (("\\.html?\\'" . web-mode)
+;;          ("\\.css\\'"   . web-mode)
+;;          ("\\.jsx?\\'"  . web-mode)
+;;          ("\\.tsx?\\'"  . web-mode)
+;;          ("\\.json\\'"  . web-mode))
+;;   :config
+;;   (setq web-mode-markup-indent-offset ian/indent-width)
+;;   (setq web-mode-code-indent-offset ian/indent-width)
+;;   (setq web-mode-css-indent-offset ian/indent-width)
+;;   (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'"))))
 
 (use-package emmet-mode
   :hook ((html-mode       . emmet-mode)

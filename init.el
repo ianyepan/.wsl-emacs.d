@@ -374,7 +374,11 @@
   (add-hook 'c-mode-hook #'(lambda () (c-toggle-comment-style -1))))
 
 (use-package evil-matchit
-  :hook (web-mode . turn-on-evil-matchit-mode))
+  :hook ((web-mode        . turn-on-evil-matchit-mode)
+         (html-mode       . turn-on-evil-matchit-mode)
+         (mhtml-mode      . turn-on-evil-matchit-mode)
+         (js-mode         . turn-on-evil-matchit-mode)
+         (typescript-mode . turn-on-evil-matchit-mode)))
 
 ;; Git integration
 

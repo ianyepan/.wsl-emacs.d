@@ -672,6 +672,10 @@
                                              (vterm-clear-scrollback))))
 
 (use-package vterm-toggle
+  :preface
+  (defun ian/vterm-toggle-new-instance ()
+    (interactive)
+    (vterm-toggle--new))
   :after (projectile vterm evil)
   :config
   (setq vterm-toggle-fullscreen-p nil)

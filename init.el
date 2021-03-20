@@ -293,7 +293,17 @@
 ;;   :config
 ;;   (load-theme 'vscode-dark-plus t))
 
+(use-package solaire-mode
+  :hook ((change-major-mode . turn-on-solaire-mode)
+         (after-revert . turn-on-solaire-mode)
+         (ediff-prepare-buffer . solaire-mode)
+         (minibuffer-setup . solaire-mode-in-minibuffer))
+  :config
+  (setq solaire-mode-auto-swap-bg t)
+  (solaire-global-mode +1))
+
 (use-package doom-themes
+  :after solaire-mode
   :custom-face
   (cursor                         ((t (:background "#528bff"))))
   (region                         ((t (:extend nil))))

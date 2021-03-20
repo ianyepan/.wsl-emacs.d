@@ -747,6 +747,11 @@
   (setq neo-show-hidden-files t)
   (setq neo-window-width 30))
 
+(use-package which-key
+  :config
+  (setq which-key-idle-delay 0.4)
+  (which-key-mode +1))
+
 ;; Org and LaTeX export
 ; Ubuntu needs to have these installed:
 ; 1. texlive-latex-extra

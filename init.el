@@ -279,7 +279,7 @@
   :ensure nil
   :config
   (when (member "Segoe UI" (font-family-list))
-    (set-face-attribute 'variable-pitch nil :family "Segoe UI" :height 115 :weight 'normal)))
+    (set-face-attribute 'variable-pitch nil :family "Segoe UI" :height 0.9 :weight 'normal)))
 
 ;;; Third-party Packages
 
@@ -741,11 +741,11 @@
                 (neotree-find file-name)))
         (message "Could not find projectile project root."))))
   :custom-face
-  (neo-dir-link-face  ((t (:family "Segoe UI" :height 105))))
-  (neo-header-face    ((t (:family "Segoe UI" :height 105))))
-  (neo-banner-face    ((t (:family "Segoe UI" :height 105))))
-  (neo-root-dir-face  ((t (:family "Segoe UI" :height 105))))
-  (neo-file-link-face ((t (:family "Segoe UI" :height 105))))
+  (neo-dir-link-face  ((t (:family "Segoe UI" :height 0.9))))
+  (neo-header-face    ((t (:family "Segoe UI" :height 0.9))))
+  (neo-banner-face    ((t (:family "Segoe UI" :height 0.9))))
+  (neo-root-dir-face  ((t (:family "Segoe UI" :height 0.9))))
+  (neo-file-link-face ((t (:family "Segoe UI" :height 0.9))))
   :config
   (add-hook 'neotree-mode-hook (lambda ()
                                  (hl-line-mode +1)

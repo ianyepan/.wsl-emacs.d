@@ -61,7 +61,6 @@
   (tool-bar-mode -1)
   (menu-bar-mode -1)
   (setq-default line-spacing 2)
-  ;; (setq-default tab-width ian/indent-width)
   (setq-default indent-tabs-mode nil))
 
 (use-package "startup"
@@ -211,7 +210,7 @@
   :preface
   (defun ian/fontsize-normal ()
     (interactive)
-    (set-face-attribute 'default nil :height 120))
+    (set-face-attribute 'default nil :height 110))
   (defun ian/fontsize-small ()
     (interactive)
     (set-face-attribute 'default nil :height 90))
@@ -279,18 +278,11 @@
   :ensure nil
   :config
   (when (member "Segoe UI" (font-family-list))
-    (set-face-attribute 'variable-pitch nil :family "Segoe UI" :height 0.9 :weight 'normal)))
+    (set-face-attribute 'variable-pitch nil :family "Segoe UI" :height 1.0 :weight 'normal)))
 
 ;;; Third-party Packages
 
 ;; GUI enhancements
-
-;; (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
-;; (load-theme 'powershell t)
-
-;; (use-package vscode-dark-plus-theme
-;;   :config
-;;   (load-theme 'vscode-dark-plus t))
 
 (use-package solaire-mode
   :hook ((change-major-mode . turn-on-solaire-mode)
@@ -301,23 +293,31 @@
   (setq solaire-mode-auto-swap-bg t)
   (solaire-global-mode +1))
 
+;; (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
+;; (load-theme 'powershell t)
+
+;; (use-package vscode-dark-plus-theme
+;;   :config
+;;   (load-theme 'vscode-dark-plus t))
+
+
 (use-package doom-themes
   :after solaire-mode
   :custom-face
-  (cursor                         ((t (:background "#528bff"))))
   (region                         ((t (:extend nil))))
   (font-lock-comment-face         ((t (:italic t))))
   (sml/modified                   ((t (:foreground "white" :bold t))))
-  (hl-todo                        ((t (:inverse-video t))))
+  (hl-todo                        ((t (:inverse-video t :italic t))))
   (highlight-symbol-face          ((t (:background "#355266" :distant-foreground "#bbbbbb"))))
   (show-paren-match               ((t (:foreground "#eeeeee" :background "#444444" :bold t))))
   (highlight                      ((t (:foreground "#4db2ff" :background nil :underline t)))) ; link hover
   (link                           ((t (:foreground "#3794ff"))))
   (evil-ex-substitute-replacement ((t (:strike-through nil))))
+  (vertical-border                ((t (:foreground "black" :background "black"))))
   :config
   (setq doom-themes-enable-bold nil)
   (setq doom-gruvbox-dark-variant "hard")
-  (load-theme 'doom-one t))
+  (load-theme 'doom-gruvbox t))
 
 (use-package highlight-symbol
   :hook (prog-mode . highlight-symbol-mode)
@@ -408,7 +408,7 @@
   :hook (after-init . ivy-mode)
   :config
   (setcdr (assoc t ivy-format-functions-alist) #'ivy-format-function-line)
-  (setq ivy-height 12)
+  (setq ivy-height 15)
   (setq ivy-display-style nil)
   (setq ivy-re-builders-alist
         '((counsel-rg            . ivy--regex-plus)
@@ -741,11 +741,11 @@
                 (neotree-find file-name)))
         (message "Could not find projectile project root."))))
   :custom-face
-  (neo-dir-link-face  ((t (:family "Segoe UI" :height 0.9))))
-  (neo-header-face    ((t (:family "Segoe UI" :height 0.9))))
-  (neo-banner-face    ((t (:family "Segoe UI" :height 0.9))))
-  (neo-root-dir-face  ((t (:family "Segoe UI" :height 0.9))))
-  (neo-file-link-face ((t (:family "Segoe UI" :height 0.9))))
+  (neo-dir-link-face  ((t (:inherit 'variable-pitch))))
+  (neo-header-face    ((t (:inherit 'variable-pitch))))
+  (neo-banner-face    ((t (:inherit 'variable-pitch))))
+  (neo-root-dir-face  ((t (:inherit 'variable-pitch))))
+  (neo-file-link-face ((t (:inherit 'variable-pitch))))
   :config
   (add-hook 'neotree-mode-hook (lambda ()
                                  (hl-line-mode +1)

@@ -765,6 +765,7 @@
                                  (hl-line-mode +1)
                                  (setq-local line-spacing nil)))
   (global-set-key (kbd "C-S-e") #'ian/neotree-project-toggle)
+  (global-set-key (kbd "C-x e") #'ian/neotree-project-toggle)
   ;; (setq neo-autorefresh t)
   (setq neo-theme 'icons)
   (setq neo-show-hidden-files t)

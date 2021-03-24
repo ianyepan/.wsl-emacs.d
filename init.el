@@ -60,7 +60,7 @@
   (setq kill-buffer-query-functions nil)
   (tool-bar-mode -1)
   (menu-bar-mode -1)
-  (setq-default line-spacing 2)
+  (setq-default line-spacing 1)
   (setq-default indent-tabs-mode nil))
 
 (use-package "startup"
@@ -210,14 +210,14 @@
   :preface
   (defun ian/fontsize-normal ()
     (interactive)
-    (set-face-attribute 'default nil :height 110))
+    (set-face-attribute 'default nil :height 100))
   (defun ian/fontsize-small ()
     (interactive)
     (set-face-attribute 'default nil :height 90))
   (defun ian/set-default-font ()
     (interactive)
     (when (member "Consolas" (font-family-list))
-      (set-face-attribute 'default nil :family "Consolas" :weight 'normal))
+      (set-face-attribute 'default nil :family "Hack" :weight 'normal))
     (ian/fontsize-normal))
   (defalias 'ian/normal-fontsize #'ian/fontsize-normal)
   (defalias 'ian/small-fontsize #'ian/fontsize-small)
@@ -534,7 +534,7 @@
   (define-key lsp-ui-mode-map (kbd "C-c l h") #'lsp-ui-doc-hide)
   (custom-set-faces '(lsp-ui-sideline-global ((t (:italic t)))))
   (setq lsp-ui-doc-enable nil)
-  (setq lsp-ui-sideline-show-code-actions t)
+  (setq lsp-ui-sideline-show-code-actions nil)
   (setq lsp-ui-sideline-delay 0.05))
 
 (use-package lsp-java
@@ -704,6 +704,20 @@
 
 ;; Misc
 
+(use-package all-the-icons
+  :config
+  (setq all-the-icons-scale-factor 0.8))
+
+(use-package all-the-icons-dired
+  :config
+  (add-hook 'dired-mode-hook 'all-the-icons-dired-mode);
+  (setq all-the-icons-dired-monochrome nil))
+
+(use-package ivy-rich
+  :config
+  (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
+  (ivy-rich-mode +1))
+
 (use-package pdf-tools
   :mode (("\\.pdf\\'" . pdf-view-mode))
   :bind ((:map pdf-view-mode-map ("C--" . pdf-view-shrink))
@@ -752,7 +766,7 @@
                                  (setq-local line-spacing nil)))
   (global-set-key (kbd "C-S-e") #'ian/neotree-project-toggle)
   ;; (setq neo-autorefresh t)
-  (setq neo-theme 'nerd)
+  (setq neo-theme 'icons)
   (setq neo-show-hidden-files t)
   (setq neo-window-width 30))
 

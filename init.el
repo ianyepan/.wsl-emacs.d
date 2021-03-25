@@ -60,7 +60,7 @@
   (setq kill-buffer-query-functions nil)
   (tool-bar-mode -1)
   (menu-bar-mode -1)
-  (setq-default line-spacing 2)
+  (setq-default line-spacing 1)
   (setq-default indent-tabs-mode nil))
 
 (use-package "startup"
@@ -210,14 +210,14 @@
   :preface
   (defun ian/fontsize-normal ()
     (interactive)
-    (set-face-attribute 'default nil :height 110))
+    (set-face-attribute 'default nil :height 100))
   (defun ian/fontsize-small ()
     (interactive)
     (set-face-attribute 'default nil :height 90))
   (defun ian/set-default-font ()
     (interactive)
-    (when (member "Consolas" (font-family-list))
-      (set-face-attribute 'default nil :family "Consolas" :weight 'normal))
+    (when (member "Cascadia Code" (font-family-list))
+      (set-face-attribute 'default nil :family "Cascadia Code" :weight 'normal))
     (ian/fontsize-normal))
   (defalias 'ian/normal-fontsize #'ian/fontsize-normal)
   (defalias 'ian/small-fontsize #'ian/fontsize-small)
@@ -278,7 +278,7 @@
   :ensure nil
   :config
   (when (member "Segoe UI" (font-family-list))
-    (set-face-attribute 'variable-pitch nil :family "Segoe UI" :height 0.9 :weight 'normal)))
+    (set-face-attribute 'variable-pitch nil :family "Segoe UI" :height 1.0 :weight 'normal)))
 
 (use-package zone
   :ensure nil

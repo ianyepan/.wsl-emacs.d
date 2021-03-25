@@ -280,6 +280,18 @@
   (when (member "Segoe UI" (font-family-list))
     (set-face-attribute 'variable-pitch nil :family "Segoe UI" :height 0.9 :weight 'normal)))
 
+(use-package zone
+  :ensure nil
+  :preface
+  (defun ian/zone-choose-pgm (pgm)
+    "Choose a zone program from a hand-picked list."
+    ;; (interactive (list (completing-read "Program: " (mapcar 'symbol-name zone-programs))))
+    (interactive (list (completing-read "Program: " '(zone-pgm-putz-with-case
+                                                      zone-pgm-rotate-LR-lockstep
+                                                      zone-pgm-drip
+                                                      zone-pgm-whack-chars))))
+    (let ((zone-programs (list (intern pgm)))) (zone))))
+
 ;;; Third-party Packages
 
 ;; GUI enhancements

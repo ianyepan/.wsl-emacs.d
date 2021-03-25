@@ -755,11 +755,11 @@
                 (neotree-find file-name)))
         (message "Could not find projectile project root."))))
   :custom-face
-  (neo-dir-link-face  ((t (:inherit 'variable-pitch))))
-  (neo-header-face    ((t (:inherit 'variable-pitch))))
-  (neo-banner-face    ((t (:inherit 'variable-pitch))))
-  (neo-root-dir-face  ((t (:inherit 'variable-pitch))))
-  (neo-file-link-face ((t (:inherit 'variable-pitch))))
+  (neo-dir-link-face  ((t (:inherit variable-pitch))))
+  (neo-header-face    ((t (:inherit variable-pitch))))
+  (neo-banner-face    ((t (:inherit variable-pitch))))
+  (neo-root-dir-face  ((t (:inherit variable-pitch))))
+  (neo-file-link-face ((t (:inherit variable-pitch))))
   :config
   (add-hook 'neotree-mode-hook (lambda ()
                                  (hl-line-mode +1)

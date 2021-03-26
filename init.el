@@ -524,6 +524,7 @@
   (setq lsp-modeline-code-actions-enable nil)
   (setq lsp-modeline-diagnostics-enable nil)
   (setq lsp-headerline-breadcrumb-enable nil)
+  (setq lsp-semantic-tokens-enable nil)
   (setq lsp-enable-folding nil)
   (setq lsp-enable-imenu nil)
   (setq lsp-enable-snippet nil)

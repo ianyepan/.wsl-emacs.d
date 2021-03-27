@@ -728,6 +728,13 @@
 
 ;; Misc
 
+(use-package company-box
+  :hook (company-mode . company-box-mode)
+  :config
+  (setq company-box-doc-enable nil)
+  (setq company-box-scrollbar nil)
+  (setq company-box-frame-behavior 'point))
+
 (use-package all-the-icons
   :config
   (setq all-the-icons-scale-factor 0.8))

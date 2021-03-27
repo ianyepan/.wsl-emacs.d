@@ -511,9 +511,9 @@
           js-mode         ; ts-ls (tsserver wrapper)
           js-jsx-mode     ; ts-ls (tsserver wrapper)
           typescript-mode ; ts-ls (tsserver wrapper)
-          python-mode     ; pyls
+          python-mode     ; pyright
           web-mode        ; ts-ls/HTML/CSS
-          ) . lsp)
+          ) . lsp-deferred)
   :commands lsp
   :config
   (define-key lsp-mode-map (kbd "C-c l <tab>") #'lsp-execute-code-action)
@@ -553,6 +553,7 @@
   (custom-set-faces '(lsp-ui-sideline-global ((t (:italic t)))))
   (setq lsp-ui-doc-enable nil)
   (setq lsp-ui-sideline-show-code-actions nil)
+  (setq lsp-ui-sideline-show-diagnostics t)
   (setq lsp-ui-sideline-delay 0.05))
 
 (use-package lsp-java

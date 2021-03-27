@@ -280,6 +280,11 @@
   (when (member "Segoe UI" (font-family-list))
     (set-face-attribute 'variable-pitch nil :family "Segoe UI" :height 0.9 :weight 'normal)))
 
+(use-package xref
+  :ensure nil
+  :config
+  (setq xref-prompt-for-identifier nil))
+
 (use-package zone
   :ensure nil
   :preface

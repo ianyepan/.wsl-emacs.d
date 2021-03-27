@@ -625,7 +625,10 @@
   :config
   (set-face-attribute 'markdown-code-face nil :inherit 'org-block))
 
-(use-package typescript-mode)
+(use-package typescript-mode
+  :mode ("\\.tsx?\\'" . typescript-mode)
+  :config
+  (setq typescript-indent-level ian/indent-width))
 
 (use-package json-mode)
 

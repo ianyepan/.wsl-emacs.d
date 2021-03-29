@@ -307,6 +307,7 @@
          (ediff-prepare-buffer . solaire-mode)
          (minibuffer-setup . solaire-mode-in-minibuffer))
   :config
+  (add-to-list 'solaire-mode-themes-to-face-swap '"vscode-dark-plus")
   (setq solaire-mode-auto-swap-bg t)
   (solaire-global-mode +1))
 
@@ -314,6 +315,7 @@
 ;; (load-theme 'powershell t)
 
 ;; (use-package vscode-dark-plus-theme
+;;   :after solaire-mode
 ;;   :config
 ;;   (load-theme 'vscode-dark-plus t))
 

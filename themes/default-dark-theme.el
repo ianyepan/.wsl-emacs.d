@@ -16,10 +16,10 @@
 
 (custom-theme-set-faces
  'default-dark
- '(default                          ((t (:background "grey10" :foreground "grey90"))))
+ '(default                          ((t (:background "grey5" :foreground "grey90"))))
+ '(fringe                           ((t (:inherit default))))
  '(cursor                           ((t (:background "white"))))
  '(region                           ((t (:background "#b0c4de" :foreground "black" :extend nil))))
- ;; '(font-lock-comment-face           ((t (:foreground "grey55"))))
  '(line-number                      ((t (:foreground "grey45"))))
 
  '(company-tooltip                  ((t (:foreground "gray90" :background "black"))))

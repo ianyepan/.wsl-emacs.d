@@ -60,7 +60,6 @@
   (setq kill-buffer-query-functions nil)
   (tool-bar-mode -1)
   (menu-bar-mode -1)
-  (setq-default line-spacing 2)
   (setq-default indent-tabs-mode nil))
 
 (use-package "startup"
@@ -208,16 +207,18 @@
 
 (use-package frame
   :preface
+  (setq ian/font-family "Consolas")
+  (setq ian/normal-fontsize (if (equal ian/font-family "Consolas") 110 100))
   (defun ian/fontsize-normal ()
     (interactive)
-    (set-face-attribute 'default nil :height 110))
+    (set-face-attribute 'default nil :height ian/normal-fontsize))
   (defun ian/fontsize-small ()
     (interactive)
-    (set-face-attribute 'default nil :height 90))
+    (set-face-attribute 'default nil :height (- ian/normal-fontsize 20)))
   (defun ian/set-default-font ()
     (interactive)
-    (when (member "Consolas" (font-family-list))
-      (set-face-attribute 'default nil :family "Consolas" :weight 'normal))
+    (when (member ian/font-family (font-family-list))
+      (set-face-attribute 'default nil :family ian/font-family :weight 'normal))
     (ian/fontsize-normal))
   (defalias 'ian/normal-fontsize #'ian/fontsize-normal)
   (defalias 'ian/small-fontsize #'ian/fontsize-small)
@@ -227,7 +228,8 @@
         (append (list '(width . 75) '(height . 35)
                       '(internal-border-width . 2))))
   (blink-cursor-mode -1)
-  (ian/set-default-font))
+  (ian/set-default-font)
+  (setq-default line-spacing (if (equal ian/font-family "Consolas") 2 0)))
 
 (use-package ediff
   :ensure nil

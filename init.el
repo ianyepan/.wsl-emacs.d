@@ -734,7 +734,8 @@
 
 ;; (use-package good-scroll
 ;;   :config
-;;   (setq good-scroll-step 140)
+;;   (setq good-scroll-step (* (+ (/ ian/normal-fontsize 10) line-spacing)
+;;                             (if (equal ian/normal-fontsize 110) 11 14)))
 ;;   (setq good-scroll-render-rate 0.01)
 ;;   (good-scroll-mode +1))
 

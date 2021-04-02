@@ -771,18 +771,12 @@
   (setq minions-mode-line-delimiters '("" . ""))
   (minions-mode +1))
 
-;; (use-package smart-mode-line
-;;   :config
-;;   (setq sml/no-confirm-load-theme t)
-;;   (setq sml/modified-char "*")
-;;   (setq sml/theme 'respectful)
-;;   (sml/setup))
-
-(use-package doom-modeline
-  :ensure t
-  :hook (after-init . doom-modeline-mode)
+(use-package smart-mode-line
   :config
-  (setq doom-modeline-bar-width 2))
+  (setq sml/no-confirm-load-theme t)
+  (setq sml/modified-char "*")
+  (setq sml/theme 'respectful)
+  (sml/setup))
 
 (use-package neotree
   :after projectile

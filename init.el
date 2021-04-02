@@ -404,11 +404,12 @@
   (add-hook 'c-mode-hook #'(lambda () (c-toggle-comment-style -1))))
 
 (use-package evil-matchit
-  :hook ((web-mode        . turn-on-evil-matchit-mode)
-         (html-mode       . turn-on-evil-matchit-mode)
-         (mhtml-mode      . turn-on-evil-matchit-mode)
-         (js-mode         . turn-on-evil-matchit-mode)
-         (typescript-mode . turn-on-evil-matchit-mode)))
+  :hook ((web-mode
+          html-mode
+          mhtml-mode
+          js-mode
+          typescript-mode
+          ) . turn-on-evil-matchit-mode))
 
 ;; Git integration
 
@@ -650,12 +651,13 @@
 ;;   (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'"))))
 
 (use-package emmet-mode
-  :hook ((html-mode       . emmet-mode)
-         (css-mode        . emmet-mode)
-         (js-mode         . emmet-mode)
-         (js-jsx-mode     . emmet-mode)
-         (typescript-mode . emmet-mode)
-         (web-mode        . emmet-mode))
+  :hook ((html-mode
+          css-mode
+          js-mode
+          js-jsx-mode
+          typescript-mode
+          web-mode
+          ) . emmet-mode)
   :config
   (setq emmet-insert-flash-time 0.001) ; effectively disabling it
   (add-hook 'js-jsx-mode-hook #'(lambda ()

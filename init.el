@@ -730,6 +730,12 @@
 
 ;; Misc
 
+;; (use-package good-scroll
+;;   :config
+;;   (setq good-scroll-step 140)
+;;   (setq good-scroll-render-rate 0.01)
+;;   (good-scroll-mode +1))
+
 (use-package company-box
   :hook (company-mode . company-box-mode)
   :config

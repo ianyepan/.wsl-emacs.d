@@ -208,29 +208,27 @@
 (use-package frame
   :preface
   (setq ian/font-family "Consolas")
-  (setq ian/normal-fontsize (if (or (equal ian/font-family "Consolas")
-                                    (equal ian/font-family "Flexi IBM VGA False")) 110 100))
-  (defun ian/fontsize-normal ()
-    (interactive)
-    (set-face-attribute 'default nil :height ian/normal-fontsize))
-  (defun ian/fontsize-small ()
-    (interactive)
-    (set-face-attribute 'default nil :height (- ian/normal-fontsize 20)))
-  (defun ian/set-default-font ()
+  (setq ian/is-using-undersized-font ; Consolas is smaller than most other fonts
+        (equal ian/font-family "Consolas"))
+  (setq ian/cjk-font-family "YaHei Consolas Hybrid")
+  (setq ian/normal-fontsize (if ian/is-using-undersized-font 110 100))
+  (defun ian/set-default-fonts ()
+    "Set the default Latin and CJK font families, as well as the line height."
     (interactive)
     (when (member ian/font-family (font-family-list))
-      (set-face-attribute 'default nil :family ian/font-family :weight 'normal))
-    (ian/fontsize-normal))
-  (defalias 'ian/normal-fontsize #'ian/fontsize-normal)
-  (defalias 'ian/small-fontsize #'ian/fontsize-small)
+      (set-face-attribute 'default nil :family ian/font-family :height ian/normal-fontsize))
+    (when (member ian/cjk-font-family (font-family-list))
+      (dolist (charset '(kana han symbol cjk-misc bopomofo))
+        (set-fontset-font (frame-parameter nil 'font)
+                          charset (font-spec :family ian/cjk-font-family
+                                             :size (* (/ ian/normal-fontsize 10)
+                                                      (if ian/is-using-undersized-font 0.9 1.0))))))
+    (setq-default line-spacing (if ian/is-using-undersized-font 2 0)))
   :ensure nil
   :config
-  (setq default-frame-alist
-        (append (list '(width . 75) '(height . 35)
-                      '(internal-border-width . 2))))
+  (setq default-frame-alist (append (list '(width . 75) '(height . 35) '(internal-border-width . 2))))
   (blink-cursor-mode -1)
-  (ian/set-default-font)
-  (setq-default line-spacing (if (equal ian/font-family "Consolas") 2 0)))
+  (ian/set-default-fonts))
 
 (use-package ediff
   :ensure nil

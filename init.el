@@ -583,9 +583,6 @@
 
 (use-package tree-sitter-langs)
 
-;; (use-package modern-cpp-font-lock
-;;   :hook (c++-mode . modern-c++-font-lock-mode))
-
 (use-package pyvenv
   :config
   (setq pyvenv-mode-line-indicator '(pyvenv-virtual-env-name ("[venv:" pyvenv-virtual-env-name "] ")))

@@ -529,8 +529,6 @@
   (define-key lsp-mode-map (kbd "C-c l <tab>") #'lsp-execute-code-action)
   (define-key lsp-mode-map (kbd "C-c l TAB") #'lsp-execute-code-action)
   (setq lsp-auto-guess-root t)
-  ;; (setq lsp-diagnostics-provider :none)                       ; disable flycheck-lsp for most modes
-  ;; (add-hook 'web-mode-hook #'lsp-diagnostics-flycheck-enable) ; enable flycheck-lsp for web-mode locally
   (setq lsp-log-io nil)
   (setq lsp-restart 'auto-restart)
   (setq lsp-enable-symbol-highlighting nil)

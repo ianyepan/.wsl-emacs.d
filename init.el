@@ -568,15 +568,17 @@
 (use-package lsp-java
   :after lsp)
 
-(use-package lsp-python-ms
-  :hook (python-mode . (lambda () (require 'lsp-python-ms)))
-  :init
-  (setq lsp-python-ms-executable "~/python-language-server/output/bin/Release/linux-x64/publish/Microsoft.Python.LanguageServer")
-  :config
-  (setq lsp-python-ms-python-executable-cmd "python3"))
+;; (use-package lsp-python-ms
+;;   :hook (python-mode . (lambda () (require 'lsp-python-ms)))
+;;   :init
+;;   (setq lsp-python-ms-executable "~/python-language-server/output/bin/Release/linux-x64/publish/Microsoft.Python.LanguageServer")
+;;   (when (executable-find "python3")
+;;     (setq lsp-python-ms-python-executable-cmd "python3")))
 
-;; (use-package lsp-pyright
-;;   :hook (python-mode . (lambda () (require 'lsp-pyright))))
+(use-package lsp-pyright
+  :hook (python-mode . (lambda () (require 'lsp-pyright)))
+  :init (when (executable-find "python3")
+          (setq lsp-pyright-python-executable-cmd "python3")))
 
 (use-package tree-sitter
   :custom-face

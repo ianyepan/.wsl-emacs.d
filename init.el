@@ -269,6 +269,8 @@
   :config
   (add-to-list 'recentf-exclude (format "%s/\\.emacs.d/elpa/.*" (getenv "HOME")))
   (add-to-list 'recentf-exclude (format "%s/\\.emacs.d/workspace/.*" (getenv "HOME")))
+  (add-to-list 'recentf-exclude (format "%s/\\.local/lib/python3.8/site-packages/.*" (getenv "HOME")))
+  (add-to-list 'recentf-exclude "/usr/lib/.*")
   (recentf-mode +1))
 
 (use-package display-line-numbers

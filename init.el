@@ -519,6 +519,11 @@
           python-mode     ; pyright
           web-mode        ; ts-ls/HTML/CSS
           ) . lsp-deferred)
+  :custom-face
+  (lsp-headerline-breadcrumb-symbols-face                ((t (:inherit variable-pitch))))
+  (lsp-headerline-breadcrumb-path-face                   ((t (:inherit variable-pitch))))
+  (lsp-headerline-breadcrumb-project-prefix-face         ((t (:inherit variable-pitch))))
+  (lsp-headerline-breadcrumb-unknown-project-prefix-face ((t (:inherit variable-pitch))))
   :commands lsp
   :config
   (define-key lsp-mode-map (kbd "C-c l <tab>") #'lsp-execute-code-action)

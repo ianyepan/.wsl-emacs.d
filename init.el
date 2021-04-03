@@ -208,7 +208,8 @@
 (use-package frame
   :preface
   (setq ian/font-family "Consolas")
-  (setq ian/normal-fontsize (if (equal ian/font-family "Consolas") 110 100))
+  (setq ian/normal-fontsize (if (or (equal ian/font-family "Consolas")
+                                    (equal ian/font-family "Flexi IBM VGA False")) 110 100))
   (defun ian/fontsize-normal ()
     (interactive)
     (set-face-attribute 'default nil :height ian/normal-fontsize))
@@ -280,7 +281,7 @@
   :ensure nil
   :config
   (when (member "Segoe UI" (font-family-list))
-    (set-face-attribute 'variable-pitch nil :family "Segoe UI" :height 0.9 :weight 'normal)))
+    (set-face-attribute 'variable-pitch nil :family "Segoe UI" :height 95 :weight 'normal)))
 
 (use-package xref
   :ensure nil
@@ -292,7 +293,6 @@
   :preface
   (defun ian/zone-choose-pgm (pgm)
     "Choose a zone program from a hand-picked list."
-    ;; (interactive (list (completing-read "Program: " (mapcar 'symbol-name zone-programs))))
     (interactive (list (completing-read "Program: " '(zone-pgm-putz-with-case
                                                       zone-pgm-rotate-LR-lockstep
                                                       zone-pgm-drip
@@ -314,13 +314,12 @@
   (solaire-global-mode +1))
 
 ;; (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
-;; (load-theme 'powershell t)
+;; (load-theme 'default-dark t)
 
 ;; (use-package vscode-dark-plus-theme
 ;;   :after solaire-mode
 ;;   :config
 ;;   (load-theme 'vscode-dark-plus t))
-
 
 (use-package doom-themes
   :after solaire-mode
@@ -567,8 +566,15 @@
 (use-package lsp-java
   :after lsp)
 
-(use-package lsp-pyright
-  :hook (python-mode . (lambda () (require 'lsp-pyright))))
+(use-package lsp-python-ms
+  :hook (python-mode . (lambda () (require 'lsp-python-ms)))
+  :init
+  (setq lsp-python-ms-executable "~/python-language-server/output/bin/Release/linux-x64/publish/Microsoft.Python.LanguageServer")
+  :config
+  (setq lsp-python-ms-python-executable-cmd "python3"))
+
+;; (use-package lsp-pyright
+;;   :hook (python-mode . (lambda () (require 'lsp-pyright))))
 
 (use-package tree-sitter
   :custom-face

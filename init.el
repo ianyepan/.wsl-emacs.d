@@ -103,12 +103,12 @@
     "Split window below."
     (interactive)
     (split-window-below)
-    (other-window 1))
+    (other-window +1))
   (defun ian/split-and-follow-vertically ()
     "Split window right."
     (interactive)
     (split-window-right)
-    (other-window 1))
+    (other-window +1))
   :config
   (setq split-width-threshold 100)
   (global-set-key (kbd "C-x 2") #'ian/split-and-follow-horizontally)

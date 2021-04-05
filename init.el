@@ -633,7 +633,10 @@
   (with-eval-after-load 'company
     (define-key company-active-map (kbd "C-j") nil) ; avoid conflict with emmet-mode
     (define-key company-active-map (kbd "C-n") #'company-select-next)
-    (define-key company-active-map (kbd "C-p") #'company-select-previous)))
+    (define-key company-active-map (kbd "C-p") #'company-select-previous)
+    (define-key company-active-map (kbd "TAB") 'company-select-next)
+    (define-key company-active-map (kbd "<tab>") 'company-select-next)
+    (define-key company-active-map (kbd "<backtab>") 'company-select-previous)))
 
 (use-package flycheck
   :hook ((prog-mode . flycheck-mode))

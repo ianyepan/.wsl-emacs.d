@@ -60,6 +60,8 @@
   (setq kill-buffer-query-functions nil)
   (tool-bar-mode -1)
   (menu-bar-mode -1)
+  (put 'downcase-region 'disabled nil)
+  (put 'upcase-region 'disabled nil)
   (setq-default indent-tabs-mode nil))
 
 (use-package "startup"

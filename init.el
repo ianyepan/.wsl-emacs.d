@@ -185,6 +185,7 @@
 
 (use-package python
   :ensure nil
+  :mode ("\\.gyp\\'" . python-mode)
   :config
   (setq python-indent-offset ian/indent-width)
   (setq python-shell-interpreter "python3"))

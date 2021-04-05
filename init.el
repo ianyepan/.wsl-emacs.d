@@ -69,6 +69,11 @@
   :config
   (setq initial-scratch-message ""))
 
+(use-package uniquify
+  :ensure nil
+  :config
+  (setq-default uniquify-buffer-name-style 'forward))
+
 ;; Overriding built-in function
 (defun use-fancy-splash-screens-p ()
   "Never display splash screen with Emacs PNG logo."

@@ -387,6 +387,7 @@
   (setq-default cursor-type  '(hbar . 5))
   (setq evil-emacs-state-cursor '(hbar . 5))
   (with-eval-after-load 'evil-maps
+    (define-key evil-normal-state-map (kbd "z <return>") #'evil-scroll-line-to-top)
     (define-key evil-normal-state-map (kbd "gd") #'xref-find-definitions)
     (define-key evil-normal-state-map (kbd "<f12>") #'xref-find-definitions)
     (define-key evil-normal-state-map (kbd "gD") #'xref-find-references)
@@ -755,11 +756,19 @@
 
 ;; Misc
 
-(use-package good-scroll
+;; (use-package good-scroll
+;;   :config
+;;   (setq good-scroll-step 160)
+;;   (setq good-scroll-render-rate 0.01)
+;;   (good-scroll-mode +1))
+
+(use-package sublimity
   :config
-  (setq good-scroll-step 160)
-  (setq good-scroll-render-rate 0.01)
-  (good-scroll-mode +1))
+  (require 'sublimity-scroll)
+  (setq sublimity-scroll-vertical-frame-delay 0.0001)
+  (setq sublimity-scroll-weight 8)
+  (setq sublimity-scroll-drift-length 5)
+  (sublimity-mode +1))
 
 (use-package company-box
   :hook (company-mode . company-box-mode)

@@ -160,6 +160,7 @@
   (setq c-default-style '((java-mode . "java")
                           (awk-mode  . "awk")
                           (c++-mode  . "bsd")
+                          (c-mode    . "bsd")
                           (other     . "k&r")))
   (setq-default c-basic-offset ian/indent-width))
 

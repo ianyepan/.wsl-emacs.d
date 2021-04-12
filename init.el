@@ -765,9 +765,9 @@
 (use-package sublimity
   :config
   (require 'sublimity-scroll)
-  (setq sublimity-scroll-vertical-frame-delay 0.0001)
-  (setq sublimity-scroll-weight 8)
-  (setq sublimity-scroll-drift-length 5)
+  (setq sublimity-scroll-vertical-frame-delay 0.00001)
+  (setq sublimity-scroll-weight 5)
+  (setq sublimity-scroll-drift-length 3)
   (sublimity-mode +1))
 
 (use-package vimrc-mode)

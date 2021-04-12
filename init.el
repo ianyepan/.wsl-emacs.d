@@ -770,6 +770,8 @@
   (setq sublimity-scroll-drift-length 5)
   (sublimity-mode +1))
 
+(use-package vimrc-mode)
+
 (use-package company-box
   :hook (company-mode . company-box-mode)
   :config

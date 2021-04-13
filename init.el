@@ -387,6 +387,7 @@
   (setq-default cursor-type  '(hbar . 5))
   (setq evil-emacs-state-cursor '(hbar . 5))
   (with-eval-after-load 'evil-maps
+    (define-key evil-normal-state-map (kbd "<mouse-2>") #'mouse-set-point)
     (define-key evil-normal-state-map (kbd "z <return>") #'evil-scroll-line-to-top)
     (define-key evil-normal-state-map (kbd "gd") #'xref-find-definitions)
     (define-key evil-normal-state-map (kbd "<f12>") #'xref-find-definitions)

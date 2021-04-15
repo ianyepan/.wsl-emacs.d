@@ -461,6 +461,7 @@
   (global-set-key (kbd "s-P")           #'counsel-M-x)
   (global-set-key (kbd "C-S-p")         #'counsel-M-x)
   (global-set-key (kbd "M-x")           #'counsel-M-x)
+  (global-set-key (kbd "<f1>")          #'counsel-M-x)
   (global-set-key (kbd "C-x <C-right>") #'counsel-find-file) ; autohotkey fix
   (global-set-key (kbd "C-x <right>")   #'counsel-find-file) ; autohotkey fix
   (global-set-key (kbd "C-s")           #'counsel-grep-or-swiper))

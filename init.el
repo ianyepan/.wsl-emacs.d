@@ -124,7 +124,9 @@
   :config
   (setq confirm-kill-processes nil)
   (setq create-lockfiles nil) ; don't create .# files (crashes 'npm start')
-  (setq make-backup-files nil))
+  (setq make-backup-files nil)
+  (setq revert-without-query '(".*"))
+  (global-set-key (kbd "<f5>") #'revert-buffer))
 
 (use-package autorevert
   :ensure nil

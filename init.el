@@ -654,7 +654,10 @@
   (setq flycheck-check-syntax-automatically '(save mode-enabled newline))
   (setq flycheck-display-errors-delay 0.1)
   (setq-default flycheck-disabled-checkers '(python-pylint))
-  (setq flycheck-flake8rc "~/.config/flake8"))
+  (setq flycheck-flake8rc "~/.config/flake8")
+  (with-eval-after-load 'flycheck
+    (define-key flycheck-mode-map (kbd "<f8>") #'flycheck-next-error)
+    (define-key flycheck-mode-map (kbd "S-<f8>") #'flycheck-previous-error)))
 
 (use-package markdown-mode
   :config

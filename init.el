@@ -467,7 +467,6 @@
   (global-set-key (kbd "s-P")           #'counsel-M-x)
   (global-set-key (kbd "C-S-p")         #'counsel-M-x)
   (global-set-key (kbd "M-x")           #'counsel-M-x)
-  (global-set-key (kbd "<f1>")          #'counsel-M-x)
   (global-set-key (kbd "C-x <C-right>") #'counsel-find-file) ; autohotkey fix
   (global-set-key (kbd "C-x <right>")   #'counsel-find-file) ; autohotkey fix
   (global-set-key (kbd "C-s")           #'counsel-grep-or-swiper))
@@ -657,7 +656,8 @@
   (setq flycheck-flake8rc "~/.config/flake8")
   (with-eval-after-load 'flycheck
     (define-key flycheck-mode-map (kbd "<f8>") #'flycheck-next-error)
-    (define-key flycheck-mode-map (kbd "S-<f8>") #'flycheck-previous-error)))
+    (define-key flycheck-mode-map (kbd "S-<f8>") #'flycheck-previous-error)
+    (define-key flycheck-mode-map (kbd "C-<f8>") #'flycheck-list-errors)))
 
 (use-package markdown-mode
   :config
@@ -711,7 +711,6 @@
   (defalias 'format-document #'ian/format-code)
   :config
   (global-set-key (kbd "M-F") #'ian/format-code)
-  (global-set-key (kbd "<f6>") #'ian/format-code)
   (add-hook 'prog-mode-hook #'format-all-ensure-formatter))
 
 (use-package rainbow-mode

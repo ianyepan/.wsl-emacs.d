@@ -711,6 +711,7 @@
   (defalias 'format-document #'ian/format-code)
   :config
   (global-set-key (kbd "M-F") #'ian/format-code)
+  (global-set-key (kbd "<f6>") #'ian/format-code)
   (add-hook 'prog-mode-hook #'format-all-ensure-formatter))
 
 (use-package rainbow-mode

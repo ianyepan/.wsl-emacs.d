@@ -241,7 +241,8 @@
   :ensure nil
   :config
   (setq default-frame-alist (append (list '(width . 75) '(height . 35) '(internal-border-width . 2))))
-  (blink-cursor-mode -1)
+  (blink-cursor-mode +1)
+  (setq blink-cursor-blinks -1) ; blink forever
   (ian/set-default-fonts))
 
 (use-package ediff

@@ -704,7 +704,7 @@
   (defalias 'format-document #'ian/format-code)
   :config
   (global-set-key (kbd "M-F") #'ian/format-code)
-  (add-hook 'prog-mode-hook 'format-all-ensure-formatter))
+  (add-hook 'prog-mode-hook #'format-all-ensure-formatter))
 
 (use-package rainbow-mode
   :hook (web-mode . rainbow-mode))
@@ -815,7 +815,7 @@
 
 (use-package all-the-icons-dired
   :config
-  (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+  (add-hook 'dired-mode-hook #'all-the-icons-dired-mode)
   (setq all-the-icons-dired-monochrome nil))
 
 (use-package ivy-rich
@@ -882,9 +882,9 @@
   (which-key-mode +1))
 
 ;; Org and LaTeX export
-; Ubuntu needs to have these installed:
-; 1. texlive-latex-extra
-; 2. texlive-fonts-extra
+;; Ubuntu needs to have these installed:
+;; 1. texlive-latex-extra
+;; 2. texlive-fonts-extra
 
 (use-package org
   :hook ((org-mode . visual-line-mode)

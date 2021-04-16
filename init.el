@@ -301,7 +301,8 @@
 (use-package xref
   :ensure nil
   :config
-  (setq xref-prompt-for-identifier nil))
+  (setq xref-prompt-for-identifier nil)
+  (define-key prog-mode-map (kbd "<f12>") #'xref-find-definitions))
 
 (use-package zone
   :ensure nil
@@ -396,7 +397,6 @@
     (define-key evil-normal-state-map (kbd "<mouse-2>") #'mouse-set-point)
     (define-key evil-normal-state-map (kbd "z <return>") #'evil-scroll-line-to-top)
     (define-key evil-normal-state-map (kbd "gd") #'xref-find-definitions)
-    (define-key evil-normal-state-map (kbd "<f12>") #'xref-find-definitions)
     (define-key evil-normal-state-map (kbd "gD") #'xref-find-references)
     (define-key evil-insert-state-map (kbd "C-n") nil) ; avoid conflict with company tooltip selection
     (define-key evil-insert-state-map (kbd "C-p") nil) ; avoid conflict with company tooltip selection

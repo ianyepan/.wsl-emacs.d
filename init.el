@@ -808,10 +808,6 @@
 ;;     (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-top)
 ;;     (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-bottom)))
 
-(use-package gcmh
-  :config
-  (gcmh-mode +1))
-
 (use-package company-box
   :hook (company-mode . company-box-mode)
   :config

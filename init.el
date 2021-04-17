@@ -47,7 +47,7 @@
   ;; (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
   ;; (setq package-check-signature nil)
   (setq user-full-name "Ian Y.E. Pan")
-  (setq frame-title-format '("Emacs"))
+  (setq frame-title-format '("Emacs " emacs-version))
   (setq ring-bell-function 'ignore)
   (setq-default default-directory "~/")
   (setq frame-resize-pixelwise t)

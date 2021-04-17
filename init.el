@@ -62,12 +62,26 @@
   (menu-bar-mode -1)
   (put 'downcase-region 'disabled nil)
   (put 'upcase-region 'disabled nil)
-  (setq-default indent-tabs-mode nil))
-
-(use-package "startup"
-  :ensure nil
-  :config
+  (setq-default indent-tabs-mode nil)
   (setq initial-scratch-message ""))
+
+(use-package emacs
+  :ensure nil
+  :preface
+  (defun ian/split-and-follow-horizontally ()
+    "Split window below."
+    (interactive)
+    (split-window-below)
+    (other-window +1))
+  (defun ian/split-and-follow-vertically ()
+    "Split window right."
+    (interactive)
+    (split-window-right)
+    (other-window +1))
+  :config
+  (setq split-width-threshold 100)
+  (global-set-key (kbd "C-x 2") #'ian/split-and-follow-horizontally)
+  (global-set-key (kbd "C-x 3") #'ian/split-and-follow-vertically))
 
 (use-package uniquify
   :ensure nil
@@ -95,24 +109,6 @@
   :ensure nil
   :config
   (column-number-mode +1))
-
-(use-package "window"
-  :ensure nil
-  :preface
-  (defun ian/split-and-follow-horizontally ()
-    "Split window below."
-    (interactive)
-    (split-window-below)
-    (other-window +1))
-  (defun ian/split-and-follow-vertically ()
-    "Split window right."
-    (interactive)
-    (split-window-right)
-    (other-window +1))
-  :config
-  (setq split-width-threshold 100)
-  (global-set-key (kbd "C-x 2") #'ian/split-and-follow-horizontally)
-  (global-set-key (kbd "C-x 3") #'ian/split-and-follow-vertically))
 
 (use-package delsel
   :ensure nil

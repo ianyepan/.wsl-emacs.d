@@ -8,7 +8,9 @@
 (setq gc-cons-threshold most-positive-fixnum
       gc-cons-percentage 0.6
       file-name-handler-alist nil
-      site-run-file nil)
+      site-run-file nil
+      read-process-output-max (* 10 1024 1024)
+      bidi-inhibit-bpa t)
 
 (defvar ian/gc-cons-threshold (* 100 1024 1024))
 
@@ -122,6 +124,7 @@
 (use-package files
   :ensure nil
   :config
+  (remove-hook 'find-file-hooks 'vc-refresh-state) ; makes open files faster
   (setq confirm-kill-processes nil)
   (setq create-lockfiles nil) ; don't create .# files (crashes 'npm start')
   (setq make-backup-files nil)

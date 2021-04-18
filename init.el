@@ -3,28 +3,6 @@
 ;;; Commentary:
 ;;  This is my personal Emacs configuration
 ;;; Code:
-(defvar file-name-handler-alist-original file-name-handler-alist)
-
-(setq gc-cons-threshold most-positive-fixnum
-      gc-cons-percentage 0.6
-      file-name-handler-alist nil
-      site-run-file nil
-      read-process-output-max (* 10 1024 1024)
-      bidi-inhibit-bpa t)
-
-(defvar ian/gc-cons-threshold (* 100 1024 1024))
-
-(add-hook 'emacs-startup-hook ; hook run after loading init files
-          #'(lambda ()
-              (setq gc-cons-threshold ian/gc-cons-threshold
-                    gc-cons-percentage 0.1
-                    file-name-handler-alist file-name-handler-alist-original)))
-
-(add-hook 'minibuffer-setup-hook #'(lambda ()
-                                     (setq gc-cons-threshold most-positive-fixnum)))
-(add-hook 'minibuffer-exit-hook #'(lambda ()
-                                    (garbage-collect)
-                                    (setq gc-cons-threshold ian/gc-cons-threshold)))
 
 ;; GccEmacs (native-comp) stuff
 (setq comp-deferred-compilation t)
@@ -34,7 +12,6 @@
 (add-to-list 'package-archives '("gnu"   . "https://elpa.gnu.org/packages/"))
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (add-to-list 'package-archives '("org"   . "https://orgmode.org/elpa/"))
-(setq package-enable-at-startup nil)
 (package-initialize)
 
 (unless (package-installed-p 'use-package)
@@ -64,8 +41,6 @@
   (setq inhibit-compacting-font-caches t)
   (setq echo-keystrokes 0.02)
   (setq kill-buffer-query-functions nil)
-  (tool-bar-mode -1)
-  (menu-bar-mode -1)
   (put 'downcase-region 'disabled nil)
   (put 'upcase-region 'disabled nil)
   (setq-default indent-tabs-mode nil)
@@ -105,11 +80,6 @@
   :ensure nil
   :config
   (setq custom-file (concat user-emacs-directory "to-be-dumped.el")))
-
-(use-package scroll-bar
-  :ensure nil
-  :config
-  (scroll-bar-mode -1))
 
 (use-package simple
   :ensure nil

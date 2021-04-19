@@ -20,6 +20,7 @@
  '(fringe                           ((t (:inherit default))))
  '(cursor                           ((t (:background "white"))))
  '(region                           ((t (:background "#b0c4de" :foreground "black" :extend nil))))
+ '(hl-line                          ((t (:background "grey25"))))
  '(line-number                      ((t (:foreground "grey45"))))
 
  '(company-tooltip                  ((t (:foreground "gray90" :background "black"))))

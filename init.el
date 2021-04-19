@@ -358,10 +358,13 @@
         evil-undo-system 'undo-tree)
   :hook (after-init . evil-mode)
   :preface
-  (defun ian/save-and-kill-this-buffer ()
+  (defun ian/paste-with-ctrl-shift-v ()
+    "Paste with Ctrl-Shift-v, as inspired by Windows Terminal shortcut"
     (interactive)
-    (save-buffer)
-    (kill-this-buffer))
+    (evil-normal-state nil)
+    (evil-paste-after 1)
+    (evil-insert-state nil)
+    (right-char))
   :config
   (setq-default cursor-type  '(hbar . 5))
   (setq evil-emacs-state-cursor '(hbar . 5))
@@ -376,11 +379,10 @@
     (define-key evil-insert-state-map (kbd "C-n") nil) ; avoid conflict with company tooltip selection
     (define-key evil-insert-state-map (kbd "C-p") nil) ; avoid conflict with company tooltip selection
     (define-key evil-normal-state-map (kbd "C-p") nil) ; avoid conflict with WSL find-file
-    (define-key evil-insert-state-map (kbd "C-S-C") #'evil-yank)          ; for WSL
-    (define-key evil-normal-state-map (kbd "C-S-C") #'evil-yank)          ; for WSL
-    (define-key evil-insert-state-map (kbd "C-S-V") #'evil-paste-before)) ; for WSL
+    (define-key evil-normal-state-map (kbd "C-S-c") #'evil-yank)
+    (define-key evil-insert-state-map (kbd "C-S-v") #'ian/paste-with-ctrl-shift-v))
   (evil-ex-define-cmd "q" #'kill-this-buffer)
-  (evil-ex-define-cmd "wq" #'ian/save-and-kill-this-buffer))
+  (evil-ex-define-cmd "wq" #'(lambda () (interactive) (save-buffer) (kill-this-buffer))))
 
 (use-package evil-collection
   :after evil

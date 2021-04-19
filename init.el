@@ -366,6 +366,7 @@
   (setq-default cursor-type  '(hbar . 5))
   (setq evil-emacs-state-cursor '(hbar . 5))
   (with-eval-after-load 'evil-maps
+    (define-key evil-motion-state-map (kbd "C-w C-o") #'(lambda () (interactive) (neotree-hide) (delete-other-windows)))
     (define-key evil-normal-state-map (kbd "C-<up>") #'evil-scroll-line-up)
     (define-key evil-normal-state-map (kbd "C-<down>") #'evil-scroll-line-down)
     (define-key evil-normal-state-map (kbd "<mouse-2>") #'mouse-set-point)

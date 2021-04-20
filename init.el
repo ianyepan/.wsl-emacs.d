@@ -198,17 +198,18 @@
     "Set the default Latin and CJK font families, as well as the line height."
     (interactive)
     (defvar is-using-undersized-font nil)
-    (when (equal english-font "Consolas") ; Consolas is smaller than most other fonts
-      (setq font-size (round (* font-size 1.1)))
-      (setq is-using-undersized-font t))
+    (if (equal english-font "Consolas") ; Consolas is smaller than most other fonts
+        (progn
+          (setq font-size (round (* font-size 1.1)))
+          (setq is-using-undersized-font t))
+      (setq is-using-undersized-font nil))
     (when (member english-font (font-family-list))
       (set-face-attribute 'default nil :family english-font :height font-size))
     (when (member chinese-font (font-family-list))
       (dolist (charset '(kana han symbol cjk-misc bopomofo))
         (set-fontset-font (frame-parameter nil 'font)
                           charset (font-spec :family chinese-font
-                                             :size (* (/ font-size 10)
-                                                      (if is-using-undersized-font 0.9 1.0))))))
+                                             :size (*(/ font-size 10) 1.0)))))
     (setq-default line-spacing (if is-using-undersized-font 2 0)))
   :ensure nil
   :config

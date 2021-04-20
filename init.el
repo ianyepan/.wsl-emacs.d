@@ -479,6 +479,7 @@
 (use-package prescient
   :config
   (setq prescient-filter-method '(literal regexp initialism fuzzy))
+  (setq prescient-sort-length-enable nil)
   (prescient-persist-mode +1))
 
 (use-package ivy-prescient

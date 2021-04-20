@@ -102,7 +102,7 @@
   (global-set-key (kbd "<f5>") #'(lambda ()
                                    (interactive)
                                    (revert-buffer)
-                                   (message "...Buffer reloaded!"))))
+                                   (message "Refreshing buffer...done"))))
 
 (use-package autorevert
   :ensure nil
@@ -409,7 +409,12 @@
 (use-package magit
   :bind ("C-x g" . magit-status)
   :config
-  (add-hook 'with-editor-mode-hook #'evil-insert-state))
+  (add-hook 'with-editor-mode-hook #'evil-insert-state)
+  (with-eval-after-load 'magit
+    (define-key magit-mode-map (kbd "<f5>") #'(lambda ()
+                                                (interactive)
+                                                (magit-refresh)
+                                                (message "Refreshing Magit...done")))))
 
 (use-package diff-hl
   :hook ((prog-mode . diff-hl-mode)

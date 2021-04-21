@@ -145,9 +145,7 @@
 (use-package cc-mode
   :ensure nil
   :config
-  (define-key c++-mode-map ":" nil) ; don't indent namespace:: on-the-fly etc.
-  (with-eval-after-load 'lsp-java
-    (define-key java-mode-map (kbd "C-c i") #'lsp-java-add-import)))
+  (define-key c++-mode-map ":" nil)) ; don't indent namespace:: on-the-fly etc.
 
 (use-package perl-mode
   :ensure nil
@@ -323,9 +321,11 @@
   (link                           ((t (:foreground "#3794ff"))))
   (evil-ex-substitute-replacement ((t (:strike-through nil))))
   (vertical-border                ((t (:foreground "black" :background "black"))))
+  (fringe                         ((t (:background nil))))
   :config
   (setq doom-themes-enable-bold nil)
   (setq doom-gruvbox-dark-variant "hard")
+  (setq doom-solarized-dark-brighter-text t)
   (load-theme 'doom-one t))
 
 (use-package highlight-symbol
@@ -561,7 +561,10 @@
   (setq lsp-ui-sideline-delay 0.05))
 
 (use-package lsp-java
-  :after lsp)
+  :after lsp
+  :config
+  (with-eval-after-load 'lsp-java
+    (define-key java-mode-map (kbd "C-c i") #'lsp-java-add-import)))
 
 ;; (use-package lsp-python-ms
 ;;   :hook (python-mode . (lambda () (require 'lsp-python-ms)))

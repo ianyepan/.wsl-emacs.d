@@ -777,18 +777,13 @@
 ;;     (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-top)
 ;;     (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-bottom)))
 
-;; (use-package emojify
-;;   :hook (after-init . global-emojify-mode)
-;;   :config
-;;   (setq emojify-emoji-styles '(unicode)))
-
-(use-package company-emoji
-  :after company
+(use-package emojify
   :config
-  (add-to-list 'company-backends 'company-emoji)
   (when (member "Segoe UI Emoji" (font-family-list))
     (set-fontset-font
-     t 'symbol (font-spec :family "Segoe UI Emoji") nil 'prepend)))
+     t 'symbol (font-spec :family "Segoe UI Emoji") nil 'prepend))
+  (setq emojify-emoji-styles '(unicode))
+  (global-set-key (kbd "C-c .") #'emojify-insert-emoji))
 
 (use-package company-box
   :hook (company-mode . company-box-mode)

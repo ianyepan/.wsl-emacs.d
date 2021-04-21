@@ -600,20 +600,6 @@
                 (call-interactively #'lsp-workspace-restart)))
   (pyvenv-mode +1))
 
-;; (use-package cobol-mode
-;;   :config
-;;   (setq cobol-tab-width ian/indent-width)
-;;   (setq auto-mode-alist
-;;         (append
-;;          '(("\\.cob\\'" . cobol-mode)
-;;            ("\\.cbl\\'" . cobol-mode))
-;;          auto-mode-alist)))
-
-;; (use-package sml-mode ; Standard ML of New Jersey
-;;   :mode (("\\.s?ml\\'" . sml-mode))
-;;   :config
-;;   (setq sml-indent-level ian/indent-width))
-
 (use-package company
   :hook (prog-mode . company-mode)
   :config

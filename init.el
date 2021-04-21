@@ -339,11 +339,6 @@
 (use-package highlight-escape-sequences
   :hook (prog-mode . hes-mode))
 
-(use-package emojify
-  :hook (after-init . global-emojify-mode)
-  :config
-  (setq emojify-emoji-styles '(unicode)))
-
 ;; Vi keybindings
 
 (use-package undo-tree
@@ -777,6 +772,19 @@
 ;;     (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-center)
 ;;     (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-top)
 ;;     (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-bottom)))
+
+;; (use-package emojify
+;;   :hook (after-init . global-emojify-mode)
+;;   :config
+;;   (setq emojify-emoji-styles '(unicode)))
+
+(use-package company-emoji
+  :after company
+  :config
+  (add-to-list 'company-backends 'company-emoji)
+  (when (member "Segoe UI Emoji" (font-family-list))
+    (set-fontset-font
+     t 'symbol (font-spec :family "Segoe UI Emoji") nil 'prepend)))
 
 (use-package company-box
   :hook (company-mode . company-box-mode)

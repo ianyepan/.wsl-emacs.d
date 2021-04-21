@@ -366,6 +366,7 @@
   (setq evil-emacs-state-cursor '(hbar . 5))
   (with-eval-after-load 'evil-maps
     (define-key evil-motion-state-map (kbd "C-w C-o") #'(lambda () (interactive) (neotree-hide) (delete-other-windows)))
+    (global-set-key                   (kbd "C-x 1") #'(lambda () (interactive) (neotree-hide) (delete-other-windows)))
     (define-key evil-normal-state-map (kbd "C-<up>") #'evil-scroll-line-up)
     (define-key evil-normal-state-map (kbd "C-<down>") #'evil-scroll-line-down)
     (define-key evil-normal-state-map (kbd "<mouse-2>") #'mouse-set-point)
@@ -856,7 +857,11 @@
                                  (setq-local line-spacing nil)))
   (global-set-key (kbd "C-S-e") #'ian/neotree-project-toggle)
   (global-set-key (kbd "C-x e") #'ian/neotree-project-toggle)
-  ;; (setq neo-autorefresh t)
+  (with-eval-after-load 'neotree
+    (define-key neotree-mode-map (kbd "<f5>") #'(lambda ()
+                                                  (interactive)
+                                                  (neotree-refresh)
+                                                  (message "Refreshing NeoTree...done"))))
   (setq neo-theme 'icons)
   (setq neo-show-hidden-files t)
   (setq neo-window-width 30))

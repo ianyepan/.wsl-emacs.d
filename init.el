@@ -750,7 +750,6 @@
 
 ;; Misc
 
-
 (use-package dashboard
   :config
   (dashboard-setup-startup-hook)
@@ -852,9 +851,11 @@
   (which-key-mode +1))
 
 ;; Org and LaTeX export
-;; Ubuntu needs to have these installed:
-;; 1. texlive-latex-extra
-;; 2. texlive-fonts-extra
+;;;; Ubuntu needs to have these installed:
+;;;; 1. texlive-latex-extra
+;;;; 2. texlive-fonts-extra
+;;;; Arch needs to have this installed:
+;;;; 1. texlive-most
 
 (use-package org
   :hook ((org-mode . visual-line-mode)

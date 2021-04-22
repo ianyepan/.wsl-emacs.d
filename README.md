@@ -1,5 +1,5 @@
 <div align="center">
- <h3>😈 Ian's Emacs Configuration (on Windows 10 + WSL Ubuntu 20.04) 😈</h3>
+ <h3>😈 Ian's Emacs Configuration For Arch & Ubuntu (WSL2) 😈</h3>
 </div>
 
 <hr>
@@ -14,7 +14,7 @@ This is my personal Emacs 27.2 configuration when I'm using Windows
 that you could build upon, check out [this
 page](https://github.com/ianpan870102/yay-evil-emacs).
 
-### Installation 💻
+### Installation 🍀
 Back up your `~/.emacs.d/` first (if you have one):
 
 ```

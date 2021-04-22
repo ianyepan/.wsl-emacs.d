@@ -777,6 +777,14 @@
 ;;     (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-top)
 ;;     (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-bottom)))
 
+(use-package dashboard
+  :config
+  (dashboard-setup-startup-hook)
+  (setq dashboard-startup-banner 'logo
+        dashboard-banner-logo-title "( E M A C S )"
+        dashboard-items nil
+        dashboard-set-footer nil))
+
 (use-package emojify
   :config
   (when (member "Segoe UI Emoji" (font-family-list))

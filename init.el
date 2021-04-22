@@ -27,6 +27,18 @@
   :preface
   (defvar ian/indent-width 2)
   (defvar ian/system-type system-type)
+  (defun ian/set-default-browser-WSL ()
+    (cond
+     ((eq ian/system-type 'gnu/linux)
+      (when (string-match "Linux.*microsoft.*Linux"
+                          (shell-command-to-string "uname -a"))
+        (setq-default ian/system-type "wsl/linux")
+        (defvar ian/cmd-exe-bin"/mnt/c/Windows/System32/cmd.exe")
+        (defvar ian/cmd-exe-args '("/c" "start" "") )
+        (setq
+         browse-url-generic-program  ian/cmd-exe-bin
+         browse-url-generic-args     ian/cmd-exe-args
+         browse-url-browser-function 'browse-url-generic)))))
   :config
   (setq user-full-name "Ian Y.E. Pan")
   (setq frame-title-format '("Emacs " emacs-version))
@@ -44,18 +56,7 @@
   (put 'upcase-region 'disabled nil)
   (setq-default indent-tabs-mode nil)
   (setq initial-scratch-message "")
-  (cond
-   ((eq ian/system-type 'gnu/linux)
-    (when (string-match "Linux.*microsoft.*Linux"
-                        (shell-command-to-string "uname -a"))
-      (setq-default ian/system-type "wsl/linux")
-      (setq
-       cmdExeBin"/mnt/c/Windows/System32/cmd.exe"
-       cmdExeArgs '("/c" "start" "") )
-      (setq
-       browse-url-generic-program  cmdExeBin
-       browse-url-generic-args     cmdExeArgs
-       browse-url-browser-function 'browse-url-generic)))))
+  (ian/set-default-browser-WSL))
 
 (use-package emacs
   :ensure nil

@@ -26,6 +26,7 @@
 (use-package emacs
   :preface
   (defvar ian/indent-width 2)
+  (defvar ian/system-type system-type)
   :config
   ;; (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
   ;; (setq package-check-signature nil)
@@ -45,7 +46,6 @@
   (put 'upcase-region 'disabled nil)
   (setq-default indent-tabs-mode nil)
   (setq initial-scratch-message "")
-  (defvar ian/system-type system-type)
   (cond
    ((eq ian/system-type 'gnu/linux)
     (when (string-match "Linux.*Microsoft.*Linux"

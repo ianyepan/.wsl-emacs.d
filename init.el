@@ -750,44 +750,6 @@
 
 ;; Misc
 
-;; (use-package good-scroll
-;;   :config
-;;   (setq good-scroll-step 160)
-;;   (setq good-scroll-render-rate 0.01)
-;;   (good-scroll-mode +1))
-
-;; (use-package sublimity
-;;   :config
-;;   (require 'sublimity-scroll)
-;;   (setq sublimity-scroll-vertical-frame-delay 0.0001)
-;;   (setq sublimity-scroll-weight 10)
-;;   (setq sublimity-scroll-drift-length 2)
-;;   (sublimity-mode +1))
-
-;; (use-package scroll-on-jump
-;;   :config
-;;   (setq scroll-on-jump-duration 0.15)
-;;   (setq scroll-on-jump-smooth t)
-;;   (setq scroll-on-jump-use-curve t)
-;;   (with-eval-after-load 'evil
-;;     (scroll-on-jump-advice-add evil-undo)
-;;     (scroll-on-jump-advice-add evil-redo)
-;;     (scroll-on-jump-advice-add evil-jump-item)
-;;     (scroll-on-jump-advice-add evil-jump-forward)
-;;     (scroll-on-jump-advice-add evil-jump-backward)
-;;     (scroll-on-jump-advice-add evil-ex-search-next)
-;;     (scroll-on-jump-advice-add evil-ex-search-previous)
-;;     (scroll-on-jump-advice-add evil-forward-paragraph)
-;;     (scroll-on-jump-advice-add evil-backward-paragraph)
-;;     (scroll-on-jump-advice-add evil-goto-mark)
-;;     (scroll-on-jump-advice-add evil-goto-first-line)
-;;     (scroll-on-jump-with-scroll-advice-add evil-goto-line)
-;;     (scroll-on-jump-with-scroll-advice-add evil-scroll-up)
-;;     (scroll-on-jump-with-scroll-advice-add evil-scroll-down)
-;;     (scroll-on-jump-with-scroll-advice-add evil-scroll-up)
-;;     (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-center)
-;;     (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-top)
-;;     (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-bottom)))
 
 (use-package dashboard
   :config

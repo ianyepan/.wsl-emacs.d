@@ -44,7 +44,20 @@
   (put 'downcase-region 'disabled nil)
   (put 'upcase-region 'disabled nil)
   (setq-default indent-tabs-mode nil)
-  (setq initial-scratch-message ""))
+  (setq initial-scratch-message "")
+  (defvar ian/system-type system-type)
+  (cond
+   ((eq ian/system-type 'gnu/linux)
+    (when (string-match "Linux.*Microsoft.*Linux"
+                        (shell-command-to-string "uname -a"))
+      (setq-default ian/system-type "wsl/linux")
+      (setq
+       cmdExeBin"/mnt/c/Windows/System32/cmd.exe"
+       cmdExeArgs '("/c" "start" "") )
+      (setq
+       browse-url-generic-program  cmdExeBin
+       browse-url-generic-args     cmdExeArgs
+       browse-url-browser-function 'browse-url-generic)))))
 
 (use-package emacs
   :ensure nil

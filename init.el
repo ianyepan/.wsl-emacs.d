@@ -33,12 +33,9 @@
       (when (string-match "Linux.*microsoft.*Linux"
                           (shell-command-to-string "uname -a"))
         (setq-default ian/system-type "wsl/linux")
-        (defvar ian/cmd-exe-bin"/mnt/c/Windows/System32/cmd.exe")
-        (defvar ian/cmd-exe-args '("/c" "start" "") )
-        (setq
-         browse-url-generic-program  ian/cmd-exe-bin
-         browse-url-generic-args     ian/cmd-exe-args
-         browse-url-browser-function 'browse-url-generic)))))
+        (setq browse-url-generic-program "/mnt/c/Windows/System32/cmd.exe"
+              browse-url-generic-args '("/c" "start" "")
+              browse-url-browser-function 'browse-url-generic)))))
   :config
   (setq user-full-name "Ian Y.E. Pan")
   (setq frame-title-format '("Emacs " emacs-version))

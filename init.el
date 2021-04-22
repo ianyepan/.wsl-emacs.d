@@ -48,7 +48,7 @@
   (setq initial-scratch-message "")
   (cond
    ((eq ian/system-type 'gnu/linux)
-    (when (string-match "Linux.*Microsoft.*Linux"
+    (when (string-match "Linux.*microsoft.*Linux"
                         (shell-command-to-string "uname -a"))
       (setq-default ian/system-type "wsl/linux")
       (setq

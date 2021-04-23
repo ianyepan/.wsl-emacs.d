@@ -394,7 +394,10 @@
   :after evil
   :config
   (setq evil-collection-company-use-tng nil)
-  (evil-collection-init))
+  (evil-collection-init)
+  (with-eval-after-load 'ivy
+    (define-key ivy-mode-map (kbd "<escape>") nil)
+    (define-key ivy-minibuffer-map (kbd "<escape>") #'minibuffer-keyboard-quit)))
 
 (use-package evil-commentary
   :after evil

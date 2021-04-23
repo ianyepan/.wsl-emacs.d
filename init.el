@@ -444,9 +444,7 @@
   (setq ivy-use-virtual-buffers t)
   (setq ivy-count-format "(%d/%d) ")
   (setq ivy-initial-inputs-alist nil)
-  (define-key ivy-minibuffer-map (kbd "RET") #'ivy-alt-done)
-  (define-key ivy-mode-map       (kbd "<escape>") nil)
-  (define-key ivy-minibuffer-map (kbd "<escape>") #'minibuffer-keyboard-quit))
+  (define-key ivy-minibuffer-map (kbd "RET") #'ivy-alt-done))
 
 (use-package counsel
   :hook (ivy-mode . counsel-mode)

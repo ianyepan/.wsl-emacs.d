@@ -864,6 +864,7 @@
   (setq org-link-descriptive nil)
   (setq org-startup-folded nil)
   (setq org-todo-keywords '((sequence "TODO" "DOING" "DONE")))
+  (add-to-list 'org-file-apps '("\\.pdf\\'" . emacs))
   (setq org-html-checkbox-type 'html))
 
 (use-package org-bullets

@@ -791,6 +791,7 @@
          (:map pdf-view-mode-map ("C-=" . pdf-view-enlarge))
          (:map pdf-view-mode-map ("C-0" . pdf-view-scale-reset)))
   :config
+  (pdf-tools-install)
   (pdf-loader-install))
 
 (use-package minions

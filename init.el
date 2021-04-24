@@ -305,6 +305,7 @@
 (use-package doom-themes
   :after solaire-mode
   :custom-face
+  (cursor ((t (:background "#eeeeee"))))
   (region                         ((t (:extend nil))))
   (font-lock-comment-face         ((t (:italic t))))
   (sml/modified                   ((t (:foreground "white" :bold t))))
@@ -320,7 +321,7 @@
   (setq doom-themes-enable-bold nil)
   (setq doom-gruvbox-dark-variant "hard")
   (setq doom-solarized-dark-brighter-text t)
-  (load-theme 'doom-one t))
+  (load-theme 'doom-solarized-dark t))
 
 (use-package highlight-symbol
   :hook (prog-mode . highlight-symbol-mode)
@@ -758,6 +759,7 @@
   (setq company-box-frame-behavior 'point))
 
 (use-package all-the-icons
+  :if (display-graphic-p)
   :config
   (setq all-the-icons-scale-factor 0.8))
 

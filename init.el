@@ -794,6 +794,25 @@
   (pdf-tools-install)
   (pdf-loader-install))
 
+(use-package eaf
+  :load-path "~/.emacs.d/site-lisp/emacs-application-framework"
+  :init
+  (use-package epc      :defer t)
+  (use-package ctable   :defer t)
+  (use-package deferred :defer t)
+  (use-package s        :defer t)
+  :config
+  (add-hook 'eaf-mode-hook 'evil-emacs-state) ; better keybinding support
+  (eaf-setq eaf-browser-enable-adblocker "true")
+  (eaf-setq eaf-pdf-dark-mode "false")
+  (eaf-bind-key zoom-out    "C--" eaf-pdf-viewer-keybinding)
+  (eaf-bind-key zoom-in     "C-=" eaf-pdf-viewer-keybinding)
+  (eaf-bind-key zoom-reset  "C-0" eaf-pdf-viewer-keybinding)
+  (eaf-bind-key scroll_up   "C-d" eaf-pdf-viewer-keybinding)
+  (eaf-bind-key scroll_up   "d"   eaf-pdf-viewer-keybinding)
+  (eaf-bind-key scroll_down "C-u" eaf-pdf-viewer-keybinding)
+  (eaf-bind-key scroll_down "u"   eaf-pdf-viewer-keybinding))
+
 (use-package minions
   :config
   (setq minions-mode-line-lighter "")

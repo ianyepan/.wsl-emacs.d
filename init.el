@@ -1,4 +1,4 @@
-;;; init.el --- Emacs init file
+;;; init.el --- -*- lexical-binding: t -*-
 ;;  Author: Ian Y.E. Pan
 ;;; Commentary:
 ;;  This is my personal Emacs configuration

@@ -1,3 +1,7 @@
+;;; early-init.el --- -*- lexical-binding: t -*-
+;;  Author: Ian Y.E. Pan
+;;; Commentary:
+;;; Code:
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
@@ -26,3 +30,6 @@
                                     (setq gc-cons-threshold ian/gc-cons-threshold)))
 
 (setq package-enable-at-startup nil)
+
+(provide 'early-init)
+;;; early-init.el ends here

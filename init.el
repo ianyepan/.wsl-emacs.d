@@ -638,6 +638,7 @@
     (define-key flycheck-mode-map (kbd "C-<f8>") #'flycheck-list-errors)))
 
 (use-package markdown-mode
+  :hook (markdown-mode . auto-fill-mode)
   :config
   (set-face-attribute 'markdown-code-face nil :inherit 'org-block))
 

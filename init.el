@@ -53,25 +53,8 @@
   (put 'upcase-region 'disabled nil)
   (setq-default indent-tabs-mode nil)
   (setq initial-scratch-message "")
-  (ian/set-default-browser-WSL))
-
-(use-package emacs
-  :ensure nil
-  :preface
-  (defun ian/split-and-follow-horizontally ()
-    "Split window below."
-    (interactive)
-    (split-window-below)
-    (other-window +1))
-  (defun ian/split-and-follow-vertically ()
-    "Split window right."
-    (interactive)
-    (split-window-right)
-    (other-window +1))
-  :config
   (setq split-width-threshold 100)
-  (global-set-key (kbd "C-x 2") #'ian/split-and-follow-horizontally)
-  (global-set-key (kbd "C-x 3") #'ian/split-and-follow-vertically))
+  (ian/set-default-browser-WSL))
 
 (use-package uniquify
   :ensure nil

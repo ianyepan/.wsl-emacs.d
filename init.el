@@ -755,6 +755,9 @@
         dashboard-items nil
         dashboard-set-footer nil))
 
+(use-package olivetti
+  :bind ("C-c w" . olivetti-mode))
+
 (use-package emojify
   :config
   (when (member "Segoe UI Emoji" (font-family-list))

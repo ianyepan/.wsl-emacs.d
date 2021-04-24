@@ -790,6 +790,7 @@
   (use-package deferred :defer t)
   (use-package s        :defer t)
   :config
+  (setq eaf-find-file-ext-blacklist '("png" "jpg"))
   (add-hook 'eaf-mode-hook 'evil-emacs-state) ; better keybinding support
   (eaf-setq eaf-browser-enable-adblocker "true")
   (eaf-setq eaf-pdf-dark-mode "false")

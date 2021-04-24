@@ -184,11 +184,12 @@
 
 (use-package frame
   :preface
+  (defconst small-fonts-list '("Consolas"))
   (defun ian/set-default-fonts (english-font chinese-font font-size)
     "Set the default Latin and CJK font families, as well as the line height."
     (interactive)
     (defvar is-using-undersized-font nil)
-    (if (equal english-font "Consolas") ; Consolas is smaller than most other fonts
+    (if (member english-font small-fonts-list)
         (progn
           (setq font-size (round (* font-size 1.1)))
           (setq is-using-undersized-font t))

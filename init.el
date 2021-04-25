@@ -746,7 +746,9 @@
         dashboard-set-footer nil))
 
 (use-package olivetti
-  :bind ("C-c w" . olivetti-mode))
+  :bind ("C-c w" . olivetti-mode)
+  :config
+  (setq-default olivetti-body-width fill-column))
 
 (use-package emojify
   :config
@@ -874,7 +876,9 @@
   :hook ((org-mode . visual-line-mode)
          (org-mode . auto-fill-mode)
          (org-mode . org-indent-mode)
-         (org-mode . (lambda () (setq-local evil-auto-indent nil))))
+         (org-mode . (lambda ()
+                       (setq-local evil-auto-indent nil)
+                       (setq-local olivetti-body-width (+ fill-column 5)))))
   :config
   (setq org-link-descriptive nil)
   (setq org-startup-folded nil)

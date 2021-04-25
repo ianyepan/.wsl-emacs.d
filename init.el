@@ -217,6 +217,8 @@
 
 (use-package flyspell
   :ensure nil
+  :hook ((markdown-mode . flyspell-mode)
+         (org-mode      . flyspell-mode))
   :config
   (setq ispell-program-name "/usr/bin/aspell"))
 

@@ -565,13 +565,6 @@
   :config
   (define-key java-mode-map (kbd "C-c i") #'lsp-java-add-import))
 
-;; (use-package lsp-python-ms
-;;   :hook (python-mode . (lambda () (require 'lsp-python-ms)))
-;;   :init
-;;   (setq lsp-python-ms-executable "~/python-language-server/output/bin/Release/linux-x64/publish/Microsoft.Python.LanguageServer")
-;;   (when (executable-find "python3")
-;;     (setq lsp-python-ms-python-executable-cmd "python3")))
-
 (use-package lsp-pyright
   :hook (python-mode . (lambda () (require 'lsp-pyright)))
   :init (when (executable-find "python3")

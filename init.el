@@ -563,8 +563,7 @@
 (use-package lsp-java
   :after lsp
   :config
-  (with-eval-after-load 'lsp-java
-    (define-key java-mode-map (kbd "C-c i") #'lsp-java-add-import)))
+  (define-key java-mode-map (kbd "C-c i") #'lsp-java-add-import))
 
 ;; (use-package lsp-python-ms
 ;;   :hook (python-mode . (lambda () (require 'lsp-python-ms)))
@@ -608,13 +607,12 @@
   (setq company-tooltip-align-annotations t)
   (setq company-frontends '(company-pseudo-tooltip-frontend ; show tooltip even for single candidate
                             company-echo-metadata-frontend))
-  (with-eval-after-load 'company
-    (define-key company-active-map (kbd "C-j") nil) ; avoid conflict with emmet-mode
-    (define-key company-active-map (kbd "C-n") #'company-select-next)
-    (define-key company-active-map (kbd "C-p") #'company-select-previous)
-    (define-key company-active-map (kbd "TAB") 'company-select-next)
-    (define-key company-active-map (kbd "<tab>") 'company-select-next)
-    (define-key company-active-map (kbd "<backtab>") 'company-select-previous)))
+  (define-key company-active-map (kbd "C-j") nil) ; avoid conflict with emmet-mode
+  (define-key company-active-map (kbd "C-n") #'company-select-next)
+  (define-key company-active-map (kbd "C-p") #'company-select-previous)
+  (define-key company-active-map (kbd "TAB") 'company-select-next)
+  (define-key company-active-map (kbd "<tab>") 'company-select-next)
+  (define-key company-active-map (kbd "<backtab>") 'company-select-previous))
 
 (use-package flycheck
   :hook ((prog-mode . flycheck-mode))
@@ -623,10 +621,9 @@
   (setq flycheck-display-errors-delay 0.1)
   (setq-default flycheck-disabled-checkers '(python-pylint))
   (setq flycheck-flake8rc "~/.config/flake8")
-  (with-eval-after-load 'flycheck
-    (define-key flycheck-mode-map (kbd "<f8>") #'flycheck-next-error)
-    (define-key flycheck-mode-map (kbd "S-<f8>") #'flycheck-previous-error)
-    (define-key flycheck-mode-map (kbd "C-<f8>") #'flycheck-list-errors)))
+  (define-key flycheck-mode-map (kbd "<f8>") #'flycheck-next-error)
+  (define-key flycheck-mode-map (kbd "S-<f8>") #'flycheck-previous-error)
+  (define-key flycheck-mode-map (kbd "C-<f8>") #'flycheck-list-errors))
 
 (use-package markdown-mode
   :hook (markdown-mode . auto-fill-mode)
@@ -854,11 +851,10 @@
                                  (setq-local line-spacing nil)))
   (global-set-key (kbd "C-S-e") #'ian/neotree-project-toggle)
   (global-set-key (kbd "C-x e") #'ian/neotree-project-toggle)
-  (with-eval-after-load 'neotree
-    (define-key neotree-mode-map (kbd "<f5>") #'(lambda ()
-                                                  (interactive)
-                                                  (neotree-refresh)
-                                                  (message "Refreshing NeoTree...done"))))
+  (define-key neotree-mode-map (kbd "<f5>") #'(lambda ()
+                                                (interactive)
+                                                (neotree-refresh)
+                                                (message "Refreshing NeoTree...done")))
   (setq neo-theme 'icons)
   (setq neo-show-hidden-files t)
   (setq neo-window-width 30))

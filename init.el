@@ -217,6 +217,8 @@
 
 (use-package flyspell
   :ensure nil
+  :hook ((markdown-mode . flyspell-mode)
+         (org-mode      . flyspell-mode))
   :config
   (setq ispell-program-name "/usr/bin/aspell"))
 
@@ -803,14 +805,14 @@
   (add-hook 'eaf-mode-hook 'evil-emacs-state) ; better keybinding support
   (eaf-setq eaf-browser-enable-adblocker "true")
   (eaf-setq eaf-pdf-dark-mode "false")
-  (eaf-bind-key quit-window "q"   eaf-pdf-viewer-keybinding)
-  (eaf-bind-key zoom_out    "C--" eaf-pdf-viewer-keybinding)
-  (eaf-bind-key zoom_in     "C-=" eaf-pdf-viewer-keybinding)
-  (eaf-bind-key zoom_reset  "C-0" eaf-pdf-viewer-keybinding)
-  (eaf-bind-key scroll_up   "C-d" eaf-pdf-viewer-keybinding)
-  (eaf-bind-key scroll_up   "d"   eaf-pdf-viewer-keybinding)
-  (eaf-bind-key scroll_down "C-u" eaf-pdf-viewer-keybinding)
-  (eaf-bind-key scroll_down "u"   eaf-pdf-viewer-keybinding))
+  (eaf-bind-key quit-window      "q"   eaf-pdf-viewer-keybinding)
+  (eaf-bind-key zoom_out         "C--" eaf-pdf-viewer-keybinding)
+  (eaf-bind-key zoom_in          "C-=" eaf-pdf-viewer-keybinding)
+  (eaf-bind-key zoom_reset       "C-0" eaf-pdf-viewer-keybinding)
+  (eaf-bind-key scroll_up_page   "C-d" eaf-pdf-viewer-keybinding)
+  (eaf-bind-key scroll_up_page   "d"   eaf-pdf-viewer-keybinding)
+  (eaf-bind-key scroll_down_page "C-u" eaf-pdf-viewer-keybinding)
+  (eaf-bind-key scroll_down_page "u"   eaf-pdf-viewer-keybinding))
 
 (use-package minions
   :config
@@ -899,8 +901,8 @@
   :ensure nil
   :config
   (setq org-latex-packages-alist '(("margin=1in" "geometry" nil)
-                                   ;; ("bitstream-charter" "mathdesign" nil)
-                                   ("" "tinos" nil)
+                                   ("bitstream-charter" "mathdesign" nil)
+                                   ;; ("" "tinos" nil)
                                    ("" "inconsolata" nil)))
   (setq org-latex-pdf-process
         '("/usr/bin/pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"

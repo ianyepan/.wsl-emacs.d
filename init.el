@@ -137,7 +137,7 @@
 (use-package cc-mode
   :ensure nil
   :config
-  (define-key c++-mode-map ":" nil)) ; don't indent namespace:: on-the-fly etc.
+  (define-key c++-mode-map ":" nil))
 
 (use-package perl-mode
   :ensure nil
@@ -293,11 +293,13 @@
          (minibuffer-setup . solaire-mode-in-minibuffer))
   :config
   (add-to-list 'solaire-mode-themes-to-face-swap '"vscode-dark-plus")
+  (add-to-list 'solaire-mode-themes-to-face-swap '"wilmersdorf")
   (setq solaire-mode-auto-swap-bg t)
   (solaire-global-mode +1))
 
-;; (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
-;; (load-theme 'default-dark t)
+;; (with-eval-after-load 'solaire-mode
+;;   (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
+;;   (load-theme 'wilmersdorf t))
 
 ;; (use-package vscode-dark-plus-theme
 ;;   :after solaire-mode
@@ -749,7 +751,11 @@
      t 'symbol (font-spec :family "Segoe UI Emoji") nil 'prepend))
   (setq emojify-display-style 'unicode)
   (setq emojify-emoji-styles '(unicode))
-  (global-set-key (kbd "C-c .") #'emojify-insert-emoji))
+  (global-set-key (kbd "C-c .") #'emojify-insert-emoji)
+  (with-eval-after-load 'evil
+    (define-key evil-normal-state-map (kbd "C-c .") #'emojify-insert-emoji)
+    (define-key evil-insert-state-map (kbd "C-c .") #'emojify-insert-emoji)))
+
 
 (use-package company-box
   :hook (company-mode . company-box-mode)

@@ -268,8 +268,7 @@
 (use-package xref
   :ensure nil
   :config
-  (setq xref-prompt-for-identifier nil)
-  (define-key prog-mode-map (kbd "<f12>") #'xref-find-definitions))
+  (setq xref-prompt-for-identifier nil))
 
 (use-package zone
   :ensure nil
@@ -363,20 +362,22 @@
   :config
   (setq-default cursor-type  '(hbar . 5))
   (setq evil-emacs-state-cursor '(hbar . 5))
-  (with-eval-after-load 'evil-maps
-    (define-key evil-motion-state-map (kbd "C-w C-o") #'(lambda () (interactive) (neotree-hide) (delete-other-windows)))
-    (global-set-key                   (kbd "C-x 1") #'(lambda () (interactive) (neotree-hide) (delete-other-windows)))
-    (define-key evil-normal-state-map (kbd "C-<up>") #'evil-scroll-line-up)
-    (define-key evil-normal-state-map (kbd "C-<down>") #'evil-scroll-line-down)
-    (define-key evil-normal-state-map (kbd "<mouse-2>") #'mouse-set-point)
-    (define-key evil-normal-state-map (kbd "z <return>") #'evil-scroll-line-to-top)
-    (define-key evil-normal-state-map (kbd "gd") #'xref-find-definitions)
-    (define-key evil-normal-state-map (kbd "gD") #'xref-find-references)
-    (define-key evil-insert-state-map (kbd "C-n") nil) ; avoid conflict with company tooltip selection
-    (define-key evil-insert-state-map (kbd "C-p") nil) ; avoid conflict with company tooltip selection
-    (define-key evil-normal-state-map (kbd "C-p") nil) ; avoid conflict with WSL find-file
-    (define-key evil-normal-state-map (kbd "C-S-c") #'evil-yank)
-    (define-key evil-insert-state-map (kbd "C-S-v") #'ian/paste-with-ctrl-shift-v))
+  (evil-define-key 'normal global-map
+    (kbd "C-w C-o")    #'(lambda () (interactive) (neotree-hide) (delete-other-windows))
+    (kbd "C-x 1")      #'(lambda () (interactive) (neotree-hide) (delete-other-windows))
+    (kbd "C-<up>")     #'evil-scroll-line-up
+    (kbd "C-<down>")   #'evil-scroll-line-down
+    (kbd "<mouse-2>")  #'mouse-set-point
+    (kbd "z <return>") #'evil-scroll-line-to-top)
+  (evil-define-key 'normal prog-mode-map
+    (kbd "gd")         #'xref-find-definitions
+    (kbd "<f12>")      #'xref-find-definitions
+    (kbd "gD")         #'xref-find-references)
+  (evil-define-key '(normal insert) global-map
+    (kbd "C-p") nil ; avoid conflict with company-tooptip and find-file
+    (kbd "C-S-c")      #'evil-yank
+    (kbd "C-S-v")      #'ian/paste-with-ctrl-shift-v)
+  (evil-define-key 'insert global-map (kbd "C-n") nil) ; avoid conflict with company-tooltip
   (evil-ex-define-cmd "q" #'kill-this-buffer)
   (evil-ex-define-cmd "wq" #'(lambda () (interactive) (save-buffer) (kill-this-buffer))))
 

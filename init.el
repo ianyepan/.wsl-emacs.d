@@ -751,11 +751,7 @@
      t 'symbol (font-spec :family "Segoe UI Emoji") nil 'prepend))
   (setq emojify-display-style 'unicode)
   (setq emojify-emoji-styles '(unicode))
-  (global-set-key (kbd "C-c .") #'emojify-insert-emoji)
-  (with-eval-after-load 'evil
-    (define-key evil-normal-state-map (kbd "C-c .") #'emojify-insert-emoji)
-    (define-key evil-insert-state-map (kbd "C-c .") #'emojify-insert-emoji)))
-
+  (bind-key* "C-c ." #'emojify-insert-emoji)) ; override binding in any mode
 
 (use-package company-box
   :hook (company-mode . company-box-mode)

@@ -362,22 +362,20 @@
   :config
   (setq-default cursor-type  '(hbar . 5))
   (setq evil-emacs-state-cursor '(hbar . 5))
-  (evil-define-key 'normal global-map
-    (kbd "C-w C-o")    #'(lambda () (interactive) (neotree-hide) (delete-other-windows))
-    (kbd "C-x 1")      #'(lambda () (interactive) (neotree-hide) (delete-other-windows))
-    (kbd "C-<up>")     #'evil-scroll-line-up
-    (kbd "C-<down>")   #'evil-scroll-line-down
-    (kbd "<mouse-2>")  #'mouse-set-point
-    (kbd "z <return>") #'evil-scroll-line-to-top)
-  (evil-define-key 'normal prog-mode-map
-    (kbd "gd")         #'xref-find-definitions
-    (kbd "<f12>")      #'xref-find-definitions
-    (kbd "gD")         #'xref-find-references)
-  (evil-define-key '(normal insert) global-map
-    (kbd "C-p") nil ; avoid conflict with company-tooptip and find-file
-    (kbd "C-S-c")      #'evil-yank
-    (kbd "C-S-v")      #'ian/paste-with-ctrl-shift-v)
-  (evil-define-key 'insert global-map (kbd "C-n") nil) ; avoid conflict with company-tooltip
+  (define-key evil-normal-state-map (kbd "C-w C-o") #'(lambda () (interactive) (neotree-hide) (delete-other-windows)))
+  (global-set-key (kbd "C-x 1") #'(lambda () (interactive) (neotree-hide) (delete-other-windows)))
+  (global-set-key (kbd "C-<up>") #'evil-scroll-line-up)
+  (global-set-key (kbd "C-<down>") #'evil-scroll-line-down)
+  (global-set-key (kbd "<mouse-2>") #'mouse-set-point)
+  (define-key evil-normal-state-map (kbd "z <return>") #'evil-scroll-line-to-top)
+  (define-key evil-insert-state-map (kbd "C-n") nil) ; avoid conflict with company tooltip selection
+  (define-key evil-insert-state-map (kbd "C-p") nil) ; avoid conflict with company tooltip selection
+  (define-key evil-normal-state-map (kbd "C-p") nil) ; avoid conflict with counsel-find-file
+  (define-key evil-normal-state-map (kbd "C-S-c") #'evil-yank)
+  (define-key evil-insert-state-map (kbd "C-S-v") #'ian/paste-with-ctrl-shift-v)
+  (evil-define-key 'normal prog-mode-map (kbd "gd") #'xref-find-definitions)
+  (evil-define-key 'normal prog-mode-map (kbd "<f12>") #'xref-find-definitions)
+  (evil-define-key 'normal prog-mode-map (kbd "gD") #'xref-find-references)
   (evil-ex-define-cmd "q" #'kill-this-buffer)
   (evil-ex-define-cmd "wq" #'(lambda () (interactive) (save-buffer) (kill-this-buffer))))
 
@@ -795,6 +793,7 @@
   (use-package s        :defer t)
   :config
   (setq eaf-find-file-ext-blacklist '("png" "jpg"))
+  ;; (setq eaf-enable-debug t)
   (add-hook 'eaf-mode-hook 'evil-emacs-state) ; better keybinding support
   (eaf-setq eaf-browser-enable-adblocker "true")
   (eaf-setq eaf-pdf-dark-mode "false")

@@ -204,7 +204,7 @@
     (setq-default line-spacing (if is-using-undersized-font 2 0)))
   :ensure nil
   :config
-  (setq default-frame-alist (append (list '(width . 75) '(height . 35) '(internal-border-width . 2))))
+  (setq default-frame-alist (append (list '(width . 74) '(height . 35) '(internal-border-width . 2))))
   (blink-cursor-mode +1)
   (setq blink-cursor-blinks -1) ; blink forever
   (ian/set-default-fonts "Consolas" "YaHei Consolas Hybrid" 100))
@@ -308,7 +308,7 @@
 (use-package doom-themes
   :after solaire-mode
   :custom-face
-  (cursor ((t (:background "#eeeeee"))))
+  (cursor                         ((t (:background "#eeeeee"))))
   (region                         ((t (:extend nil))))
   (font-lock-comment-face         ((t (:italic t))))
   (sml/modified                   ((t (:foreground "white" :bold t))))
@@ -731,12 +731,17 @@
 ;; Misc
 
 (use-package dashboard
+  :if (display-graphic-p)
   :config
   (dashboard-setup-startup-hook)
-  (setq dashboard-startup-banner 'logo
-        dashboard-banner-logo-title "( E M A C S )"
-        dashboard-items nil
-        dashboard-set-footer nil))
+  (setq dashboard-startup-banner 'logo)
+  (setq dashboard-banner-logo-title "( E M A C S )")
+  (setq dashboard-init-info "")
+  (setq dashboard-items nil)
+  (setq dashboard-set-footer t)
+  (setq dashboard-footer-icon "")
+  (setq dashboard-footer-messages '("😈 Happy hacking!   "))
+  (define-key dashboard-mode-map (kbd "<f5>") #'dashboard-refresh-buffer))
 
 (use-package olivetti
   :bind ("C-c w" . olivetti-mode)

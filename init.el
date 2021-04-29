@@ -376,6 +376,7 @@
   (evil-define-key 'normal prog-mode-map (kbd "gd") #'xref-find-definitions)
   (evil-define-key 'normal prog-mode-map (kbd "<f12>") #'xref-find-definitions)
   (evil-define-key 'normal prog-mode-map (kbd "gD") #'xref-find-references)
+  (bind-key* (kbd "<f4>") #'kill-this-buffer)
   (evil-ex-define-cmd "q" #'kill-this-buffer)
   (evil-ex-define-cmd "wq" #'(lambda () (interactive) (save-buffer) (kill-this-buffer))))
 
@@ -463,6 +464,7 @@
   (setq projectile-mode-line-prefix " ")
   (projectile-mode +1)
   (define-key projectile-mode-map (kbd "C-c p") #'projectile-command-map)
+  (define-key projectile-mode-map (kbd "S-<f4>") #'projectile-kill-buffers)
   (define-key projectile-mode-map (kbd "s-p") #'projectile-find-file)
   (define-key projectile-mode-map (kbd "C-p") #'projectile-find-file)
   (define-key projectile-mode-map (kbd "s-F") #'projectile-ripgrep)

@@ -471,7 +471,7 @@
   (setq projectile-mode-line-prefix " ")
   (projectile-mode +1)
   (define-key projectile-mode-map (kbd "C-c p") #'projectile-command-map)
-  (define-key projectile-mode-map (kbd "S-<f4>") #'projectile-kill-buffers)
+  (define-key projectile-mode-map (kbd "C-<f4>") #'projectile-kill-buffers)
   (define-key projectile-mode-map (kbd "s-p") #'projectile-find-file)
   (define-key projectile-mode-map (kbd "C-p") #'projectile-find-file)
   (define-key projectile-mode-map (kbd "s-F") #'projectile-ripgrep)

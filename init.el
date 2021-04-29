@@ -251,6 +251,7 @@
   :ensure nil
   :config
   (add-to-list 'recentf-exclude (format "%s/\\.emacs.d/early-init.el" (getenv "HOME")))
+  (add-to-list 'recentf-exclude (format "%s/\\.emacs.d/init.el" (getenv "HOME")))
   (add-to-list 'recentf-exclude (format "%s/\\.emacs.d/elpa/.*" (getenv "HOME")))
   (add-to-list 'recentf-exclude (format "%s/\\.emacs.d/workspace/.*" (getenv "HOME")))
   (add-to-list 'recentf-exclude (format "%s/\\.local/lib/python3.8/site-packages/.*" (getenv "HOME")))

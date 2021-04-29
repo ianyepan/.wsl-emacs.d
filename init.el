@@ -718,10 +718,6 @@
                                              (vterm-clear-scrollback))))
 
 (use-package vterm-toggle
-  :preface
-  (defun ian/vterm-toggle-new-instance ()
-    (interactive)
-    (vterm-toggle--new))
   :after (projectile vterm evil)
   :config
   (setq vterm-toggle-fullscreen-p nil)
@@ -765,7 +761,7 @@
      t 'symbol (font-spec :family "Segoe UI Emoji") nil 'prepend))
   (setq emojify-display-style 'unicode)
   (setq emojify-emoji-styles '(unicode))
-  (bind-key* "C-c ." #'emojify-insert-emoji)) ; override binding in any mode
+  (bind-key* (kbd "C-c .") #'emojify-insert-emoji)) ; override binding in any mode
 
 (use-package company-box
   :hook (company-mode . company-box-mode)

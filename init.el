@@ -376,9 +376,14 @@
   (evil-define-key 'normal prog-mode-map (kbd "gd") #'xref-find-definitions)
   (evil-define-key 'normal prog-mode-map (kbd "<f12>") #'xref-find-definitions)
   (evil-define-key 'normal prog-mode-map (kbd "gD") #'xref-find-references)
-  (bind-key* (kbd "<f4>") #'kill-this-buffer)
-  (evil-ex-define-cmd "q" #'kill-this-buffer)
-  (evil-ex-define-cmd "wq" #'(lambda () (interactive) (save-buffer) (kill-this-buffer))))
+  (evil-define-key 'normal prog-mode-map (kbd "S-<f12>") #'xref-find-references)
+  (evil-ex-define-cmd "q" #'kill-current-buffer)
+  (evil-ex-define-cmd "wq" #'(lambda () (interactive) (save-buffer) (kill-current-buffer)))
+  (bind-key* (kbd "<f4>") #'(lambda ()
+                              (interactive)
+                              (if (one-window-p)
+                                  (kill-current-buffer)
+                                (kill-buffer-and-window)))))
 
 (use-package evil-collection
   :after evil

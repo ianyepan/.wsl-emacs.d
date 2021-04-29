@@ -780,14 +780,13 @@
   (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
   (ivy-rich-mode +1))
 
-(use-package pdf-tools
-  :mode (("\\.pdf\\'" . pdf-view-mode))
-  :bind ((:map pdf-view-mode-map ("C--" . pdf-view-shrink))
-         (:map pdf-view-mode-map ("C-=" . pdf-view-enlarge))
-         (:map pdf-view-mode-map ("C-0" . pdf-view-scale-reset)))
-  :config
-  (pdf-tools-install)
-  (pdf-loader-install))
+;; (use-package pdf-tools
+;;   :mode (("\\.pdf\\'" . pdf-view-mode))
+;;   :bind ((:map pdf-view-mode-map ("C--" . pdf-view-shrink))
+;;          (:map pdf-view-mode-map ("C-=" . pdf-view-enlarge))
+;;          (:map pdf-view-mode-map ("C-0" . pdf-view-scale-reset)))
+;;   :config
+;;   (pdf-loader-install))
 
 (use-package eaf
   :load-path "~/.emacs.d/site-lisp/emacs-application-framework"

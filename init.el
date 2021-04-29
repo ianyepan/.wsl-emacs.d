@@ -26,13 +26,11 @@
 (use-package emacs
   :preface
   (defvar ian/indent-width 2)
-  (defvar ian/system-type system-type)
   (defun ian/set-default-browser-WSL ()
     (cond
-     ((eq ian/system-type 'gnu/linux)
+     ((eq system-type 'gnu/linux)
       (when (string-match "Linux.*microsoft.*Linux"
                           (shell-command-to-string "uname -a"))
-        (setq-default ian/system-type "wsl/linux")
         (setq browse-url-generic-program "/mnt/c/Windows/System32/cmd.exe"
               browse-url-generic-args '("/c" "start" "")
               browse-url-browser-function 'browse-url-generic)))))

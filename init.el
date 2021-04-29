@@ -801,14 +801,14 @@
   (add-hook 'eaf-mode-hook 'evil-emacs-state) ; better keybinding support
   (eaf-setq eaf-browser-enable-adblocker "true")
   (eaf-setq eaf-pdf-dark-mode "false")
-  (eaf-bind-key quit-window      "q"   eaf-pdf-viewer-keybinding)
-  (eaf-bind-key zoom_out         "C--" eaf-pdf-viewer-keybinding)
-  (eaf-bind-key zoom_in          "C-=" eaf-pdf-viewer-keybinding)
-  (eaf-bind-key zoom_reset       "C-0" eaf-pdf-viewer-keybinding)
-  (eaf-bind-key scroll_up_page   "C-d" eaf-pdf-viewer-keybinding)
-  (eaf-bind-key scroll_up_page   "d"   eaf-pdf-viewer-keybinding)
-  (eaf-bind-key scroll_down_page "C-u" eaf-pdf-viewer-keybinding)
-  (eaf-bind-key scroll_down_page "u"   eaf-pdf-viewer-keybinding))
+  (eaf-bind-key quit-window      "q"       eaf-pdf-viewer-keybinding)
+  (eaf-bind-key zoom_out         "C--"     eaf-pdf-viewer-keybinding)
+  (eaf-bind-key zoom_in          "C-="     eaf-pdf-viewer-keybinding)
+  (eaf-bind-key zoom_reset       "C-0"     eaf-pdf-viewer-keybinding)
+  (eaf-bind-key scroll_up_page   "<next>"  eaf-pdf-viewer-keybinding)
+  (eaf-bind-key scroll_down_page "<prior>" eaf-pdf-viewer-keybinding)
+  (eaf-bind-key scroll_to_begin  "<home>"  eaf-pdf-viewer-keybinding)
+  (eaf-bind-key scroll_to_end    "<end>"   eaf-pdf-viewer-keybinding))
 
 (use-package minions
   :config

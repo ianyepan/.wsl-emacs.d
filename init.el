@@ -526,6 +526,8 @@
   :config
   (define-key lsp-mode-map (kbd "C-c l <tab>") #'lsp-execute-code-action)
   (define-key lsp-mode-map (kbd "C-c l TAB") #'lsp-execute-code-action)
+  (global-set-key (kbd "<f2>") nil)
+  (define-key lsp-mode-map (kbd "<f2>") #'lsp-rename)
   (setq lsp-auto-guess-root t)
   (setq lsp-log-io nil)
   (setq lsp-restart 'auto-restart)

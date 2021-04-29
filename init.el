@@ -34,6 +34,9 @@
         (setq browse-url-generic-program "/mnt/c/Windows/System32/cmd.exe"
               browse-url-generic-args '("/c" "start" "")
               browse-url-browser-function 'browse-url-generic)))))
+  (defun ian/edit-config ()
+    (interactive)
+    (find-file (concat user-emacs-directory "init.el")))
   :config
   (setq user-full-name "Ian Y.E. Pan")
   (setq frame-title-format '("Emacs " emacs-version))
@@ -52,7 +55,8 @@
   (setq-default indent-tabs-mode nil)
   (setq initial-scratch-message "")
   (setq split-width-threshold 100)
-  (ian/set-default-browser-WSL))
+  (ian/set-default-browser-WSL)
+  (bind-key* (kbd "C-,") #'ian/edit-config))
 
 (use-package uniquify
   :ensure nil

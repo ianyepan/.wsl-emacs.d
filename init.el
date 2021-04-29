@@ -748,7 +748,10 @@
   (setq dashboard-set-footer t)
   (setq dashboard-footer-icon "")
   (setq dashboard-footer-messages '("😈 Happy hacking!   "))
-  (define-key dashboard-mode-map (kbd "<f5>") #'dashboard-refresh-buffer))
+  (define-key dashboard-mode-map (kbd "<f5>") #'(lambda ()
+                                                  (interactive)
+                                                  (dashboard-refresh-buffer)
+                                                  (message "Refreshing Dashboard...done"))))
 
 (use-package olivetti
   :bind ("C-c w" . olivetti-mode)

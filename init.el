@@ -27,6 +27,7 @@
   :preface
   (defvar ian/indent-width 2)
   (defun ian/set-default-browser-WSL ()
+    "When in WSL Emacs, open links in default Windows 10 browser."
     (cond
      ((eq system-type 'gnu/linux)
       (when (string-match "Linux.*microsoft.*Linux"
@@ -35,6 +36,7 @@
               browse-url-generic-args '("/c" "start" "")
               browse-url-browser-function 'browse-url-generic)))))
   (defun ian/edit-config ()
+    "Open Emacs settings."
     (interactive)
     (find-file (concat user-emacs-directory "init.el")))
   :config
@@ -355,7 +357,7 @@
   :hook (after-init . evil-mode)
   :preface
   (defun ian/paste-with-ctrl-shift-v ()
-    "Paste with Ctrl-Shift-v, as inspired by Windows Terminal shortcut"
+    "Paste with Ctrl-Shift-v, as inspired by Windows Terminal shortcut."
     (interactive)
     (evil-normal-state nil)
     (evil-paste-after 1)
@@ -701,6 +703,7 @@
 (use-package dired-single
   :preface
   (defun ian/dired-single-init ()
+    "Keybindings setup for dired-single."
     (define-key dired-mode-map [return] #'dired-single-buffer)
     (define-key dired-mode-map [remap dired-mouse-find-file-other-window] #'dired-single-buffer-mouse)
     (define-key dired-mode-map [remap dired-up-directory] #'dired-single-up-directory))

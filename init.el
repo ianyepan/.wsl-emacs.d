@@ -406,8 +406,7 @@
 ;; Git integration
 
 (use-package magit
-  :bind (("C-x g" . magit-status)
-         ("<f3>"  . magit-status))
+  :bind ("C-x g" . magit-status)
   :config
   (add-hook 'with-editor-mode-hook #'evil-insert-state)
   (define-key magit-mode-map (kbd "<f5>") #'(lambda ()

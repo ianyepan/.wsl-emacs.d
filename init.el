@@ -738,6 +738,19 @@
                                                   (dashboard-refresh-buffer)
                                                   (message "Refreshing Dashboard...done"))))
 
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode)
+  :custom-face
+  (rainbow-delimiters-depth-1-face ((t :foreground "gold")))
+  (rainbow-delimiters-depth-2-face ((t :foreground "orchid")))
+  (rainbow-delimiters-depth-3-face ((t :foreground "LightSkyBlue")))
+  (rainbow-delimiters-depth-4-face ((t :foreground "gold")))
+  (rainbow-delimiters-depth-5-face ((t :foreground "orchid")))
+  (rainbow-delimiters-depth-6-face ((t :foreground "LightSkyBlue")))
+  (rainbow-delimiters-depth-7-face ((t :foreground "gold")))
+  (rainbow-delimiters-depth-8-face ((t :foreground "orchid")))
+  (rainbow-delimiters-depth-9-face ((t :foreground "LightSkyBlue"))))
+
 (use-package olivetti
   :bind ("C-c w" . olivetti-mode)
   :config

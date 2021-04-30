@@ -155,12 +155,6 @@
   (setq cperl-invalid-face nil)
   (setq cperl-indent-level ian/indent-width))
 
-(use-package prolog
-  :ensure nil
-  ;; :mode (("\\.pl\\'" . prolog-mode)) ; if commented, ".pl" will become perl/cperl mode
-  :config
-  (setq prolog-indent-width ian/indent-width))
-
 (use-package python
   :ensure nil
   :mode ("\\.gyp\\'" . python-mode)

@@ -295,7 +295,6 @@
 (use-package doom-themes
   :after solaire-mode
   :custom-face
-  (cursor                         ((t (:background "#eeeeee"))))
   (region                         ((t (:extend nil))))
   (font-lock-comment-face         ((t (:italic t))))
   (sml/modified                   ((t (:foreground "white" :bold t))))

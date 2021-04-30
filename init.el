@@ -143,18 +143,6 @@
   :config
   (define-key c++-mode-map ":" nil))
 
-(use-package perl-mode
-  :ensure nil
-  :config
-  (setq perl-indent-level ian/indent-width))
-
-(use-package cperl-mode
-  :ensure nil
-  :config
-  (defalias 'perl-mode 'cperl-mode)
-  (setq cperl-invalid-face nil)
-  (setq cperl-indent-level ian/indent-width))
-
 (use-package python
   :ensure nil
   :mode ("\\.gyp\\'" . python-mode)

@@ -283,14 +283,8 @@
   (setq solaire-mode-auto-swap-bg t)
   (solaire-global-mode +1))
 
-;; (with-eval-after-load 'solaire-mode
-;;   (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
-;;   (load-theme 'wilmersdorf t))
-
-;; (use-package vscode-dark-plus-theme
-;;   :after solaire-mode
-;;   :config
-;;   (load-theme 'vscode-dark-plus t))
+;; (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
+;; (load-theme 'default-dark t)
 
 (use-package doom-themes
   :after solaire-mode

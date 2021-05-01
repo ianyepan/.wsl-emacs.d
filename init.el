@@ -672,7 +672,8 @@
   (add-hook 'prog-mode-hook #'format-all-ensure-formatter))
 
 (use-package rainbow-mode
-  :hook (web-mode . rainbow-mode))
+  :config
+  (bind-key* (kbd "C-c r") #'rainbow-mode))
 
 (use-package hl-todo
   :config

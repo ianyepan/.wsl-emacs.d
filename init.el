@@ -292,7 +292,7 @@
   (region                         ((t (:extend nil))))
   (font-lock-comment-face         ((t (:italic t))))
   (sml/modified                   ((t (:foreground "white" :bold t))))
-  (hl-todo                        ((t (:inverse-video t :italic t))))
+  (hl-todo                        ((t (:inverse-video nil :italic t :bold t))))
   (highlight-symbol-face          ((t (:background "#355266" :distant-foreground "#bbbbbb"))))
   (show-paren-match               ((t (:foreground "#eeeeee" :background "#444444" :bold t))))
   (highlight                      ((t (:foreground "#4db2ff" :background nil :underline t)))) ; link hover

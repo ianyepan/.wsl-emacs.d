@@ -740,6 +740,8 @@
   :config
   (setq-default olivetti-body-width fill-column))
 
+(use-package speed-type)
+
 (use-package emojify
   :config
   (when (member "Segoe UI Emoji" (font-family-list))

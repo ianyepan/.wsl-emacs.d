@@ -735,6 +735,8 @@
 
 (use-package olivetti
   :bind ("C-c w" . olivetti-mode)
+  :hook ((org-mode      . olivetti-mode)
+         (markdown-mode . olivetti-mode))
   :config
   (setq-default olivetti-body-width fill-column))
 

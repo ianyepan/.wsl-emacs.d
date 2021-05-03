@@ -48,6 +48,8 @@
   (setq scroll-conservatively 101) ; > 100
   (setq scroll-preserve-screen-position t)
   (setq auto-window-vscroll nil)
+  (setq hscroll-step 1)
+  (setq hscroll-margin 0)
   (setq load-prefer-newer t)
   (setq inhibit-compacting-font-caches t)
   (setq echo-keystrokes 0.02)

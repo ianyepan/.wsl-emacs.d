@@ -291,6 +291,7 @@
 (use-package doom-themes
   :after solaire-mode
   :custom-face
+  (cursor                         ((t (:background "#eeeeee"))))
   (region                         ((t (:extend nil))))
   (font-lock-comment-face         ((t (:italic t))))
   (sml/modified                   ((t (:foreground "white" :bold t))))
@@ -306,7 +307,7 @@
   (setq doom-themes-enable-bold nil)
   (setq doom-gruvbox-dark-variant "hard")
   (setq doom-solarized-dark-brighter-text t)
-  (load-theme 'doom-solarized-dark t))
+  (load-theme 'doom-nord t))
 
 (use-package highlight-symbol
   :hook (prog-mode . highlight-symbol-mode)

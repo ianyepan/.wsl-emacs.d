@@ -804,6 +804,8 @@
   (eaf-bind-key zoom_reset       "C-0"     eaf-pdf-viewer-keybinding)
   (eaf-bind-key scroll_up_page   "<next>"  eaf-pdf-viewer-keybinding)
   (eaf-bind-key scroll_down_page "<prior>" eaf-pdf-viewer-keybinding)
+  (eaf-bind-key scroll_up_page   "d"       eaf-pdf-viewer-keybinding)
+  (eaf-bind-key scroll_down_page "u"       eaf-pdf-viewer-keybinding)
   (eaf-bind-key scroll_to_begin  "<home>"  eaf-pdf-viewer-keybinding)
   (eaf-bind-key scroll_to_end    "<end>"   eaf-pdf-viewer-keybinding))
 

@@ -422,6 +422,9 @@
   (setq ivy-use-virtual-buffers t)
   (setq ivy-count-format "(%d/%d) ")
   (setq ivy-initial-inputs-alist nil)
+  (define-key ivy-minibuffer-map (kbd "TAB") #'ivy-next-line)
+  (define-key ivy-minibuffer-map (kbd "<tab>") #'ivy-next-line)
+  (define-key ivy-minibuffer-map (kbd "<backtab>") #'ivy-previous-line)
   (define-key ivy-minibuffer-map (kbd "RET") #'ivy-alt-done)
   (define-key ivy-minibuffer-map (kbd "<C-return>") #'ivy-immediate-done))
 

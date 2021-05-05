@@ -114,6 +114,7 @@
 (use-package eldoc
   :ensure nil
   :config
+  (global-eldoc-mode -1)
   (setq eldoc-idle-delay 0.4))
 
 (use-package js
@@ -518,6 +519,8 @@
   (setq lsp-enable-symbol-highlighting nil)
   (setq lsp-enable-on-type-formatting nil)
   (setq lsp-signature-auto-activate nil)
+  (setq lsp-signature-render-documentation nil)
+  (setq lsp-eldoc-hook nil)
   (setq lsp-modeline-code-actions-enable nil)
   (setq lsp-modeline-diagnostics-enable nil)
   (setq lsp-headerline-breadcrumb-enable nil)

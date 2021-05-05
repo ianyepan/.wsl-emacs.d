@@ -691,7 +691,7 @@
   :preface
   (defun ian/dired-single-init ()
     "Keybindings setup for dired-single."
-    (define-key dired-mode-map [return] #'dired-single-buffer)
+    (define-key dired-mode-map (kbd "<return>") #'dired-single-buffer)
     (define-key dired-mode-map [remap dired-mouse-find-file-other-window] #'dired-single-buffer-mouse)
     (define-key dired-mode-map [remap dired-up-directory] #'dired-single-up-directory))
   :config

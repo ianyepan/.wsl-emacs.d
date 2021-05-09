@@ -59,6 +59,8 @@
   (setq-default indent-tabs-mode nil)
   (setq initial-scratch-message "")
   (setq split-width-threshold 100)
+  (setq max-specpdl-size 10000)
+  (setq max-lisp-eval-depth 10000)
   (ian/set-default-browser-WSL)
   (bind-key* (kbd "C-,") #'ian/edit-config))
 

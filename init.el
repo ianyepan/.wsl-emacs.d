@@ -533,7 +533,6 @@
   (setq lsp-enable-folding nil)
   (setq lsp-enable-imenu nil)
   (setq lsp-enable-snippet nil)
-  (setq lsp-completion-enable nil)
   (setq read-process-output-max (* 1024 1024)) ;; 1MB
   (setq lsp-idle-delay 0.5)
   (add-to-list 'lsp-language-id-configuration '(js-jsx-mode . "javascriptreact")))

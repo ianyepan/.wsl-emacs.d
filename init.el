@@ -596,7 +596,9 @@
   :hook (prog-mode . company-mode)
   :config
   (setq company-idle-delay 0.0)
-  (setq company-tooltip-maximum-width 75)
+  (setq company-tooltip-minimum-width 60)
+  (setq company-tooltip-maximum-width 60)
+  (setq company-tooltip-limit 12)
   (setq company-minimum-prefix-length 1)
   (setq company-selection-wrap-around t)
   (setq company-tooltip-align-annotations t)

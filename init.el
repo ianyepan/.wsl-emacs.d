@@ -637,6 +637,7 @@
   (setq flycheck-display-errors-delay 0.1)
   (setq-default flycheck-disabled-checkers '(python-pylint))
   (setq flycheck-flake8rc "~/.config/flake8")
+  (setq flycheck-checker-error-threshold 1000)
   (define-key flycheck-mode-map (kbd "<f8>") #'flycheck-next-error)
   (define-key flycheck-mode-map (kbd "S-<f8>") #'flycheck-previous-error)
   (define-key flycheck-mode-map (kbd "C-<f8>") #'flycheck-list-errors))

@@ -575,6 +575,21 @@
   :init (when (executable-find "python3")
           (setq lsp-pyright-python-executable-cmd "python3")))
 
+;; (use-package eglot
+;;   :hook ((c-mode
+;;           c++mode
+;;           c-or-c++-mode
+;;           js-mode
+;;           js-jsx-mode
+;;           typescript-mode
+;;           python-mode
+;;           ) . eglot-ensure)
+;;   :config
+;;   (add-hook 'eglot-managed-mode-hook #'(lambda () (eldoc-mode -1)))
+;;   ;; (add-hook 'eglot-managed-mode-hook #'(lambda () (setq eldoc-documentation-functions '(eglot-signature-eldoc-function))))
+;;   (add-to-list 'eglot-server-programs '((c++-mode c-mode) "clangd"))
+;;   (add-to-list 'eglot-server-programs '(python-mode "pyright")))
+
 (use-package tree-sitter
   :custom-face
   (tree-sitter-hl-face:method.call   ((t (:inherit font-lock-function-name-face))))

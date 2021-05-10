@@ -117,6 +117,7 @@
   :ensure nil
   :config
   (global-eldoc-mode -1)
+  (setq eldoc-echo-area-use-multiline-p nil)
   (setq eldoc-idle-delay 0.4))
 
 (use-package js

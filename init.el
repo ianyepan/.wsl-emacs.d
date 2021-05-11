@@ -274,10 +274,6 @@ This follows the UX design of Visual Studio Code."
   (setq xref-after-return-hook '(xref-pulse-momentarily))
   (setq xref-prompt-for-identifier nil))
 
-(use-package pulse
-  :config
-  (setq pulse-delay 0.06))
-
 (use-package zone
   :ensure nil
   :preface

@@ -361,11 +361,15 @@ This follows the UX design of Visual Studio Code."
     (evil-paste-after 1)
     (evil-insert-state nil)
     (right-char))
+  (defun ian/pulse-line ()
+    "Flash highlight the current line with reigon face"
+    (interactive)
+    (pulse-momentary-highlight-one-line (point) 'region))
   :config
   (setq-default cursor-type  '(hbar . 5))
   (setq evil-emacs-state-cursor '(hbar . 5))
   (define-key evil-normal-state-map (kbd "C-w C-o") #'(lambda () (interactive) (neotree-hide) (delete-other-windows)))
-  (define-key evil-normal-state-map (kbd "C-o") #'(lambda () (interactive) (evil-jump-backward) (xref-pulse-momentarily)))
+  (define-key evil-normal-state-map (kbd "C-o") #'(lambda () (interactive) (evil-jump-backward) (ian/pulse-line)))
   (global-set-key (kbd "C-x 1") #'(lambda () (interactive) (neotree-hide) (delete-other-windows)))
   (global-set-key (kbd "C-<up>") #'evil-scroll-line-up)
   (global-set-key (kbd "C-<down>") #'evil-scroll-line-down)

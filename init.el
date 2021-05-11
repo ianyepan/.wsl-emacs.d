@@ -752,7 +752,13 @@ This follows the UX design of Visual Studio Code."
   :hook (vterm-mode . (lambda ()
                         (setq-local global-hl-line-mode nil)
                         (setq-local line-spacing nil)))
+  :preface
+  (defun ian/new-vterm-instance ()
+    (interactive)
+    (vterm t))
   :config
+  (with-eval-after-load 'evil
+    (evil-set-initial-state 'vterm-mode 'emacs))
   (define-key vterm-mode-map (kbd "C-l") #'(lambda ()
                                              (interactive)
                                              (vterm-clear)
@@ -763,8 +769,6 @@ This follows the UX design of Visual Studio Code."
   :config
   (setq vterm-toggle-fullscreen-p nil)
   (setq vterm-toggle-scope 'project)
-  (with-eval-after-load 'evil
-    (evil-set-initial-state 'vterm-mode 'emacs))
   (global-set-key (kbd "C-`") #'vterm-toggle)
   (add-to-list 'display-buffer-alist
                '((lambda (bufname _) (with-current-buffer bufname (equal major-mode 'vterm-mode)))

@@ -260,9 +260,18 @@
 
 (use-package xref
   :ensure nil
+  :preface
+  (defun ian/xref-reposition-in-new-buffer (func &rest args)
+    "When xref opens a new buffer, reposition the cursor at 7 lines from top.
+This follows the UX design of Visual Studio Code."
+    (let ((original-buf (current-buffer)))
+      (apply func args)
+      (unless (eq (current-buffer) original-buf)
+        (recenter-top-bottom 7))))
   :config
-  (setq xref-after-jump-hook '(recenter xref-pulse-momentarily))
-  (setq xref-after-return-hook '(recenter xref-pulse-momentarily))
+  (advice-add 'xref-find-definitions :around #'ian/xref-reposition-in-new-buffer)
+  (setq xref-after-jump-hook '(xref-pulse-momentarily))
+  (setq xref-after-return-hook '(xref-pulse-momentarily))
   (setq xref-prompt-for-identifier nil))
 
 (use-package zone

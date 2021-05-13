@@ -643,7 +643,9 @@ This follows the UX design of Visual Studio Code."
   (define-key company-active-map (kbd "<backtab>") 'company-select-previous))
 
 (use-package flycheck
-  :hook ((prog-mode . flycheck-mode))
+  :hook ((prog-mode . flycheck-mode)
+         (markdown-mode . flycheck-mode)
+         (org-mode . flycheck-mode))
   :config
   (setq flycheck-check-syntax-automatically '(save mode-enabled newline))
   (setq flycheck-display-errors-delay 0.1)
@@ -652,7 +654,16 @@ This follows the UX design of Visual Studio Code."
   (setq flycheck-checker-error-threshold 1000)
   (define-key flycheck-mode-map (kbd "<f8>") #'flycheck-next-error)
   (define-key flycheck-mode-map (kbd "S-<f8>") #'flycheck-previous-error)
-  (define-key flycheck-mode-map (kbd "C-<f8>") #'flycheck-list-errors))
+  (define-key flycheck-mode-map (kbd "C-<f8>") #'flycheck-list-errors)
+  (flycheck-define-checker proselint
+    "A linter for prose. Install the executable with `pip3 install proselint'."
+    :command ("proselint" source-inplace)
+    :error-patterns
+    ((warning line-start (file-name) ":" line ":" column ": "
+              (id (one-or-more (not (any " "))))
+              (message) line-end))
+    :modes (markdown-mode org-mode))
+  (add-to-list 'flycheck-checkers 'proselint))
 
 (use-package markdown-mode
   :hook (markdown-mode . auto-fill-mode)

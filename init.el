@@ -198,7 +198,7 @@
   (setq default-frame-alist (append (list '(width . 74) '(height . 35) '(internal-border-width . 2))))
   (blink-cursor-mode +1)
   (setq blink-cursor-blinks -1) ; blink forever
-  (ian/set-default-fonts "Consolas" "YaHei Consolas Hybrid" 100))
+  (ian/set-default-fonts "Hack" "YaHei Consolas Hybrid" 100))
 
 (use-package ediff
   :ensure nil

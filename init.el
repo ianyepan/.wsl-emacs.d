@@ -25,7 +25,7 @@
 (use-package emacs
   :preface
   (defvar ian/indent-width 2)
-  (defun ian/set-default-browser-WSL ()
+  (defun ian/maybe-set-default-browser ()
     "When in WSL Emacs, open links in default Windows 10 browser."
     (cond
      ((eq system-type 'gnu/linux)
@@ -55,12 +55,15 @@
   (setq kill-buffer-query-functions nil)
   (put 'downcase-region 'disabled nil)
   (put 'upcase-region 'disabled nil)
+  (put 'scroll-right 'disabled nil)
+  (put 'scroll-left 'disabled nil)
   (setq-default indent-tabs-mode nil)
   (setq initial-scratch-message "")
   (setq split-width-threshold 100)
   (setq max-specpdl-size 10000)
   (setq max-lisp-eval-depth 10000)
-  (ian/set-default-browser-WSL)
+  (set-default 'truncate-lines t)
+  (ian/maybe-set-default-browser)
   (bind-key* (kbd "C-,") #'ian/edit-config))
 
 (use-package uniquify
@@ -366,8 +369,10 @@ This follows the UX design of Visual Studio Code."
   (define-key evil-normal-state-map (kbd "C-w C-o") #'(lambda () (interactive) (neotree-hide) (delete-other-windows)))
   (define-key evil-normal-state-map (kbd "C-o") #'(lambda () (interactive) (evil-jump-backward) (ian/pulse-line)))
   (global-set-key (kbd "C-x 1") #'(lambda () (interactive) (neotree-hide) (delete-other-windows)))
-  (global-set-key (kbd "C-<up>") #'evil-scroll-line-up)
-  (global-set-key (kbd "C-<down>") #'evil-scroll-line-down)
+  (global-set-key (kbd "M-<up>") #'(lambda () (interactive) (scroll-down 2)))
+  (global-set-key (kbd "M-<down>") #'(lambda () (interactive) (scroll-up 2)))
+  (define-key evil-normal-state-map (kbd "M-<left>") #'(lambda () (interactive) (scroll-right 3)))
+  (define-key evil-normal-state-map (kbd "M-<right>") #'(lambda () (interactive) (scroll-left 3)))
   (global-set-key (kbd "<mouse-2>") #'mouse-set-point)
   (define-key evil-normal-state-map (kbd "z <return>") #'evil-scroll-line-to-top)
   (define-key evil-insert-state-map (kbd "C-n") nil) ; avoid conflict with company tooltip selection

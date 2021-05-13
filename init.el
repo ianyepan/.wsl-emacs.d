@@ -813,6 +813,8 @@ This follows the UX design of Visual Studio Code."
   :config
   (setq-default olivetti-body-width fill-column))
 
+(use-package writegood-mode)
+
 (use-package speed-type)
 
 (use-package emojify

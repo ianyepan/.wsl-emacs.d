@@ -910,9 +910,8 @@ This follows the UX design of Visual Studio Code."
       (neotree-toggle)
       (if project-dir
           (when (neo-global--window-exists-p)
-            (progn
-              (neotree-dir project-dir)
-              (neotree-find file-name)))
+            (neotree-dir project-dir)
+            (neotree-find file-name))
         (message "Could not find projectile project root."))))
   :custom-face
   (neo-dir-link-face  ((t (:inherit variable-pitch))))

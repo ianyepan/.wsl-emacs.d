@@ -561,7 +561,7 @@ This follows the UX design of Visual Studio Code."
 (use-package lsp-ui
   :preface
   (defun ian/lsp-ui-doc-show ()
-    "Sometimes lsp-ui-doc-show needs more than 1 call to display correctly."
+    "Sometimes lsp-ui-doc-show needs more than one call to display correctly."
     (interactive)
     (lsp-ui-doc-hide)
     (lsp-ui-doc-show)
@@ -909,10 +909,10 @@ This follows the UX design of Visual Studio Code."
           (file-name (buffer-file-name)))
       (neotree-toggle)
       (if project-dir
-          (if (neo-global--window-exists-p)
-              (progn
-                (neotree-dir project-dir)
-                (neotree-find file-name)))
+          (when (neo-global--window-exists-p)
+            (progn
+              (neotree-dir project-dir)
+              (neotree-find file-name)))
         (message "Could not find projectile project root."))))
   :custom-face
   (neo-dir-link-face  ((t (:inherit variable-pitch))))

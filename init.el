@@ -5,8 +5,8 @@
 ;;; Code:
 
 ;; GccEmacs (native-comp) stuff
-(setq comp-deferred-compilation t)
-(setq comp-async-report-warnings-errors nil)
+;; (setq comp-deferred-compilation t)
+;; (setq comp-async-report-warnings-errors nil)
 
 (require 'package)
 (add-to-list 'package-archives '("gnu"   . "https://elpa.gnu.org/packages/"))

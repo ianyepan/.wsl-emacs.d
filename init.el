@@ -292,21 +292,15 @@ This follows the UX design of Visual Studio Code."
 ;; GUI enhancements
 
 (use-package solaire-mode
-  :hook ((change-major-mode . turn-on-solaire-mode)
-         (after-revert . turn-on-solaire-mode)
-         (ediff-prepare-buffer . solaire-mode)
-         (minibuffer-setup . solaire-mode-in-minibuffer))
   :config
   (add-to-list 'solaire-mode-themes-to-face-swap '"vscode-dark-plus")
   (add-to-list 'solaire-mode-themes-to-face-swap '"wilmersdorf")
-  (setq solaire-mode-auto-swap-bg t)
   (solaire-global-mode +1))
 
 ;; (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
 ;; (load-theme 'default-dark t)
 
 (use-package doom-themes
-  :after solaire-mode
   :custom-face
   (cursor                         ((t (:background "#eeeeee"))))
   (region                         ((t (:extend nil))))

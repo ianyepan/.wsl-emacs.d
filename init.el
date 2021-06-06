@@ -953,6 +953,13 @@ This follows the UX design of Visual Studio Code."
   (add-to-list 'org-file-apps '("\\.pdf\\'" . emacs))
   (setq org-html-checkbox-type 'html))
 
+(use-package company-org-block
+  :hook ((org-mode . (lambda ()
+                       (setq-local company-backends '(company-org-block))
+                       (company-mode +1))))
+  :config
+  (setq company-org-block-edit-style 'inline))
+
 (use-package org-bullets
   :hook (org-mode . org-bullets-mode))
 

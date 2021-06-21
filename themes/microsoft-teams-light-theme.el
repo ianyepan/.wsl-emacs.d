@@ -124,7 +124,7 @@
    `(show-paren-match-face                    ((,class (:background ,warning))))
    `(show-paren-match                         ((t (:foreground ,fg3 :background ,bg4 :bold t))))
    `(show-paren-mismatch                      ((t (:background ,warning))))
-   `(isearch                                  ((,class (:background "#613214"))))
+   `(isearch                                  ((,class (:background ,bg-hl))))
    `(vertical-border                          ((,class (:foreground "black"))))
    `(minibuffer-prompt                        ((,class (:foreground ,ms-bluegreen :weight normal))))
    `(link                                     ((,class (:foreground "#3794ff"))))
@@ -239,7 +239,7 @@
 
    `(slime-repl-inputed-output-face           ((,class (:foreground ,type))))
    `(trailing-whitespace                      ((,class :foreground nil :background ,warning)))
-   `(lazy-highlight                           ((,class (:background "#613214"))))
+   `(lazy-highlight                           ((,class (:background ,bg-hl))))
 
    `(undo-tree-visualizer-current-face        ((,class :foreground ,builtin)))
    `(undo-tree-visualizer-default-face        ((,class :foreground ,fg2)))

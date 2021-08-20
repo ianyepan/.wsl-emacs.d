@@ -293,32 +293,34 @@ This follows the UX design of Visual Studio Code."
 
 (use-package solaire-mode
   :config
-  (add-to-list 'solaire-mode-themes-to-face-swap '"vscode-dark-plus")
-  (add-to-list 'solaire-mode-themes-to-face-swap '"wilmersdorf")
   (solaire-global-mode +1))
+
+(use-package vscode-dark-plus-theme
+  :config
+  (load-theme 'vscode-dark-plus t))
 
 ;; (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
 ;; (load-theme 'default-dark t)
 
-(use-package doom-themes
-  :custom-face
-  (cursor                         ((t (:background "#eeeeee"))))
-  (region                         ((t (:extend nil))))
-  (font-lock-comment-face         ((t (:italic t))))
-  (sml/modified                   ((t (:foreground "white" :bold t))))
-  (hl-todo                        ((t (:inverse-video nil :italic t :bold t))))
-  (highlight-symbol-face          ((t (:background "#355266" :distant-foreground "#bbbbbb"))))
-  (show-paren-match               ((t (:foreground "#eeeeee" :background "#444444" :bold t))))
-  (highlight                      ((t (:foreground "#4db2ff" :background nil :underline t)))) ; link hover
-  (link                           ((t (:foreground "#3794ff"))))
-  (evil-ex-substitute-replacement ((t (:strike-through nil))))
-  (vertical-border                ((t (:foreground "black" :background "black"))))
-  (fringe                         ((t (:background nil))))
-  :config
-  (setq doom-themes-enable-bold nil)
-  (setq doom-gruvbox-dark-variant "hard")
-  (setq doom-solarized-dark-brighter-text t)
-  (load-theme 'doom-nord t))
+;; (use-package doom-themes
+;;   :custom-face
+;;   (cursor                         ((t (:background "#eeeeee"))))
+;;   (region                         ((t (:extend nil))))
+;;   (font-lock-comment-face         ((t (:italic t))))
+;;   (sml/modified                   ((t (:foreground "white" :bold t))))
+;;   (hl-todo                        ((t (:inverse-video nil :italic t :bold t))))
+;;   (highlight-symbol-face          ((t (:background "#355266" :distant-foreground "#bbbbbb"))))
+;;   (show-paren-match               ((t (:foreground "#eeeeee" :background "#444444" :bold t))))
+;;   (highlight                      ((t (:foreground "#4db2ff" :background nil :underline t)))) ; link hover
+;;   (link                           ((t (:foreground "#3794ff"))))
+;;   (evil-ex-substitute-replacement ((t (:strike-through nil))))
+;;   (vertical-border                ((t (:foreground "black" :background "black"))))
+;;   (fringe                         ((t (:background nil))))
+;;   :config
+;;   (setq doom-themes-enable-bold nil)
+;;   (setq doom-gruvbox-dark-variant "hard")
+;;   (setq doom-solarized-dark-brighter-text t)
+;;   (load-theme 'doom-solarized-dark t))
 
 (use-package highlight-symbol
   :hook (prog-mode . highlight-symbol-mode)
@@ -856,29 +858,29 @@ This follows the UX design of Visual Studio Code."
 ;;   :config
 ;;   (pdf-loader-install))
 
-(use-package eaf
-  :load-path "~/.emacs.d/site-lisp/emacs-application-framework"
-  :init
-  (use-package epc      :defer t)
-  (use-package ctable   :defer t)
-  (use-package deferred :defer t)
-  (use-package s        :defer t)
-  :config
-  (setq eaf-find-file-ext-blacklist '("png" "jpg" "gif"))
-  ;; (setq eaf-enable-debug t)
-  (add-hook 'eaf-mode-hook 'evil-emacs-state) ; better keybinding support
-  (eaf-setq eaf-browser-enable-adblocker "true")
-  (eaf-setq eaf-pdf-dark-mode "false")
-  (eaf-bind-key quit-window      "q"       eaf-pdf-viewer-keybinding)
-  (eaf-bind-key zoom_out         "C--"     eaf-pdf-viewer-keybinding)
-  (eaf-bind-key zoom_in          "C-="     eaf-pdf-viewer-keybinding)
-  (eaf-bind-key zoom_reset       "C-0"     eaf-pdf-viewer-keybinding)
-  (eaf-bind-key scroll_up_page   "<next>"  eaf-pdf-viewer-keybinding)
-  (eaf-bind-key scroll_down_page "<prior>" eaf-pdf-viewer-keybinding)
-  (eaf-bind-key scroll_up_page   "d"       eaf-pdf-viewer-keybinding)
-  (eaf-bind-key scroll_down_page "u"       eaf-pdf-viewer-keybinding)
-  (eaf-bind-key scroll_to_begin  "<home>"  eaf-pdf-viewer-keybinding)
-  (eaf-bind-key scroll_to_end    "<end>"   eaf-pdf-viewer-keybinding))
+; (use-package eaf
+;   :load-path "~/.emacs.d/site-lisp/emacs-application-framework"
+;   :init
+;   (use-package epc      :defer t)
+;   (use-package ctable   :defer t)
+;   (use-package deferred :defer t)
+;   (use-package s        :defer t)
+;   :config
+;   (setq eaf-find-file-ext-blacklist '("png" "jpg" "gif"))
+;   ;; (setq eaf-enable-debug t)
+;   (add-hook 'eaf-mode-hook 'evil-emacs-state) ; better keybinding support
+;   (eaf-setq eaf-browser-enable-adblocker "true")
+;   (eaf-setq eaf-pdf-dark-mode "false")
+;   (eaf-bind-key quit-window      "q"       eaf-pdf-viewer-keybinding)
+;   (eaf-bind-key zoom_out         "C--"     eaf-pdf-viewer-keybinding)
+;   (eaf-bind-key zoom_in          "C-="     eaf-pdf-viewer-keybinding)
+;   (eaf-bind-key zoom_reset       "C-0"     eaf-pdf-viewer-keybinding)
+;   (eaf-bind-key scroll_up_page   "<next>"  eaf-pdf-viewer-keybinding)
+;   (eaf-bind-key scroll_down_page "<prior>" eaf-pdf-viewer-keybinding)
+;   (eaf-bind-key scroll_up_page   "d"       eaf-pdf-viewer-keybinding)
+;   (eaf-bind-key scroll_down_page "u"       eaf-pdf-viewer-keybinding)
+;   (eaf-bind-key scroll_to_begin  "<home>"  eaf-pdf-viewer-keybinding)
+;   (eaf-bind-key scroll_to_end    "<end>"   eaf-pdf-viewer-keybinding))
 
 (use-package minions
   :config
@@ -952,13 +954,6 @@ This follows the UX design of Visual Studio Code."
   (setq org-todo-keywords '((sequence "TODO" "DOING" "DONE")))
   (add-to-list 'org-file-apps '("\\.pdf\\'" . emacs))
   (setq org-html-checkbox-type 'html))
-
-(use-package company-org-block
-  :hook ((org-mode . (lambda ()
-                       (setq-local company-backends '(company-org-block))
-                       (company-mode +1))))
-  :config
-  (setq company-org-block-edit-style 'inline))
 
 (use-package org-bullets
   :hook (org-mode . org-bullets-mode))

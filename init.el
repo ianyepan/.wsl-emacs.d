@@ -786,6 +786,8 @@ This follows the UX design of Visual Studio Code."
   (add-to-list 'display-buffer-alist
                '((lambda (bufname _) (with-current-buffer bufname (equal major-mode 'vterm-mode)))
                  (display-buffer-reuse-window display-buffer-at-bottom)
+                 (direction . bottom)
+                 (dedicated . t)
                  (reusable-frames . visible)
                  (window-height . 0.7))))
 

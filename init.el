@@ -733,7 +733,9 @@ This follows the UX design of Visual Studio Code."
   (defalias 'format-document #'ian/format-code)
   :config
   (global-set-key (kbd "M-F") #'ian/format-code)
-  (add-hook 'prog-mode-hook #'format-all-ensure-formatter))
+  (add-hook 'prog-mode-hook #'format-all-ensure-formatter)
+  (add-hook 'python-mode-hook #'(lambda ()
+                                  (setq-local format-all-formatters '(("Python" yapf))))))
 
 (use-package rainbow-mode
   :config

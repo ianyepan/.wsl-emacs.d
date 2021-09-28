@@ -264,12 +264,12 @@
   :ensure nil
   :preface
   (defun ian/xref-reposition-in-new-buffer (func &rest args)
-    "When xref opens a new buffer, reposition the cursor at 7 lines from top.
+    "When xref opens a new buffer, reposition the cursor at 1/4 window height from top.
 This follows the UX design of Visual Studio Code."
     (let ((original-buf (current-buffer)))
       (apply func args)
       (unless (eq (current-buffer) original-buf)
-        (recenter-top-bottom 7))))
+        (recenter-top-bottom (/ (window-body-height) 4)))))
   :config
   (advice-add 'xref-find-definitions :around #'ian/xref-reposition-in-new-buffer)
   (setq xref-after-jump-hook '(xref-pulse-momentarily))

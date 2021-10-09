@@ -201,7 +201,7 @@
   (setq default-frame-alist (append (list '(width . 74) '(height . 35) '(internal-border-width . 2))))
   (blink-cursor-mode +1)
   (setq blink-cursor-blinks -1) ; blink forever
-  (ian/set-default-fonts "Consolas" "YaHei Consolas Hybrid" 100))
+  (ian/set-default-fonts "Consolas" "YaHei Consolas Hybrid" 75)) ; 75, 100
 
 (use-package ediff
   :ensure nil
@@ -258,7 +258,7 @@
   :ensure nil
   :config
   (when (member "Segoe UI" (font-family-list))
-    (set-face-attribute 'variable-pitch nil :family "Segoe UI" :height 95 :weight 'normal)))
+    (set-face-attribute 'variable-pitch nil :family "Segoe UI" :height 70 :weight 'normal)))
 
 (use-package xref
   :ensure nil
@@ -295,32 +295,32 @@ This follows the UX design of Visual Studio Code."
   :config
   (solaire-global-mode +1))
 
-(use-package vscode-dark-plus-theme
-  :config
-  (load-theme 'vscode-dark-plus t))
+;; (use-package vscode-dark-plus-theme
+;;   :config
+;;   (load-theme 'vscode-dark-plus t))
 
 ;; (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
 ;; (load-theme 'default-dark t)
 
-;; (use-package doom-themes
-;;   :custom-face
-;;   (cursor                         ((t (:background "#eeeeee"))))
-;;   (region                         ((t (:extend nil))))
-;;   (font-lock-comment-face         ((t (:italic t))))
-;;   (sml/modified                   ((t (:foreground "white" :bold t))))
-;;   (hl-todo                        ((t (:inverse-video nil :italic t :bold t))))
-;;   (highlight-symbol-face          ((t (:background "#355266" :distant-foreground "#bbbbbb"))))
-;;   (show-paren-match               ((t (:foreground "#eeeeee" :background "#444444" :bold t))))
-;;   (highlight                      ((t (:foreground "#4db2ff" :background nil :underline t)))) ; link hover
-;;   (link                           ((t (:foreground "#3794ff"))))
-;;   (evil-ex-substitute-replacement ((t (:strike-through nil))))
-;;   (vertical-border                ((t (:foreground "black" :background "black"))))
-;;   (fringe                         ((t (:background nil))))
-;;   :config
-;;   (setq doom-themes-enable-bold nil)
-;;   (setq doom-gruvbox-dark-variant "hard")
-;;   (setq doom-solarized-dark-brighter-text t)
-;;   (load-theme 'doom-solarized-dark t))
+(use-package doom-themes
+  :custom-face
+  (cursor                         ((t (:background "#eeeeee"))))
+  (region                         ((t (:extend nil))))
+  (font-lock-comment-face         ((t (:italic t))))
+  (sml/modified                   ((t (:foreground "white" :bold t))))
+  (hl-todo                        ((t (:inverse-video nil :italic t :bold t))))
+  (highlight-symbol-face          ((t (:background "#355266" :distant-foreground "#bbbbbb"))))
+  (show-paren-match               ((t (:foreground "#eeeeee" :background "#444444" :bold t))))
+  (highlight                      ((t (:foreground "#4db2ff" :background nil :underline t)))) ; link hover
+  (link                           ((t (:foreground "#3794ff"))))
+  (evil-ex-substitute-replacement ((t (:strike-through nil))))
+  (vertical-border                ((t (:foreground "black" :background "black"))))
+  (fringe                         ((t (:background nil))))
+  :config
+  (setq doom-themes-enable-bold nil)
+  (setq doom-gruvbox-dark-variant "hard")
+  (setq doom-solarized-dark-brighter-text t)
+  (load-theme 'doom-one t))
 
 (use-package highlight-symbol
   :hook (prog-mode . highlight-symbol-mode)
@@ -523,6 +523,7 @@ This follows the UX design of Visual Studio Code."
           typescript-mode ; ts-ls (tsserver wrapper)
           python-mode     ; pyright
           web-mode        ; ts-ls/HTML/CSS
+          haskell-mode
           ) . lsp-deferred)
   :custom-face
   (lsp-headerline-breadcrumb-symbols-face                ((t (:inherit variable-pitch))))
@@ -582,6 +583,8 @@ This follows the UX design of Visual Studio Code."
   :after lsp
   :config
   (define-key java-mode-map (kbd "C-c i") #'lsp-java-add-import))
+
+(use-package lsp-haskell)
 
 (use-package lsp-pyright
   :hook (python-mode . (lambda () (require 'lsp-pyright)))

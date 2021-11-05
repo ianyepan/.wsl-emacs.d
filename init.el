@@ -258,7 +258,7 @@
   :ensure nil
   :config
   (when (member "Segoe UI" (font-family-list))
-    (set-face-attribute 'variable-pitch nil :family "Segoe UI" :height 70 :weight 'normal)))
+    (set-face-attribute 'variable-pitch nil :family "Segoe UI" :height 90 :weight 'normal)))
 
 (use-package xref
   :ensure nil
@@ -740,7 +740,9 @@ This follows the UX design of Visual Studio Code."
   (global-set-key (kbd "M-F") #'ian/format-code)
   (add-hook 'prog-mode-hook #'format-all-ensure-formatter)
   (add-hook 'python-mode-hook #'(lambda ()
-                                  (setq-local format-all-formatters '(("Python" yapf))))))
+                                  (setq-local format-all-formatters '(("Python" yapf)))))
+  (add-hook 'sql-mode-hook #'(lambda ()
+                               (setq-local format-all-formatters '(("SQL" pgformatter))))))
 
 (use-package rainbow-mode
   :config

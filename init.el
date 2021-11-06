@@ -196,12 +196,22 @@
                           charset (font-spec :family chinese-font
                                              :size (*(/ font-size 10) 1.0)))))
     (setq-default line-spacing (if is-using-undersized-font 2 0)))
+  (defun ian/set-big-fonts ()
+    (interactive)
+    (ian/set-default-fonts "Consolas" "YaHei Consolas Hybrid" 100)
+    (when (member "Segoe UI" (font-family-list))
+      (set-face-attribute 'variable-pitch nil :family "Segoe UI" :height 90 :weight 'normal)))
+  (defun ian/set-small-fonts ()
+    (interactive)
+    (ian/set-default-fonts "Consolas" "YaHei Consolas Hybrid" 75)
+    (when (member "Segoe UI" (font-family-list))
+      (set-face-attribute 'variable-pitch nil :family "Segoe UI" :height 70 :weight 'normal)))
   :ensure nil
   :config
   (setq default-frame-alist (append (list '(width . 74) '(height . 35) '(internal-border-width . 2))))
   (blink-cursor-mode +1)
   (setq blink-cursor-blinks -1) ; blink forever
-  (ian/set-default-fonts "Consolas" "YaHei Consolas Hybrid" 75)) ; 75, 100
+  (ian/set-big-fonts))
 
 (use-package ediff
   :ensure nil
@@ -253,12 +263,6 @@
   :hook (prog-mode . display-line-numbers-mode)
   :config
   (setq-default display-line-numbers-width 3))
-
-(use-package faces
-  :ensure nil
-  :config
-  (when (member "Segoe UI" (font-family-list))
-    (set-face-attribute 'variable-pitch nil :family "Segoe UI" :height 90 :weight 'normal)))
 
 (use-package xref
   :ensure nil

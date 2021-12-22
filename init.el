@@ -179,7 +179,7 @@
 (use-package frame
   :preface
   (defconst small-fonts-list '("Consolas"))
-  (defun ian/set-default-fonts (english-font chinese-font font-size)
+  (defun ian/set-default-fonts (english-font chinese-font font-size font-weight)
     "Set the default Latin and CJK font families, as well as the line height."
     (interactive)
     (defvar is-using-undersized-font nil)
@@ -189,21 +189,21 @@
           (setq is-using-undersized-font t))
       (setq is-using-undersized-font nil))
     (when (member english-font (font-family-list))
-      (set-face-attribute 'default nil :family english-font :height font-size))
+      (set-face-attribute 'default nil :family english-font :height font-size :weight font-weight))
     (when (member chinese-font (font-family-list))
       (dolist (charset '(kana han symbol cjk-misc bopomofo))
         (set-fontset-font (frame-parameter nil 'font)
                           charset (font-spec :family chinese-font
                                              :size (*(/ font-size 10) 1.0)))))
-    (setq-default line-spacing (if is-using-undersized-font 2 0)))
+    (setq-default line-spacing (if is-using-undersized-font 3 1)))
   (defun ian/set-big-fonts ()
     (interactive)
-    (ian/set-default-fonts "Consolas" "YaHei Consolas Hybrid" 100)
+    (ian/set-default-fonts "Consolas" "YaHei Consolas Hybrid" 100 'normal)
     (when (member "Segoe UI" (font-family-list))
-      (set-face-attribute 'variable-pitch nil :family "Segoe UI" :height 90 :weight 'normal)))
+      (set-face-attribute 'variable-pitch nil :family "Segoe UI" :height 95 :weight 'normal)))
   (defun ian/set-small-fonts ()
     (interactive)
-    (ian/set-default-fonts "Consolas" "YaHei Consolas Hybrid" 75)
+    (ian/set-default-fonts "Consolas" "YaHei Consolas Hybrid" 70 'normal)
     (when (member "Segoe UI" (font-family-list))
       (set-face-attribute 'variable-pitch nil :family "Segoe UI" :height 70 :weight 'normal)))
   :ensure nil

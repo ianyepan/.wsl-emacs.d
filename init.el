@@ -612,11 +612,12 @@ This follows the UX design of Visual Studio Code."
 
 (use-package tree-sitter
   :custom-face
-  (tree-sitter-hl-face:method.call   ((t (:inherit font-lock-function-name-face))))
-  (tree-sitter-hl-face:function.call ((t (:inherit font-lock-function-name-face))))
-  (tree-sitter-hl-face:operator      ((t (:inherit default))))
-  (tree-sitter-hl-face:type.builtin  ((t (:inherit font-lock-type-face))))
-  (tree-sitter-hl-face:number        ((t (:inherit highlight-numbers-number))))
+  (tree-sitter-hl-face:method.call      ((t (:inherit font-lock-function-name-face))))
+  (tree-sitter-hl-face:function.call    ((t (:inherit font-lock-function-name-face))))
+  (tree-sitter-hl-face:function.builtin ((t (:inherit font-lock-function-name-face))))
+  (tree-sitter-hl-face:operator         ((t (:inherit default))))
+  (tree-sitter-hl-face:type.builtin     ((t (:inherit font-lock-type-face))))
+  (tree-sitter-hl-face:number           ((t (:inherit highlight-numbers-number))))
   :config
   (global-tree-sitter-mode)
   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))

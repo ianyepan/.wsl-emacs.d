@@ -848,7 +848,6 @@ This follows the UX design of Visual Studio Code."
   :config
   (setq company-box-doc-enable nil)
   (setq company-box-scrollbar nil)
-  (setq company-box-max-candidates 50)
   (setq company-box-frame-behavior 'point))
 
 (use-package all-the-icons

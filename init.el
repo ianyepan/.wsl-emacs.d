@@ -96,7 +96,7 @@
 (use-package files
   :ensure nil
   :config
-  (remove-hook 'find-file-hooks 'vc-refresh-state) ; makes open files faster
+  (remove-hook 'find-file-hook 'vc-refresh-state) ; makes open files faster
   (setq confirm-kill-processes nil)
   (setq create-lockfiles nil) ; don't create .# files (crashes 'npm start')
   (setq make-backup-files nil)

@@ -178,7 +178,8 @@
 
 (use-package frame
   :preface
-  (defconst small-fonts-list '("Consolas"))
+  (defconst small-fonts-list '("Consolas" "Ubuntu Mono" "Fixedsys Excelsior"))
+  (defconst tight-fonts-list '("Consolas" "Ubuntu Mono" "Fixedsys Excelsior"))
   (defun ian/set-default-fonts (english-font chinese-font font-size font-weight)
     "Set the default Latin and CJK font families, as well as the line height."
     (interactive)
@@ -195,10 +196,10 @@
         (set-fontset-font (frame-parameter nil 'font)
                           charset (font-spec :family chinese-font
                                              :size (*(/ font-size 10) 1.0)))))
-    (setq-default line-spacing (if is-using-undersized-font 3 1)))
+    (setq-default line-spacing (if (member english-font tight-fonts-list) 3 1)))
   (defun ian/set-big-fonts ()
     (interactive)
-    (ian/set-default-fonts "Consolas" "YaHei Consolas Hybrid" 100 'normal)
+    (ian/set-default-fonts "Consolas" "YaHei Consolas Hybrid" 105 'normal)
     (when (member "Segoe UI" (font-family-list))
       (set-face-attribute 'variable-pitch nil :family "Segoe UI" :height 95 :weight 'normal)))
   (defun ian/set-small-fonts ()

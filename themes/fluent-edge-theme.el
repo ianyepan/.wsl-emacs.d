@@ -35,7 +35,7 @@
       (bg00              "#000000")
       (bg0               "#1e1e1e")
       (bg1               "#242424") ; default bg
-      (bg2               "#3f3f3f")
+      (bg2               "#2e2e2e")
       (bg3               "#4a4a4a")
       (bg4               "#5f5f5f")
       (bg-hl             "#264f7a")
@@ -467,11 +467,11 @@
    `(diff-hl-delete                           ((t (:background ,vc-r :foreground ,vc-r))))
    `(diff-hl-change                           ((t (:background ,vc-b :foreground ,vc-b))))
 
-   `(neo-dir-link-face                        ((t (:foreground "#dddddd" :family "Sans Serif"))))
-   `(neo-header-face                          ((t (:foreground "#dddddd" :family "Sans Serif"))))
-   `(neo-banner-face                          ((t (:foreground "#dddddd" :family "Sans Serif"))))
-   `(neo-root-dir-face                        ((t (:foreground "#dddddd" :family "Sans Serif"))))
-   `(neo-file-link-face                       ((t (:foreground "#dddddd" :family "Sans Serif"))))
+   `(neo-dir-link-face                        ((t (:foreground "#dddddd"))))
+   `(neo-header-face                          ((t (:foreground "#dddddd"))))
+   `(neo-banner-face                          ((t (:foreground "#dddddd"))))
+   `(neo-root-dir-face                        ((t (:foreground "#dddddd"))))
+   `(neo-file-link-face                       ((t (:foreground "#dddddd"))))
    `(neo-expand-btn-face                      ((t (:foreground "#dddddd"))))
 
    `(sml/global                               ((t (:foreground ,fg1 :weight normal))))

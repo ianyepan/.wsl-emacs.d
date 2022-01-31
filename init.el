@@ -944,7 +944,6 @@ This follows the UX design of Visual Studio Code."
                                  (hl-line-mode +1)
                                  (setq-local line-spacing nil)))
   (global-set-key (kbd "C-S-e") #'ian/neotree-project-toggle)
-  (global-set-key (kbd "C-x e") #'ian/neotree-project-toggle)
   (define-key neotree-mode-map (kbd "<f5>") #'(lambda ()
                                                 (interactive)
                                                 (neotree-refresh)

@@ -85,7 +85,7 @@
       (gh-orange         "#ffa657")
       (gh-lightorange    "#ffc680")
       (gh-red            "#ff7b72")
-      (gh-green          "#3fb950")
+      (gh-green          "#7ee787")
       (gh-blue           "#58a6ff")
       (gh-lightred       "#ffa198")
       (gh-lightgreen     "#7ee787")

@@ -723,9 +723,11 @@ This follows the UX design of Visual Studio Code."
   (defun ian/format-code ()
     "Auto-format whole buffer."
     (interactive)
-    (if (derived-mode-p 'prolog-mode)
-        (prolog-indent-buffer)
-      (format-all-buffer)))
+    (let ((windowstart (window-start)))
+      (if (derived-mode-p 'prolog-mode)
+          (prolog-indent-buffer)
+        (format-all-buffer))
+      (set-window-start (selected-window) windowstart)))
   (defalias 'format-document #'ian/format-code)
   :config
   (global-set-key (kbd "C-M-l") #'ian/format-code) ; inspired by IntelliJ IDEA

@@ -813,7 +813,10 @@ This follows the UX design of Visual Studio Code."
   (setq dashboard-items nil)
   (setq dashboard-set-footer t)
   (setq dashboard-footer-icon "")
-  (setq dashboard-footer-messages '("😈 Happy hacking!   "))
+  (setq dashboard-footer-messages '("😈 Happy hacking!   "
+                                    "👽 Happy hacking!   "
+                                    "👻 Happy hacking!   "
+                                    "💀 Happy hacking!   "))
   (define-key dashboard-mode-map (kbd "<f5>") #'(lambda ()
                                                   (interactive)
                                                   (dashboard-refresh-buffer)

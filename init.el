@@ -231,10 +231,6 @@
   :ensure nil
   :hook (prog-mode . electric-pair-local-mode))
 
-(use-package whitespace
-  :ensure nil
-  :hook (before-save . whitespace-cleanup))
-
 (use-package dired
   :ensure nil
   :hook ((dired-mode . dired-hide-details-mode)

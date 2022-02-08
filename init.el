@@ -581,9 +581,12 @@ This follows the UX design of Visual Studio Code."
   (setq lsp-ui-sideline-delay 0.05))
 
 (use-package lsp-java
-  :after lsp
-  :config
-  (define-key java-mode-map (kbd "C-c i") #'lsp-java-add-import))
+  :after lsp)
+
+(use-package java
+  :ensure nil
+  :after lsp-java
+  :bind (:map java-mode-map ("C-c i" . lsp-java-add-import)))
 
 (use-package lsp-haskell)
 

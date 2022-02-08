@@ -59,7 +59,7 @@
   (put 'scroll-left 'disabled nil)
   (setq-default indent-tabs-mode nil)
   (setq initial-scratch-message "")
-  (setq split-width-threshold 100)
+  (setq split-width-threshold 150)
   (setq max-specpdl-size 10000)
   (setq max-lisp-eval-depth 10000)
   (set-default 'truncate-lines t)

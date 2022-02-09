@@ -790,7 +790,7 @@ This follows the UX design of Visual Studio Code."
                  (direction . bottom)
                  (dedicated . t)
                  (reusable-frames . visible)
-                 (window-height . 0.7))))
+                 (window-height . 0.5))))
 
 ;; Misc
 

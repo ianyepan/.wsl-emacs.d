@@ -799,7 +799,7 @@ This follows the UX design of Visual Studio Code."
   (require 'sublimity-scroll)
   (setq sublimity-scroll-vertical-frame-delay 0.0001)
   (setq sublimity-scroll-weight 4)
-  (setq sublimity-scroll-drift-length 12)
+  (setq sublimity-scroll-drift-length 1)
   (sublimity-mode +1))
 
 (use-package dashboard

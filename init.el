@@ -899,14 +899,8 @@ This follows the UX design of Visual Studio Code."
   :config
   (setq minions-mode-line-lighter "")
   (setq minions-mode-line-delimiters '("" . ""))
+  (setq-default mode-line-buffer-identification '("%b // " (:eval (projectile-project-name))))
   (minions-mode +1))
-
-(use-package smart-mode-line
-  :config
-  (setq sml/no-confirm-load-theme t)
-  (setq sml/modified-char "*")
-  (setq sml/theme 'respectful)
-  (sml/setup))
 
 (use-package neotree
   :after projectile

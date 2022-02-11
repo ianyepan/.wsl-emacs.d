@@ -673,6 +673,8 @@ This follows the UX design of Visual Studio Code."
 
 (use-package vimrc-mode)
 
+(use-package cmake-font-lock)
+
 (use-package yaml-mode)
 
 (use-package haskell-mode)

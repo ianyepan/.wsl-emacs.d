@@ -524,7 +524,7 @@ This follows the UX design of Visual Studio Code."
           typescript-mode ; ts-ls (tsserver wrapper)
           python-mode     ; pyright
           web-mode        ; ts-ls/HTML/CSS
-          haskell-mode
+          haskell-mode    ; haskell-language-server
           ) . lsp-deferred)
   :custom-face
   (lsp-headerline-breadcrumb-symbols-face                ((t (:inherit variable-pitch))))

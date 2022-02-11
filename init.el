@@ -859,38 +859,6 @@ This follows the UX design of Visual Studio Code."
   (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
   (ivy-rich-mode +1))
 
-;; (use-package pdf-tools
-;;   :mode (("\\.pdf\\'" . pdf-view-mode))
-;;   :bind ((:map pdf-view-mode-map ("C--" . pdf-view-shrink))
-;;          (:map pdf-view-mode-map ("C-=" . pdf-view-enlarge))
-;;          (:map pdf-view-mode-map ("C-0" . pdf-view-scale-reset)))
-;;   :config
-;;   (pdf-loader-install))
-
-;; (use-package eaf
-;;   :load-path "~/.emacs.d/site-lisp/emacs-application-framework"
-;;   :init
-;;   (use-package epc      :defer t)
-;;   (use-package ctable   :defer t)
-;;   (use-package deferred :defer t)
-;;   (use-package s        :defer t)
-;;   :config
-;;   (setq eaf-find-file-ext-blacklist '("png" "jpg" "gif"))
-;;   ;; (setq eaf-enable-debug t)
-;;   (add-hook 'eaf-mode-hook 'evil-emacs-state) ; better keybinding support
-;;   (eaf-setq eaf-browser-enable-adblocker "true")
-;;   (eaf-setq eaf-pdf-dark-mode "false")
-;;   (eaf-bind-key quit-window      "q"       eaf-pdf-viewer-keybinding)
-;;   (eaf-bind-key zoom_out         "C--"     eaf-pdf-viewer-keybinding)
-;;   (eaf-bind-key zoom_in          "C-="     eaf-pdf-viewer-keybinding)
-;;   (eaf-bind-key zoom_reset       "C-0"     eaf-pdf-viewer-keybinding)
-;;   (eaf-bind-key scroll_up_page   "<next>"  eaf-pdf-viewer-keybinding)
-;;   (eaf-bind-key scroll_down_page "<prior>" eaf-pdf-viewer-keybinding)
-;;   (eaf-bind-key scroll_up_page   "d"       eaf-pdf-viewer-keybinding)
-;;   (eaf-bind-key scroll_down_page "u"       eaf-pdf-viewer-keybinding)
-;;   (eaf-bind-key scroll_to_begin  "<home>"  eaf-pdf-viewer-keybinding)
-;;   (eaf-bind-key scroll_to_end    "<end>"   eaf-pdf-viewer-keybinding))
-
 (use-package minions
   :config
   (setq minions-mode-line-lighter "")

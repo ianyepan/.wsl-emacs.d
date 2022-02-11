@@ -363,7 +363,6 @@ This follows the UX design of Visual Studio Code."
   :config
   (setq-default cursor-type  '(hbar . 5))
   (setq evil-emacs-state-cursor '(hbar . 5))
-  (define-key evil-normal-state-map (kbd "C-w C-o") #'(lambda () (interactive) (neotree-hide) (delete-other-windows)))
   (define-key evil-normal-state-map (kbd "C-o") #'(lambda () (interactive) (evil-jump-backward) (ian/pulse-line)))
   (global-set-key (kbd "C-x 1") #'(lambda () (interactive) (neotree-hide) (delete-other-windows)))
   (global-set-key (kbd "M-<up>") #'(lambda () (interactive) (scroll-down 2)))
@@ -455,8 +454,6 @@ This follows the UX design of Visual Studio Code."
   (global-set-key (kbd "s-P")           #'counsel-M-x)
   (global-set-key (kbd "C-S-p")         #'counsel-M-x)
   (global-set-key (kbd "M-x")           #'counsel-M-x)
-  (global-set-key (kbd "C-x <C-right>") #'counsel-find-file) ; autohotkey fix
-  (global-set-key (kbd "C-x <right>")   #'counsel-find-file) ; autohotkey fix
   (global-set-key (kbd "C-s")           #'counsel-grep-or-swiper))
 
 (use-package counsel-projectile
@@ -731,8 +728,7 @@ This follows the UX design of Visual Studio Code."
       (set-window-start (selected-window) windowstart)))
   (defalias 'format-document #'ian/format-code)
   :config
-  ;; (global-set-key (kbd "C-M-l") #'ian/format-code) ; inspired by IntelliJ IDEA
-  (global-set-key (kbd "<f6>") #'ian/format-code) ; inspired by IntelliJ IDEA
+  (global-set-key (kbd "<f6>") #'ian/format-code)
   (add-hook 'prog-mode-hook #'format-all-ensure-formatter)
   (add-hook 'python-mode-hook #'(lambda ()
                                   (setq-local format-all-formatters '(("Python" yapf)))))

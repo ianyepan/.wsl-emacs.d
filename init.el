@@ -306,7 +306,6 @@ This follows the UX design of Visual Studio Code."
 
 (use-package doom-themes
   :custom-face
-  (cursor                         ((t (:background "#eeeeee"))))
   (region                         ((t (:extend nil))))
   (font-lock-comment-face         ((t (:italic t))))
   (sml/modified                   ((t (:foreground "white" :bold t))))

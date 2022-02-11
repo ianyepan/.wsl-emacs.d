@@ -731,7 +731,8 @@ This follows the UX design of Visual Studio Code."
       (set-window-start (selected-window) windowstart)))
   (defalias 'format-document #'ian/format-code)
   :config
-  (global-set-key (kbd "C-M-l") #'ian/format-code) ; inspired by IntelliJ IDEA
+  ;; (global-set-key (kbd "C-M-l") #'ian/format-code) ; inspired by IntelliJ IDEA
+  (global-set-key (kbd "<f6>") #'ian/format-code) ; inspired by IntelliJ IDEA
   (add-hook 'prog-mode-hook #'format-all-ensure-formatter)
   (add-hook 'python-mode-hook #'(lambda ()
                                   (setq-local format-all-formatters '(("Python" yapf)))))

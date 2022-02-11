@@ -819,14 +819,8 @@ This follows the UX design of Visual Studio Code."
 
 (use-package olivetti
   :bind ("C-c w" . olivetti-mode)
-  :hook ((org-mode      . olivetti-mode)
-         (markdown-mode . olivetti-mode))
   :config
   (setq-default olivetti-body-width fill-column))
-
-(use-package writegood-mode)
-
-(use-package speed-type)
 
 (use-package emojify
   :config

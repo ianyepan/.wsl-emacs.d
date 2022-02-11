@@ -540,6 +540,7 @@ This follows the UX design of Visual Studio Code."
   (setq lsp-auto-guess-root t)
   (setq lsp-log-io nil)
   (setq lsp-restart 'auto-restart)
+  (setq lsp-enable-links nil)
   (setq lsp-enable-symbol-highlighting nil)
   (setq lsp-enable-on-type-formatting nil)
   (setq lsp-signature-auto-activate nil)

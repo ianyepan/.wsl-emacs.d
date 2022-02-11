@@ -48,6 +48,7 @@
   (setq scroll-preserve-screen-position t)
   (setq auto-window-vscroll nil)
   (setq hscroll-step 1)
+  (setq scroll-step 1)
   (setq hscroll-margin 0)
   (setq load-prefer-newer t)
   (setq inhibit-compacting-font-caches t)
@@ -800,9 +801,6 @@ This follows the UX design of Visual Studio Code."
 (use-package sublimity
   :config
   (require 'sublimity-scroll)
-  (setq sublimity-scroll-vertical-frame-delay 0.0001)
-  (setq sublimity-scroll-weight 4)
-  (setq sublimity-scroll-drift-length 1)
   (sublimity-mode +1))
 
 (use-package dashboard

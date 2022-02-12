@@ -848,11 +848,6 @@ This follows the UX design of Visual Studio Code."
   (add-hook 'dired-mode-hook #'all-the-icons-dired-mode)
   (setq all-the-icons-dired-monochrome nil))
 
-(use-package ivy-rich
-  :config
-  (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
-  (ivy-rich-mode +1))
-
 (use-package minions
   :config
   (setq minions-mode-line-lighter "")

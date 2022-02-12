@@ -793,6 +793,21 @@ This follows the UX design of Visual Studio Code."
 
 ;; Misc
 
+(use-package ivy-posframe
+  :after ivy
+  :custom-face
+  (ivy-posframe-border ((t (:background "#aaaaaa"))))
+  :config
+  (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center)))
+  (setq ivy-posframe-height-alist '((t . 20)))
+  (setq ivy-posframe-parameters
+        '((left-fringe . 5)
+          (right-fringe . 5)
+          (internal-border-width . 1)))
+  (setq ivy-posframe-width 70)
+  (setq ivy-posframe-min-width 70)
+  (ivy-posframe-mode +1))
+
 (use-package sublimity
   :config
   (require 'sublimity-scroll)

@@ -808,7 +808,7 @@ This follows the UX design of Visual Studio Code."
 (use-package ivy-posframe
   :after ivy
   :custom-face
-  (ivy-posframe-border ((t (:background "#aaaaaa"))))
+  (ivy-posframe-border ((t (:background "#777777"))))
   :config
   (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center)))
   (setq ivy-posframe-height-alist '((t . 20)))

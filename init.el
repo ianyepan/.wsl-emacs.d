@@ -38,6 +38,16 @@
     "Open Emacs settings."
     (interactive)
     (find-file (concat user-emacs-directory "init.el")))
+  (defun ian/split-and-follow-horizontally ()
+    "Split window below."
+    (interactive)
+    (split-window-below)
+    (other-window 1))
+  (defun ian/split-and-follow-vertically ()
+    "Split window right."
+    (interactive)
+    (split-window-right)
+    (other-window 1))
   :config
   (setq user-full-name "Ian Y.E. Pan")
   (setq frame-title-format '("Emacs " emacs-version))
@@ -58,6 +68,8 @@
   (put 'upcase-region 'disabled nil)
   (put 'scroll-right 'disabled nil)
   (put 'scroll-left 'disabled nil)
+  (global-set-key (kbd "C-x 2") #'ian/split-and-follow-horizontally)
+  (global-set-key (kbd "C-x 3") #'ian/split-and-follow-vertically)
   (setq-default indent-tabs-mode nil)
   (setq initial-scratch-message "")
   (setq split-width-threshold 150)

@@ -450,11 +450,23 @@ This follows the UX design of Visual Studio Code."
                                               (magit-refresh)
                                               (message "Refreshing Magit...done"))))
 
-(use-package diff-hl
-  :hook ((prog-mode . diff-hl-mode)
-         (diff-hl-mode . diff-hl-flydiff-mode))
+;; (use-package diff-hl
+;;   :hook ((prog-mode . diff-hl-mode)
+;;          (diff-hl-mode . diff-hl-flydiff-mode))
+;;   :config
+;;   (setq diff-hl-flydiff-delay 0.05))
+
+(use-package git-gutter
+  :hook (prog-mode . git-gutter-mode)
   :config
-  (setq diff-hl-flydiff-delay 0.05))
+  (setq git-gutter:update-interval 0.02))
+
+(use-package git-gutter-fringe
+  :after git-gutter
+  :config
+  (define-fringe-bitmap 'git-gutter-fr:added [224] nil nil '(center repeated))
+  (define-fringe-bitmap 'git-gutter-fr:modified [224] nil nil '(center repeated))
+  (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240] nil nil 'bottom))
 
 ;; Searching/sorting enhancements & project management
 

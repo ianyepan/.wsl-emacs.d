@@ -430,14 +430,11 @@ This follows the UX design of Visual Studio Code."
   (global-evil-leader-mode +1)
   (evil-leader/set-leader "<SPC>")
   (evil-leader/set-key
-   "s" #'counsel-grep-or-swiper
-   "w" #'save-buffer
-   "g" #'magit-status
-   "f" #'counsel-projectile-find-file
-   "o" #'other-window
-   "1" #'delete-other-windows
-   "b" #'ivy-switch-buffer
-   "e" #'ian/neotree-project-toggle))
+    "s" #'counsel-grep-or-swiper
+    "w" #'save-buffer
+    "f" #'counsel-projectile-find-file
+    "o" #'other-window
+    "e" #'ian/neotree-project-toggle))
 
 ;; Git integration
 
@@ -931,7 +928,6 @@ This follows the UX design of Visual Studio Code."
   (add-hook 'neotree-mode-hook (lambda ()
                                  (hl-line-mode +1)
                                  (setq-local line-spacing nil)))
-  (global-set-key (kbd "C-S-e") #'ian/neotree-project-toggle)
   (define-key neotree-mode-map (kbd "<f5>") #'(lambda ()
                                                 (interactive)
                                                 (neotree-refresh)

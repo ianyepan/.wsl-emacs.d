@@ -70,6 +70,7 @@
   (put 'scroll-left 'disabled nil)
   (global-set-key (kbd "C-x 2") #'ian/split-and-follow-horizontally)
   (global-set-key (kbd "C-x 3") #'ian/split-and-follow-vertically)
+  (global-set-key (kbd "C-s")   #'save-buffer)
   (setq-default indent-tabs-mode nil)
   (setq initial-scratch-message "")
   (setq split-width-threshold 150)
@@ -353,7 +354,7 @@ This follows the UX design of Visual Studio Code."
   (global-undo-tree-mode))
 
 (use-package evil
-  :after undo-tree
+  :after (undo-tree evil-leader)
   :init
   (setq evil-want-C-u-scroll t
         evil-want-keybinding nil
@@ -376,7 +377,6 @@ This follows the UX design of Visual Studio Code."
   (setq-default cursor-type  '(hbar . 5))
   (setq evil-emacs-state-cursor '(hbar . 5))
   (define-key evil-normal-state-map (kbd "C-o") #'(lambda () (interactive) (evil-jump-backward) (ian/pulse-line)))
-  (global-set-key (kbd "C-x 1") #'(lambda () (interactive) (neotree-hide) (delete-other-windows)))
   (global-set-key (kbd "M-<up>") #'(lambda () (interactive) (scroll-down 2)))
   (global-set-key (kbd "M-<down>") #'(lambda () (interactive) (scroll-up 2)))
   (define-key evil-normal-state-map (kbd "M-<left>") #'(lambda () (interactive) (scroll-right 3)))
@@ -419,6 +419,25 @@ This follows the UX design of Visual Studio Code."
           js-mode
           typescript-mode
           ) . turn-on-evil-matchit-mode))
+
+(use-package evil-leader
+  :init
+  (setq evil-want-C-u-scroll t
+        evil-want-keybinding nil
+        evil-shift-width ian/indent-width
+        evil-undo-system 'undo-tree)
+  :config
+  (global-evil-leader-mode +1)
+  (evil-leader/set-leader "<SPC>")
+  (evil-leader/set-key
+   "s" #'counsel-grep-or-swiper
+   "w" #'save-buffer
+   "g" #'magit-status
+   "f" #'counsel-projectile-find-file
+   "o" #'other-window
+   "1" #'delete-other-windows
+   "b" #'ivy-switch-buffer
+   "e" #'ian/neotree-project-toggle))
 
 ;; Git integration
 
@@ -465,8 +484,7 @@ This follows the UX design of Visual Studio Code."
   (setq counsel-rg-base-command "rg --vimgrep %s")
   (global-set-key (kbd "s-P")           #'counsel-M-x)
   (global-set-key (kbd "C-S-p")         #'counsel-M-x)
-  (global-set-key (kbd "M-x")           #'counsel-M-x)
-  (global-set-key (kbd "C-s")           #'counsel-grep-or-swiper))
+  (global-set-key (kbd "M-x")           #'counsel-M-x))
 
 (use-package counsel-projectile
   :config

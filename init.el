@@ -820,11 +820,6 @@ This follows the UX design of Visual Studio Code."
   (setq ivy-posframe-min-width 70)
   (ivy-posframe-mode +1))
 
-(use-package sublimity
-  :config
-  (require 'sublimity-scroll)
-  (sublimity-mode +1))
-
 (use-package dashboard
   :if (display-graphic-p)
   :config

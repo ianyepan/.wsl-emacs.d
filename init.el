@@ -930,6 +930,7 @@ This follows the UX design of Visual Studio Code."
                        (setq-local evil-auto-indent nil)
                        (setq-local olivetti-body-width (+ fill-column 5)))))
   :config
+  (require 'org-tempo)
   (setq org-link-descriptive nil)
   (setq org-startup-folded nil)
   (setq org-todo-keywords '((sequence "TODO" "DOING" "DONE")))
@@ -948,8 +949,8 @@ This follows the UX design of Visual Studio Code."
   :ensure nil
   :config
   (setq org-latex-packages-alist '(("margin=1in" "geometry" nil)
-                                   ("bitstream-charter" "mathdesign" nil)
-                                   ;; ("" "tinos" nil)
+                                   ;; ("bitstream-charter" "mathdesign" nil)
+                                   ;; ("default, light" "roboto" nil)
                                    ("" "inconsolata" nil)))
   (setq org-latex-pdf-process
         '("/usr/bin/pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"

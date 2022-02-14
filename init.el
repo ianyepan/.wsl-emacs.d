@@ -433,6 +433,7 @@ This follows the UX design of Visual Studio Code."
     "s" #'counsel-grep-or-swiper
     "w" #'save-buffer
     "f" #'counsel-projectile-find-file
+    "F" #'projectile-ripgrep
     "o" #'other-window
     "e" #'ian/neotree-project-toggle))
 
@@ -512,12 +513,7 @@ This follows the UX design of Visual Studio Code."
   (setq projectile-completion-system 'ivy)
   (setq projectile-mode-line-prefix " ")
   (projectile-mode +1)
-  (define-key projectile-mode-map (kbd "C-c p") #'projectile-command-map)
-  (define-key projectile-mode-map (kbd "C-<f4>") #'projectile-kill-buffers)
-  (define-key projectile-mode-map (kbd "s-p") #'projectile-find-file)
-  (define-key projectile-mode-map (kbd "C-p") #'projectile-find-file)
-  (define-key projectile-mode-map (kbd "s-F") #'projectile-ripgrep)
-  (define-key projectile-mode-map (kbd "C-S-f") #'projectile-ripgrep))
+  (define-key projectile-mode-map (kbd "C-c p") #'projectile-command-map))
 
 (use-package wgrep
   :commands wgrep-change-to-wgrep-mode

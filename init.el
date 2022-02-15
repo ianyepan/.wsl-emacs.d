@@ -76,7 +76,7 @@
   (setq split-width-threshold 150)
   (setq max-specpdl-size 10000)
   (setq max-lisp-eval-depth 10000)
-  (set-default 'truncate-lines t)
+  ;; (set-default 'truncate-lines t)
   (ian/maybe-set-default-browser)
   (bind-key* (kbd "C-,") #'ian/edit-config))
 

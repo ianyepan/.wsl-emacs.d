@@ -388,10 +388,14 @@ This follows the UX design of Visual Studio Code."
   (define-key evil-insert-state-map (kbd "C-p") nil) ; avoid conflict with company tooltip selection
   (define-key evil-normal-state-map (kbd "C-S-c") #'evil-yank)
   (define-key evil-insert-state-map (kbd "C-S-v") #'ian/paste-with-ctrl-shift-v)
-  (evil-define-key 'normal prog-mode-map (kbd "gd") #'xref-find-definitions)
-  (evil-define-key 'normal prog-mode-map (kbd "<f12>") #'xref-find-definitions)
-  (evil-define-key 'normal prog-mode-map (kbd "gD") #'xref-find-references)
-  (evil-define-key 'normal prog-mode-map (kbd "S-<f12>") #'xref-find-references)
+  (evil-define-key 'motion prog-mode-map (kbd "gd") #'xref-find-definitions)
+  (evil-define-key 'motion prog-mode-map (kbd "<f12>") #'xref-find-definitions)
+  (evil-define-key 'motion prog-mode-map (kbd "gD") #'xref-find-references)
+  (with-eval-after-load 'lsp-ui
+    (add-hook 'buffer-list-update-hook
+              #'(lambda ()
+                  (when (bound-and-true-p lsp-ui-mode)
+                    (define-key evil-motion-state-local-map (kbd "gD") #'lsp-ui-peek-find-references)))))
   (evil-ex-define-cmd "q" #'kill-current-buffer)
   (evil-ex-define-cmd "wq" #'(lambda () (interactive) (save-buffer) (kill-current-buffer)))
   (bind-key* (kbd "<f4>") #'(lambda ()
@@ -541,6 +545,8 @@ This follows the UX design of Visual Studio Code."
 ;; Programming support and utilities
 
 (use-package lsp-mode
+  :init
+  (setq lsp-keymap-prefix "C-c l")
   :hook ((c-mode          ; clangd
           c++-mode        ; clangd
           c-or-c++-mode   ; clangd
@@ -553,6 +559,12 @@ This follows the UX design of Visual Studio Code."
           haskell-mode    ; haskell-language-server
           lua-mode        ; lua-language-server
           ) . lsp-deferred)
+  :preface
+  (defun ian/lsp-execute-code-action ()
+    "Execute code action with pulse-line animation."
+    (interactive)
+    (ian/pulse-line)
+    (call-interactively 'lsp-execute-code-action))
   :custom-face
   (lsp-headerline-breadcrumb-symbols-face                ((t (:inherit variable-pitch))))
   (lsp-headerline-breadcrumb-path-face                   ((t (:inherit variable-pitch))))
@@ -560,8 +572,7 @@ This follows the UX design of Visual Studio Code."
   (lsp-headerline-breadcrumb-unknown-project-prefix-face ((t (:inherit variable-pitch))))
   :commands lsp
   :config
-  (define-key lsp-mode-map (kbd "C-c l <tab>") #'lsp-execute-code-action)
-  (define-key lsp-mode-map (kbd "C-c l TAB") #'lsp-execute-code-action)
+  (define-key lsp-mode-map (kbd "C-c l <tab>") #'ian/lsp-execute-code-action)
   (global-unset-key (kbd "<f2>"))
   (define-key lsp-mode-map (kbd "<f2>") #'lsp-rename)
   (setq lsp-auto-guess-root t)
@@ -570,8 +581,10 @@ This follows the UX design of Visual Studio Code."
   (setq lsp-enable-links nil)
   (setq lsp-enable-symbol-highlighting nil)
   (setq lsp-enable-on-type-formatting nil)
+  (setq lsp-lens-enable nil)
   (setq lsp-signature-auto-activate nil)
   (setq lsp-signature-render-documentation nil)
+  (setq lsp-eldoc-enable-hover nil)
   (setq lsp-eldoc-hook nil)
   (setq lsp-modeline-code-actions-enable nil)
   (setq lsp-modeline-diagnostics-enable nil)

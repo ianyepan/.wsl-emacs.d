@@ -557,6 +557,7 @@ This follows the UX design of Visual Studio Code."
           python-mode     ; pyright
           web-mode        ; ts-ls/HTML/CSS
           haskell-mode    ; haskell-language-server
+          lua-mode        ; lua-language-server
           ) . lsp-deferred)
   :custom-face
   (lsp-headerline-breadcrumb-symbols-face                ((t (:inherit variable-pitch))))
@@ -700,6 +701,8 @@ This follows the UX design of Visual Studio Code."
   :mode ("\\.tsx?\\'" . typescript-mode)
   :config
   (setq typescript-indent-level ian/indent-width))
+
+(use-package lua-mode)
 
 (use-package json-mode)
 

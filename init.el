@@ -376,16 +376,16 @@ This follows the UX design of Visual Studio Code."
   :config
   (setq-default cursor-type  '(hbar . 5))
   (setq evil-emacs-state-cursor '(hbar . 5))
-  (define-key evil-normal-state-map (kbd "C-o") #'(lambda () (interactive) (evil-jump-backward) (ian/pulse-line)))
-  (define-key evil-normal-state-map (kbd "C-i") #'(lambda () (interactive) (evil-jump-forward) (ian/pulse-line)))
-  (global-set-key (kbd "M-<up>") #'(lambda () (interactive) (scroll-down 2)))
-  (global-set-key (kbd "M-<down>") #'(lambda () (interactive) (scroll-up 2)))
-  (define-key evil-normal-state-map (kbd "M-<left>") #'(lambda () (interactive) (scroll-right 3)))
-  (define-key evil-normal-state-map (kbd "M-<right>") #'(lambda () (interactive) (scroll-left 3)))
+  (define-key evil-motion-state-map (kbd "C-w C-o") #'(lambda () (interactive) (neotree-hide) (delete-other-windows)))
+  (define-key evil-motion-state-map (kbd "C-o") #'(lambda () (interactive) (evil-jump-backward) (ian/pulse-line)))
+  (define-key evil-motion-state-map (kbd "C-i") #'(lambda () (interactive) (evil-jump-forward) (ian/pulse-line)))
+  (global-set-key (kbd "M-<up>") #'(lambda () (interactive) (scroll-down 1)))
+  (global-set-key (kbd "M-<down>") #'(lambda () (interactive) (scroll-up 1)))
+  (global-set-key (kbd "M-<left>") #'(lambda () (interactive) (scroll-right 2)))
+  (global-set-key (kbd "M-<right>") #'(lambda () (interactive) (scroll-left 2)))
   (define-key evil-normal-state-map (kbd "z <return>") #'evil-scroll-line-to-top)
   (define-key evil-insert-state-map (kbd "C-n") nil) ; avoid conflict with company tooltip selection
   (define-key evil-insert-state-map (kbd "C-p") nil) ; avoid conflict with company tooltip selection
-  (define-key evil-normal-state-map (kbd "C-p") nil) ; avoid conflict with counsel-find-file
   (define-key evil-normal-state-map (kbd "C-S-c") #'evil-yank)
   (define-key evil-insert-state-map (kbd "C-S-v") #'ian/paste-with-ctrl-shift-v)
   (evil-define-key 'normal prog-mode-map (kbd "gd") #'xref-find-definitions)

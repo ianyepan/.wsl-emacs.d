@@ -590,23 +590,16 @@ This follows the UX design of Visual Studio Code."
   (add-to-list 'lsp-language-id-configuration '(js-jsx-mode . "javascriptreact")))
 
 (use-package lsp-ui
-  :preface
-  (defun ian/lsp-ui-doc-show ()
-    "Sometimes lsp-ui-doc-show needs more than one call to display correctly."
-    (interactive)
-    (lsp-ui-doc-hide)
-    (lsp-ui-doc-show)
-    (lsp-ui-doc-show))
   :commands lsp-ui-mode
   :custom-face
   (lsp-ui-doc-background ((t (:background nil))))
-  (lsp-ui-doc-header ((t (:inherit (font-lock-string-face italic)))))
   :config
-  (define-key lsp-ui-mode-map (kbd "C-c l s") #'ian/lsp-ui-doc-show)
-  (define-key lsp-ui-mode-map (kbd "C-c l h") #'lsp-ui-doc-hide)
+  (add-hook 'buffer-list-update-hook
+            #'(lambda () (when (bound-and-true-p lsp-ui-mode)
+                           (define-key evil-motion-state-local-map (kbd "K") #'lsp-ui-doc-glance))))
   (custom-set-faces '(lsp-ui-sideline-global ((t (:italic t)))))
   (setq lsp-ui-doc-enable nil)
-  (setq lsp-ui-doc-header t)
+  (setq lsp-ui-doc-position 'at-point)
   (setq lsp-ui-doc-include-signature t)
   (setq lsp-ui-doc-border (face-foreground 'default))
   (setq lsp-ui-sideline-show-code-actions nil)

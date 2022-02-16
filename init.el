@@ -370,7 +370,7 @@ This follows the UX design of Visual Studio Code."
     (evil-insert-state nil)
     (right-char))
   (defun ian/pulse-line ()
-    "Flash highlight the current line with reigon face"
+    "Flash highlight the current line with region face"
     (interactive)
     (pulse-momentary-highlight-one-line (point) 'region))
   :config

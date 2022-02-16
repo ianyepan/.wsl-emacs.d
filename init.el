@@ -929,6 +929,7 @@ This follows the UX design of Visual Studio Code."
                                                 (neotree-refresh)
                                                 (message "Refreshing NeoTree...done")))
   (setq neo-theme 'icons)
+  (setq neo-autorefresh t)
   (setq neo-show-hidden-files t)
   (setq neo-window-width 30))
 

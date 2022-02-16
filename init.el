@@ -974,7 +974,7 @@ This follows the UX design of Visual Studio Code."
   (setq org-latex-packages-alist '(("margin=1in" "geometry" nil)
                                    ;; ("bitstream-charter" "mathdesign" nil)
                                    ;; ("default, light" "roboto" nil)
-                                   ("" "inconsolata" nil)))
+                                   ("scale=0.9" "inconsolata" nil)))
   (setq org-latex-pdf-process
         '("/usr/bin/pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
           "/usr/bin/pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"

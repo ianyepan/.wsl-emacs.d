@@ -448,12 +448,6 @@ This follows the UX design of Visual Studio Code."
                                               (magit-refresh)
                                               (message "Refreshing Magit...done"))))
 
-;; (use-package diff-hl
-;;   :hook ((prog-mode . diff-hl-mode)
-;;          (diff-hl-mode . diff-hl-flydiff-mode))
-;;   :config
-;;   (setq diff-hl-flydiff-delay 0.05))
-
 (use-package git-gutter
   :hook (prog-mode . git-gutter-mode)
   :config

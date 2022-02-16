@@ -377,6 +377,7 @@ This follows the UX design of Visual Studio Code."
   (setq-default cursor-type  '(hbar . 5))
   (setq evil-emacs-state-cursor '(hbar . 5))
   (define-key evil-normal-state-map (kbd "C-o") #'(lambda () (interactive) (evil-jump-backward) (ian/pulse-line)))
+  (define-key evil-normal-state-map (kbd "C-i") #'(lambda () (interactive) (evil-jump-forward) (ian/pulse-line)))
   (global-set-key (kbd "M-<up>") #'(lambda () (interactive) (scroll-down 2)))
   (global-set-key (kbd "M-<down>") #'(lambda () (interactive) (scroll-up 2)))
   (define-key evil-normal-state-map (kbd "M-<left>") #'(lambda () (interactive) (scroll-right 3)))

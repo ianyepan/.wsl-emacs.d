@@ -381,7 +381,6 @@ This follows the UX design of Visual Studio Code."
   (global-set-key (kbd "M-<down>") #'(lambda () (interactive) (scroll-up 2)))
   (define-key evil-normal-state-map (kbd "M-<left>") #'(lambda () (interactive) (scroll-right 3)))
   (define-key evil-normal-state-map (kbd "M-<right>") #'(lambda () (interactive) (scroll-left 3)))
-  (global-set-key (kbd "<mouse-2>") #'mouse-set-point)
   (define-key evil-normal-state-map (kbd "z <return>") #'evil-scroll-line-to-top)
   (define-key evil-insert-state-map (kbd "C-n") nil) ; avoid conflict with company tooltip selection
   (define-key evil-insert-state-map (kbd "C-p") nil) ; avoid conflict with company tooltip selection

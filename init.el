@@ -589,9 +589,12 @@ This follows the UX design of Visual Studio Code."
   :custom-face
   (lsp-ui-doc-background ((t (:background nil))))
   :config
-  (add-hook 'buffer-list-update-hook
-            #'(lambda () (when (bound-and-true-p lsp-ui-mode)
-                           (define-key evil-motion-state-local-map (kbd "K") #'lsp-ui-doc-glance))))
+  (with-eval-after-load 'evil
+    (add-hook 'buffer-list-update-hook
+              #'(lambda ()
+                  (when (bound-and-true-p lsp-ui-mode)
+                    (define-key evil-motion-state-local-map (kbd "K")
+                      #'(lambda () (interactive) (lsp-ui-doc-glance) (ian/pulse-line)))))))
   (custom-set-faces '(lsp-ui-sideline-global ((t (:italic t)))))
   (setq lsp-ui-doc-enable nil)
   (setq lsp-ui-doc-position 'at-point)

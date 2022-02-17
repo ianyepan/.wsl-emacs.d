@@ -682,6 +682,7 @@ This follows the UX design of Visual Studio Code."
   (setq-default flycheck-disabled-checkers '(python-pylint))
   (setq flycheck-flake8rc "~/.config/flake8")
   (setq flycheck-checker-error-threshold 1000)
+  (setq flycheck-indication-mode nil)
   (define-key flycheck-mode-map (kbd "<f8>") #'flycheck-next-error)
   (define-key flycheck-mode-map (kbd "S-<f8>") #'flycheck-previous-error)
   (define-key flycheck-mode-map (kbd "C-<f8>") #'flycheck-list-errors)

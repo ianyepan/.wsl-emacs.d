@@ -458,7 +458,6 @@ This follows the UX design of Visual Studio Code."
   (setq git-gutter:update-interval 0.02))
 
 (use-package git-gutter-fringe
-  :after git-gutter
   :config
   (define-fringe-bitmap 'git-gutter-fr:added [224] nil nil '(center repeated))
   (define-fringe-bitmap 'git-gutter-fr:modified [224] nil nil '(center repeated))

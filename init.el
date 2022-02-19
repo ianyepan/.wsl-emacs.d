@@ -470,6 +470,7 @@ This follows the UX design of Visual Studio Code."
   (setq blamer-author-formatter "🖊%s ")
   (setq blamer-datetime-formatter "[%s]")
   (setq blamer-commit-formatter " ● %s")
+  (setq blamer-max-commit-message-length 100)
   (setq blamer-min-offset 70))
 
 ;; Searching/sorting enhancements & project management

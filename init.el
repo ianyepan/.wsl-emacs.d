@@ -463,6 +463,15 @@ This follows the UX design of Visual Studio Code."
   (define-fringe-bitmap 'git-gutter-fr:modified [224] nil nil '(center repeated))
   (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240] nil nil 'bottom))
 
+(use-package blamer
+  :bind (("C-c g" . blamer-mode))
+  :config
+  (setq blamer-idle-time 0.05)
+  (setq blamer-author-formatter "🖊%s ")
+  (setq blamer-datetime-formatter "[%s]")
+  (setq blamer-commit-formatter " ● %s")
+  (setq blamer-min-offset 70))
+
 ;; Searching/sorting enhancements & project management
 
 (use-package ivy

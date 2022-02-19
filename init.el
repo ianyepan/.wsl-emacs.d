@@ -490,9 +490,7 @@ This follows the UX design of Visual Studio Code."
   :hook (ivy-mode . counsel-mode)
   :config
   (setq counsel-rg-base-command "rg --vimgrep %s")
-  (global-set-key (kbd "s-P")           #'counsel-M-x)
-  (global-set-key (kbd "C-S-p")         #'counsel-M-x)
-  (global-set-key (kbd "M-x")           #'counsel-M-x))
+  (global-set-key (kbd "C-S-p")         #'counsel-M-x))
 
 (use-package counsel-projectile
   :config

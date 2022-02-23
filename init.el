@@ -902,6 +902,16 @@ This follows the UX design of Visual Studio Code."
   :config
   (setq all-the-icons-scale-factor 0.8))
 
+(use-package all-the-icons-ivy-rich
+  :after counsel-projectile
+  :init (all-the-icons-ivy-rich-mode +1)
+  :config
+  (setq all-the-icons-ivy-rich-icon-size 0.8))
+
+(use-package ivy-rich
+  :after all-the-icons-ivy-rich
+  :init (ivy-rich-mode +1))
+
 (use-package all-the-icons-dired
   :config
   (add-hook 'dired-mode-hook #'all-the-icons-dired-mode)

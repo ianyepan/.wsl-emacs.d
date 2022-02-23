@@ -937,13 +937,9 @@ This follows the UX design of Visual Studio Code."
   :config
   (add-hook 'neotree-mode-hook (lambda ()
                                  (hl-line-mode +1)
-                                 (setq-local line-spacing nil)))
-  (define-key neotree-mode-map (kbd "<f5>") #'(lambda ()
-                                                (interactive)
-                                                (neotree-refresh)
-                                                (message "Refreshing NeoTree...done")))
+                                 (setq-local line-spacing 1)))
   (setq neo-theme 'icons)
-  (setq neo-autorefresh t)
+  (setq neo-autorefresh t) ; neotree.el: change delay to (run-with-idle-timer 0.1 ...)
   (setq neo-show-hidden-files t)
   (setq neo-window-width 30))
 

@@ -663,7 +663,7 @@ This follows the UX design of Visual Studio Code."
 (use-package company
   :hook (prog-mode . company-mode)
   :config
-  (setq company-idle-delay 0.0)
+  (setq company-idle-delay 0.2)
   (setq company-tooltip-minimum-width 60)
   (setq company-tooltip-maximum-width 60)
   (setq company-tooltip-limit 12)

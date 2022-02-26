@@ -16,37 +16,33 @@
 
 (custom-theme-set-faces
  'default-dark
- '(default                          ((t (:background "grey5" :foreground "grey90"))))
+ '(default                          ((t (:background "black" :foreground "white"))))
  '(fringe                           ((t (:inherit default))))
  '(cursor                           ((t (:background "white"))))
  '(region                           ((t (:background "#b0c4de" :foreground "black" :extend nil))))
  '(hl-line                          ((t (:background "grey25"))))
  '(line-number                      ((t (:foreground "grey45"))))
 
- '(company-tooltip                  ((t (:foreground "gray90" :background "black"))))
- '(company-tooltip-common           ((t (:foreground "LightSalmon" :bold t))))
- '(company-tooltip-annotation       ((t (:foreground "gray50" :italic t))))
- '(company-tooltip-selection        ((t (:background "gray20"))))
- '(company-scrollbar-bg             ((t (:background "gray15"))))
- '(company-scrollbar-fg             ((t (:background "gray30"))))
+ '(company-tooltip                  ((t (:foreground "black" :background "gray80"))))
+ '(company-tooltip-common           ((t (:foreground "blue" :bold t))))
+ '(company-tooltip-annotation       ((t (:inherit font-lock-comment-face))))
+ '(company-tooltip-selection        ((t (:background "gray60"))))
+ '(company-scrollbar-bg             ((t (:background "gray75"))))
+ '(company-scrollbar-fg             ((t (:background "gray80"))))
 
- '(diff-hl-insert                   ((t (:background "#36a546" :foreground "#36a546"))))
- '(diff-hl-delete                   ((t (:background "#ac0909" :foreground "#ac0909"))))
- '(diff-hl-change                   ((t (:background "#f1eb7f" :foreground "#f1eb7f"))))
+ '(git-gutter:added                 ((t (:foreground "#4a7f00"))))
+ '(git-gutter:deleted               ((t (:foreground "#a41511"))))
+ '(git-gutter:modified              ((t (:foreground "#207fa1"))))
+ '(git-gutter-fr:added              ((t (:foreground "#4a7f00"))))
+ '(git-gutter-fr:deleted            ((t (:foreground "#a41511"))))
+ '(git-gutter-fr:modified           ((t (:foreground "#207fa1"))))
 
  '(highlight-symbol-face            ((t (:background "#355266" :distant-foreground "white"))))
- '(hl-todo                          ((t (:inverse-video t))))
 
  '(term-color-blue                  ((t (:foreground "#0782f0"))))
 
  '(mode-line                        ((t (:foreground "black" :background "grey75" :box (:line-width -1 :style released-button)))))
  '(mode-line-inactive               ((t (:foreground "black" :background "grey55" :box (:line-width -1 :style released-button)))))
- '(sml/global                       ((t (:foreground "black" :weight normal))))
- '(sml/filename                     ((t (:foreground "black" :weight bold))))
- '(sml/prefix                       ((t (:foreground "black" :weight normal))))
- '(sml/read-only                    ((t (:foreground "black" :weight normal))))
- '(sml/modes                        ((t (:foreground "black" :weight normal))))
- '(sml/modified                     ((t (:foreground "black" :weight normal))))
  )
 
 (provide-theme 'default-dark)

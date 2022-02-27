@@ -436,6 +436,7 @@ This follows the UX design of Visual Studio Code."
     "f" #'counsel-projectile-find-file
     "F" #'projectile-ripgrep
     "o" #'other-window
+    "r" #'ranger
     "e" #'ian/neotree-project-toggle))
 
 ;; Git integration
@@ -807,6 +808,13 @@ This follows the UX design of Visual Studio Code."
   (if (boundp 'dired-mode-map)
       (ian/dired-single-init)
     (add-hook 'dired-load-hook #'ian/dired-single-init)))
+
+(use-package ranger
+  :config
+  (setq ranger-width-preview 0.5)
+  (setq ranger-width-parents 0.125)
+  (setq ranger-cleanup-eagerly t)
+  (setq ranger-show-hidden t))
 
 ;; Terminal integration
 

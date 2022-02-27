@@ -34,16 +34,16 @@ background contrast. All other values default to \"medium\"."
   ((bg
     (cond ((equal doom-gruvbox-material-dark-variant "hard") '("#1d2021" "#1e1e1e" nil))   ; bg0_h
           ((equal doom-gruvbox-material-dark-variant "soft") '("#32302f" "#323232" nil))   ; bg0_s
-          (t                                        '("#202020" "#202020" nil)))) ; bg0
+          (t                                        '("#282828" "#282828" nil)))) ; bg0
    (bg-alt
     (cond ((equal doom-gruvbox-material-dark-variant "hard") '("#0d1011" "black" nil))     ; (self-defined)
-          ((equal doom-gruvbox-material-dark-variant "soft") '("#202020" "#202020" nil))   ; bg0
+          ((equal doom-gruvbox-material-dark-variant "soft") '("#282828" "#282828" nil))   ; bg0
           (t                                        '("#1d2021" "#1e1e1e" nil)))) ; bg_h
    (bg-alt2    '("#504945" "#504945" "brown"      )) ; bg2 (for region, selection etc.)
 
    (base0      '("#0d1011" "black"   "black"      )) ; (self-defined)
    (base1      '("#1d2021" "#1d1d1d" "brightblack")) ; bg0_h
-   (base2      '("#202020" "#202020" "brightblack")) ; bg0
+   (base2      '("#282828" "#282828" "brightblack")) ; bg0
    (base3      '("#3c3836" "#383838" "brightblack")) ; bg1
    (base4      '("#665c54" "#5c5c5c" "brightblack")) ; bg3
    (base5      '("#7c6f64" "#6f6f6f" "brightblack")) ; bg4

@@ -829,6 +829,7 @@ This follows the UX design of Visual Studio Code."
   :config
   (setq ranger-width-preview 0.5)
   (setq ranger-width-parents 0.125)
+  (setq ranger-preview-delay 0.02)
   (setq ranger-cleanup-eagerly t)
   (setq ranger-show-hidden t)
   (define-key ranger-mode-map (kbd "i") #'dired-toggle-read-only)

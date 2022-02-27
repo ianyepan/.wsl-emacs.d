@@ -180,7 +180,7 @@
 (use-package mwheel
   :ensure nil
   :config
-  (setq mouse-wheel-scroll-amount '(4 ((shift) . 1) ((control) . nil)))
+  (setq mouse-wheel-scroll-amount '(3 ((shift) . 1) ((control) . nil)))
   (setq mouse-wheel-progressive-speed nil))
 
 (use-package paren
@@ -192,8 +192,8 @@
 
 (use-package frame
   :preface
-  (defconst small-fonts-list '("Consolas" "Ubuntu Mono" "Fixedsys Excelsior"))
-  (defconst tight-fonts-list '("Consolas" "Ubuntu Mono" "Fixedsys Excelsior"))
+  (defconst small-fonts-list '("Consolas" "Ubuntu Mono" "Fixedsys Excelsior" "Inconsolata"))
+  (defconst tight-fonts-list '("Consolas" "Ubuntu Mono" "Fixedsys Excelsior" "Inconsolata" "Monaco"))
   (defun ian/set-default-fonts (english-font chinese-font font-size font-weight)
     "Set the default Latin and CJK font families, as well as the line height."
     (interactive)
@@ -321,10 +321,7 @@ This follows the UX design of Visual Studio Code."
   :custom-face
   (region                         ((t (:extend nil))))
   (font-lock-comment-face         ((t (:italic t))))
-  (sml/modified                   ((t (:foreground "white" :bold t))))
-  (hl-todo                        ((t (:inverse-video nil :italic t :bold t))))
   (highlight-symbol-face          ((t (:background "#355266" :distant-foreground "#bbbbbb"))))
-  (show-paren-match               ((t (:foreground "#eeeeee" :background "#444444" :bold t))))
   (highlight                      ((t (:foreground "#4db2ff" :background nil :underline t)))) ; link hover
   (link                           ((t (:foreground "#3794ff"))))
   (evil-ex-substitute-replacement ((t (:strike-through nil))))
@@ -332,9 +329,9 @@ This follows the UX design of Visual Studio Code."
   (fringe                         ((t (:background nil))))
   :config
   (setq doom-themes-enable-bold nil)
-  (setq doom-gruvbox-dark-variant "hard")
+  (setq doom-gruvbox-dark-variant "medium")
   (setq doom-solarized-dark-brighter-text t)
-  (load-theme 'doom-one t))
+  (load-theme 'doom-gruvbox-material t))
 
 (use-package highlight-symbol
   :hook (prog-mode . highlight-symbol-mode)
@@ -379,8 +376,8 @@ This follows the UX design of Visual Studio Code."
   (define-key evil-motion-state-map (kbd "C-w C-o") #'(lambda () (interactive) (neotree-hide) (delete-other-windows)))
   (define-key evil-motion-state-map (kbd "C-o") #'(lambda () (interactive) (evil-jump-backward) (ian/pulse-line)))
   (define-key evil-motion-state-map (kbd "C-i") #'(lambda () (interactive) (evil-jump-forward) (ian/pulse-line)))
-  (global-set-key (kbd "M-<up>") #'(lambda () (interactive) (scroll-down 1)))
-  (global-set-key (kbd "M-<down>") #'(lambda () (interactive) (scroll-up 1)))
+  (global-set-key (kbd "M-<up>") #'(lambda () (interactive) (scroll-down 2)))
+  (global-set-key (kbd "M-<down>") #'(lambda () (interactive) (scroll-up 2)))
   (global-set-key (kbd "M-<left>") #'(lambda () (interactive) (scroll-right 2)))
   (global-set-key (kbd "M-<right>") #'(lambda () (interactive) (scroll-left 2)))
   (define-key evil-normal-state-map (kbd "z <return>") #'evil-scroll-line-to-top)
@@ -790,6 +787,8 @@ This follows the UX design of Visual Studio Code."
   (bind-key* (kbd "C-c r") #'rainbow-mode))
 
 (use-package hl-todo
+  :custom-face
+  (hl-todo                        ((t (:inverse-video nil :italic t :bold t))))
   :config
   (add-to-list 'hl-todo-keyword-faces '("DOING" . "#94bff3"))
   (add-to-list 'hl-todo-keyword-faces '("WHY" . "#7cb8bb"))

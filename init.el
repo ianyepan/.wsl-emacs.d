@@ -109,12 +109,28 @@
 
 (use-package files
   :ensure nil
+  :preface
+  (defun ian/find-file-sudo-root ()
+    "Open a file as the root user.
+Reference: https://www.emacswiki.org/emacs/TrampMode#h5o-19"
+    (interactive)
+    (require 'tramp)
+    (let* ((name (or buffer-file-name default-directory))
+           (tramp (and (tramp-tramp-file-p name)
+                       (tramp-dissect-file-name name)))
+           path dir file)
+      (when tramp ; If called from a "root" file, we need to fix up the path.
+        (setq path (tramp-file-name-localname tramp)
+              dir (file-name-directory path)))
+      (when (setq file (read-file-name "Find file (sudo): " dir path))
+        (find-file (concat "/sudo:root@localhost:" file)))))
   :config
   (remove-hook 'find-file-hook 'vc-refresh-state) ; makes open files faster
   (setq confirm-kill-processes nil)
   (setq create-lockfiles nil) ; don't create .# files (crashes 'npm start')
   (setq make-backup-files nil)
   (setq revert-without-query '(".*"))
+  (global-set-key (kbd "C-c C-f") #'ian/find-file-sudo-root)
   (global-set-key (kbd "<f5>") #'(lambda ()
                                    (interactive)
                                    (revert-buffer)

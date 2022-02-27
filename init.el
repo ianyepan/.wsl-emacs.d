@@ -306,9 +306,9 @@ This follows the UX design of Visual Studio Code."
 
 ;; GUI enhancements
 
-(use-package solaire-mode
-  :config
-  (solaire-global-mode +1))
+;; (use-package solaire-mode
+;;   :config
+;;   (solaire-global-mode +1))
 
 ;; (use-package vscode-dark-plus-theme
 ;;   :config

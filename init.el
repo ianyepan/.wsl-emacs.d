@@ -174,7 +174,8 @@ Reference: https://www.emacswiki.org/emacs/TrampMode#h5o-19"
                           (c++-mode  . "bsd")
                           (c-mode    . "bsd")
                           (other     . "k&r")))
-  (setq-default c-basic-offset ian/indent-width))
+  (setq-default c-basic-offset ian/indent-width)
+  (add-to-list 'auto-mode-alist '("\\.inl\\'" . c++-mode)))
 
 (use-package cc-mode
   :ensure nil
@@ -229,10 +230,10 @@ Reference: https://www.emacswiki.org/emacs/TrampMode#h5o-19"
     (setq-default line-spacing (if (member english-font tight-fonts-list) 3 1)))
   (defun ian/set-big-fonts ()
     (interactive)
-    (ian/set-default-fonts "Consolas" "YaHei Consolas Hybrid" 115 'normal)
+    (ian/set-default-fonts "Consolas" "YaHei Consolas Hybrid" 105 'normal)
     (set-face-attribute 'fixed-pitch-serif nil :family "Monospace" :height 0.8)
     (when (member "Segoe UI Variable Static Small" (font-family-list))
-      (set-face-attribute 'variable-pitch nil :family "Segoe UI Variable Static Small" :height 0.75 :weight 'normal)))
+      (set-face-attribute 'variable-pitch nil :family "Segoe UI Variable Static Small" :height 95 :weight 'normal)))
   (defun ian/set-small-fonts ()
     (interactive)
     (ian/set-default-fonts "Consolas" "YaHei Consolas Hybrid" 70 'normal)

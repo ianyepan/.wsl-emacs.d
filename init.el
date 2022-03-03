@@ -573,7 +573,7 @@ This follows the UX design of Visual Studio Code."
   :hook ((c-mode          ; clangd
           c++-mode        ; clangd
           c-or-c++-mode   ; clangd
-          java-mode       ; eclipse-jdtls
+          ;; java-mode       ; eclipse-jdtls
           js-mode         ; ts-ls (tsserver wrapper)
           js-jsx-mode     ; ts-ls (tsserver wrapper)
           typescript-mode ; ts-ls (tsserver wrapper)
@@ -595,6 +595,7 @@ This follows the UX design of Visual Studio Code."
   (lsp-headerline-breadcrumb-unknown-project-prefix-face ((t (:inherit variable-pitch))))
   :commands lsp
   :config
+  (add-hook 'java-mode-hook #'(lambda () (when (eq major-mode 'java-mode) (lsp-deferred))))
   (define-key lsp-mode-map (kbd "C-c l <tab>") #'ian/lsp-execute-code-action)
   (global-unset-key (kbd "<f2>"))
   (define-key lsp-mode-map (kbd "<f2>") #'lsp-rename)
@@ -812,6 +813,26 @@ This follows the UX design of Visual Studio Code."
   (add-to-list 'hl-todo-keyword-faces '("DOING" . "#94bff3"))
   (add-to-list 'hl-todo-keyword-faces '("WHY" . "#7cb8bb"))
   (global-hl-todo-mode +1))
+
+(use-package processing-mode
+  :after company
+  :preface
+  (defvar processing-company--keywords
+    (with-eval-after-load 'processing-mode
+      (cons 'processing-mode (append processing-functions
+                                     processing-builtins
+                                     processing-constants))))
+  (defun processing-company--init ()
+    (setq-local company-backends '((company-keywords
+                                    :with
+                                    company-yasnippet
+                                    company-dabbrev-code)))
+    (make-local-variable 'company-keywords-alist)
+    (add-to-list 'company-keywords-alist processing-company--keywords))
+  :config
+  (add-hook 'processing-mode-hook 'processing-company--init)
+  (setq processing-sketchbook-dir (format "%s/Projects/Processing/sketchbooks" (getenv "HOME")))
+  (setq processing-location (format "%s/processing-3.5.4/processing-java" (getenv "HOME"))))
 
 ;;; Dired enhancements
 

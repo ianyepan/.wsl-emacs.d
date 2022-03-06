@@ -64,6 +64,7 @@
   (setq inhibit-compacting-font-caches t)
   (setq echo-keystrokes 0.02)
   (setq kill-buffer-query-functions nil)
+  (setq delete-by-moving-to-trash t)
   (put 'downcase-region 'disabled nil)
   (put 'upcase-region 'disabled nil)
   (put 'scroll-right 'disabled nil)

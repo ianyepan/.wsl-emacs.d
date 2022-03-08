@@ -49,9 +49,9 @@ background contrast. All other values default to \"medium\"."
    (base5      '("#7c6f64" "#6f6f6f" "brightblack")) ; bg4
    (base6      '("#928374" "#909090" "brightblack")) ; gray
    (base7      '("#d5c4a1" "#cccccc" "brightblack")) ; fg2
-   (base8      '("#d4be98" "#fbfbfb" "brightwhite")) ; fg0
+   (base8      '("#ffe4b6" "#fbfbfb" "brightwhite")) ; fg0
    (fg         '("#d4be98" "#dfdfdf" "brightwhite")) ; fg/fg1
-   (fg-alt     '("#ddc7a1" "#cccccc" "brightwhite")) ; fg2
+   (fg-alt     '("#d4be98" "#cccccc" "brightwhite")) ; fg2
 
    ;; Standardized official colours from gruvbox-material
    (grey        '("#928374" "#909090" "brightblack"))   ; gray

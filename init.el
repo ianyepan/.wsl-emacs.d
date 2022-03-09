@@ -26,7 +26,7 @@
   :preface
   (defvar ian/indent-width 2)
   (defun ian/maybe-set-default-browser ()
-    "When in WSL Emacs, open links in default Windows 10 browser."
+    "When in WSL Emacs, open links in default Windows 11 browser."
     (cond
      ((eq system-type 'gnu/linux)
       (when (string-match "Linux.*microsoft.*Linux"

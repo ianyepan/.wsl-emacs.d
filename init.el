@@ -79,6 +79,9 @@
   (setq max-lisp-eval-depth 10000)
   (set-default 'truncate-lines t)
   (ian/maybe-set-default-browser)
+  (setq jit-lock-defer-time 0)
+  (setq fast-but-imprecise-scrolling t)
+  (xterm-mouse-mode +1)
   (bind-key* (kbd "C-,") #'ian/edit-config))
 
 (use-package uniquify
@@ -393,6 +396,7 @@ This follows the UX design of Visual Studio Code."
   :config
   (setq-default cursor-type  '(hbar . 5))
   (setq evil-emacs-state-cursor '(hbar . 5))
+  (setq evil-insert-state-cursor '(bar . 1))
   (define-key evil-motion-state-map (kbd "C-w C-o") #'(lambda () (interactive) (neotree-hide) (delete-other-windows)))
   (define-key evil-motion-state-map (kbd "C-o") #'(lambda () (interactive) (evil-jump-backward) (ian/pulse-line)))
   (define-key evil-motion-state-map (kbd "C-i") #'(lambda () (interactive) (evil-jump-forward) (ian/pulse-line)))

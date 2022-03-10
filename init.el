@@ -641,6 +641,7 @@ This follows the UX design of Visual Studio Code."
                       #'(lambda () (interactive) (lsp-ui-doc-glance) (ian/pulse-line)))))))
   (custom-set-faces '(lsp-ui-sideline-global ((t (:italic t)))))
   (setq lsp-ui-doc-enable nil)
+  (setq lsp-ui-doc-use-childframe nil)
   (setq lsp-ui-doc-position 'at-point)
   (setq lsp-ui-doc-include-signature t)
   (setq lsp-ui-doc-border (face-foreground 'default))

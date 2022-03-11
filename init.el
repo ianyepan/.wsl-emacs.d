@@ -899,6 +899,10 @@ This follows the UX design of Visual Studio Code."
 
 ;; Misc
 
+(add-to-list 'load-path "~/.emacs.d/whitespace4r")
+(load "whitespace4r")
+(add-hook 'prog-mode-hook #'whitespace4r-mode)
+
 (use-package dashboard
   :if (display-graphic-p)
   :config

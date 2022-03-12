@@ -901,9 +901,9 @@ This follows the UX design of Visual Studio Code."
 
 ;; Misc
 
-(add-to-list 'load-path "~/.emacs.d/whitespace4r")
-(load "whitespace4r")
-(add-hook 'prog-mode-hook #'whitespace4r-mode)
+;; (add-to-list 'load-path "~/.emacs.d/whitespace4r")
+;; (load "whitespace4r")
+;; (add-hook 'prog-mode-hook #'whitespace4r-mode)
 
 (use-package dashboard
   :if (display-graphic-p)
@@ -1049,7 +1049,6 @@ This follows the UX design of Visual Studio Code."
         '("/usr/bin/pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
           "/usr/bin/pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
           "/usr/bin/pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f")))
-
 
 (provide 'init)
 ;;; init.el ends here

@@ -961,6 +961,7 @@ This follows the UX design of Visual Studio Code."
   :init (ivy-rich-mode +1))
 
 (use-package all-the-icons-dired
+  :if (display-graphic-p)
   :config
   (add-hook 'dired-mode-hook #'all-the-icons-dired-mode)
   (setq all-the-icons-dired-monochrome nil))

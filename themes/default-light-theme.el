@@ -15,11 +15,11 @@
 
 (custom-theme-set-faces
  'default-light
- '(default                                ((t (:background "#f5f5f5"))))
+ '(default                                ((t (:background "#f7f7f7" :foreground "#222222"))))
  '(region                                 ((t (:background "#d7d4f0" :extend nil))))
  '(secondary-selection                    ((t (:inherit region))))
  '(fringe                                 ((t (:background nil))))
- '(font-lock-keyword-face                 ((t (:foreground "#7f0055" :bold t))))
+ '(font-lock-keyword-face                 ((t (:foreground "#7f0055" :bold nil))))
  '(font-lock-builtin-face                 ((t (:foreground "#7f0055"))))
  '(font-lock-type-face                    ((t (:foreground "#7f0055"))))
  '(font-lock-constant-face                ((t (:foreground "blue"))))
@@ -31,7 +31,7 @@
  '(error                                  ((t (:foreground "#c80000" :bold t))))
  '(warning                                ((t (:inherit error))))
 
- '(hl-line                                ((t (:background "#e8f0ff"))))
+ '(hl-line                                ((t (:background "#d5e5f5"))))
  '(ivy-current-match                      ((t (:background "#c8e0fe"))))
  '(highlight-symbol-face                  ((t (:background "#d5e5f5"))))
  '(show-paren-match                       ((t (:background "grey85"))))
@@ -39,12 +39,19 @@
  '(link                                   ((t (:foreground "#0065c2"))))
 
  '(company-tooltip                        ((t (:foreground "grey20" :background "grey94"))))
- '(company-tooltip-common                 ((t (:foreground "#0065c2" :bold t))))
+ '(company-tooltip-common                 ((t (:foreground "#0065c2" :bold nil))))
  '(company-tooltip-annotation             ((t (:foreground "grey55"))))
  '(company-tooltip-selection              ((t (:background "#d8e5f5" :bold nil))))
  '(company-scrollbar-bg                   ((t (:background "grey95"))))
  '(company-scrollbar-fg                   ((t (:background "grey90"))))
  '(company-template-field                 ((t (:inherit region))))
+
+ '(git-gutter:added                       ((t (:foreground "#81b88b" :weight normal))))
+ '(git-gutter:deleted                     ((t (:foreground "#ca4b51" :weight normal))))
+ '(git-gutter:modified                    ((t (:foreground "#66afe0" :weight normal))))
+ '(git-gutter-fr:added                    ((t (:foreground "#81b88b" :weight normal))))
+ '(git-gutter-fr:deleted                  ((t (:foreground "#ca4b51" :weight normal))))
+ '(git-gutter-fr:modified                 ((t (:foreground "#66afe0" :weight normal))))
 
  '(neo-dir-link-face                      ((t (:foreground "#555555"))))
  '(neo-header-face                        ((t (:foreground "#555555"))))

@@ -49,15 +49,16 @@
       (fg4               "#484644")
 
       (bg0               "#e2e2f6")
-      (bg1               "#f4f4fc") ; default bg
+      ;; (bg1               "#f4f4fc") ; default bg
+      (bg1               "#f7f7f7") ; default bg
       (bg2               "#e2e2f6")
       (bg3               "#e2e2f6")
       (bg4               "#e2e2f6")
 
       (bg-hl             "#bdbde6")
-      (vc-r              "#a41511")
-      (vc-g              "#4a7f00")
-      (vc-b              "#207fa1")
+      (vc-r              "#ca4b51")
+      (vc-g              "#81b88b")
+      (vc-b              "#66afe0")
       (key2              "#8b8cc7")
       (key3              "#6264a7")
       (accent            "#585a96")
@@ -78,15 +79,15 @@
       (warning           "#f16969")
 
       ;; standardized palette
-      (ms-yellow         "#f19999")
+      (ms-yellow         "#d16969")
       (ms-bluegreen      "#585a96")
       (ms-magenta        "#6264a7")
-      (ms-orange         "#f19999")
-      (ms-lightorange    "#f19999")
+      (ms-orange         "#d16969")
+      (ms-lightorange    "#d16969")
       (ms-red            "#d16969")
       (ms-green          "#6a9955")
       (ms-blue           "#6264a7")
-      (ms-lightred       "#f19999")
+      (ms-lightred       "#d16969")
       (ms-lightgreen     "#b5cea8")
       (ms-lightblue      "#9cdcfe")
       (ms-red-bg         "#551b1e")
@@ -117,7 +118,7 @@
 
    `(region                                   ((,class (:background ,bg-hl :distant-foreground ,fg0 :extend nil))))
    `(secondary-selection                      ((,class (:inherit region))))
-   `(highlight                                ((,class (:foreground "#4db2ff" :underline t)))) ; link hover
+   `(highlight                                ((,class (:foreground "#0063b1" :underline t)))) ; link hover
    `(hl-line                                  ((,class (:background ,bg3))))
    `(fringe                                   ((,class (:background nil :foreground ,fg4))))
    `(cursor                                   ((,class (:background ,fg1))))
@@ -127,7 +128,7 @@
    `(isearch                                  ((,class (:background ,bg-hl))))
    `(vertical-border                          ((,class (:foreground "black"))))
    `(minibuffer-prompt                        ((,class (:foreground ,ms-bluegreen :weight normal))))
-   `(link                                     ((,class (:foreground "#3794ff"))))
+   `(link                                     ((,class (:foreground "#0078d4"))))
    `(error                                    ((,class (:foreground ,ms-orange))))
    `(warning                                  ((,class (:foreground ,ms-magenta))))
    `(success                                  ((,class (:foreground ,ms-bluegreen))))

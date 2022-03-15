@@ -5,8 +5,11 @@
 ;;; Code:
 
 ;; GccEmacs (native-comp) stuff
-;; (setq comp-deferred-compilation t)
-;; (setq comp-async-report-warnings-errors nil)
+; (setq comp-deferred-compilation t)
+; (setq native-comp-async-report-warnings-errors nil)
+; (pixel-scroll-precision-mode +1)
+; (setq package-native-compile t)
+; (native-compile-async "~/.emacs.d/elpa" 'recursively)
 
 (require 'package)
 (add-to-list 'package-archives '("gnu"   . "https://elpa.gnu.org/packages/"))
@@ -338,7 +341,7 @@ This follows the UX design of Visual Studio Code."
 ;;   (load-theme 'vscode-dark-plus t))
 
 ;; (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
-;; (load-theme 'default-dark t)
+;; (load-theme 'default-light t)
 
 (use-package doom-themes
   :custom-face
@@ -354,7 +357,7 @@ This follows the UX design of Visual Studio Code."
   (setq doom-themes-enable-bold nil)
   (setq doom-gruvbox-dark-variant "medium")
   (setq doom-solarized-dark-brighter-text t)
-  (load-theme 'doom-gruvbox-material t))
+  (load-theme 'doom-one t))
 
 (use-package highlight-symbol
   :hook (prog-mode . highlight-symbol-mode)
@@ -695,7 +698,6 @@ This follows the UX design of Visual Studio Code."
   (setq company-tooltip-maximum-width 60)
   (setq company-tooltip-limit 12)
   (setq company-minimum-prefix-length 1)
-  (setq company-selection-wrap-around t)
   (setq company-tooltip-align-annotations t)
   (setq company-frontends '(company-pseudo-tooltip-frontend ; show tooltip even for single candidate
                             company-echo-metadata-frontend))
@@ -868,38 +870,37 @@ This follows the UX design of Visual Studio Code."
 
 ;; Terminal integration
 
-(use-package vterm
-  :hook (vterm-mode . (lambda ()
-                        (setq-local global-hl-line-mode nil)
-                        (setq-local line-spacing nil)))
-  :preface
-  (defun ian/new-vterm-instance ()
-    (interactive)
-    (vterm t))
-  :config
-  (with-eval-after-load 'evil
-    (evil-set-initial-state 'vterm-mode 'emacs))
-  (define-key vterm-mode-map (kbd "C-l") #'(lambda ()
-                                             (interactive)
-                                             (vterm-clear)
-                                             (vterm-clear-scrollback))))
+;; (use-package vterm
+;;   :hook (vterm-mode . (lambda ()
+;;                         (setq-local global-hl-line-mode nil)
+;;                         (setq-local line-spacing nil)))
+;;   :preface
+;;   (defun ian/new-vterm-instance ()
+;;     (interactive)
+;;     (vterm t))
+;;   :config
+;;   (with-eval-after-load 'evil
+;;     (evil-set-initial-state 'vterm-mode 'emacs))
+;;   (define-key vterm-mode-map (kbd "C-l") #'(lambda ()
+;;                                              (interactive)
+;;                                              (vterm-clear)
+;;                                              (vterm-clear-scrollback))))
 
-(use-package vterm-toggle
-  :after (projectile vterm evil)
-  :config
-  (setq vterm-toggle-fullscreen-p nil)
-  (setq vterm-toggle-scope 'project)
-  (global-set-key (kbd "C-`") #'vterm-toggle)
-  (add-to-list 'display-buffer-alist
-               '((lambda (bufname _) (with-current-buffer bufname (equal major-mode 'vterm-mode)))
-                 (display-buffer-reuse-window display-buffer-at-bottom)
-                 (direction . bottom)
-                 (dedicated . t)
-                 (reusable-frames . visible)
-                 (window-height . 0.5))))
+;; (use-package vterm-toggle
+;;   :after (projectile vterm evil)
+;;   :config
+;;   (setq vterm-toggle-fullscreen-p nil)
+;;   (setq vterm-toggle-scope 'project)
+;;   (global-set-key (kbd "C-`") #'vterm-toggle)
+;;   (add-to-list 'display-buffer-alist
+;;                '((lambda (bufname _) (with-current-buffer bufname (equal major-mode 'vterm-mode)))
+;;                  (display-buffer-reuse-window display-buffer-at-bottom)
+;;                  (direction . bottom)
+;;                  (dedicated . t)
+;;                  (reusable-frames . visible)
+;;                  (window-height . 0.5))))
 
 ;; Misc
-
 
 (use-package dashboard
   :if (display-graphic-p)
@@ -956,11 +957,11 @@ This follows the UX design of Visual Studio Code."
   :after all-the-icons-ivy-rich
   :init (ivy-rich-mode +1))
 
-(use-package all-the-icons-dired
-  :if (display-graphic-p)
-  :config
-  (add-hook 'dired-mode-hook #'all-the-icons-dired-mode)
-  (setq all-the-icons-dired-monochrome nil))
+;; (use-package all-the-icons-dired
+;;   :if (display-graphic-p)
+;;   :config
+;;   (add-hook 'dired-mode-hook #'all-the-icons-dired-mode)
+;;   (setq all-the-icons-dired-monochrome nil))
 
 (use-package minions
   :config

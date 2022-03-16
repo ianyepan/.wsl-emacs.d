@@ -1,25 +1,32 @@
-;;; default-light-theme.el
+;;; eclipse-theme.el --- A pleasant light theme
 
 ;;; Commentary:
 ;;
-;; The builtin light theme, with minor tweaks
+;; This light theme is inspired by Eclipse IDE and Visual Studio
+;; Code's default Light+ theme
 
 ;;; Usage:
 ;;
 ;; (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-;; (load-theme 'default-light t)
+;; (load-theme 'eclipse t)
 
 ;;; Code:
-(deftheme default-light)
+(deftheme eclipse)
 
 (custom-theme-set-faces
- 'default-light
+ 'eclipse
  '(default                                ((t (:background "#f7f7f7" :foreground "#222222"))))
- '(region                                 ((t (:background "#0078d4" :foreground "white" :extend nil))))
+ '(region                                 ((t (:background "#328ffe" :foreground "white" :extend nil))))
  '(secondary-selection                    ((t (:inherit region))))
  '(fringe                                 ((t (:background nil))))
  '(font-lock-keyword-face                 ((t (:foreground "#7f0055" :bold nil))))
+ '(font-lock-builtin-face                 ((t (:foreground "#7f0055"))))
+ '(font-lock-type-face                    ((t (:foreground "#7f0055"))))
+ '(font-lock-constant-face                ((t (:foreground "blue"))))
+ '(font-lock-string-face                  ((t (:foreground "MediumBlue"))))
+ '(font-lock-variable-name-face           ((t (:foreground "black"))))
  '(minibuffer-prompt                      ((t (:inherit default))))
+ '(font-lock-comment-face                 ((t (:foreground "#3F7F5F"))))
  '(font-lock-doc-face                     ((t (:inherit font-lock-comment-face))))
  '(error                                  ((t (:foreground "#c80000" :bold t))))
  '(warning                                ((t (:inherit error))))
@@ -52,11 +59,15 @@
  '(neo-root-dir-face                      ((t (:foreground "#444444"))))
  '(neo-file-link-face                     ((t (:foreground "#444444"))))
 
+ '(mode-line                              ((t (:foreground "grey25" :background "grey90" :box (:color "grey75" :line-width 1)))))
+ '(mode-line-inactive                     ((t (:foreground "grey25" :background "grey90" :box (:color "grey75" :line-width 1)))))
+
  '(lsp-lsp-flycheck-info-unnecessary-face ((t (:foreground "#999999" :underline (:style wave :color "DarkOrange")))))
 
+ '(markdown-header-face                   ((t (:foreground "grey25" :background "grey90" :overline t :height 1.3))))
  '(org-level-1                            ((t (:foreground "grey25" :background "grey90" :overline t :height 1.3))))
  '(org-level-2                            ((t (:foreground "grey25" :background "grey90" :overline t :height 1.3))))
  )
 
-(provide-theme 'default-light)
-;;; default-light-theme.el ends here
+(provide-theme 'eclipse)
+;;; eclipse-theme.el ends here

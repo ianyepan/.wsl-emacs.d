@@ -341,7 +341,7 @@ This follows the UX design of Visual Studio Code."
 ;;   (load-theme 'vscode-dark-plus t))
 
 ;; (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
-;; (load-theme 'default-light t)
+;; (load-theme 'eclipse t)
 
 (use-package doom-themes
   :custom-face
@@ -372,17 +372,30 @@ This follows the UX design of Visual Studio Code."
 
 ;; Vi keybindings
 
-(use-package undo-tree
+(use-package undo-fu
   :config
-  (global-undo-tree-mode))
+  (setq undo-fu-ignore-keyboard-quit t))
 
-(use-package evil
-  :after (undo-tree evil-leader)
+(use-package evil-leader
   :init
   (setq evil-want-C-u-scroll t
         evil-want-keybinding nil
         evil-shift-width ian/indent-width
-        evil-undo-system 'undo-tree)
+        evil-undo-system 'undo-fu)
+  :config
+  (global-evil-leader-mode +1)
+  (evil-leader/set-leader "<SPC>")
+  (evil-leader/set-key
+    "s" #'counsel-grep-or-swiper
+    "w" #'save-buffer
+    "f" #'counsel-projectile-find-file
+    "F" #'projectile-ripgrep
+    "o" #'other-window
+    "r" #'ranger
+    "e" #'ian/neotree-project-toggle))
+
+(use-package evil
+  :after (undo-fu evil-leader)
   :hook (after-init . evil-mode)
   :preface
   (defun ian/paste-with-ctrl-shift-v ()
@@ -412,6 +425,8 @@ This follows the UX design of Visual Studio Code."
   (define-key evil-insert-state-map (kbd "C-p") nil) ; avoid conflict with company tooltip selection
   (define-key evil-normal-state-map (kbd "C-S-c") #'evil-yank)
   (define-key evil-insert-state-map (kbd "C-S-v") #'ian/paste-with-ctrl-shift-v)
+  (define-key evil-normal-state-map "u" 'undo-fu-only-undo)
+  (define-key evil-normal-state-map "\C-r" 'undo-fu-only-redo)
   (evil-define-key 'motion prog-mode-map (kbd "gd") #'xref-find-definitions)
   (evil-define-key 'motion prog-mode-map (kbd "<f12>") #'xref-find-definitions)
   (evil-define-key 'motion prog-mode-map (kbd "gD") #'xref-find-references)
@@ -447,24 +462,6 @@ This follows the UX design of Visual Studio Code."
           js-mode
           typescript-mode
           ) . turn-on-evil-matchit-mode))
-
-(use-package evil-leader
-  :init
-  (setq evil-want-C-u-scroll t
-        evil-want-keybinding nil
-        evil-shift-width ian/indent-width
-        evil-undo-system 'undo-tree)
-  :config
-  (global-evil-leader-mode +1)
-  (evil-leader/set-leader "<SPC>")
-  (evil-leader/set-key
-    "s" #'counsel-grep-or-swiper
-    "w" #'save-buffer
-    "f" #'counsel-projectile-find-file
-    "F" #'projectile-ripgrep
-    "o" #'other-window
-    "r" #'ranger
-    "e" #'ian/neotree-project-toggle))
 
 ;; Git integration
 

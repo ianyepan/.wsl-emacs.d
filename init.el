@@ -515,7 +515,9 @@ This follows the UX design of Visual Studio Code."
   (define-key ivy-minibuffer-map (kbd "<tab>") #'ivy-next-line)
   (define-key ivy-minibuffer-map (kbd "<backtab>") #'ivy-previous-line)
   (define-key ivy-minibuffer-map (kbd "RET") #'ivy-alt-done)
-  (define-key ivy-minibuffer-map (kbd "<C-return>") #'ivy-immediate-done))
+  (define-key ivy-minibuffer-map (kbd "<C-return>") #'ivy-immediate-done)
+  (define-key ivy-minibuffer-map (kbd "C-c m") #'ivy-mark)
+  (define-key ivy-minibuffer-map (kbd "C-c u") #'ivy-unmark))
 
 (use-package counsel
   :hook (ivy-mode . counsel-mode)

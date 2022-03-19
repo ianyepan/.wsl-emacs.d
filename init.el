@@ -490,7 +490,7 @@ This follows the UX design of Visual Studio Code."
   :bind (("C-c g" . blamer-mode))
   :config
   (setq blamer-idle-time 0.05)
-  (setq blamer-author-formatter "🖊%s ")
+  (setq blamer-author-formatter "%s ")
   (setq blamer-datetime-formatter "[%s]")
   (setq blamer-commit-formatter " ● %s")
   (setq blamer-max-commit-message-length 100)

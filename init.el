@@ -392,6 +392,7 @@ This follows the UX design of Visual Studio Code."
     "F" #'projectile-ripgrep
     "o" #'other-window
     "r" #'ranger
+    "<tab>" #'ian/lsp-execute-code-action
     "e" #'ian/neotree-project-toggle))
 
 (use-package evil
@@ -604,7 +605,7 @@ This follows the UX design of Visual Studio Code."
   :commands lsp
   :config
   (add-hook 'java-mode-hook #'(lambda () (when (eq major-mode 'java-mode) (lsp-deferred))))
-  (define-key lsp-mode-map (kbd "C-c l <tab>") #'ian/lsp-execute-code-action)
+  ;; (define-key lsp-mode-map (kbd "C-c l <tab>") #'ian/lsp-execute-code-action)
   (global-unset-key (kbd "<f2>"))
   (define-key lsp-mode-map (kbd "<f2>") #'lsp-rename)
   (setq lsp-auto-guess-root t)
@@ -621,13 +622,14 @@ This follows the UX design of Visual Studio Code."
   (setq lsp-modeline-code-actions-enable nil)
   (setq lsp-modeline-diagnostics-enable nil)
   (setq lsp-headerline-breadcrumb-enable nil)
+  (setq lsp-headerline-breadcrumb-icons-enable nil)
   (setq lsp-semantic-tokens-enable nil)
   (setq lsp-enable-folding nil)
   (setq lsp-enable-imenu nil)
   (setq lsp-enable-snippet nil)
   (setq lsp-enable-file-watchers nil)
   (setq read-process-output-max (* 1024 1024)) ;; 1MB
-  (setq lsp-idle-delay 0.5)
+  (setq lsp-idle-delay 0.25)
   (with-eval-after-load 'lsp-clangd
     (add-to-list 'lsp-clients-clangd-args "--header-insertion=never"))
   (add-to-list 'lsp-language-id-configuration '(js-jsx-mode . "javascriptreact")))

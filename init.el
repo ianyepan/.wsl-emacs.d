@@ -148,7 +148,7 @@ Reference: https://www.emacswiki.org/emacs/TrampMode#h5o-19"
   :config
   (setq auto-revert-interval 2)
   (setq auto-revert-check-vc-info t)
-  (setq global-auto-revert-non-file-buffers t)
+  (setq global-auto-revert-non-file-buffers nil)
   (setq auto-revert-verbose nil)
   (global-auto-revert-mode +1))
 

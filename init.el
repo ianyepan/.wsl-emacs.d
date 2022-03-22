@@ -630,6 +630,7 @@ This follows the UX design of Visual Studio Code."
   (setq lsp-enable-file-watchers nil)
   (setq read-process-output-max (* 1024 1024)) ;; 1MB
   (setq lsp-idle-delay 0.25)
+  (setq lsp-auto-execute-action nil)
   (with-eval-after-load 'lsp-clangd
     (add-to-list 'lsp-clients-clangd-args "--header-insertion=never"))
   (add-to-list 'lsp-language-id-configuration '(js-jsx-mode . "javascriptreact")))
@@ -652,6 +653,7 @@ This follows the UX design of Visual Studio Code."
   (setq lsp-ui-doc-include-signature t)
   (setq lsp-ui-doc-border (face-foreground 'default))
   (setq lsp-ui-sideline-show-code-actions nil)
+  (setq lsp-ui-peek-always-show t)
   (setq lsp-ui-sideline-delay 0.05))
 
 (use-package lsp-java

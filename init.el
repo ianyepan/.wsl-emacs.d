@@ -683,7 +683,7 @@ This follows the UX design of Visual Studio Code."
 ;;   (global-tree-sitter-mode)
 ;;   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
-(use-package tree-sitter-langs)
+;; (use-package tree-sitter-langs)
 
 (use-package pyvenv
   :config

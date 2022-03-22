@@ -590,6 +590,7 @@ This follows the UX design of Visual Studio Code."
           web-mode        ; ts-ls/HTML/CSS
           haskell-mode    ; haskell-language-server
           lua-mode        ; lua-language-server
+          rust-mode       ; rust-analyzer
           ) . lsp-deferred)
   :preface
   (defun ian/lsp-execute-code-action ()
@@ -744,6 +745,13 @@ This follows the UX design of Visual Studio Code."
   :mode ("\\.tsx?\\'" . typescript-mode)
   :config
   (setq typescript-indent-level ian/indent-width))
+
+(use-package rust-mode)
+
+(use-package flycheck-rust
+  :config
+  (with-eval-after-load 'rust-mode
+    (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)))
 
 (use-package lua-mode)
 

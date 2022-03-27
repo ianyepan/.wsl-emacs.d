@@ -890,6 +890,8 @@ This follows the UX design of Visual Studio Code."
     (interactive)
     (vterm t))
   :config
+  (setq vterm-disable-bold t)
+  (setq vterm-timer-delay nil)
   (with-eval-after-load 'evil
     (evil-set-initial-state 'vterm-mode 'emacs))
   (define-key vterm-mode-map (kbd "C-l") #'(lambda ()

@@ -219,7 +219,7 @@ Reference: https://www.emacswiki.org/emacs/TrampMode#h5o-19"
 (use-package frame
   :preface
   (defconst small-fonts-list '("Consolas" "Ubuntu Mono" "Fixedsys Excelsior" "Inconsolata"))
-  (defconst tight-fonts-list '("Consolas" "Ubuntu Mono" "Fixedsys Excelsior" "Inconsolata" "Monaco"))
+  (defconst tight-fonts-list '("Consolas" "Ubuntu Mono" "Inconsolata" "Monaco"))
   (defun ian/set-default-fonts (english-font chinese-font font-size font-weight)
     "Set the default Latin and CJK font families, as well as the line height."
     (interactive)
@@ -239,20 +239,22 @@ Reference: https://www.emacswiki.org/emacs/TrampMode#h5o-19"
     (setq-default line-spacing (if (member english-font tight-fonts-list) 3 1)))
   (defun ian/set-big-fonts ()
     (interactive)
-    (ian/set-default-fonts "Consolas" "YaHei Consolas Hybrid" 105 'normal)
-    (set-face-attribute 'fixed-pitch-serif nil :family "Monospace" :height 0.8)
+    (ian/set-default-fonts "Consolas" "YaHei Consolas Hybrid" 150 'normal)
+    (when (member "Inconsolata" (font-family-list))
+      (set-face-attribute 'fixed-pitch nil :family "Inconsolata" :height 1.0))
     (when (member "Segoe UI Variable Static Small" (font-family-list))
-      (set-face-attribute 'variable-pitch nil :family "Segoe UI Variable Static Small" :height 95 :weight 'normal)))
+      (set-face-attribute 'variable-pitch nil :family "Segoe UI Variable Static Small" :height 140 :weight 'normal)))
   (defun ian/set-small-fonts ()
     (interactive)
     (ian/set-default-fonts "Consolas" "YaHei Consolas Hybrid" 70 'normal)
-    (set-face-attribute 'fixed-pitch-serif nil :family "Monospace" :height 0.8)
+    (when (member "Inconsolata" (font-family-list))
+      (set-face-attribute 'fixed-pitch nil :family "Inconsolata" :height 1.0))
     (when (member "Segoe UI Variable Static Small" (font-family-list))
       (set-face-attribute 'variable-pitch nil :family "Segoe UI Variable Static Small" :height 0.9 :weight 'normal)))
   :ensure nil
   :config
   (setq default-frame-alist (append (list '(width . 74) '(height . 35) '(internal-border-width . 2))))
-  (blink-cursor-mode +1)
+  (blink-cursor-mode -1)
   (setq blink-cursor-blinks -1) ; blink forever
   (ian/set-big-fonts))
 
@@ -342,24 +344,24 @@ This follows the UX design of Visual Studio Code."
 ;;   :config
 ;;   (load-theme 'vscode-dark-plus t))
 
-;; (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
-;; (load-theme 'eclipse t)
+(add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
+(load-theme 'eclipse t)
 
-(use-package doom-themes
-  :custom-face
-  (region                         ((t (:extend nil))))
-  (font-lock-comment-face         ((t (:italic t))))
-  (highlight-symbol-face          ((t (:background "#355266" :distant-foreground "#bbbbbb"))))
-  (highlight                      ((t (:foreground "#4db2ff" :background nil :underline t)))) ; link hover
-  (link                           ((t (:foreground "#3794ff"))))
-  (evil-ex-substitute-replacement ((t (:strike-through nil))))
-  (vertical-border                ((t (:foreground "black" :background "black"))))
-  (fringe                         ((t (:background nil))))
-  :config
-  (setq doom-themes-enable-bold nil)
-  (setq doom-gruvbox-dark-variant "medium")
-  (setq doom-solarized-dark-brighter-text t)
-  (load-theme 'doom-one t))
+;; (use-package doom-themes
+;;   :custom-face
+;;   (region                         ((t (:background "#0562d1" :foreground "white" :extend nil))))
+;;   (font-lock-comment-face         ((t (:italic t))))
+;;   (highlight-symbol-face          ((t (:background "#355266" :distant-foreground "#bbbbbb"))))
+;;   (highlight                      ((t (:foreground "#4db2ff" :background nil :underline t)))) ; link hover
+;;   (link                           ((t (:foreground "#3794ff"))))
+;;   (evil-ex-substitute-replacement ((t (:strike-through nil))))
+;;   (vertical-border                ((t (:foreground "black" :background "black"))))
+;;   (fringe                         ((t (:background nil))))
+;;   :config
+;;   (setq doom-themes-enable-bold nil)
+;;   (setq doom-gruvbox-dark-variant "medium")
+;;   (setq doom-solarized-dark-brighter-text t)
+;;   (load-theme 'doom-Iosvkem t))
 
 (use-package highlight-symbol
   :hook (prog-mode . highlight-symbol-mode)
@@ -395,6 +397,7 @@ This follows the UX design of Visual Studio Code."
     "o" #'other-window
     "r" #'ranger
     "<tab>" #'ian/lsp-execute-code-action
+    "TAB" #'ian/lsp-execute-code-action
     "e" #'ian/neotree-project-toggle))
 
 (use-package evil
@@ -833,7 +836,7 @@ This follows the UX design of Visual Studio Code."
 
 (use-package hl-todo
   :custom-face
-  (hl-todo                        ((t (:inverse-video nil :italic t :bold t))))
+  (hl-todo                        ((t (:inverse-video nil :italic t :bold nil))))
   :config
   (add-to-list 'hl-todo-keyword-faces '("DOING" . "#94bff3"))
   (add-to-list 'hl-todo-keyword-faces '("WHY" . "#7cb8bb"))
@@ -1009,6 +1012,7 @@ This follows the UX design of Visual Studio Code."
   :config
   (add-hook 'neotree-mode-hook (lambda ()
                                  (hl-line-mode +1)
+                                 (define-key evil-normal-state-local-map (kbd "TAB") 'neotree-enter)
                                  (setq-local line-spacing 1)))
   (setq neo-theme 'icons)
   (setq neo-autorefresh t) ; neotree.el: change delay to (run-with-idle-timer 0.1 ...)

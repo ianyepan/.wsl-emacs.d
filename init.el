@@ -4,13 +4,6 @@
 ;;  This is my personal Emacs configuration
 ;;; Code:
 
-;; GccEmacs (native-comp) stuff
-; (setq comp-deferred-compilation t)
-; (setq native-comp-async-report-warnings-errors nil)
-; (pixel-scroll-precision-mode +1)
-; (setq package-native-compile t)
-; (native-compile-async "~/.emacs.d/elpa" 'recursively)
-
 (require 'package)
 (add-to-list 'package-archives '("gnu"   . "https://elpa.gnu.org/packages/"))
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
@@ -22,6 +15,15 @@
 (eval-and-compile
   (setq use-package-always-ensure t
         use-package-expand-minimally t))
+
+;;; GccEmacs (native-comp) stuff
+(when (and (fboundp 'native-comp-available-p) (native-comp-available-p))
+  (progn
+    (setq native-comp-async-report-warnings-errors nil)
+    (setq comp-deferred-compilation t)
+    (pixel-scroll-precision-mode +1)
+    (add-to-list 'native-comp-eln-load-path (expand-file-name "eln-cache/" user-emacs-directory))
+    (setq package-native-compile t)))
 
 ;;; Settings without corresponding packages
 

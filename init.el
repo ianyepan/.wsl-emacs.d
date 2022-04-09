@@ -275,14 +275,6 @@ Reference: https://www.emacswiki.org/emacs/TrampMode#h5o-19"
   :ensure nil
   :hook (prog-mode . electric-pair-local-mode))
 
-(use-package dired
-  :ensure nil
-  :hook ((dired-mode . dired-hide-details-mode)
-         (dired-mode . hl-line-mode))
-  :config
-  (setq dired-listing-switches "-lat") ; sort by date (new first)
-  (put 'dired-find-alternate-file 'disabled nil))
-
 (use-package saveplace
   :ensure nil
   :config
@@ -864,17 +856,14 @@ This follows the UX design of Visual Studio Code."
 
 ;;; Dired enhancements
 
-(use-package dired-single
-  :preface
-  (defun ian/dired-single-init ()
-    "Keybindings setup for dired-single."
-    (define-key dired-mode-map (kbd "<return>") #'dired-single-buffer)
-    (define-key dired-mode-map [remap dired-mouse-find-file-other-window] #'dired-single-buffer-mouse)
-    (define-key dired-mode-map [remap dired-up-directory] #'dired-single-up-directory))
+(use-package dired
+  :ensure nil
+  :hook ((dired-mode . dired-hide-details-mode)
+         (dired-mode . hl-line-mode))
   :config
-  (if (boundp 'dired-mode-map)
-      (ian/dired-single-init)
-    (add-hook 'dired-load-hook #'ian/dired-single-init)))
+  (setq dired-listing-switches "-lat") ; sort by date (new first)
+  (setq dired-kill-when-opening-new-dired-buffer t)
+  (put 'dired-find-alternate-file 'disabled nil))
 
 (use-package ranger
   :config

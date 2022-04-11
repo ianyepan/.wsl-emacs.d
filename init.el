@@ -20,8 +20,7 @@
 (when (and (fboundp 'native-comp-available-p) (native-comp-available-p))
   (progn
     (setq native-comp-async-report-warnings-errors nil)
-    (setq comp-deferred-compilation t)
-    (pixel-scroll-precision-mode +1)
+    (setq native-comp-deferred-compilation t)
     (add-to-list 'native-comp-eln-load-path (expand-file-name "eln-cache/" user-emacs-directory))
     (setq package-native-compile t)))
 
@@ -450,8 +449,7 @@ This follows the UX design of Visual Studio Code."
 (use-package evil-commentary
   :after evil
   :config
-  (evil-commentary-mode +1)
-  (add-hook 'c-mode-hook #'(lambda () (c-toggle-comment-style -1))))
+  (evil-commentary-mode +1))
 
 (use-package evil-matchit
   :hook ((web-mode
@@ -490,7 +488,7 @@ This follows the UX design of Visual Studio Code."
   (setq blamer-idle-time 0.05)
   (setq blamer-author-formatter "%s ")
   (setq blamer-datetime-formatter "[%s]")
-  (setq blamer-commit-formatter " ● %s")
+  (setq blamer-commit-formatter ": %s")
   (setq blamer-max-commit-message-length 100)
   (setq blamer-min-offset 70))
 

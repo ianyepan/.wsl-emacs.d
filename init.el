@@ -197,6 +197,14 @@ Reference: https://www.emacswiki.org/emacs/TrampMode#h5o-19"
   (setq python-indent-offset ian/indent-width)
   (setq python-shell-interpreter "python3"))
 
+(use-package ruby-mode
+  :ensure nil
+  :config
+  (add-to-list 'auto-mode-alist
+               '("\\.\\(?:cap\\|gemspec\\|irbrc\\|gemrc\\|rake\\|rb\\|ru\\|thor\\)\\'" . ruby-mode))
+  (add-to-list 'auto-mode-alist
+               '("\\(?:Brewfile\\|Capfile\\|Gemfile\\(?:\\.[a-zA-Z0-9._-]+\\)?\\|[rR]akefile\\)\\'" . ruby-mode)))
+
 (use-package css-mode ; inerited by less-css-mode
   :ensure nil
   :config
@@ -587,6 +595,7 @@ This follows the UX design of Visual Studio Code."
           haskell-mode    ; haskell-language-server
           lua-mode        ; lua-language-server
           rust-mode       ; rust-analyzer
+          ruby-mode       ; solargraph
           ) . lsp-deferred)
   :preface
   (defun ian/lsp-execute-code-action ()

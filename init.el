@@ -210,6 +210,12 @@ Reference: https://www.emacswiki.org/emacs/TrampMode#h5o-19"
   :config
   (setq css-indent-offset ian/indent-width))
 
+(use-package sh-script
+  :ensure nil
+  :config
+  (with-eval-after-load 'company
+    (add-hook 'sh-mode-hook #'(lambda () (company-mode -1)))))
+
 (use-package mwheel
   :ensure nil
   :config

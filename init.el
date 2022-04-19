@@ -421,8 +421,6 @@ This follows the UX design of Visual Studio Code."
     (interactive)
     (pulse-momentary-highlight-one-line (point) 'region))
   :config
-  (setq-default cursor-type  '(hbar . 5))
-  (setq evil-emacs-state-cursor '(hbar . 5))
   (setq evil-insert-state-cursor '(bar . 1))
   (define-key evil-motion-state-map (kbd "C-w C-o") #'(lambda () (interactive) (neotree-hide) (delete-other-windows)))
   (define-key evil-motion-state-map (kbd "C-o") #'(lambda () (interactive) (evil-jump-backward) (ian/pulse-line)))
@@ -736,7 +734,6 @@ This follows the UX design of Visual Studio Code."
   (setq flycheck-indication-mode nil)
   (define-key flycheck-mode-map (kbd "<f8>") #'flycheck-next-error)
   (define-key flycheck-mode-map (kbd "S-<f8>") #'flycheck-previous-error)
-  (define-key flycheck-mode-map (kbd "C-<f8>") #'flycheck-list-errors)
   (flycheck-define-checker proselint
     "A linter for prose. Install the executable with `pip3 install proselint'."
     :command ("proselint" source-inplace)
@@ -867,7 +864,7 @@ This follows the UX design of Visual Studio Code."
   (setq processing-sketchbook-dir (format "%s/Projects/Processing/sketchbooks" (getenv "HOME")))
   (setq processing-location (format "%s/processing-3.5.4/processing-java" (getenv "HOME"))))
 
-;;; Dired enhancements
+;; Dired enhancements
 
 (use-package dired
   :ensure nil
@@ -1064,6 +1061,7 @@ This follows the UX design of Visual Studio Code."
 (use-package ox-latex
   :ensure nil
   :config
+  (define-key org-mode-map (kbd "<f9>") #'org-latex-export-to-pdf)
   (setq org-latex-packages-alist '(("margin=1in" "geometry" nil)
                                    ;; ("bitstream-charter" "mathdesign" nil)
                                    ;; ("default, light" "roboto" nil)

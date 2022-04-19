@@ -907,15 +907,17 @@ This follows the UX design of Visual Studio Code."
 (use-package vterm-toggle
   :after (projectile vterm evil)
   :config
-  (setq vterm-toggle-fullscreen-p t)
+  (setq vterm-toggle-fullscreen-p nil)
   (setq vterm-toggle-scope 'project)
-  ;; (add-to-list 'display-buffer-alist
-  ;;              '((lambda (bufname _) (with-current-buffer bufname (equal major-mode 'vterm-mode)))
-  ;;                (display-buffer-reuse-window display-buffer-at-bottom)
-  ;;                (direction . bottom)
-  ;;                (dedicated . t)
-  ;;                (reusable-frames . visible)
-  ;;                (window-height . 0.5)))
+  (add-to-list 'display-buffer-alist
+               '((lambda(bufname _) (with-current-buffer bufname
+                                      (or (equal major-mode 'vterm-mode)
+                                          (string-prefix-p vterm-buffer-name bufname))))
+                 (display-buffer-reuse-window display-buffer-at-bottom)
+                 (direction . bottom)
+                 (dedicated . t)
+                 (reusable-frames . visible)
+                 (window-height . 0.5)))
   (global-set-key (kbd "C-`") #'vterm-toggle))
 
 ;; Misc

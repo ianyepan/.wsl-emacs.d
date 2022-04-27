@@ -532,7 +532,8 @@ This follows the UX design of Visual Studio Code."
   :hook (ivy-mode . counsel-mode)
   :config
   (setq counsel-rg-base-command "rg --vimgrep %s")
-  (global-set-key (kbd "C-S-p")         #'counsel-M-x))
+  (setq counsel-fzf-cmd "fd -H -c never \"%s\"")
+  (global-set-key (kbd "C-S-p") #'counsel-M-x))
 
 (use-package counsel-projectile
   :config

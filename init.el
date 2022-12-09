@@ -341,9 +341,6 @@ This follows the UX design of Visual Studio Code."
 
 ;; GUI enhancements
 
-;; (use-package solaire-mode
-;;   :config
-;;   (solaire-global-mode +1))
 
 ;; (use-package vscode-dark-plus-theme
 ;;   :config
@@ -354,7 +351,7 @@ This follows the UX design of Visual Studio Code."
 
 ;; (use-package doom-themes
 ;;   :custom-face
-;;   (region                         ((t (:background "#0562d1" :foreground "white" :extend nil))))
+;;   (region                         ((t (:extend nil))))
 ;;   (font-lock-comment-face         ((t (:italic t))))
 ;;   (highlight-symbol-face          ((t (:background "#355266" :distant-foreground "#bbbbbb"))))
 ;;   (highlight                      ((t (:foreground "#4db2ff" :background nil :underline t)))) ; link hover
@@ -434,8 +431,8 @@ This follows the UX design of Visual Studio Code."
   (define-key evil-insert-state-map (kbd "C-p") nil) ; avoid conflict with company tooltip selection
   (define-key evil-normal-state-map (kbd "C-S-c") #'evil-yank)
   (define-key evil-insert-state-map (kbd "C-S-v") #'ian/paste-with-ctrl-shift-v)
-  (define-key evil-normal-state-map "u" 'undo-fu-only-undo)
-  (define-key evil-normal-state-map "\C-r" 'undo-fu-only-redo)
+  (define-key evil-normal-state-map "u" #'undo-fu-only-undo)
+  (define-key evil-normal-state-map "\C-r" #'undo-fu-only-redo)
   (evil-define-key 'motion prog-mode-map (kbd "gd") #'xref-find-definitions)
   (evil-define-key 'motion prog-mode-map (kbd "<f12>") #'xref-find-definitions)
   (evil-define-key 'motion prog-mode-map (kbd "gD") #'xref-find-references)
@@ -483,6 +480,7 @@ This follows the UX design of Visual Studio Code."
                                               (message "Refreshing Magit...done"))))
 
 (use-package git-gutter
+  :if (display-graphic-p)
   :hook (prog-mode . git-gutter-mode)
   :config
   (setq git-gutter:update-interval 0.05))
@@ -493,6 +491,23 @@ This follows the UX design of Visual Studio Code."
   (define-fringe-bitmap 'git-gutter-fr:added [224] nil nil '(center repeated))
   (define-fringe-bitmap 'git-gutter-fr:modified [224] nil nil '(center repeated))
   (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240] nil nil 'bottom))
+
+(use-package diff-hl
+  :unless (display-graphic-p)
+  :custom-face
+  (diff-hl-insert ((t (:background nil :slant normal))))
+  (diff-hl-delete ((t (:background nil :slant normal))))
+  (diff-hl-change ((t (:background nil :slant normal))))
+  :config
+  (setq diff-hl-margin-symbols-alist '((insert  . "┃") ; U+02503 (box drawings heavy vertical)
+                                       (delete  . "▶")
+                                       (change  . "┃")
+                                       (unknown . "┃")
+                                       (ignored . "┃")))
+  (diff-hl-margin-mode)
+  (setq diff-hl-flydiff-delay 0.05)
+  (diff-hl-flydiff-mode)
+  (global-diff-hl-mode))
 
 (use-package blamer
   :bind (("C-c g" . blamer-mode))
@@ -601,6 +616,7 @@ This follows the UX design of Visual Studio Code."
           lua-mode        ; lua-language-server
           rust-mode       ; rust-analyzer
           ruby-mode       ; solargraph
+          go-mode         ; gopls
           ) . lsp-deferred)
   :preface
   (defun ian/lsp-execute-code-action ()
@@ -621,6 +637,7 @@ This follows the UX design of Visual Studio Code."
   (define-key lsp-mode-map (kbd "<f2>") #'lsp-rename)
   (setq lsp-auto-guess-root t)
   (setq lsp-log-io nil)
+  (setq lsp-use-plists t)
   (setq lsp-restart 'auto-restart)
   (setq lsp-enable-links nil)
   (setq lsp-enable-symbol-highlighting nil)
@@ -639,6 +656,7 @@ This follows the UX design of Visual Studio Code."
   (setq lsp-enable-imenu nil)
   (setq lsp-enable-snippet nil)
   (setq lsp-enable-file-watchers nil)
+  (setq lsp-keep-workspace-alive nil)
   (setq read-process-output-max (* 1024 1024)) ;; 1MB
   (setq lsp-idle-delay 0.25)
   (setq lsp-auto-execute-action nil)
@@ -649,7 +667,7 @@ This follows the UX design of Visual Studio Code."
 (use-package lsp-ui
   :commands lsp-ui-mode
   :custom-face
-  (lsp-ui-doc-background ((t (:background nil))))
+  (lsp-ui-doc-background ((t (:background "#262829"))))
   :config
   (with-eval-after-load 'evil
     (add-hook 'buffer-list-update-hook
@@ -659,11 +677,12 @@ This follows the UX design of Visual Studio Code."
                       #'(lambda () (interactive) (lsp-ui-doc-glance) (ian/pulse-line)))))))
   (custom-set-faces '(lsp-ui-sideline-global ((t (:italic t)))))
   (setq lsp-ui-doc-enable nil)
-  (setq lsp-ui-doc-use-childframe t)
-  (setq lsp-ui-doc-position 'at-point)
+  (when (display-graphic-p)
+    (setq lsp-ui-doc-use-childframe t)
+    (setq lsp-ui-doc-position 'at-point))
   (setq lsp-ui-doc-include-signature t)
   (setq lsp-ui-doc-border (face-foreground 'default))
-  (setq lsp-ui-sideline-show-code-actions nil)
+  (setq lsp-ui-sideline-show-code-actions t)
   (setq lsp-ui-peek-always-show t)
   (setq lsp-ui-sideline-delay 0.05))
 
@@ -710,7 +729,7 @@ This follows the UX design of Visual Studio Code."
   (setq company-idle-delay 0.2)
   (setq company-tooltip-minimum-width 60)
   (setq company-tooltip-maximum-width 60)
-  (setq company-tooltip-limit 12)
+  (setq company-tooltip-limit 7)
   (setq company-minimum-prefix-length 1)
   (setq company-tooltip-align-annotations t)
   (setq company-frontends '(company-pseudo-tooltip-frontend ; show tooltip even for single candidate
@@ -722,12 +741,20 @@ This follows the UX design of Visual Studio Code."
   (define-key company-active-map (kbd "<tab>") 'company-select-next)
   (define-key company-active-map (kbd "<backtab>") 'company-select-previous))
 
+(use-package company-box
+  :if (display-graphic-p)
+  :hook (company-mode . company-box-mode)
+  :config
+  (setq company-box-doc-enable nil)
+  (setq company-box-scrollbar nil)
+  (setq company-box-frame-behavior 'default))
+
 (use-package flycheck
   :hook ((prog-mode . flycheck-mode)
          (markdown-mode . flycheck-mode)
          (org-mode . flycheck-mode))
   :config
-  (setq flycheck-check-syntax-automatically '(save mode-enabled newline))
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
   (setq flycheck-display-errors-delay 0.1)
   (setq-default flycheck-disabled-checkers '(python-pylint))
   (setq flycheck-flake8rc "~/.config/flake8")
@@ -761,6 +788,13 @@ This follows the UX design of Visual Studio Code."
   :config
   (with-eval-after-load 'rust-mode
     (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)))
+
+(use-package go-mode
+  :config
+  (evil-define-key 'motion go-mode-map (kbd "gd") #'xref-find-definitions)
+  (evil-define-key 'normal go-mode-map (kbd "gd") #'xref-find-definitions)
+  (evil-define-key 'motion go-mode-map (kbd "K") #'(lambda () (interactive) (lsp-ui-doc-glance) (ian/pulse-line)))
+  (evil-define-key 'normal go-mode-map (kbd "K") #'(lambda () (interactive) (lsp-ui-doc-glance) (ian/pulse-line))))
 
 (use-package lua-mode)
 
@@ -827,6 +861,7 @@ This follows the UX design of Visual Studio Code."
   (defalias 'format-document #'ian/format-code)
   :config
   (global-set-key (kbd "<f6>") #'ian/format-code)
+  (global-set-key (kbd "C-M-l") #'ian/format-code)
   (add-hook 'prog-mode-hook #'format-all-ensure-formatter)
   (add-hook 'python-mode-hook #'(lambda ()
                                   (setq-local format-all-formatters '(("Python" yapf)))))
@@ -877,51 +912,72 @@ This follows the UX design of Visual Studio Code."
   (put 'dired-find-alternate-file 'disabled nil))
 
 (use-package ranger
+  :after dired
   :config
   (setq ranger-width-preview 0.5)
   (setq ranger-width-parents 0.167)
   (setq ranger-preview-delay 0.02)
   (setq ranger-show-hidden t)
+  (define-key ranger-mode-map (kbd "d") #'dired-flag-file-deletion)
+  (define-key ranger-mode-map (kbd "u") #'dired-unmark)
+  (define-key ranger-mode-map (kbd "U") #'dired-unmark-all-marks)
+  (define-key ranger-mode-map (kbd "x") #'dired-do-flagged-delete)
   (define-key ranger-mode-map (kbd "i") #'dired-toggle-read-only)
+  (define-key ranger-mode-map (kbd "m") #'dired-mark)
+  (define-key ranger-mode-map (kbd "R") #'dired-do-rename)
+  (define-key ranger-mode-map (kbd "C") #'dired-do-copy)
   (define-key ranger-mode-map (kbd "C-h") nil))
 
 ;; Terminal integration
 
-(use-package vterm
-  :hook (vterm-mode . (lambda ()
-                        (setq-local global-hl-line-mode nil)
-                        (setq-local line-spacing nil)))
-  :preface
-  (defun ian/new-vterm-instance ()
-    (interactive)
-    (vterm t))
-  :config
-  (setq vterm-disable-bold t)
-  (setq vterm-timer-delay 0.01)
-  (with-eval-after-load 'evil
-    (evil-set-initial-state 'vterm-mode 'emacs))
-  (define-key vterm-mode-map (kbd "C-l") #'(lambda ()
-                                             (interactive)
-                                             (vterm-clear)
-                                             (vterm-clear-scrollback))))
+;; (use-package vterm
+;;   :hook (vterm-mode . (lambda ()
+;;                         (setq-local global-hl-line-mode nil)
+;;                         (setq-local line-spacing nil)))
+;;   :preface
+;;   (defun ian/new-vterm-instance ()
+;;     (interactive)
+;;     (vterm t))
+;;   :config
+;;   (setq vterm-disable-bold t)
+;;   (setq vterm-timer-delay 0.01)
+;;   (with-eval-after-load 'evil
+;;     (evil-set-initial-state 'vterm-mode 'emacs))
+;;   (define-key vterm-mode-map (kbd "C-l") #'(lambda ()
+;;                                              (interactive)
+;;                                              (vterm-clear)
+;;                                              (vterm-clear-scrollback))))
 
-(use-package vterm-toggle
-  :after (projectile vterm evil)
-  :config
-  (setq vterm-toggle-fullscreen-p nil)
-  (setq vterm-toggle-scope 'project)
-  (add-to-list 'display-buffer-alist
-               '((lambda(bufname _) (with-current-buffer bufname
-                                      (or (equal major-mode 'vterm-mode)
-                                          (string-prefix-p vterm-buffer-name bufname))))
-                 (display-buffer-reuse-window display-buffer-at-bottom)
-                 (direction . bottom)
-                 (dedicated . t)
-                 (reusable-frames . visible)
-                 (window-height . 0.5)))
-  (global-set-key (kbd "C-`") #'vterm-toggle))
+;; (use-package vterm-toggle
+;;   :after (projectile vterm evil)
+;;   :config
+;;   (setq vterm-toggle-fullscreen-p nil)
+;;   (setq vterm-toggle-scope 'project)
+;;   (add-to-list 'display-buffer-alist
+;;                '((lambda(bufname _) (with-current-buffer bufname
+;;                                       (or (equal major-mode 'vterm-mode)
+;;                                           (string-prefix-p vterm-buffer-name bufname))))
+;;                  (display-buffer-reuse-window display-buffer-at-bottom)
+;;                  (direction . bottom)
+;;                  (dedicated . t)
+;;                  (reusable-frames . visible)
+;;                  (window-height . 0.5)))
+;;   (global-set-key (kbd "C-`") #'vterm-toggle))
 
 ;; Misc
+
+(use-package xclip
+  :unless (display-graphic-p)
+  :config
+  (xclip-mode +1))
+
+(use-package evil-terminal-cursor-changer
+  :unless (display-graphic-p)
+  :config
+  (setq etcc-use-color t)
+  (unless (display-graphic-p)
+    (require 'evil-terminal-cursor-changer)
+    (evil-terminal-cursor-changer-activate)))
 
 (use-package dashboard
   :if (display-graphic-p)
@@ -956,33 +1012,15 @@ This follows the UX design of Visual Studio Code."
   (setq emojify-emoji-styles '(unicode))
   (bind-key* (kbd "C-c .") #'emojify-insert-emoji)) ; override binding in any mode
 
-(use-package company-box
-  :hook (company-mode . company-box-mode)
-  :config
-  (setq company-box-doc-enable nil)
-  (setq company-box-scrollbar nil)
-  (setq company-box-frame-behavior 'default))
-
 (use-package all-the-icons
   :if (display-graphic-p)
   :config
   (setq all-the-icons-scale-factor 0.8))
 
-(use-package all-the-icons-ivy-rich
-  :after counsel-projectile
-  :init (all-the-icons-ivy-rich-mode +1)
-  :config
-  (setq all-the-icons-ivy-rich-icon-size 0.8))
-
 (use-package ivy-rich
-  :after all-the-icons-ivy-rich
-  :init (ivy-rich-mode +1))
-
-;; (use-package all-the-icons-dired
-;;   :if (display-graphic-p)
-;;   :config
-;;   (add-hook 'dired-mode-hook #'all-the-icons-dired-mode)
-;;   (setq all-the-icons-dired-monochrome nil))
+  :after ivy
+  :config
+  (ivy-rich-mode +1))
 
 (use-package minions
   :config
@@ -1026,10 +1064,10 @@ This follows the UX design of Visual Studio Code."
   (setq which-key-idle-delay 0.4)
   (which-key-mode +1))
 
-(use-package pdf-tools
-  :mode (("\\.pdf\\'" . pdf-view-mode))
-  :config
-  (pdf-loader-install))
+;; (use-package pdf-tools
+;;   :mode (("\\.pdf\\'" . pdf-view-mode))
+;;   :config
+;;   (pdf-loader-install))
 
 ;; Org and LaTeX export
 ;;;; Ubuntu needs to have these installed:

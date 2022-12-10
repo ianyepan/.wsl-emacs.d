@@ -76,7 +76,10 @@
   (global-set-key (kbd "C-x 2") #'ian/split-and-follow-horizontally)
   (global-set-key (kbd "C-x 3") #'ian/split-and-follow-vertically)
   (global-set-key (kbd "C-s")   #'save-buffer)
+  (unless (display-graphic-p)
+    (global-set-key (kbd "C-h")   #'backward-kill-word))
   (setq-default indent-tabs-mode nil)
+  (setq-default tab-width 2)
   (setq initial-scratch-message "")
   (setq split-width-threshold 150)
   (setq max-specpdl-size 10000)
@@ -267,6 +270,8 @@ Reference: https://www.emacswiki.org/emacs/TrampMode#h5o-19"
   :ensure nil
   :config
   (setq default-frame-alist (append (list '(width . 74) '(height . 35) '(internal-border-width . 2))))
+  (if (display-graphic-p)
+      (add-to-list 'default-frame-alist '(inhibit-double-buffering . t)))
   (blink-cursor-mode -1)
   (setq blink-cursor-blinks -1) ; blink forever
   (ian/set-big-fonts))
@@ -337,10 +342,14 @@ This follows the UX design of Visual Studio Code."
                                                       zone-pgm-whack-chars))))
     (let ((zone-programs (list (intern pgm)))) (zone))))
 
+(use-package tooltip
+  :ensure nil
+  :config
+  (tooltip-mode -1))
+
 ;;; Third-party Packages
 
 ;; GUI enhancements
-
 
 ;; (use-package vscode-dark-plus-theme
 ;;   :config
@@ -666,8 +675,6 @@ This follows the UX design of Visual Studio Code."
 
 (use-package lsp-ui
   :commands lsp-ui-mode
-  :custom-face
-  (lsp-ui-doc-background ((t (:background "#262829"))))
   :config
   (with-eval-after-load 'evil
     (add-hook 'buffer-list-update-hook
@@ -677,6 +684,7 @@ This follows the UX design of Visual Studio Code."
                       #'(lambda () (interactive) (lsp-ui-doc-glance) (ian/pulse-line)))))))
   (custom-set-faces '(lsp-ui-sideline-global ((t (:italic t)))))
   (setq lsp-ui-doc-enable nil)
+  (setq lsp-ui-doc-max-width 80)
   (when (display-graphic-p)
     (setq lsp-ui-doc-use-childframe t)
     (setq lsp-ui-doc-position 'at-point))
@@ -701,19 +709,21 @@ This follows the UX design of Visual Studio Code."
   :init (when (executable-find "python3")
           (setq lsp-pyright-python-executable-cmd "python3")))
 
-;; (use-package tree-sitter
-;;   :custom-face
-;;   (tree-sitter-hl-face:method.call      ((t (:inherit font-lock-function-name-face))))
-;;   (tree-sitter-hl-face:function.call    ((t (:inherit font-lock-function-name-face))))
-;;   (tree-sitter-hl-face:function.builtin ((t (:inherit font-lock-function-name-face))))
-;;   (tree-sitter-hl-face:operator         ((t (:inherit default))))
-;;   (tree-sitter-hl-face:type.builtin     ((t (:inherit font-lock-type-face))))
-;;   (tree-sitter-hl-face:number           ((t (:inherit highlight-numbers-number))))
-;;   :config
-;;   (global-tree-sitter-mode)
-;;   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+(use-package tree-sitter
+  :after tree-sitter-langs
+  :custom-face
+  (tree-sitter-hl-face:property         ((t (:slant normal))))
+  (tree-sitter-hl-face:method.call      ((t (:inherit font-lock-function-name-face))))
+  (tree-sitter-hl-face:function.call    ((t (:inherit font-lock-function-name-face))))
+  (tree-sitter-hl-face:function.builtin ((t (:inherit font-lock-function-name-face))))
+  (tree-sitter-hl-face:operator         ((t (:inherit default))))
+  (tree-sitter-hl-face:type.builtin     ((t (:inherit font-lock-type-face))))
+  (tree-sitter-hl-face:number           ((t (:inherit highlight-numbers-number))))
+  :config
+  (global-tree-sitter-mode)
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
-;; (use-package tree-sitter-langs)
+(use-package tree-sitter-langs)
 
 (use-package pyvenv
   :config
@@ -726,7 +736,7 @@ This follows the UX design of Visual Studio Code."
 (use-package company
   :hook (prog-mode . company-mode)
   :config
-  (setq company-idle-delay 0.2)
+  (setq company-idle-delay 0.0)
   (setq company-tooltip-minimum-width 60)
   (setq company-tooltip-maximum-width 60)
   (setq company-tooltip-limit 7)
@@ -734,6 +744,8 @@ This follows the UX design of Visual Studio Code."
   (setq company-tooltip-align-annotations t)
   (setq company-frontends '(company-pseudo-tooltip-frontend ; show tooltip even for single candidate
                             company-echo-metadata-frontend))
+  (unless (display-graphic-p)
+    (define-key company-active-map (kbd "C-h") #'backward-kill-word))
   (define-key company-active-map (kbd "C-j") nil) ; avoid conflict with emmet-mode
   (define-key company-active-map (kbd "C-n") #'company-select-next)
   (define-key company-active-map (kbd "C-p") #'company-select-previous)
@@ -753,6 +765,9 @@ This follows the UX design of Visual Studio Code."
   :hook ((prog-mode . flycheck-mode)
          (markdown-mode . flycheck-mode)
          (org-mode . flycheck-mode))
+  :custom-face
+  (flycheck-error   ((t (:inherit error :underline t))))
+  (flycheck-warning ((t (:inherit warning :underline t))))
   :config
   (setq flycheck-check-syntax-automatically '(save mode-enabled))
   (setq flycheck-display-errors-delay 0.1)
@@ -774,8 +789,8 @@ This follows the UX design of Visual Studio Code."
 
 (use-package markdown-mode
   :hook (markdown-mode . auto-fill-mode)
-  :config
-  (set-face-attribute 'markdown-code-face nil :inherit 'org-block))
+  :custom-face
+  (markdown-code-face ((t (:background unspecified :inherit lsp-ui-doc-background)))))
 
 (use-package typescript-mode
   :mode ("\\.tsx?\\'" . typescript-mode)

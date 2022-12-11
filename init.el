@@ -252,7 +252,7 @@ Reference: https://www.emacswiki.org/emacs/TrampMode#h5o-19"
         (set-fontset-font (frame-parameter nil 'font)
                           charset (font-spec :family chinese-font
                                              :size (*(/ font-size 10) 1.0)))))
-    (setq-default line-spacing (if (member english-font tight-fonts-list) 3 1)))
+    (setq-default line-spacing (if (member english-font tight-fonts-list) 2 1)))
   (defun ian/set-big-fonts ()
     (interactive)
     (ian/set-default-fonts "Consolas" "YaHei Consolas Hybrid" 150 'normal)
@@ -428,28 +428,35 @@ This follows the UX design of Visual Studio Code."
     (pulse-momentary-highlight-one-line (point) 'region))
   :config
   (setq evil-insert-state-cursor '(bar . 1))
-  (define-key evil-motion-state-map (kbd "C-w C-o") #'(lambda () (interactive) (neotree-hide) (delete-other-windows)))
-  (define-key evil-motion-state-map (kbd "C-o") #'(lambda () (interactive) (evil-jump-backward) (ian/pulse-line)))
-  (define-key evil-motion-state-map (kbd "C-i") #'(lambda () (interactive) (evil-jump-forward) (ian/pulse-line)))
+  (define-key evil-normal-state-map (kbd "C-w C-o") #'(lambda () (interactive) (neotree-hide) (delete-other-windows)))
+  (define-key evil-normal-state-map (kbd "C-o") #'(lambda () (interactive) (evil-jump-backward) (ian/pulse-line)))
+  (define-key evil-normal-state-map (kbd "C-i") #'(lambda () (interactive) (evil-jump-forward) (ian/pulse-line)))
   (global-set-key (kbd "M-<up>") #'(lambda () (interactive) (scroll-down 2)))
   (global-set-key (kbd "M-<down>") #'(lambda () (interactive) (scroll-up 2)))
   (global-set-key (kbd "M-<left>") #'(lambda () (interactive) (scroll-right 2)))
   (global-set-key (kbd "M-<right>") #'(lambda () (interactive) (scroll-left 2)))
-  (define-key evil-normal-state-map (kbd "z <return>") #'evil-scroll-line-to-top)
+  (if (display-graphic-p)
+      (define-key evil-normal-state-map (kbd "z <return>") #'evil-scroll-line-to-top)
+    (define-key evil-normal-state-map (kbd "z RET") #'evil-scroll-line-to-top))
   (define-key evil-insert-state-map (kbd "C-n") nil) ; avoid conflict with company tooltip selection
   (define-key evil-insert-state-map (kbd "C-p") nil) ; avoid conflict with company tooltip selection
   (define-key evil-normal-state-map (kbd "C-S-c") #'evil-yank)
   (define-key evil-insert-state-map (kbd "C-S-v") #'ian/paste-with-ctrl-shift-v)
   (define-key evil-normal-state-map "u" #'undo-fu-only-undo)
   (define-key evil-normal-state-map "\C-r" #'undo-fu-only-redo)
-  (evil-define-key 'motion prog-mode-map (kbd "gd") #'xref-find-definitions)
-  (evil-define-key 'motion prog-mode-map (kbd "<f12>") #'xref-find-definitions)
-  (evil-define-key 'motion prog-mode-map (kbd "gD") #'xref-find-references)
+  (unless (display-graphic-p)
+    (evil-define-key 'motion profiler-report-mode-map (kbd "TAB") #'profiler-report-toggle-entry)
+    (evil-define-key 'normal profiler-report-mode-map (kbd "TAB") #'profiler-report-toggle-entry))
+  (evil-define-key 'normal prog-mode-map (kbd "<f12>") #'xref-find-definitions)
+  (evil-define-key 'normal prog-mode-map (kbd "gd") #'xref-find-definitions)
+  (evil-define-key 'normal prog-mode-map (kbd "gD") #'xref-find-references)
+  ;; (evil-define-key 'motion prog-mode-map (kbd "gd") #'lsp-bridge-find-def)
+  ;; (evil-define-key 'motion prog-mode-map (kbd "gD") #'lsp-bridge-find-references)
   (with-eval-after-load 'lsp-ui
     (add-hook 'buffer-list-update-hook
               #'(lambda ()
                   (when (bound-and-true-p lsp-ui-mode)
-                    (define-key evil-motion-state-local-map (kbd "gD") #'lsp-ui-peek-find-references)))))
+                    (define-key evil-normal-state-local-map (kbd "gD") #'lsp-ui-peek-find-references)))))
   (evil-ex-define-cmd "q" #'kill-current-buffer)
   (evil-ex-define-cmd "wq" #'(lambda () (interactive) (save-buffer) (kill-current-buffer)))
   (bind-key* (kbd "<f4>") #'(lambda ()
@@ -544,11 +551,16 @@ This follows the UX design of Visual Studio Code."
   (setq ivy-use-virtual-buffers t)
   (setq ivy-count-format "(%d/%d) ")
   (setq ivy-initial-inputs-alist nil)
-  (define-key ivy-minibuffer-map (kbd "TAB") #'ivy-next-line)
-  (define-key ivy-minibuffer-map (kbd "<tab>") #'ivy-next-line)
+  (if (display-graphic-p)
+      (progn
+        (define-key ivy-minibuffer-map (kbd "<tab>") #'ivy-next-line)
+        (define-key ivy-minibuffer-map (kbd "<return>") #'ivy-alt-done)
+        (define-key ivy-minibuffer-map (kbd "<C-return>") #'ivy-immediate-done))
+    (progn
+      (define-key ivy-minibuffer-map (kbd "TAB") #'ivy-next-line)
+      (define-key ivy-minibuffer-map (kbd "RET") #'ivy-alt-done)
+      (define-key ivy-minibuffer-map (kbd "C-j") #'ivy-immediate-done)))
   (define-key ivy-minibuffer-map (kbd "<backtab>") #'ivy-previous-line)
-  (define-key ivy-minibuffer-map (kbd "RET") #'ivy-alt-done)
-  (define-key ivy-minibuffer-map (kbd "<C-return>") #'ivy-immediate-done)
   (define-key ivy-minibuffer-map (kbd "C-c m") #'ivy-mark)
   (define-key ivy-minibuffer-map (kbd "C-c u") #'ivy-unmark))
 
@@ -641,7 +653,6 @@ This follows the UX design of Visual Studio Code."
   :commands lsp
   :config
   (add-hook 'java-mode-hook #'(lambda () (when (eq major-mode 'java-mode) (lsp-deferred))))
-  ;; (define-key lsp-mode-map (kbd "C-c l <tab>") #'ian/lsp-execute-code-action)
   (global-unset-key (kbd "<f2>"))
   (define-key lsp-mode-map (kbd "<f2>") #'lsp-rename)
   (setq lsp-auto-guess-root t)
@@ -680,7 +691,7 @@ This follows the UX design of Visual Studio Code."
     (add-hook 'buffer-list-update-hook
               #'(lambda ()
                   (when (bound-and-true-p lsp-ui-mode)
-                    (define-key evil-motion-state-local-map (kbd "K")
+                    (define-key evil-normal-state-local-map (kbd "K")
                       #'(lambda () (interactive) (lsp-ui-doc-glance) (ian/pulse-line)))))))
   (custom-set-faces '(lsp-ui-sideline-global ((t (:italic t)))))
   (setq lsp-ui-doc-enable nil)
@@ -749,8 +760,9 @@ This follows the UX design of Visual Studio Code."
   (define-key company-active-map (kbd "C-j") nil) ; avoid conflict with emmet-mode
   (define-key company-active-map (kbd "C-n") #'company-select-next)
   (define-key company-active-map (kbd "C-p") #'company-select-previous)
-  (define-key company-active-map (kbd "TAB") 'company-select-next)
-  (define-key company-active-map (kbd "<tab>") 'company-select-next)
+  (if (display-graphic-p)
+      (define-key company-active-map (kbd "<tab>") 'company-select-next)
+    (define-key company-active-map (kbd "TAB") 'company-select-next))
   (define-key company-active-map (kbd "<backtab>") 'company-select-previous))
 
 (use-package company-box

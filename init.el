@@ -686,7 +686,7 @@ This follows the UX design of Visual Studio Code."
   :commands lsp-ui-mode
   :custom-face
   (lsp-ui-sideline-global ((t (:italic t))))
-  (lsp-ui-doc-url ((t (:inherit variable-pitch))))
+  (lsp-ui-peek-highlight  ((t (:foreground unspecified :background unspecified :inherit isearch ))))
   :config
   (with-eval-after-load 'evil
     (add-hook 'buffer-list-update-hook

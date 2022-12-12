@@ -504,7 +504,22 @@ This follows the UX design of Visual Studio Code."
   :config
   (define-fringe-bitmap 'git-gutter-fr:added [224] nil nil '(center repeated))
   (define-fringe-bitmap 'git-gutter-fr:modified [224] nil nil '(center repeated))
-  (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240] nil nil 'bottom))
+  (fringe-helper-define 'git-gutter-fr:deleted 'bottom
+    "X......."
+    "XX......"
+    "XXX....."
+    "XXXX...."
+    "XXXXX..."
+    "XXXXXX.."
+    "XXXXXXX."
+    "XXXXXXXX"
+    "XXXXXXX."
+    "XXXXXX.."
+    "XXXXX..."
+    "XXXX...."
+    "XXX....."
+    "XX......"
+    "X......."))
 
 (use-package diff-hl
   :unless (display-graphic-p)

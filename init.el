@@ -301,12 +301,10 @@ Reference: https://www.emacswiki.org/emacs/TrampMode#h5o-19"
 (use-package recentf
   :ensure nil
   :config
-  (add-to-list 'recentf-exclude (format "%s/\\.emacs.d/early-init.el" (getenv "HOME")))
-  (add-to-list 'recentf-exclude (format "%s/\\.emacs.d/init.el" (getenv "HOME")))
-  (add-to-list 'recentf-exclude (format "%s/\\.emacs.d/elpa/.*" (getenv "HOME")))
-  (add-to-list 'recentf-exclude (format "%s/\\.emacs.d/workspace/.*" (getenv "HOME")))
-  (add-to-list 'recentf-exclude (format "%s/\\.local/lib/python3.9/site-packages/.*" (getenv "HOME")))
+  (add-to-list 'recentf-exclude (format "%s/\\.emacs.d/.*" (getenv "HOME")))
+  (add-to-list 'recentf-exclude (format "%s/\\.local/lib/.*" (getenv "HOME")))
   (add-to-list 'recentf-exclude "/usr/lib/.*")
+  (add-to-list 'recentf-exclude "/usr/include/.*")
   (recentf-mode +1))
 
 (use-package display-line-numbers
@@ -686,6 +684,9 @@ This follows the UX design of Visual Studio Code."
 
 (use-package lsp-ui
   :commands lsp-ui-mode
+  :custom-face
+  (lsp-ui-sideline-global ((t (:italic t))))
+  (lsp-ui-doc-url ((t (:inherit variable-pitch))))
   :config
   (with-eval-after-load 'evil
     (add-hook 'buffer-list-update-hook
@@ -693,14 +694,15 @@ This follows the UX design of Visual Studio Code."
                   (when (bound-and-true-p lsp-ui-mode)
                     (define-key evil-normal-state-local-map (kbd "K")
                       #'(lambda () (interactive) (lsp-ui-doc-glance) (ian/pulse-line)))))))
-  (custom-set-faces '(lsp-ui-sideline-global ((t (:italic t)))))
   (setq lsp-ui-doc-enable nil)
-  (setq lsp-ui-doc-max-width 80)
   (when (display-graphic-p)
     (setq lsp-ui-doc-use-childframe t)
+    (setq lsp-ui-doc-text-scale-level -1.0)
+    (setq lsp-ui-doc-max-width 80)
+    (setq lsp-ui-doc-max-height 25)
     (setq lsp-ui-doc-position 'at-point))
   (setq lsp-ui-doc-include-signature t)
-  (setq lsp-ui-doc-border (face-foreground 'default))
+  (setq lsp-ui-doc-border (face-foreground 'font-lock-comment-face))
   (setq lsp-ui-sideline-show-code-actions t)
   (setq lsp-ui-peek-always-show t)
   (setq lsp-ui-sideline-delay 0.05))

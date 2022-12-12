@@ -502,8 +502,16 @@ This follows the UX design of Visual Studio Code."
 (use-package git-gutter-fringe
   :if (display-graphic-p)
   :config
-  (define-fringe-bitmap 'git-gutter-fr:added [224] nil nil '(center repeated))
-  (define-fringe-bitmap 'git-gutter-fr:modified [224] nil nil '(center repeated))
+  (fringe-helper-define 'git-gutter-fr:added '(center repeated)
+    "...XXXX."
+    "...XXXX."
+    "...XXXX."
+    "...XXXX.")
+  (fringe-helper-define 'git-gutter-fr:modified '(center repeated)
+    "...XXXX."
+    "...XXXX."
+    "...XXXX."
+    "...XXXX.")
   (fringe-helper-define 'git-gutter-fr:deleted 'bottom
     "X......."
     "XX......"

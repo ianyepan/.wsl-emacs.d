@@ -235,7 +235,7 @@ Reference: https://www.emacswiki.org/emacs/TrampMode#h5o-19"
 (use-package frame
   :preface
   (defconst small-fonts-list '("Consolas" "Ubuntu Mono" "Fixedsys Excelsior" "Inconsolata"))
-  (defconst tight-fonts-list '("Consolas" "Ubuntu Mono" "Inconsolata" "Monaco"))
+  (defconst tight-fonts-list '("Consolas" "Ubuntu Mono" "Monaco" "Comic Mono"))
   (defun ian/set-default-fonts (english-font chinese-font font-size font-weight)
     "Set the default Latin and CJK font families, as well as the line height."
     (interactive)
@@ -255,14 +255,14 @@ Reference: https://www.emacswiki.org/emacs/TrampMode#h5o-19"
     (setq-default line-spacing (if (member english-font tight-fonts-list) 2 1)))
   (defun ian/set-big-fonts ()
     (interactive)
-    (ian/set-default-fonts "Consolas" "YaHei Consolas Hybrid" 150 'normal)
+    (ian/set-default-fonts "Roboto Mono" "YaHei Consolas Hybrid" 95 'normal)
     (when (member "Inconsolata" (font-family-list))
       (set-face-attribute 'fixed-pitch nil :family "Inconsolata" :height 1.0))
     (when (member "Segoe UI Variable Static Small" (font-family-list))
-      (set-face-attribute 'variable-pitch nil :family "Segoe UI Variable Static Small" :height 140 :weight 'normal)))
+      (set-face-attribute 'variable-pitch nil :family "Segoe UI Variable Static Small" :height 95 :weight 'normal)))
   (defun ian/set-small-fonts ()
     (interactive)
-    (ian/set-default-fonts "Consolas" "YaHei Consolas Hybrid" 70 'normal)
+    (ian/set-default-fonts "Consolas" "YaHei Consolas Hybrid" 85 'normal)
     (when (member "Inconsolata" (font-family-list))
       (set-face-attribute 'fixed-pitch nil :family "Inconsolata" :height 1.0))
     (when (member "Segoe UI Variable Static Small" (font-family-list))
@@ -353,24 +353,29 @@ This follows the UX design of Visual Studio Code."
 ;;   :config
 ;;   (load-theme 'vscode-dark-plus t))
 
-(add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
-(load-theme 'eclipse t)
+;; (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
+;; (load-theme 'default-light t)
 
-;; (use-package doom-themes
+;; (use-package spacemacs-common
+;;   :ensure spacemacs-theme
 ;;   :custom-face
-;;   (region                         ((t (:extend nil))))
-;;   (font-lock-comment-face         ((t (:italic t))))
-;;   (highlight-symbol-face          ((t (:background "#355266" :distant-foreground "#bbbbbb"))))
-;;   (highlight                      ((t (:foreground "#4db2ff" :background nil :underline t)))) ; link hover
-;;   (link                           ((t (:foreground "#3794ff"))))
-;;   (evil-ex-substitute-replacement ((t (:strike-through nil))))
-;;   (vertical-border                ((t (:foreground "black" :background "black"))))
-;;   (fringe                         ((t (:background nil))))
+;;   (region ((t (:extend nil))))
 ;;   :config
-;;   (setq doom-themes-enable-bold nil)
-;;   (setq doom-gruvbox-dark-variant "medium")
-;;   (setq doom-solarized-dark-brighter-text t)
-;;   (load-theme 'doom-Iosvkem t))
+;;   (load-theme 'spacemacs-light t))
+
+(use-package doom-themes
+  :custom-face
+  (region                         ((t (:extend nil))))
+  (highlight-symbol-face          ((t (:background "#355266" :distant-foreground "#bbbbbb"))))
+  (highlight                      ((t (:foreground "#4db2ff" :background nil :underline t)))) ; link hover
+  (link                           ((t (:foreground "#3794ff"))))
+  (evil-ex-substitute-replacement ((t (:strike-through nil))))
+  (vertical-border                ((t (:foreground "black" :background "black"))))
+  (fringe                         ((t (:background nil))))
+  :config
+  (setq doom-themes-enable-bold nil)
+  (setq doom-themes-enable-italic nil)
+  (load-theme 'doom-gruvbox-material t))
 
 (use-package highlight-symbol
   :hook (prog-mode . highlight-symbol-mode)
@@ -440,20 +445,21 @@ This follows the UX design of Visual Studio Code."
   (define-key evil-insert-state-map (kbd "C-p") nil) ; avoid conflict with company tooltip selection
   (define-key evil-normal-state-map (kbd "C-S-c") #'evil-yank)
   (define-key evil-insert-state-map (kbd "C-S-v") #'ian/paste-with-ctrl-shift-v)
-  (define-key evil-normal-state-map "u" #'undo-fu-only-undo)
-  (define-key evil-normal-state-map "\C-r" #'undo-fu-only-redo)
+  (define-key evil-normal-state-map (kbd "u") #'undo-fu-only-undo)
+  (define-key evil-normal-state-map (kbd "C-r") #'undo-fu-only-redo)
+  (define-key evil-normal-state-map (kbd "C-u") #'(lambda () (interactive) (evil-scroll-up 0) (recenter)))
+  (define-key evil-normal-state-map (kbd "C-d") #'(lambda () (interactive) (evil-scroll-down 0) (recenter)))
   (unless (display-graphic-p)
-    (evil-define-key 'motion profiler-report-mode-map (kbd "TAB") #'profiler-report-toggle-entry)
-    (evil-define-key 'normal profiler-report-mode-map (kbd "TAB") #'profiler-report-toggle-entry))
-  (evil-define-key 'normal prog-mode-map (kbd "<f12>") #'xref-find-definitions)
-  (evil-define-key 'normal prog-mode-map (kbd "gd") #'xref-find-definitions)
-  (evil-define-key 'normal prog-mode-map (kbd "gD") #'xref-find-references)
+    (evil-define-key '(motion normal) profiler-report-mode-map (kbd "TAB") #'profiler-report-toggle-entry))
+  (evil-define-key '(motion normal) prog-mode-map (kbd "gd") #'xref-find-definitions)
+  (evil-define-key '(motion normal) prog-mode-map (kbd "gD") #'xref-find-references)
   ;; (evil-define-key 'motion prog-mode-map (kbd "gd") #'lsp-bridge-find-def)
   ;; (evil-define-key 'motion prog-mode-map (kbd "gD") #'lsp-bridge-find-references)
   (with-eval-after-load 'lsp-ui
     (add-hook 'buffer-list-update-hook
               #'(lambda ()
                   (when (bound-and-true-p lsp-ui-mode)
+                    (define-key evil-normal-state-local-map (kbd "gr") #'lsp-ui-peek-find-references)
                     (define-key evil-normal-state-local-map (kbd "gD") #'lsp-ui-peek-find-references)))))
   (evil-ex-define-cmd "q" #'kill-current-buffer)
   (evil-ex-define-cmd "wq" #'(lambda () (interactive) (save-buffer) (kill-current-buffer)))
@@ -503,15 +509,15 @@ This follows the UX design of Visual Studio Code."
   :if (display-graphic-p)
   :config
   (fringe-helper-define 'git-gutter-fr:added '(center repeated)
-    "...XXXX."
-    "...XXXX."
-    "...XXXX."
-    "...XXXX.")
+    "..XXXXX."
+    "..XXXXX."
+    "..XXXXX."
+    "..XXXXX.")
   (fringe-helper-define 'git-gutter-fr:modified '(center repeated)
-    "...XXXX."
-    "...XXXX."
-    "...XXXX."
-    "...XXXX.")
+    "..XXXXX."
+    "..XXXXX."
+    "..XXXXX."
+    "..XXXXX.")
   (fringe-helper-define 'git-gutter-fr:deleted 'bottom
     "X......."
     "XX......"
@@ -642,6 +648,14 @@ This follows the UX design of Visual Studio Code."
 
 ;; Programming support and utilities
 
+;; (add-to-list 'load-path (concat user-emacs-directory "lsp-bridge/"))
+;; (use-package yasnippet)
+;; (require 'lsp-bridge)
+;; (global-lsp-bridge-mode)
+;; (define-key acm-mode-map (kbd "<tab>") #'acm-select-next)
+;; (define-key acm-mode-map (kbd "TAB") #'acm-select-next)
+;; (define-key acm-mode-map (kbd "<backtab>") #'acm-select-prev)
+
 (use-package lsp-mode
   :init
   (setq lsp-keymap-prefix "C-c l")
@@ -709,7 +723,7 @@ This follows the UX design of Visual Studio Code."
   :commands lsp-ui-mode
   :custom-face
   (lsp-ui-sideline-global ((t (:italic t))))
-  (lsp-ui-peek-highlight  ((t (:foreground unspecified :background unspecified :inherit isearch ))))
+  (lsp-ui-peek-highlight  ((t (:foreground unspecified :background unspecified :inherit isearch))))
   :config
   (with-eval-after-load 'evil
     (add-hook 'buffer-list-update-hook
@@ -726,7 +740,8 @@ This follows the UX design of Visual Studio Code."
     (setq lsp-ui-doc-position 'at-point))
   (setq lsp-ui-doc-include-signature t)
   (setq lsp-ui-doc-border (face-foreground 'font-lock-comment-face))
-  (setq lsp-ui-sideline-show-code-actions t)
+  (setq lsp-ui-sideline-diagnostic-max-line-length 80)
+  (setq lsp-ui-sideline-diagnostic-max-lines 2)
   (setq lsp-ui-peek-always-show t)
   (setq lsp-ui-sideline-delay 0.05))
 
@@ -843,10 +858,9 @@ This follows the UX design of Visual Studio Code."
 
 (use-package go-mode
   :config
-  (evil-define-key 'motion go-mode-map (kbd "gd") #'xref-find-definitions)
-  (evil-define-key 'normal go-mode-map (kbd "gd") #'xref-find-definitions)
-  (evil-define-key 'motion go-mode-map (kbd "K") #'(lambda () (interactive) (lsp-ui-doc-glance) (ian/pulse-line)))
-  (evil-define-key 'normal go-mode-map (kbd "K") #'(lambda () (interactive) (lsp-ui-doc-glance) (ian/pulse-line))))
+  (evil-define-key '(motion normal) go-mode-map (kbd "gd") #'xref-find-definitions)
+  ;; (evil-define-key '(motion normal) go-mode-map (kbd "gd") #'lsp-bridge-find-def)
+  (evil-define-key '(motion normal) go-mode-map (kbd "K") #'(lambda () (interactive) (lsp-ui-doc-glance) (ian/pulse-line))))
 
 (use-package lua-mode)
 
@@ -961,6 +975,7 @@ This follows the UX design of Visual Studio Code."
   :config
   (setq dired-listing-switches "-lat") ; sort by date (new first)
   (setq dired-kill-when-opening-new-dired-buffer t)
+  (setq dired-clean-confirm-killing-deleted-buffers nil)
   (put 'dired-find-alternate-file 'disabled nil))
 
 (use-package ranger
@@ -1041,10 +1056,7 @@ This follows the UX design of Visual Studio Code."
   (setq dashboard-items nil)
   (setq dashboard-set-footer t)
   (setq dashboard-footer-icon "")
-  (setq dashboard-footer-messages '("😈 Happy hacking!   "
-                                    "👽 Happy hacking!   "
-                                    "👻 Happy hacking!   "
-                                    "💀 Happy hacking!   "))
+  (setq dashboard-footer-messages '("😈 Happy hacking!   "))
   (define-key dashboard-mode-map (kbd "<f5>") #'(lambda ()
                                                   (interactive)
                                                   (dashboard-refresh-buffer)

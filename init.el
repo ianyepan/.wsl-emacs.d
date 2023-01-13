@@ -437,10 +437,10 @@ This follows the UX design of Visual Studio Code."
   (define-key evil-normal-state-map (kbd "C-w C-o") #'(lambda () (interactive) (neotree-hide) (delete-other-windows)))
   (define-key evil-normal-state-map (kbd "C-o") #'(lambda () (interactive) (evil-jump-backward) (ian/pulse-line)))
   (define-key evil-normal-state-map (kbd "C-i") #'(lambda () (interactive) (evil-jump-forward) (ian/pulse-line)))
-  (global-set-key (kbd "M-<up>") #'(lambda () (interactive) (scroll-down 2)))
-  (global-set-key (kbd "M-<down>") #'(lambda () (interactive) (scroll-up 2)))
-  (global-set-key (kbd "M-<left>") #'(lambda () (interactive) (scroll-right 2)))
-  (global-set-key (kbd "M-<right>") #'(lambda () (interactive) (scroll-left 2)))
+  (bind-key* (kbd "M-<up>") #'(lambda () (interactive) (scroll-down 2)))
+  (bind-key* (kbd "M-<down>") #'(lambda () (interactive) (scroll-up 2)))
+  (bind-key* (kbd "M-<left>") #'(lambda () (interactive) (scroll-right 2)))
+  (bind-key* (kbd "M-<right>") #'(lambda () (interactive) (scroll-left 2)))
   (if (display-graphic-p)
       (define-key evil-normal-state-map (kbd "z <return>") #'evil-scroll-line-to-top)
     (define-key evil-normal-state-map (kbd "z RET") #'evil-scroll-line-to-top))
@@ -732,7 +732,7 @@ This follows the UX design of Visual Studio Code."
     (add-hook 'buffer-list-update-hook
               #'(lambda ()
                   (when (bound-and-true-p lsp-ui-mode)
-                    (define-key evil-normal-state-local-map (kbd "K")
+                    (evil-define-key '(motion normal) 'local (kbd "K")
                       #'(lambda () (interactive) (lsp-ui-doc-glance) (ian/pulse-line)))))))
   (setq lsp-ui-doc-enable nil)
   (when (display-graphic-p)
@@ -859,9 +859,10 @@ This follows the UX design of Visual Studio Code."
 
 (use-package go-mode
   :config
-  (evil-define-key '(motion normal) go-mode-map (kbd "gd") #'xref-find-definitions)
-  ;; (evil-define-key '(motion normal) go-mode-map (kbd "gd") #'lsp-bridge-find-def)
-  (evil-define-key '(motion normal) go-mode-map (kbd "K") #'(lambda () (interactive) (lsp-ui-doc-glance) (ian/pulse-line))))
+  (with-eval-after-load 'evil
+    (evil-define-key '(motion normal) go-mode-map (kbd "gd") #'xref-find-definitions)
+    ;; (evil-define-key '(motion normal) go-mode-map (kbd "gd") #'lsp-bridge-find-def)
+    (evil-define-key '(motion normal) go-mode-map (kbd "K") #'(lambda () (interactive) (lsp-ui-doc-glance) (ian/pulse-line)))))
 
 (use-package lua-mode)
 

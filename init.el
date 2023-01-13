@@ -291,7 +291,9 @@ Reference: https://www.emacswiki.org/emacs/TrampMode#h5o-19"
 
 (use-package elec-pair
   :ensure nil
-  :hook (prog-mode . electric-pair-local-mode))
+  :hook (prog-mode . electric-pair-local-mode)
+  :config
+  (setq electric-pair-preserve-balance nil))
 
 (use-package saveplace
   :ensure nil

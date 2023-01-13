@@ -669,7 +669,6 @@ This follows the UX design of Visual Studio Code."
           typescript-mode ; ts-ls (tsserver wrapper)
           python-mode     ; pyright
           web-mode        ; ts-ls/HTML/CSS
-          haskell-mode    ; haskell-language-server
           lua-mode        ; lua-language-server
           rust-mode       ; rust-analyzer
           ruby-mode       ; solargraph
@@ -753,8 +752,6 @@ This follows the UX design of Visual Studio Code."
   :ensure nil
   :after lsp-java
   :bind (:map java-mode-map ("C-c i" . lsp-java-add-import)))
-
-(use-package lsp-haskell)
 
 (use-package lsp-pyright
   :hook (python-mode . (lambda () (require 'lsp-pyright)))

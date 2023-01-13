@@ -497,6 +497,7 @@ This follows the UX design of Visual Studio Code."
   :bind ("C-x g" . magit-status)
   :config
   (add-hook 'with-editor-mode-hook #'evil-insert-state)
+  (local-unset-key (kbd "f"))
   (define-key magit-mode-map (kbd "<f5>") #'(lambda ()
                                               (interactive)
                                               (magit-refresh)
@@ -1062,10 +1063,13 @@ This follows the UX design of Visual Studio Code."
                                                   (dashboard-refresh-buffer)
                                                   (message "Refreshing Dashboard...done"))))
 
-(use-package olivetti
-  :bind ("C-c w" . olivetti-mode)
+(use-package avy
   :config
-  (setq-default olivetti-body-width fill-column))
+  (setq avy-keys (number-sequence ?a ?z))
+  (setq avy-background nil)
+  (setq avy-all-windows nil)
+  (with-eval-after-load 'evil
+    (evil-define-key '(motion normal) 'global (kbd "f") #'avy-goto-char)))
 
 (use-package emojify
   :config

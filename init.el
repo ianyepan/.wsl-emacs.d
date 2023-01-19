@@ -1035,6 +1035,13 @@ This follows the UX design of Visual Studio Code."
 
 ;; Misc
 
+(use-package gcmh
+  ;; :hook (emacs-startup-hook . gcmh-mode)
+  :demand t
+  :config
+  (setq gcmh-low-cons-threshold (* 16 1024 1024))
+  (gcmh-mode +1))
+
 (use-package xclip
   :unless (display-graphic-p)
   :config

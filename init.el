@@ -716,7 +716,7 @@ This follows the UX design of Visual Studio Code."
   (setq lsp-idle-delay 0.25)
   (setq lsp-auto-execute-action nil)
   (with-eval-after-load 'lsp-clangd
-    (add-to-list 'lsp-clients-clangd-args "--header-insertion=never"))
+    (setq lsp-clients-clangd-args '("--header-insertion=never" "-j=4" "-background-index")))
   (add-to-list 'lsp-language-id-configuration '(js-jsx-mode . "javascriptreact")))
 
 (use-package lsp-ui

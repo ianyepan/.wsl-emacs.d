@@ -179,14 +179,14 @@ Reference: https://www.emacswiki.org/emacs/TrampMode#h5o-19"
 
 (use-package cc-vars
   :ensure nil
+  :mode ("\\.inl\\'" . c++-mode)
   :config
   (setq c-default-style '((java-mode . "java")
                           (awk-mode  . "awk")
                           (c++-mode  . "bsd")
                           (c-mode    . "bsd")
                           (other     . "k&r")))
-  (setq-default c-basic-offset ian/indent-width)
-  (add-to-list 'auto-mode-alist '("\\.inl\\'" . c++-mode)))
+  (setq-default c-basic-offset ian/indent-width))
 
 (use-package cc-mode
   :ensure nil
@@ -208,7 +208,7 @@ Reference: https://www.emacswiki.org/emacs/TrampMode#h5o-19"
   (add-to-list 'auto-mode-alist
                '("\\(?:Brewfile\\|Capfile\\|Gemfile\\(?:\\.[a-zA-Z0-9._-]+\\)?\\|[rR]akefile\\)\\'" . ruby-mode)))
 
-(use-package css-mode ; inerited by less-css-mode
+(use-package css-mode ; inherited by less-css-mode
   :ensure nil
   :config
   (setq css-indent-offset ian/indent-width))
@@ -255,7 +255,7 @@ Reference: https://www.emacswiki.org/emacs/TrampMode#h5o-19"
     (setq-default line-spacing (if (member english-font tight-fonts-list) 2 1)))
   (defun ian/set-big-fonts ()
     (interactive)
-    (ian/set-default-fonts "Roboto Mono" "YaHei Consolas Hybrid" 95 'normal)
+    (ian/set-default-fonts "Consolas" "YaHei Consolas Hybrid" 95 'normal)
     (when (member "Inconsolata" (font-family-list))
       (set-face-attribute 'fixed-pitch nil :family "Inconsolata" :height 1.0))
     (when (member "Segoe UI Variable Static Small" (font-family-list))
@@ -406,15 +406,14 @@ This follows the UX design of Visual Studio Code."
   (global-evil-leader-mode +1)
   (evil-leader/set-leader "<SPC>")
   (evil-leader/set-key
-    "s" #'counsel-grep-or-swiper
-    "w" #'save-buffer
-    "f" #'counsel-projectile-find-file
-    "F" #'projectile-ripgrep
-    "o" #'other-window
-    "r" #'ranger
+    "s"     #'counsel-grep-or-swiper
+    "w"     #'save-buffer
+    "f"     #'counsel-projectile-find-file
+    "F"     #'projectile-ripgrep
+    "r"     #'ranger
     "<tab>" #'ian/lsp-execute-code-action
-    "TAB" #'ian/lsp-execute-code-action
-    "e" #'ian/neotree-project-toggle))
+    "TAB"   #'ian/lsp-execute-code-action
+    "e"     #'ian/neotree-project-toggle))
 
 (use-package evil
   :after (undo-fu evil-leader)
@@ -672,9 +671,7 @@ This follows the UX design of Visual Studio Code."
           typescript-mode ; ts-ls (tsserver wrapper)
           python-mode     ; pyright
           web-mode        ; ts-ls/HTML/CSS
-          lua-mode        ; lua-language-server
           rust-mode       ; rust-analyzer
-          ruby-mode       ; solargraph
           go-mode         ; gopls
           ) . lsp-deferred)
   :preface

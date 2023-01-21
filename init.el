@@ -89,7 +89,12 @@
   (setq jit-lock-defer-time 0)
   (setq fast-but-imprecise-scrolling t)
   (xterm-mouse-mode +1)
-  (bind-key* (kbd "C-,") #'ian/edit-config))
+  (bind-key* (kbd "C-,") #'ian/edit-config)
+  (bind-key* (kbd "<f4>") #'(lambda ()
+                              (interactive)
+                              (if (one-window-p)
+                                  (kill-current-buffer)
+                                (kill-buffer-and-window)))))
 
 (use-package uniquify
   :ensure nil
@@ -465,11 +470,6 @@ This follows the UX design of Visual Studio Code."
                     (define-key evil-normal-state-local-map (kbd "gD") #'lsp-ui-peek-find-references)))))
   (evil-ex-define-cmd "q" #'kill-current-buffer)
   (evil-ex-define-cmd "wq" #'(lambda () (interactive) (save-buffer) (kill-current-buffer)))
-  (bind-key* (kbd "<f4>") #'(lambda ()
-                              (interactive)
-                              (if (one-window-p)
-                                  (kill-current-buffer)
-                                (kill-buffer-and-window)))))
 
 (use-package evil-collection
   :after evil

@@ -401,27 +401,14 @@ This follows the UX design of Visual Studio Code."
   :config
   (setq undo-fu-ignore-keyboard-quit t))
 
-(use-package evil-leader
-  :init
-  (setq evil-want-C-u-scroll t
-        evil-want-keybinding nil
-        evil-shift-width ian/indent-width
-        evil-undo-system 'undo-fu)
-  :config
-  (global-evil-leader-mode +1)
-  (evil-leader/set-leader "<SPC>")
-  (evil-leader/set-key
-    "s"     #'counsel-grep-or-swiper
-    "w"     #'save-buffer
-    "f"     #'counsel-projectile-find-file
-    "F"     #'projectile-ripgrep
-    "r"     #'ranger
-    "<tab>" #'ian/lsp-execute-code-action
-    "TAB"   #'ian/lsp-execute-code-action
-    "e"     #'ian/neotree-project-toggle))
-
 (use-package evil
-  :after (undo-fu evil-leader)
+  :after undo-fu
+  :init
+  (setq evil-want-C-u-scroll t)
+  (setq evil-want-keybinding nil)
+  (setq evil-shift-width ian/indent-width)
+  (setq evil-respect-visual-line-mode t)
+  (setq evil-undo-system 'undo-fu)
   :hook (after-init . evil-mode)
   :preface
   (defun ian/paste-with-ctrl-shift-v ()
@@ -470,6 +457,16 @@ This follows the UX design of Visual Studio Code."
                     (define-key evil-normal-state-local-map (kbd "gD") #'lsp-ui-peek-find-references)))))
   (evil-ex-define-cmd "q" #'kill-current-buffer)
   (evil-ex-define-cmd "wq" #'(lambda () (interactive) (save-buffer) (kill-current-buffer)))
+  (evil-set-leader '(motion normal) (kbd "SPC"))
+  (evil-define-key '(motion normal) 'global
+    (kbd "<leader>s")     #'counsel-grep-or-swiper
+    (kbd "<leader>w")     #'save-buffer
+    (kbd "<leader>f")     #'counsel-projectile-find-file
+    (kbd "<leader>F")     #'projectile-ripgrep
+    (kbd "<leader>r")     #'ranger
+    (kbd "<leader><tab>") #'ian/lsp-execute-code-action
+    (kbd "<leader>TAB")   #'ian/lsp-execute-code-action
+    (kbd "<leader>e")     #'ian/neotree-project-toggle))
 
 (use-package evil-collection
   :after evil

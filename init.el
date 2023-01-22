@@ -77,7 +77,7 @@
   (global-set-key (kbd "C-x 3") #'ian/split-and-follow-vertically)
   (global-set-key (kbd "C-s")   #'save-buffer)
   (unless (display-graphic-p)
-    (global-set-key (kbd "C-h")   #'backward-kill-word))
+    (global-set-key (kbd "C-h") #'backward-kill-word))
   (setq-default indent-tabs-mode nil)
   (setq-default tab-width 2)
   (setq initial-scratch-message "")
@@ -794,7 +794,8 @@ This follows the UX design of Visual Studio Code."
   (setq company-frontends '(company-pseudo-tooltip-frontend ; show tooltip even for single candidate
                             company-echo-metadata-frontend))
   (unless (display-graphic-p)
-    (define-key company-active-map (kbd "C-h") #'backward-kill-word))
+    (define-key company-active-map (kbd "C-h") #'backward-kill-word)
+    (define-key company-active-map (kbd "C-w") #'backward-kill-word))
   (define-key company-active-map (kbd "C-j") nil) ; avoid conflict with emmet-mode
   (define-key company-active-map (kbd "C-n") #'company-select-next)
   (define-key company-active-map (kbd "C-p") #'company-select-previous)

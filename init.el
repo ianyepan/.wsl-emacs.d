@@ -382,7 +382,7 @@ This follows the UX design of Visual Studio Code."
   :config
   (setq doom-themes-enable-bold nil)
   (setq doom-themes-enable-italic nil)
-  (load-theme 'doom-gruvbox-material t))
+  (load-theme 'doom-gruvbox t))
 
 (use-package highlight-symbol
   :hook (prog-mode . highlight-symbol-mode)

@@ -472,7 +472,8 @@ This follows the UX design of Visual Studio Code."
   :after evil
   :config
   (setq evil-collection-company-use-tng nil)
-  (evil-collection-init))
+  (evil-collection-init)
+  (evil-collection-define-key 'normal 'dired-mode-map (kbd "SPC") nil))
 
 (use-package evil-commentary
   :after evil

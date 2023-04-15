@@ -690,7 +690,6 @@ This follows the UX design of Visual Studio Code."
   (define-key lsp-mode-map (kbd "<f2>") #'lsp-rename)
   (setq lsp-auto-guess-root t)
   (setq lsp-log-io nil)
-  (setq lsp-use-plists t)
   (setq lsp-restart 'auto-restart)
   (setq lsp-enable-links nil)
   (setq lsp-enable-symbol-highlighting nil)

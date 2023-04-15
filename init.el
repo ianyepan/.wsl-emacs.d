@@ -352,6 +352,15 @@ This follows the UX design of Visual Studio Code."
   :config
   (tooltip-mode -1))
 
+(use-package view
+  :ensure nil
+  :config
+  (with-eval-after-load 'evil-collection
+    (add-hook 'view-mode-hook
+              #'(lambda () (interactive)
+                  (evil-collection-define-key 'normal 'view-mode-map  (kbd "SPC") nil)
+                  (evil-collection-define-key 'motion 'view-mode-map  (kbd "SPC") nil)))))
+
 ;;; Third-party Packages
 
 ;; GUI enhancements
@@ -473,7 +482,7 @@ This follows the UX design of Visual Studio Code."
   :config
   (setq evil-collection-company-use-tng nil)
   (evil-collection-init)
-  (evil-collection-define-key 'normal 'dired-mode-map (kbd "SPC") nil))
+  (evil-collection-define-key 'normal 'dired-mode-map (kbd "SPC") nil)
 
 (use-package evil-commentary
   :after evil

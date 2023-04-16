@@ -481,8 +481,7 @@ This follows the UX design of Visual Studio Code."
   :after evil
   :config
   (setq evil-collection-company-use-tng nil)
-  (evil-collection-init)
-  (evil-collection-define-key 'normal 'dired-mode-map (kbd "SPC") nil)
+  (evil-collection-init))
 
 (use-package evil-commentary
   :after evil
@@ -985,7 +984,12 @@ This follows the UX design of Visual Studio Code."
   (setq dired-listing-switches "-lat") ; sort by date (new first)
   (setq dired-kill-when-opening-new-dired-buffer t)
   (setq dired-clean-confirm-killing-deleted-buffers nil)
-  (put 'dired-find-alternate-file 'disabled nil))
+  (put 'dired-find-alternate-file 'disabled nil)
+  (with-eval-after-load 'evil-collection
+    (add-hook 'dired-mode-hook
+              #'(lambda () (interactive)
+                  (evil-collection-define-key 'normal 'dired-mode-map  (kbd "SPC") nil)
+                  (evil-collection-define-key 'motion 'dired-mode-map  (kbd "SPC") nil)))))
 
 (use-package ranger
   :after dired

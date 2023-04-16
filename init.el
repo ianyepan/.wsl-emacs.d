@@ -358,8 +358,7 @@ This follows the UX design of Visual Studio Code."
   (with-eval-after-load 'evil-collection
     (add-hook 'view-mode-hook
               #'(lambda () (interactive)
-                  (evil-collection-define-key 'normal 'view-mode-map  (kbd "SPC") nil)
-                  (evil-collection-define-key 'motion 'view-mode-map  (kbd "SPC") nil)))))
+                  (evil-collection-define-key '(motion normal) 'view-mode-map (kbd "SPC") nil)))))
 
 ;;; Third-party Packages
 
@@ -988,8 +987,7 @@ This follows the UX design of Visual Studio Code."
   (with-eval-after-load 'evil-collection
     (add-hook 'dired-mode-hook
               #'(lambda () (interactive)
-                  (evil-collection-define-key 'normal 'dired-mode-map  (kbd "SPC") nil)
-                  (evil-collection-define-key 'motion 'dired-mode-map  (kbd "SPC") nil)))))
+                  (evil-collection-define-key '(motion normal) 'dired-mode-map  (kbd "SPC") nil)))))
 
 (use-package ranger
   :after dired

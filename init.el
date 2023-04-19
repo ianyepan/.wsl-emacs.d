@@ -1086,7 +1086,7 @@ This follows the UX design of Visual Studio Code."
   (setq avy-background nil)
   (setq avy-all-windows nil)
   (with-eval-after-load 'evil
-    (evil-define-key '(motion normal) 'global (kbd "f") #'avy-goto-char)))
+    (evil-define-key '(motion normal) 'global (kbd "C-f") #'avy-goto-char)))
 
 (use-package emojify
   :config

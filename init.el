@@ -1138,6 +1138,8 @@ This follows the UX design of Visual Studio Code."
   (add-hook 'neotree-mode-hook (lambda ()
                                  (hl-line-mode +1)
                                  (define-key evil-normal-state-local-map (kbd "TAB") 'neotree-enter)
+                                 (with-eval-after-load 'evil
+                                   (define-key evil-normal-state-local-map (kbd "H") 'evil-window-top))
                                  (setq-local line-spacing 1)))
   (setq neo-theme 'icons)
   (setq neo-autorefresh t) ; neotree.el: change delay to (run-with-idle-timer 0.1 ...)

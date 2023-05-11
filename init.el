@@ -360,6 +360,15 @@ This follows the UX design of Visual Studio Code."
               #'(lambda () (interactive)
                   (evil-collection-define-key '(motion normal) 'view-mode-map (kbd "SPC") nil)))))
 
+(use-package help-mode
+  :ensure nil
+  :config
+  (with-eval-after-load 'evil-collection
+    (add-hook 'help-mode-hook
+              #'(lambda () (interactive)
+                  (evil-collection-define-key '(motion normal) 'help-mode-map (kbd "SPC") nil)))))
+
+
 ;;; Third-party Packages
 
 ;; GUI enhancements

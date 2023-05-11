@@ -444,6 +444,7 @@ This follows the UX design of Visual Studio Code."
   :config
   (setq evil-insert-state-cursor '(bar . 1))
   (setq evil-kill-on-visual-paste nil)
+  (setq-default evil-symbol-word-search t)
   (define-key evil-normal-state-map (kbd "C-w C-o") #'(lambda () (interactive) (neotree-hide) (delete-other-windows)))
   (define-key evil-normal-state-map (kbd "C-o") #'(lambda () (interactive) (evil-jump-backward) (ian/pulse-line)))
   (define-key evil-normal-state-map (kbd "C-i") #'(lambda () (interactive) (evil-jump-forward) (ian/pulse-line)))

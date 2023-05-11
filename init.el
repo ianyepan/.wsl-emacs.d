@@ -196,7 +196,9 @@ Reference: https://www.emacswiki.org/emacs/TrampMode#h5o-19"
 (use-package cc-mode
   :ensure nil
   :config
-  (define-key c++-mode-map ":" nil))
+  (define-key c++-mode-map ":" nil)
+  (add-hook 'c-mode-hook (lambda () (setq comment-start "//"
+                                          comment-end   ""))))
 
 (use-package python
   :ensure nil

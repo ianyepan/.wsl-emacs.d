@@ -1015,6 +1015,9 @@ This follows the UX design of Visual Studio Code."
   (setq ranger-width-parents 0.167)
   (setq ranger-preview-delay 0.02)
   (setq ranger-show-hidden t)
+  (with-eval-after-load 'evil
+    (evil-define-key '(motion normal) 'ranger-mode-map (kbd "H") #'evil-window-top)
+    (evil-define-key '(motion normal) 'ranger-mode-map (kbd "L") #'evil-window-bottom))
   (define-key ranger-mode-map (kbd "d") #'dired-flag-file-deletion)
   (define-key ranger-mode-map (kbd "u") #'dired-unmark)
   (define-key ranger-mode-map (kbd "U") #'dired-unmark-all-marks)

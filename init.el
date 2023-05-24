@@ -370,6 +370,13 @@ This follows the UX design of Visual Studio Code."
               #'(lambda () (interactive)
                   (evil-collection-define-key '(motion normal) 'help-mode-map (kbd "SPC") nil)))))
 
+(use-package diff-mode
+  :ensure nil
+  :config
+  (with-eval-after-load 'evil-collection
+    (add-hook 'diff-mode-hook
+              #'(lambda () (interactive)
+                  (evil-collection-define-key '(motion normal) 'diff-mode-map  (kbd "SPC") nil)))))
 
 ;;; Third-party Packages
 

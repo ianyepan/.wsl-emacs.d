@@ -378,6 +378,15 @@ This follows the UX design of Visual Studio Code."
               #'(lambda () (interactive)
                   (evil-collection-define-key '(motion normal) 'diff-mode-map  (kbd "SPC") nil)))))
 
+(use-package whitespace
+  :ensure nil
+  :config
+  (delete 'lines whitespace-style)
+  (delete 'newline-mark whitespace-style)
+  (bind-key* (kbd "<f7>") #'(lambda ()
+                              (interactive)
+                              (whitespace-mode 'toggle))))
+
 ;;; Third-party Packages
 
 ;; GUI enhancements

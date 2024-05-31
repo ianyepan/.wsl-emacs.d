@@ -787,21 +787,21 @@ This follows the UX design of Visual Studio Code."
   :init (when (executable-find "python3")
           (setq lsp-pyright-python-executable-cmd "python3")))
 
-(use-package tree-sitter
-  :after tree-sitter-langs
-  :custom-face
-  (tree-sitter-hl-face:property         ((t (:slant normal))))
-  (tree-sitter-hl-face:method.call      ((t (:inherit font-lock-function-name-face))))
-  (tree-sitter-hl-face:function.call    ((t (:inherit font-lock-function-name-face))))
-  (tree-sitter-hl-face:function.builtin ((t (:inherit font-lock-function-name-face))))
-  (tree-sitter-hl-face:operator         ((t (:inherit default))))
-  (tree-sitter-hl-face:type.builtin     ((t (:inherit font-lock-type-face))))
-  (tree-sitter-hl-face:number           ((t (:inherit highlight-numbers-number))))
-  :config
-  (global-tree-sitter-mode)
-  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+;; (use-package tree-sitter
+;;   :after tree-sitter-langs
+;;   :custom-face
+;;   (tree-sitter-hl-face:property         ((t (:slant normal))))
+;;   (tree-sitter-hl-face:method.call      ((t (:inherit font-lock-function-name-face))))
+;;   (tree-sitter-hl-face:function.call    ((t (:inherit font-lock-function-name-face))))
+;;   (tree-sitter-hl-face:function.builtin ((t (:inherit font-lock-function-name-face))))
+;;   (tree-sitter-hl-face:operator         ((t (:inherit default))))
+;;   (tree-sitter-hl-face:type.builtin     ((t (:inherit font-lock-type-face))))
+;;   (tree-sitter-hl-face:number           ((t (:inherit highlight-numbers-number))))
+;;   :config
+;;   (global-tree-sitter-mode)
+;;   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
-(use-package tree-sitter-langs)
+;; (use-package tree-sitter-langs)
 
 (use-package pyvenv
   :config
@@ -877,19 +877,19 @@ This follows the UX design of Visual Studio Code."
   :config
   (setq typescript-indent-level ian/indent-width))
 
-(use-package rust-mode)
+;; (use-package rust-mode)
 
-(use-package flycheck-rust
-  :config
-  (with-eval-after-load 'rust-mode
-    (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)))
+;; (use-package flycheck-rust
+;;   :config
+;;   (with-eval-after-load 'rust-mode
+;;     (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)))
 
-(use-package go-mode
-  :config
-  (with-eval-after-load 'evil
-    (evil-define-key '(motion normal) go-mode-map (kbd "gd") #'xref-find-definitions)
-    ;; (evil-define-key '(motion normal) go-mode-map (kbd "gd") #'lsp-bridge-find-def)
-    (evil-define-key '(motion normal) go-mode-map (kbd "K") #'(lambda () (interactive) (lsp-ui-doc-glance) (ian/pulse-line)))))
+;; (use-package go-mode
+;;   :config
+;;   (with-eval-after-load 'evil
+;;     (evil-define-key '(motion normal) go-mode-map (kbd "gd") #'xref-find-definitions)
+;;     ;; (evil-define-key '(motion normal) go-mode-map (kbd "gd") #'lsp-bridge-find-def)
+;;     (evil-define-key '(motion normal) go-mode-map (kbd "K") #'(lambda () (interactive) (lsp-ui-doc-glance) (ian/pulse-line)))))
 
 (use-package lua-mode)
 
@@ -901,17 +901,17 @@ This follows the UX design of Visual Studio Code."
 
 (use-package yaml-mode)
 
-(use-package haskell-mode)
+;; (use-package haskell-mode)
 
-(use-package rjsx-mode
-  :mode ("\\.jsx?\\'" . rjsx-mode)
-  :custom-face
-  (js2-error   ((t (:inherit default :underscore nil))))
-  (js2-warning ((t (:inherit default :underscore nil))))
-  :config
-  (define-key rjsx-mode-map "<" nil)
-  (define-key rjsx-mode-map (kbd "C-d") nil)
-  (define-key rjsx-mode-map ">" nil))
+;; (use-package rjsx-mode
+;;   :mode ("\\.jsx?\\'" . rjsx-mode)
+;;   :custom-face
+;;   (js2-error   ((t (:inherit default :underscore nil))))
+;;   (js2-warning ((t (:inherit default :underscore nil))))
+;;   :config
+;;   (define-key rjsx-mode-map "<" nil)
+;;   (define-key rjsx-mode-map (kbd "C-d") nil)
+;;   (define-key rjsx-mode-map ">" nil))
 
 ;; (use-package web-mode
 ;;   :mode (("\\.html?\\'" . web-mode)
@@ -925,20 +925,20 @@ This follows the UX design of Visual Studio Code."
 ;;   (setq web-mode-css-indent-offset ian/indent-width)
 ;;   (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'"))))
 
-(use-package emmet-mode
-  :hook ((html-mode
-          css-mode
-          js-mode
-          js-jsx-mode
-          typescript-mode
-          web-mode
-          ) . emmet-mode)
-  :config
-  (setq emmet-insert-flash-time 0.001) ; effectively disabling it
-  (add-hook 'js-jsx-mode-hook #'(lambda ()
-                                  (setq-local emmet-expand-jsx-className? t)))
-  (add-hook 'web-mode-hook #'(lambda ()
-                               (setq-local emmet-expand-jsx-className? t))))
+;; (use-package emmet-mode
+;;   :hook ((html-mode
+;;           css-mode
+;;           js-mode
+;;           js-jsx-mode
+;;           typescript-mode
+;;           web-mode
+;;           ) . emmet-mode)
+;;   :config
+;;   (setq emmet-insert-flash-time 0.001) ; effectively disabling it
+;;   (add-hook 'js-jsx-mode-hook #'(lambda ()
+;;                                   (setq-local emmet-expand-jsx-className? t)))
+;;   (add-hook 'web-mode-hook #'(lambda ()
+;;                                (setq-local emmet-expand-jsx-className? t))))
 
 (use-package cpp-auto-include ; Copyright (C) 2015 by Syohei Yoshida / Ben Deane
   :bind (:map c++-mode-map ("C-c i" . cpp-auto-include/ensure-includes-for-file)))
@@ -975,25 +975,25 @@ This follows the UX design of Visual Studio Code."
   (add-to-list 'hl-todo-keyword-faces '("WHY" . "#7cb8bb"))
   (global-hl-todo-mode +1))
 
-(use-package processing-mode
-  :after company
-  :preface
-  (defvar processing-company--keywords
-    (with-eval-after-load 'processing-mode
-      (cons 'processing-mode (append processing-functions
-                                     processing-builtins
-                                     processing-constants))))
-  (defun processing-company--init ()
-    (setq-local company-backends '((company-keywords
-                                    :with
-                                    company-yasnippet
-                                    company-dabbrev-code)))
-    (make-local-variable 'company-keywords-alist)
-    (add-to-list 'company-keywords-alist processing-company--keywords))
-  :config
-  (add-hook 'processing-mode-hook 'processing-company--init)
-  (setq processing-sketchbook-dir (format "%s/Projects/Processing/sketchbooks" (getenv "HOME")))
-  (setq processing-location (format "%s/processing-3.5.4/processing-java" (getenv "HOME"))))
+;; (use-package processing-mode
+;;   :after company
+;;   :preface
+;;   (defvar processing-company--keywords
+;;     (with-eval-after-load 'processing-mode
+;;       (cons 'processing-mode (append processing-functions
+;;                                      processing-builtins
+;;                                      processing-constants))))
+;;   (defun processing-company--init ()
+;;     (setq-local company-backends '((company-keywords
+;;                                     :with
+;;                                     company-yasnippet
+;;                                     company-dabbrev-code)))
+;;     (make-local-variable 'company-keywords-alist)
+;;     (add-to-list 'company-keywords-alist processing-company--keywords))
+;;   :config
+;;   (add-hook 'processing-mode-hook 'processing-company--init)
+;;   (setq processing-sketchbook-dir (format "%s/Projects/Processing/sketchbooks" (getenv "HOME")))
+;;   (setq processing-location (format "%s/processing-3.5.4/processing-java" (getenv "HOME"))))
 
 ;; Dired enhancements
 

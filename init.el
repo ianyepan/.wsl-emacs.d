@@ -38,10 +38,6 @@
         (setq browse-url-generic-program "/mnt/c/Windows/System32/cmd.exe"
               browse-url-generic-args '("/c" "start" "")
               browse-url-browser-function 'browse-url-generic)))))
-  (defun ian/edit-config ()
-    "Open Emacs settings."
-    (interactive)
-    (find-file (concat user-emacs-directory "init.el")))
   (defun ian/split-and-follow-horizontally ()
     "Split window below."
     (interactive)
@@ -89,7 +85,6 @@
   (setq jit-lock-defer-time 0)
   (setq fast-but-imprecise-scrolling t)
   (xterm-mouse-mode +1)
-  (bind-key* (kbd "C-,") #'ian/edit-config)
   (bind-key* (kbd "<f4>") #'(lambda ()
                               (interactive)
                               (if (one-window-p)

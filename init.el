@@ -38,13 +38,13 @@
         (setq browse-url-generic-program "/mnt/c/Windows/System32/cmd.exe"
               browse-url-generic-args '("/c" "start" "")
               browse-url-browser-function 'browse-url-generic)))))
-  (defun ian/split-and-follow-horizontally ()
-    "Split window below."
+  (defun ian/split-and-follow-vertically ()
+    "Split window vertically (below)."
     (interactive)
     (split-window-below)
     (other-window 1))
-  (defun ian/split-and-follow-vertically ()
-    "Split window right."
+  (defun ian/split-and-follow-horizontally ()
+    "Split window horizontally (right)."
     (interactive)
     (split-window-right)
     (other-window 1))
@@ -69,15 +69,50 @@
   (put 'upcase-region 'disabled nil)
   (put 'scroll-right 'disabled nil)
   (put 'scroll-left 'disabled nil)
-  (global-set-key (kbd "C-x 2") #'ian/split-and-follow-horizontally)
-  (global-set-key (kbd "C-x 3") #'ian/split-and-follow-vertically)
+  (global-set-key (kbd "C-x 2") #'ian/split-and-follow-vertically)
+  (global-set-key (kbd "C-x 3") #'ian/split-and-follow-horizontally)
   (global-set-key (kbd "C-s")   #'save-buffer)
   (unless (display-graphic-p)
     (global-set-key (kbd "C-h") #'backward-kill-word))
   (setq-default indent-tabs-mode nil)
   (setq-default tab-width 2)
   (setq initial-scratch-message "")
-  (setq split-width-threshold 150)
+
+  ;;; Fix annoying vertical window splitting.
+  ;;; https://lists.gnu.org/archive/html/help-gnu-emacs/2015-08/msg00339.html
+  (with-eval-after-load "window"
+    (defcustom split-window-below nil
+      "If non-nil, vertical splits produce new windows below."
+      :group 'windows
+      :type 'boolean)
+    (defcustom split-window-right nil
+      "If non-nil, horizontal splits produce new windows to the right."
+      :group 'windows
+      :type 'boolean)
+    (fmakunbound #'split-window-sensibly)
+    (defun split-window-sensibly
+        (&optional window)
+      (setq window (or window (selected-window)))
+      (or (and (window-splittable-p window t)
+               ;; Split window horizontally.
+               (split-window window nil (if split-window-right 'left  'right)))
+          (and (window-splittable-p window)
+               ;; Split window vertically.
+               (split-window window nil (if split-window-below 'above 'below)))
+          (and (eq window (frame-root-window (window-frame window)))
+               (not (window-minibuffer-p window))
+               ;; If WINDOW is the only window on its frame and is not the
+               ;; minibuffer window, try to split it horizontally disregarding the
+               ;; value of `split-width-threshold'.
+               (let ((split-width-threshold 0))
+                 (when (window-splittable-p window t)
+                   (split-window window nil (if split-window-right
+                                                'left
+                                              'right))))))))
+  (setq-default split-height-threshold  4
+                split-width-threshold   160) ; the reasonable limit for horizontal splits
+
+
   (setq max-specpdl-size 10000)
   (setq max-lisp-eval-depth 10000)
   (set-default 'truncate-lines t)

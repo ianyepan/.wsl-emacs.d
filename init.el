@@ -1048,6 +1048,28 @@ This follows the UX design of Visual Studio Code."
 
 (use-package ranger
   :after dired
+  :preface
+  ;; Workaround for a ranger bug affecting dired mark commands (d, u, m)
+  ;; on the topmost file in the ranger buffer.
+  ;;
+  ;; Root cause: ranger omits the directory header line that vanilla dired
+  ;; normally places at the top of the buffer. As a result, the first file
+  ;; entry starts at buffer position 1 with no preceding newline, causing
+  ;; `line-beginning-position' to return 1 when point is on that line.
+  ;; `dired-get-subdir' searches backward from point for a subdir header;
+  ;; when it hits the buffer boundary without finding one, it erroneously
+  ;; returns the current directory path (a truthy value) instead of nil.
+  ;; This causes `dired-mark' to take the "mark all subdir files" branch,
+  ;; flagging every file in the directory instead of just the one at point.
+  ;;
+  ;; Fix: wrap affected dired commands with a temporary override of
+  ;; `dired-get-subdir' to always return nil via `cl-letf', forcing
+  ;; `dired-mark' into the correct single-file branch.
+  (defmacro ianpan/dired-no-subdir (fn)
+    `(lambda (&optional arg)
+       (interactive "p")
+       (cl-letf (((symbol-function 'dired-get-subdir) (lambda () nil)))
+         (,fn arg))))
   :config
   (setq ranger-width-preview 0.5)
   (setq ranger-width-parents 0.167)
@@ -1056,12 +1078,12 @@ This follows the UX design of Visual Studio Code."
   (with-eval-after-load 'evil
     (evil-define-key '(motion normal) 'ranger-mode-map (kbd "H") #'evil-window-top)
     (evil-define-key '(motion normal) 'ranger-mode-map (kbd "L") #'evil-window-bottom))
-  (define-key ranger-mode-map (kbd "d") #'dired-flag-file-deletion)
-  (define-key ranger-mode-map (kbd "u") #'dired-unmark)
+  (define-key ranger-mode-map (kbd "d") (ianpan/dired-no-subdir dired-flag-file-deletion))
+  (define-key ranger-mode-map (kbd "u") (ianpan/dired-no-subdir dired-unmark))
   (define-key ranger-mode-map (kbd "U") #'dired-unmark-all-marks)
   (define-key ranger-mode-map (kbd "x") #'dired-do-flagged-delete)
   (define-key ranger-mode-map (kbd "i") #'dired-toggle-read-only)
-  (define-key ranger-mode-map (kbd "m") #'dired-mark)
+  (define-key ranger-mode-map (kbd "m") (ianpan/dired-no-subdir dired-mark))
   (define-key ranger-mode-map (kbd "R") #'dired-do-rename)
   (define-key ranger-mode-map (kbd "C") #'dired-do-copy)
   (define-key ranger-mode-map (kbd "C-h") nil))

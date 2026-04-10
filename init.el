@@ -78,6 +78,19 @@
   (setq-default tab-width 2)
   (setq initial-scratch-message "")
 
+  ;; Some performance tweaks and QOL changes
+  ;; Ref: https://emacsredux.com/blog/2026/04/07/stealing-from-the-best-emacs-configs/
+  (setq-default bidi-display-reordering 'left-to-right
+                bidi-paragraph-direction 'left-to-right)
+  (setq bidi-inhibit-bpa t)
+  (setq redisplay-skip-fontification-on-input t)
+  (setq read-process-output-max (* 4 1024 1024)) ; 4MB
+  (setq-default cursor-in-non-selected-windows nil)
+  (setq window-combination-resize t)
+  (advice-add 'save-place-find-file-hook :after
+              (lambda (&rest _)
+                (when buffer-file-name (ignore-errors (recenter)))))
+
   ;;; Fix annoying vertical window splitting.
   ;;; https://lists.gnu.org/archive/html/help-gnu-emacs/2015-08/msg00339.html
   (with-eval-after-load "window"

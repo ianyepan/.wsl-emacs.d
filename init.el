@@ -930,6 +930,8 @@ This follows the UX design of Visual Studio Code."
   :config
   (setq typescript-indent-level ian/indent-width))
 
+(use-package dts-mode)
+
 ;; (use-package rust-mode)
 
 ;; (use-package flycheck-rust

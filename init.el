@@ -390,7 +390,7 @@ This follows the UX design of Visual Studio Code."
                                                       zone-pgm-rotate-LR-lockstep
                                                       zone-pgm-drip
                                                       zone-pgm-whack-chars))))
-    (let ((zone-programs (list (intern pgm)))) (zone))))
+    (let ((zone-programs (vector (intern pgm)))) (zone))))
 
 (use-package tooltip
   :ensure nil

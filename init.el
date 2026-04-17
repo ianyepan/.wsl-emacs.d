@@ -736,26 +736,31 @@ This follows the UX design of Visual Studio Code."
 ;; (define-key acm-mode-map (kbd "<backtab>") #'acm-select-prev)
 
 (use-package lsp-mode
-  :init
-  (setq lsp-keymap-prefix "C-c l")
-  :hook ((c-mode          ; clangd
-          c++-mode        ; clangd
-          c-or-c++-mode   ; clangd
-          ;; java-mode       ; eclipse-jdtls
-          js-mode         ; ts-ls (tsserver wrapper)
-          js-jsx-mode     ; ts-ls (tsserver wrapper)
-          typescript-mode ; ts-ls (tsserver wrapper)
-          python-mode     ; pyright
-          web-mode        ; ts-ls/HTML/CSS
-          rust-mode       ; rust-analyzer
-          go-mode         ; gopls
-          ) . lsp-deferred)
   :preface
   (defun ian/lsp-execute-code-action ()
     "Execute code action with pulse-line animation."
     (interactive)
     (ian/pulse-line)
     (call-interactively 'lsp-execute-code-action))
+  (defun ian/lsp-deferred-js-mode ()
+    "Enable lsp-deferred for js-mode but not json-mode."
+    (unless (derived-mode-p 'json-mode)
+      (lsp-deferred)))
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :hook (((c-mode          ; clangd
+           c++-mode        ; clangd
+           c-or-c++-mode   ; clangd
+           java-mode       ; eclipse-jdtls
+           js-jsx-mode     ; ts-ls (tsserver wrapper)
+           typescript-mode ; ts-ls (tsserver wrapper)
+           python-mode     ; pyright
+           web-mode        ; ts-ls/HTML/CSS
+           rust-mode       ; rust-analyzer
+           go-mode         ; gopls
+           ) . lsp-deferred)
+         (js-mode . ian/lsp-deferred-js-mode) ; ts-ls (tsserver wrapper)
+        )
   :custom-face
   (lsp-headerline-breadcrumb-symbols-face                ((t (:inherit variable-pitch))))
   (lsp-headerline-breadcrumb-path-face                   ((t (:inherit variable-pitch))))
@@ -763,7 +768,6 @@ This follows the UX design of Visual Studio Code."
   (lsp-headerline-breadcrumb-unknown-project-prefix-face ((t (:inherit variable-pitch))))
   :commands lsp
   :config
-  (add-hook 'java-mode-hook #'(lambda () (when (eq major-mode 'java-mode) (lsp-deferred))))
   (global-unset-key (kbd "<f2>"))
   (define-key lsp-mode-map (kbd "<f2>") #'lsp-rename)
   (setq lsp-auto-guess-root t)

@@ -408,11 +408,6 @@ This follows the UX design of Visual Studio Code."
 (use-package help-mode
   :ensure nil
   :config
-  (setq help-window-select t))
-
-(use-package help-mode
-  :ensure nil
-  :config
   (with-eval-after-load 'evil-collection
     (add-hook 'help-mode-hook
               #'(lambda () (interactive)

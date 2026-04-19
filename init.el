@@ -426,9 +426,9 @@ This follows the UX design of Visual Studio Code."
   :config
   (delete 'lines whitespace-style)
   (delete 'newline-mark whitespace-style)
-  (bind-key* (kbd "<f7>") #'(lambda ()
-                              (interactive)
-                              (whitespace-mode 'toggle))))
+  (bind-key* (kbd "C-c w") #'(lambda ()
+                               (interactive)
+                               (whitespace-mode 'toggle))))
 
 ;;; Third-party Packages
 

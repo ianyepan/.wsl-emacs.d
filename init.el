@@ -75,7 +75,7 @@
   (unless (display-graphic-p)
     (global-set-key (kbd "C-h") #'backward-kill-word))
   (setq-default indent-tabs-mode nil)
-  (setq-default tab-width 2)
+  (setq-default tab-width 8)
   (setq initial-scratch-message "")
 
   ;; Some performance tweaks and QOL changes

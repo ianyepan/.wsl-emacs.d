@@ -635,10 +635,11 @@ This follows the UX design of Visual Studio Code."
                                        (change  . "┃")
                                        (unknown . "┃")
                                        (ignored . "┃")))
-  (diff-hl-margin-mode)
-  (setq diff-hl-flydiff-delay 0.05)
-  (diff-hl-flydiff-mode)
-  (global-diff-hl-mode))
+  (diff-hl-margin-mode +1)
+  (setq diff-hl-flydiff-delay 0.05) ; Need to be set before enabling diff-hl-flydiff-mode
+  (diff-hl-flydiff-mode +1)
+  (global-diff-hl-mode +1)
+  (global-diff-hl-show-hunk-mouse-mode +1))
 
 (use-package blamer
   :bind (("C-c g" . blamer-mode))

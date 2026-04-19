@@ -688,7 +688,12 @@ This follows the UX design of Visual Studio Code."
   (global-set-key (kbd "C-S-p") #'counsel-M-x))
 
 (use-package counsel-projectile
+  :preface
+  (defun ian/recenter-quarter-top ()
+    "Recenter current line to 1/4 from the top."
+    (recenter (/ (window-body-height) 4)))
   :config
+  (advice-add 'counsel-projectile-rg :after #'ian/recenter-quarter-top)
   (counsel-projectile-mode +1))
 
 (use-package swiper

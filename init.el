@@ -585,7 +585,8 @@ This follows the UX design of Visual Studio Code."
 ;; Git integration
 
 (use-package magit
-  :bind ("C-x g" . magit-status)
+  :bind (("C-x g" . magit-status)
+         ("C-c b" . magit-blame-addition))
   :config
   (add-hook 'with-editor-mode-hook #'evil-insert-state)
   (local-unset-key (kbd "f"))

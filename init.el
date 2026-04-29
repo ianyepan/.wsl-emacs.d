@@ -538,6 +538,13 @@ This follows the UX design of Visual Studio Code."
       (ian/pulse-line)))
   ;; (evil-define-key 'motion prog-mode-map (kbd "gd") #'lsp-bridge-find-def)
   ;; (evil-define-key 'motion prog-mode-map (kbd "gD") #'lsp-bridge-find-references)
+  (with-eval-after-load 'magit
+    ;; Entering Magit COMMIT_EDITMSG does not correctly set evil cursor to (bar . 1)
+    ;; Temporary workaround until evil fixes the cursor refresh and display timing upstream.
+    (add-hook 'git-commit-setup-hook
+              (lambda ()
+                (setq-local cursor-type (evil-state-property evil-state :cursor t)))
+              t))
   (with-eval-after-load 'lsp-ui
     (add-hook 'buffer-list-update-hook
               #'(lambda ()

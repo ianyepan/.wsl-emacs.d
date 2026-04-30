@@ -585,10 +585,17 @@ This follows the UX design of Visual Studio Code."
 ;; Git integration
 
 (use-package magit
+  :preface
+  (defun ian/run-projectile-invalidate-cache (&rest _args)
+    (projectile-invalidate-cache nil))
   :bind (("C-x g" . magit-status)
          ("C-c b" . magit-blame-addition))
   :config
   (add-hook 'with-editor-mode-hook #'evil-insert-state)
+  (advice-add 'magit-checkout
+              :after #'ian/run-projectile-invalidate-cache)
+  (advice-add 'magit-branch-and-checkout
+              :after #'ian/run-projectile-invalidate-cache)
   (local-unset-key (kbd "f"))
   (define-key magit-mode-map (kbd "<f5>") #'(lambda ()
                                               (interactive)
@@ -716,6 +723,7 @@ This follows the UX design of Visual Studio Code."
   (setq projectile-indexing-method 'hybrid)
   (setq projectile-completion-system 'ivy)
   (setq projectile-mode-line-prefix " ")
+  (setq projectile-enable-caching t)
   (projectile-mode +1)
   (define-key projectile-mode-map (kbd "C-c p") #'projectile-command-map))
 

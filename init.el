@@ -1032,12 +1032,12 @@ This follows the UX design of Visual Studio Code."
 (use-package format-all
   :preface
   (defun ian/format-code ()
-    "Auto-format whole buffer."
+    "Auto-format region if active, otherwise format whole buffer."
     (interactive)
     (let ((windowstart (window-start)))
       (if (derived-mode-p 'prolog-mode)
           (prolog-indent-buffer)
-        (format-all-buffer))
+        (format-all-region-or-buffer))
       (set-window-start (selected-window) windowstart)))
   (defalias 'format-document #'ian/format-code)
   :config

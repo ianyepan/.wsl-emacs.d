@@ -1088,7 +1088,6 @@ This follows the UX design of Visual Studio Code."
   :hook ((dired-mode . dired-hide-details-mode)
          (dired-mode . hl-line-mode))
   :config
-  (setq dired-listing-switches "-lat") ; sort by date (new first)
   (setq dired-kill-when-opening-new-dired-buffer t)
   (setq dired-clean-confirm-killing-deleted-buffers nil)
   (put 'dired-find-alternate-file 'disabled nil)

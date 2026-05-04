@@ -1283,7 +1283,7 @@ This follows the UX design of Visual Studio Code."
   (setq neo-theme 'icons)
   (setq neo-autorefresh t) ; neotree.el: change delay to (run-with-idle-timer 0.1 ...)
   (setq neo-show-hidden-files t)
-  (setq neo-window-width 30))
+  (setq neo-window-width 35))
 
 ;; Org and LaTeX export
 ;;;; Ubuntu needs to have these installed:

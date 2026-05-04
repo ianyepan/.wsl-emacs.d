@@ -397,6 +397,11 @@ This follows the UX design of Visual Studio Code."
   :config
   (tooltip-mode -1))
 
+(use-package gdb-mi
+  :ensure nil
+  :config
+  (setq gdb-many-windows t))
+
 (use-package view
   :ensure nil
   :config

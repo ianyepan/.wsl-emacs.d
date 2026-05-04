@@ -853,10 +853,11 @@ This follows the UX design of Visual Studio Code."
     (setq lsp-ui-doc-position 'at-point))
   (setq lsp-ui-doc-include-signature t)
   (setq lsp-ui-doc-border (face-foreground 'font-lock-comment-face))
-  (setq lsp-ui-sideline-diagnostic-max-line-length 80)
-  (setq lsp-ui-sideline-diagnostic-max-lines 2)
-  (setq lsp-ui-peek-always-show t)
-  (setq lsp-ui-sideline-delay 0.05))
+  (setq lsp-ui-sideline-enable nil)
+  ;; (setq lsp-ui-sideline-diagnostic-max-line-length 80)
+  ;; (setq lsp-ui-sideline-diagnostic-max-lines 2)
+  ;; (setq lsp-ui-sideline-delay 0.05)
+  (setq lsp-ui-peek-always-show t))
 
 (use-package lsp-java
   :after lsp)

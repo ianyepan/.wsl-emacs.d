@@ -616,7 +616,7 @@ This follows the UX design of Visual Studio Code."
   (setq git-gutter:update-interval 0.05))
 
 (use-package git-gutter-fringe
-  :if (display-graphic-p)
+  :if (display-graphic-p) ;; Prefer git-gutter-fringe over diff-hl in GUI Emacs
   :config
   (fringe-helper-define 'git-gutter-fr:added '(center repeated)
     "..XXXXX."
@@ -646,11 +646,11 @@ This follows the UX design of Visual Studio Code."
     "X......."))
 
 (use-package diff-hl
-  :unless (display-graphic-p)
+  :unless (display-graphic-p) ;; Prefer git-gutter-fringe over diff-hl in TUI Emacs
   :custom-face
-  (diff-hl-insert ((t (:background nil :slant normal))))
-  (diff-hl-delete ((t (:background nil :slant normal))))
-  (diff-hl-change ((t (:background nil :slant normal))))
+  (diff-hl-insert ((t (:background unspecified :slant normal))))
+  (diff-hl-delete ((t (:background unspecified :slant normal))))
+  (diff-hl-change ((t (:background unspecified :slant normal))))
   :config
   (setq diff-hl-margin-symbols-alist '((insert  . "┃") ; U+02503 (box drawings heavy vertical)
                                        (delete  . "▶")

@@ -446,8 +446,7 @@ This follows the UX design of Visual Studio Code."
 ;; (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
 ;; (load-theme 'default-light t)
 
-;; (use-package spacemacs-common
-;;   :ensure spacemacs-theme
+;; (use-package spacemacs-theme
 ;;   :custom-face
 ;;   (region ((t (:extend nil))))
 ;;   :config

@@ -77,6 +77,7 @@
   (setq-default indent-tabs-mode nil)
   (setq-default tab-width 8)
   (setq initial-scratch-message "")
+  (global-unset-key (kbd "M-`")) ; conflict with Zellij
 
   ;; Some performance tweaks and QOL changes
   ;; Ref: https://emacsredux.com/blog/2026/04/07/stealing-from-the-best-emacs-configs/

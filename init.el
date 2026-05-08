@@ -559,6 +559,8 @@ This follows the UX design of Visual Studio Code."
   (evil-ex-define-cmd "wq" #'(lambda () (interactive) (save-buffer) (kill-current-buffer)))
   (evil-set-leader '(motion normal) (kbd "SPC"))
   (evil-define-key '(motion normal) 'global
+    (kbd "<leader>d")     #'dired
+    (kbd "<leader>g")     #'magit-status
     (kbd "<leader>s")     #'counsel-grep-or-swiper
     (kbd "<leader>w")     #'save-buffer
     (kbd "<leader>f")     #'counsel-projectile-find-file

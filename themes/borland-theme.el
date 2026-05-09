@@ -34,8 +34,8 @@
       (fg3               "#f4f4f4")
       (fg4               "#fafafa")
       (bg0               "#010101")
-      (bg1               "#000080") ; default bg
-      (bg2               "#0000aa")
+      (bg1               "#0000a0") ; default bg
+      (bg2               "#0000ba")
       (bg3               "#0000ff")
       (bg4               "#0000ff")
       (bg-hl             "#0000ff")
@@ -106,7 +106,7 @@
    `(tty-menu-selected-face                   ((,class (:foreground ,fg2 :background ,ms-green))))
 
    ;; `(region                                   ((,class (:background ,bg-hl :distant-foreground ,fg0 :extend nil))))
-   `(region                                   ((,class (:background "gray60" :foreground ,bg1 :extend nil))))
+   `(region                                   ((,class (:background "#00aaaa" :foreground ,bg1 :extend nil))))
    `(secondary-selection                      ((,class (:inherit region))))
    `(highlight                                ((,class (:foreground "#4db2ff" :underline t)))) ; link hover
    `(hl-line                                  ((,class (:background ,bg-hl :distant-foreground ,fg1 :extend t))))
@@ -137,7 +137,7 @@
    `(company-tooltip                          ((t (:background "#aaaaaa" :foreground ,bg0))))
    `(company-tooltip-common                   ((t (:foreground "#a80000" :bold t))))
    `(company-tooltip-common-selection         ((t (:foreground "#a80000" :bold t))))
-   `(company-tooltip-annotation               ((t (:inherit font-lock-comment-face))))
+   `(company-tooltip-annotation               ((t (:foreground "#a80000" :italic nil))))
    `(company-tooltip-selection                ((t (:background "#00a800" :foreground ,fg2))))
    `(company-scrollbar-bg                     ((t (:background "#000000"))))
    `(company-scrollbar-fg                     ((t (:background "#777777"))))
@@ -446,7 +446,7 @@
    `(solaire-org-hide-face                    ((t (:inherit org-hide :background ,bg2))))
 
    `(ivy-confirm-face                         ((t (:inherit minibuffer-prompt :foreground ,keyword))))
-   `(ivy-current-match                        ((t (:inherit region :extend t))))
+   `(ivy-current-match                        ((t (:inherit hl-line :extend t))))
    `(ivy-highlight-face                       ((t (:inherit font-lock-builtin-face))))
    `(ivy-match-required-face                  ((t (:inherit minibuffer-prompt :foreground ,warning))))
    `(ivy-minibuffer-match-face-1              ((t (:inherit isearch))))
@@ -499,7 +499,7 @@
    `(hl-todo                                  ((t (:inverse-video t))))
    `(highlight-numbers-number                 ((t (:foreground ,numeric))))
    `(highlight-operators-face                 ((t (:inherit default))))
-   `(highlight-symbol-face                    ((t (:background "#394f65"))))))
+   `(highlight-symbol-face                    ((t (:background "#0000dd"))))))
 
 ;;;###autoload
 (when (and (boundp 'custom-theme-load-path) load-file-name)

@@ -4,6 +4,7 @@
 ;;    (add-to-list 'load-path "~/.emacs.d/lisp/")
 ;;    (require 'company-turbo-shadow)
 ;;    (company-turbo-shadow-mode +1)
+;;; Code:
 
 (defface company-turbo-shadow-face
   '((t :foreground "#010101" :background "#010101"))
@@ -35,20 +36,22 @@
     (setq company-turbo-shadow--bottom-overlay nil)))
 
 (defun company-turbo-shadow--line-suffix (str from-col)
-  "Return the portion of STR starting at visual column FROM-COL."
+  "Return the portion of STR starting at visual column FROM-COL, which includes on the right of the bottom shadow line."
   (with-temp-buffer
     (insert str)
     (goto-char (point-min))
     (move-to-column from-col)
-    (buffer-substring-no-properties (point) (point-max))))
+    (buffer-substring (point) (point-max))))
 
 (defun company-turbo-shadow--add-bottom (&rest _)
+  "Add bottom shadow to company tooltip."
   (company-turbo-shadow--remove-bottom)
   (when (and (overlayp company-pseudo-tooltip-overlay)
              (overlay-start company-pseudo-tooltip-overlay))
     (let* ((ov             company-pseudo-tooltip-overlay)
            (col            (overlay-get ov 'company-column))
            (shadow-width   (1+ (or (overlay-get ov 'company-width) 0)))
+           (show-tooltip-below-p  (> (overlay-get ov 'company-height) 0))
            (ov-height      (abs (or (overlay-get ov 'company-height) 0)))
            (cand-count     (length company-candidates))
            (visible-height (min cand-count ov-height))
@@ -58,7 +61,7 @@
            (shadow-str     (propertize (make-string shadow-width ?░)
                                        'face 'company-turbo-shadow-face))
            (full-height-p  (= visible-height ov-height)))
-      (when (and raw-disp (> shadow-width 0) (> visible-height 0))
+      (when (and raw-disp show-tooltip-below-p (> visible-height 0))
         (if full-height-p
             ;; When tooltip is full height — use a separate overlay on it
             (save-excursion
@@ -90,7 +93,7 @@
           (let* ((lines      (split-string raw-disp "\n"))
                  (before     (seq-take lines visible-height))
                  (after      (seq-drop lines visible-height))
-                 (shadow-line (car after))
+                 (shadow-line (or (car after) ""))
                  ;; Overwrite only target-col..target-col+shadow-width in the existing line
                  (left       (truncate-string-to-width shadow-line target-col 0 ?\s))
                  (right      (company-turbo-shadow--line-suffix
@@ -108,18 +111,12 @@
   :global t
   (if company-turbo-shadow-mode
       (progn
-        (advice-add 'company--create-lines  :filter-return #'company-turbo-shadow--patch-lines)
-        ;; (advice-add 'company-pseudo-tooltip-show :after  #'company-turbo-shadow--add-bottom)
-        ;; (advice-add 'company-pseudo-tooltip-show-at-point :after  #'company-turbo-shadow--add-bottom)
-        ;; (advice-add 'company-pseudo-tooltip-unhide :after  #'company-turbo-shadow--add-bottom)
-        (advice-add 'company-pseudo-tooltip-unhide :after  #'company-turbo-shadow--add-bottom)
-        ;; (advice-add 'company-pseudo-tooltip-edit :after  #'company-turbo-shadow--add-bottom)
-        (advice-add 'company-pseudo-tooltip-hide :before #'company-turbo-shadow--remove-bottom)
-        )
-    (advice-remove 'company--create-lines  #'company-turbo-shadow--patch-lines)
-    ;; (advice-remove 'company-pseudo-tooltip-show #'company-turbo-shadow--add-bottom)
+        (advice-add 'company--create-lines         :filter-return #'company-turbo-shadow--patch-lines)
+        (advice-add 'company-pseudo-tooltip-unhide :after         #'company-turbo-shadow--add-bottom)
+        (advice-add 'company-pseudo-tooltip-hide   :before        #'company-turbo-shadow--remove-bottom))
+    (advice-remove 'company--create-lines         #'company-turbo-shadow--patch-lines)
     (advice-remove 'company-pseudo-tooltip-unhide #'company-turbo-shadow--add-bottom)
-    (advice-remove 'company-pseudo-tooltip-hide #'company-turbo-shadow--remove-bottom)
+    (advice-remove 'company-pseudo-tooltip-hide   #'company-turbo-shadow--remove-bottom)
     (company-turbo-shadow--remove-bottom)))
 
 (provide 'company-turbo-shadow)

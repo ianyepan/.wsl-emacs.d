@@ -16,25 +16,21 @@
 (defvar company-turbo-shadow--bottom-overlay nil)
 
 (defun company-turbo-shadow--patch-lines (lines)
-  "Append a shadow character to each line in LINES except the first two."
+  "Append right shadow character(s) to each line in LINES except the first two."
   (cond
    ((null lines) nil)
    ((null (cdr lines)) lines) ; Only 1 line? Return as-is
    (t
-    (let ((shadow (propertize company-turbo-right-shadow--char
-                              'face 'company-turbo-shadow-face)))
-      (append
-       ;; Keep the first two lines untouched
-       (list (car lines) (cadr lines))
-       ;; Append shadow to the rest
-       (mapcar (lambda (line) (concat line shadow))
-               (cddr lines)))))))
+    (append
+     ;; Keep the first two lines untouched
+     (list (car lines) (cadr lines))
+     ;; Append right shadow to the rest
+     (mapcar (lambda (line) (concat line company-turbo-right-shadow--char))
+             (cddr lines))))))
 
 (defun company-turbo-shadow--remove-bottom (&rest _)
   "Clean up the bottom shadow overlay."
   (when (overlayp company-turbo-shadow--bottom-overlay)
-    (message "[SHADOW-DEBUG] Removing shadow at line: %d"
-             (line-number-at-pos (overlay-start company-turbo-shadow--bottom-overlay)))
     (delete-overlay company-turbo-shadow--bottom-overlay)
     (setq company-turbo-shadow--bottom-overlay nil)))
 
@@ -64,7 +60,7 @@
            (full-height-p  (= visible-height ov-height)))
       (when (and raw-disp (> shadow-width 0) (> visible-height 0))
         (if full-height-p
-            ;; Real buffer line below is visible — use a separate overlay on it
+            ;; When tooltip is full height — use a separate overlay on it
             (save-excursion
               (goto-char (overlay-end ov))
               (unless (eobp)

@@ -35,10 +35,10 @@
       (fg4               "#fafafa")
       (bg0               "#010101")
       (bg1               "#000080") ; default bg
-      (bg2               "#334455")
-      (bg3               "#445566")
-      (bg4               "#556677")
-      (bg-hl             "#50627b")
+      (bg2               "#0000aa")
+      (bg3               "#0000ff")
+      (bg4               "#0000ff")
+      (bg-hl             "#0000ff")
       (vc-r              "#aa0000")
       (vc-g              "#00a800")
       (vc-b              "#207fa1")
@@ -73,12 +73,12 @@
       (ms-lightred       "#ff0000")
       (ms-lightgreen     "#55ff55")
       (ms-lightblue      "#00cccc")
-      (ms-red-bg         "#551b1e")
-      (ms-green-bg       "#39422a")
-      (ms-blue-bg        "#040e3f")
-      (ms-red-bghl       "#74140f")
-      (ms-green-bghl     "#4b5332")
-      (ms-blue-bghl      "#141e4f"))
+      (ms-red-bg         "#751b1e")
+      (ms-green-bg       "#39722a")
+      (ms-blue-bg        "#040eaf")
+      (ms-red-bghl       "#a4140f")
+      (ms-green-bghl     "#4ba332")
+      (ms-blue-bghl      "#141e8f"))
 
   (custom-theme-set-faces
    'borland
@@ -243,6 +243,8 @@
    `(rainbow-delimiters-depth-8-face          ((,class :foreground "orchid")))
    `(rainbow-delimiters-depth-9-face          ((,class :foreground "LightSkyBlue")))
    `(rainbow-delimiters-unmatched-face        ((,class :foreground ,warning)))
+
+   `(lsp-ui-doc-background                    ((t (:background ,bg0))))
 
    `(magit-item-highlight                     ((,class :background ,bg3)))
    `(magit-hunk-heading                       ((,class (:background ,bg3))))

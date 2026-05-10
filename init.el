@@ -574,6 +574,7 @@ This follows the UX design of Visual Studio Code."
   :after evil
   :config
   (setq evil-collection-company-use-tng nil)
+  (setq evil-collection-repl-submit-state 'insert)
   (evil-collection-init))
 
 (use-package evil-commentary

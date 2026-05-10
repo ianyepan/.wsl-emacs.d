@@ -561,6 +561,7 @@ This follows the UX design of Visual Studio Code."
   (evil-define-key '(motion normal) 'global
     (kbd "<leader>d")     #'dired
     (kbd "<leader>g")     #'magit-status
+    (kbd "<leader>b")     #'ivy-switch-buffer
     (kbd "<leader>s")     #'counsel-grep-or-swiper
     (kbd "<leader>w")     #'save-buffer
     (kbd "<leader>f")     #'counsel-projectile-find-file

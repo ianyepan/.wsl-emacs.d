@@ -973,10 +973,6 @@ This follows the UX design of Visual Studio Code."
 
 ;; (use-package rust-mode)
 
-;; (use-package flycheck-rust
-;;   :config
-;;   (with-eval-after-load 'rust-mode
-;;     (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)))
 
 ;; (use-package go-mode
 ;;   :config

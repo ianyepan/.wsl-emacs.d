@@ -1205,7 +1205,6 @@ This follows the UX design of Visual Studio Code."
     (evil-terminal-cursor-changer-activate)))
 
 (use-package dashboard
-  :if (display-graphic-p)
   :config
   (dashboard-setup-startup-hook)
   (setq dashboard-startup-banner 'logo)

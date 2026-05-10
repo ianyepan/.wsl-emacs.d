@@ -1199,10 +1199,7 @@ This follows the UX design of Visual Studio Code."
 (use-package evil-terminal-cursor-changer
   :unless (display-graphic-p)
   :config
-  (setq etcc-use-color t)
-  (unless (display-graphic-p)
-    (require 'evil-terminal-cursor-changer)
-    (evil-terminal-cursor-changer-activate)))
+  (evil-terminal-cursor-changer-activate))
 
 (use-package dashboard
   :config

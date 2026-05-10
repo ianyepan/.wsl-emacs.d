@@ -567,6 +567,12 @@ This follows the UX design of Visual Studio Code."
     (kbd "<leader>f")     #'counsel-projectile-find-file
     (kbd "<leader>F")     #'projectile-ripgrep
     (kbd "<leader>r")     #'ranger
+    (kbd "<leader>o")     #'other-window
+    (kbd "<leader>0")     #'delete-window
+    (kbd "<leader>1")     #'delete-other-windows
+    (kbd "<leader>2")     #'ian/split-and-follow-vertically
+    (kbd "<leader>3")     #'ian/split-and-follow-horizontally
+    (kbd "<leader>6")     #'evil-buffer
     (kbd "<leader><tab>") #'ian/lsp-execute-code-action
     (kbd "<leader>TAB")   #'ian/lsp-execute-code-action
     (kbd "<leader>e")     #'ian/neotree-project-toggle))

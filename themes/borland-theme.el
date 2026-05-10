@@ -105,7 +105,6 @@
    `(tty-menu-disabled-face                   ((,class (:foreground ,bg0 :background "#aaaaaa"))))
    `(tty-menu-selected-face                   ((,class (:foreground ,fg2 :background ,ms-green))))
 
-   ;; `(region                                   ((,class (:background ,bg-hl :distant-foreground ,fg0 :extend nil))))
    `(region                                   ((,class (:background "#00aaaa" :foreground ,bg1 :extend nil))))
    `(secondary-selection                      ((,class (:inherit region))))
    `(highlight                                ((,class (:foreground "#4db2ff" :underline t)))) ; link hover
@@ -119,7 +118,8 @@
    `(vertical-border                          ((,class (:background ,mode-line-bg :foreground ,bg1))))
    `(minibuffer-prompt                        ((,class (:foreground ,ms-bluegreen :weight normal))))
    `(default-italic                           ((,class (:italic t))))
-   `(link                                     ((,class (:foreground "#3794ff"))))
+   `(help-key-binding                         ((,class (:foreground ,accent :background ,bg-hl))))
+   `(link                                     ((,class (:foreground "#3794ff" :underline t))))
    `(error                                    ((,class (:foreground ,warning))))
    `(warning                                  ((,class (:foreground ,warning))))
    `(success                                  ((,class (:foreground ,ms-bluegreen))))

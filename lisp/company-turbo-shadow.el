@@ -22,12 +22,10 @@
    ((null lines) nil)
    ((null (cdr lines)) lines) ; Only 1 line? Return as-is
    (t
+    ;; Keep the first two lines untouched and add right shadow to the rest
     (append
-     ;; Keep the first two lines untouched
      (list (car lines) (cadr lines))
-     ;; Append right shadow to the rest
-     (mapcar (lambda (line) (concat line company-turbo-right-shadow--char))
-             (cddr lines))))))
+     (mapcar (lambda (line) (concat line company-turbo-right-shadow--char)) (cddr lines))))))
 
 (defun company-turbo-shadow--remove-bottom (&rest _)
   "Clean up the bottom shadow overlay."

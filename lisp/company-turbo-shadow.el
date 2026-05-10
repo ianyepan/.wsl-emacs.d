@@ -47,7 +47,8 @@
   "Add bottom shadow to company tooltip."
   (company-turbo-shadow--remove-bottom)
   (when (and (overlayp company-pseudo-tooltip-overlay)
-             (overlay-start company-pseudo-tooltip-overlay))
+             (overlay-start company-pseudo-tooltip-overlay)
+             (not (save-excursion (forward-line 1) (eobp))))
     (let* ((ov             company-pseudo-tooltip-overlay)
            (ov-col         (overlay-get ov 'company-column))
            (ov-width       (overlay-get ov 'company-width))
@@ -68,28 +69,27 @@
             ;; When tooltip is full height — use a separate overlay on it
             (save-excursion
               (goto-char (overlay-end ov))
-              (unless (eobp)
-                (let* ((line-end   (line-end-position))
-                       (shadow-beg (progn (move-to-column target-col) (point)))
-                       (shadow-end (min (progn (move-to-column (+ target-col shadow-width)) (point))
-                                        line-end))
-                       (content    (buffer-substring-no-properties shadow-beg shadow-end))
-                       (actual-w   (string-width content))
-                       (padded     (propertize
-                                    (concat content
-                                            (make-string (max 0 (- shadow-width actual-w)) ?░))
-                                    'face 'company-turbo-shadow-face))
-                       (bov        (if (= shadow-beg shadow-end)
-                                       (make-overlay line-end line-end)
-                                     (make-overlay shadow-beg shadow-end))))
-                  (if (= shadow-beg shadow-end)
-                      (overlay-put bov 'after-string
-                                   (concat (propertize " " 'display `(space :align-to ,target-col))
-                                           padded))
-                    (overlay-put bov 'display padded))
-                  (overlay-put bov 'priority 999)
-                  (overlay-put bov 'window (selected-window))
-                  (setq company-turbo-shadow--bottom-overlay bov))))
+              (let* ((line-end   (line-end-position))
+                     (shadow-beg (progn (move-to-column target-col) (point)))
+                     (shadow-end (min (progn (move-to-column (+ target-col shadow-width)) (point))
+                                      line-end))
+                     (content    (buffer-substring-no-properties shadow-beg shadow-end))
+                     (actual-w   (string-width content))
+                     (padded     (propertize
+                                  (concat content
+                                          (make-string (max 0 (- shadow-width actual-w)) ?░))
+                                  'face 'company-turbo-shadow-face))
+                     (bov        (if (= shadow-beg shadow-end)
+                                     (make-overlay line-end line-end)
+                                   (make-overlay shadow-beg shadow-end))))
+                (if (= shadow-beg shadow-end)
+                    (overlay-put bov 'after-string
+                                 (concat (propertize " " 'display `(space :align-to ,target-col))
+                                         padded))
+                  (overlay-put bov 'display padded))
+                (overlay-put bov 'priority 999)
+                (overlay-put bov 'window (selected-window))
+                (setq company-turbo-shadow--bottom-overlay bov)))
           ;; Shrunk: blank padding lines cover real buffer lines,
           ;; trade one for shadow and ovewrite parts of it
           (let* ((lines      (split-string raw-disp "\n"))

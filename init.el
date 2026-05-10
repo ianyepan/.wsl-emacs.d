@@ -646,7 +646,7 @@ This follows the UX design of Visual Studio Code."
     "X......."))
 
 (use-package diff-hl
-  :unless (display-graphic-p) ;; Prefer git-gutter-fringe over diff-hl in TUI Emacs
+  :unless (display-graphic-p) ;; Prefer diff-hl over git-gutter-fringe in TUI Emacs
   :custom-face
   (diff-hl-insert ((t (:background unspecified :slant normal))))
   (diff-hl-delete ((t (:background unspecified :slant normal))))

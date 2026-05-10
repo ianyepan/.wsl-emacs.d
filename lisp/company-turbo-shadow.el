@@ -34,7 +34,8 @@
     (setq company-turbo-shadow--bottom-overlay nil)))
 
 (defun company-turbo-shadow--line-suffix (str from-col)
-  "Return the portion of STR starting at visual column FROM-COL, which includes on the right of the bottom shadow line."
+  "Return the portion of STR starting at visual column FROM-COL.
+This includes on the right of the bottom shadow line."
   (with-temp-buffer
     (insert str)
     (goto-char (point-min))
@@ -109,6 +110,7 @@
 (define-minor-mode company-turbo-shadow-mode
   "Minor mode to enable Borland-style shadows for Company."
   :global t
+  :group 'company
   (if company-turbo-shadow-mode
       (progn
         (advice-add 'company--create-lines         :filter-return #'company-turbo-shadow--patch-lines)

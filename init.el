@@ -678,8 +678,32 @@ This follows the UX design of Visual Studio Code."
 ;; Searching/sorting enhancements & project management
 
 (use-package ivy
+  :preface
+  (defvar ian/pre-ivy-all-windows nil)
   :hook (after-init . ivy-mode)
   :config
+  (add-hook 'minibuffer-setup-hook
+            (lambda ()
+              ;; Snapshot all live windows in a list of (<#window> . (window-start . window-point))
+              (setq ian/pre-ivy-all-windows
+                    (mapcar (lambda (w) (cons w (cons (window-start w) (window-point w))))
+                            (window-list)))
+              ;; Park all live windows' points at their window-start to avoid shifting buffer
+              ;; view when minibuffer is active and window-point is near bottom of screen.
+              (dolist (entry ian/pre-ivy-all-windows)
+                (let ((w (car entry)))
+                  (when (window-live-p w)
+                    (set-window-point w (window-start w)))))))
+  (add-hook 'minibuffer-exit-hook
+            (lambda ()
+              (dolist (entry ian/pre-ivy-all-windows)
+                (let ((w (car entry))
+                      (wstart (cadr entry))
+                      (wpoint (cddr entry)))
+                  (when (window-live-p w)
+                    (set-window-start w wstart)
+                    (set-window-point w wpoint))))
+              (setq ian/pre-ivy-all-windows nil)))
   (setq ivy-height 15)
   (setq ivy-display-style nil)
   (setq ivy-re-builders-alist

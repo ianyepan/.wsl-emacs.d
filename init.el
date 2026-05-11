@@ -403,30 +403,6 @@ This follows the UX design of Visual Studio Code."
   :config
   (setq gdb-many-windows t))
 
-(use-package view
-  :ensure nil
-  :config
-  (with-eval-after-load 'evil-collection
-    (add-hook 'view-mode-hook
-              #'(lambda () (interactive)
-                  (evil-collection-define-key '(motion normal) 'view-mode-map (kbd "SPC") nil)))))
-
-(use-package help-mode
-  :ensure nil
-  :config
-  (with-eval-after-load 'evil-collection
-    (add-hook 'help-mode-hook
-              #'(lambda () (interactive)
-                  (evil-collection-define-key '(motion normal) 'help-mode-map (kbd "SPC") nil)))))
-
-(use-package diff-mode
-  :ensure nil
-  :config
-  (with-eval-after-load 'evil-collection
-    (add-hook 'diff-mode-hook
-              #'(lambda () (interactive)
-                  (evil-collection-define-key '(motion normal) 'diff-mode-map  (kbd "SPC") nil)))))
-
 (use-package whitespace
   :ensure nil
   :config
@@ -582,6 +558,7 @@ This follows the UX design of Visual Studio Code."
   :config
   (setq evil-collection-company-use-tng nil)
   (setq evil-collection-repl-submit-state 'insert)
+  (setq evil-collection-key-blacklist '("SPC"))
   (evil-collection-init))
 
 (use-package evil-commentary
@@ -1134,11 +1111,7 @@ This follows the UX design of Visual Studio Code."
   :config
   (setq dired-kill-when-opening-new-dired-buffer t)
   (setq dired-clean-confirm-killing-deleted-buffers nil)
-  (put 'dired-find-alternate-file 'disabled nil)
-  (with-eval-after-load 'evil-collection
-    (add-hook 'dired-mode-hook
-              #'(lambda () (interactive)
-                  (evil-collection-define-key '(motion normal) 'dired-mode-map  (kbd "SPC") nil)))))
+  (put 'dired-find-alternate-file 'disabled nil))
 
 (use-package ranger
   :after dired

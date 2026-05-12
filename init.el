@@ -1112,6 +1112,11 @@ This follows the UX design of Visual Studio Code."
   (setq dired-clean-confirm-killing-deleted-buffers nil)
   (put 'dired-find-alternate-file 'disabled nil))
 
+(use-package wdired
+  :ensure nil
+  :config
+  (setq wdired-allow-to-change-permissions 'advanced))
+
 (use-package ranger
   :after dired
   :preface

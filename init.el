@@ -1106,8 +1106,7 @@ This follows the UX design of Visual Studio Code."
 
 (use-package dired
   :ensure nil
-  :hook ((dired-mode . dired-hide-details-mode)
-         (dired-mode . hl-line-mode))
+  :hook (dired-mode . hl-line-mode)
   :config
   (setq dired-kill-when-opening-new-dired-buffer t)
   (setq dired-clean-confirm-killing-deleted-buffers nil)

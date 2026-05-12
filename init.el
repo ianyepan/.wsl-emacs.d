@@ -860,11 +860,10 @@ This follows the UX design of Visual Studio Code."
   (lsp-ui-peek-highlight  ((t (:foreground unspecified :background unspecified :inherit isearch))))
   :config
   (with-eval-after-load 'evil
-    (add-hook 'buffer-list-update-hook
-              #'(lambda ()
-                  (when (bound-and-true-p lsp-ui-mode)
-                    (evil-define-key '(motion normal) 'local (kbd "K")
-                      #'(lambda () (interactive) (lsp-ui-doc-glance) (ian/pulse-line)))))))
+    (add-hook 'lsp-ui-mode-hook
+              (lambda ()
+                (evil-define-key '(motion normal) 'local (kbd "K")
+                  (lambda () (interactive) (lsp-ui-doc-glance) (ian/pulse-line))))))
   (setq lsp-ui-doc-enable nil)
   (setq lsp-ui-doc-show-with-mouse nil)
   (setq lsp-ui-doc-enhanced-markdown nil)

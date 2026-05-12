@@ -644,6 +644,8 @@ This follows the UX design of Visual Studio Code."
   (diff-hl-delete ((t (:background unspecified :slant normal))))
   (diff-hl-change ((t (:background unspecified :slant normal))))
   :config
+  (with-eval-after-load 'magit
+    (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
   (setq diff-hl-margin-symbols-alist '((insert  . "┃") ; U+02503 (box drawings heavy vertical)
                                        (delete  . "▶")
                                        (change  . "┃")

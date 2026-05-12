@@ -1308,8 +1308,7 @@ This follows the UX design of Visual Studio Code."
          (org-mode . auto-fill-mode)
          (org-mode . org-indent-mode)
          (org-mode . (lambda ()
-                       (setq-local evil-auto-indent nil)
-                       (setq-local olivetti-body-width (+ fill-column 5)))))
+                       (setq-local evil-auto-indent nil))))
   :config
   (require 'org-tempo)
   (setq org-link-descriptive nil)

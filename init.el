@@ -28,7 +28,8 @@
 
 (use-package emacs
   :preface
-  (defvar ian/indent-width 2)
+  (defvar ian/indent-width-standard 4)
+  (defvar ian/indent-width-compact 2)
   (defun ian/maybe-set-default-browser ()
     "When in WSL Emacs, open links in default Windows 11 browser."
     (cond
@@ -216,7 +217,7 @@ Reference: https://www.emacswiki.org/emacs/TrampMode#h5o-19"
   :ensure nil
   ;; :mode ("\\.jsx?\\'" . js-jsx-mode)
   :config
-  (setq js-indent-level ian/indent-width)
+  (setq js-indent-level ian/indent-width-compact)
   (add-hook 'flycheck-mode-hook
             #'(lambda ()
                 (let* ((root (locate-dominating-file
@@ -235,7 +236,7 @@ Reference: https://www.emacswiki.org/emacs/TrampMode#h5o-19"
                           (c++-mode  . "bsd")
                           (c-mode    . "bsd")
                           (other     . "k&r")))
-  (setq-default c-basic-offset ian/indent-width))
+  (setq-default c-basic-offset ian/indent-width-standard))
 
 (use-package cc-mode
   :ensure nil
@@ -248,7 +249,7 @@ Reference: https://www.emacswiki.org/emacs/TrampMode#h5o-19"
   :ensure nil
   :mode ("\\.gyp\\'" . python-mode)
   :config
-  (setq python-indent-offset ian/indent-width)
+  (setq python-indent-offset ian/indent-width-standard)
   (setq python-shell-interpreter "python3"))
 
 (use-package ruby-mode
@@ -262,7 +263,7 @@ Reference: https://www.emacswiki.org/emacs/TrampMode#h5o-19"
 (use-package css-mode ; inherited by less-css-mode
   :ensure nil
   :config
-  (setq css-indent-offset ian/indent-width))
+  (setq css-indent-offset ian/indent-width-compact))
 
 (use-package sh-script
   :ensure nil
@@ -465,7 +466,7 @@ This follows the UX design of Visual Studio Code."
   :init
   (setq evil-want-C-u-scroll t)
   (setq evil-want-keybinding nil)
-  (setq evil-shift-width ian/indent-width)
+  (setq evil-shift-width ian/indent-width-compact)
   (setq evil-respect-visual-line-mode t)
   (setq evil-undo-system 'undo-fu)
   :hook (after-init . evil-mode)
@@ -987,7 +988,7 @@ This follows the UX design of Visual Studio Code."
 (use-package typescript-mode
   :mode ("\\.tsx?\\'" . typescript-mode)
   :config
-  (setq typescript-indent-level ian/indent-width))
+  (setq typescript-indent-level ian/indent-width-compact))
 
 (use-package dts-mode)
 
@@ -1030,9 +1031,9 @@ This follows the UX design of Visual Studio Code."
 ;;          ("\\.tsx?\\'"  . web-mode)
 ;;          ("\\.json\\'"  . web-mode))
 ;;   :config
-;;   (setq web-mode-markup-indent-offset ian/indent-width)
-;;   (setq web-mode-code-indent-offset ian/indent-width)
-;;   (setq web-mode-css-indent-offset ian/indent-width)
+;;   (setq web-mode-markup-indent-offset ian/indent-width-compact)
+;;   (setq web-mode-code-indent-offset ian/indent-width-compact)
+;;   (setq web-mode-css-indent-offset ian/indent-width-compact)
 ;;   (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'"))))
 
 ;; (use-package emmet-mode

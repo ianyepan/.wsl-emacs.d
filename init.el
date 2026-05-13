@@ -504,6 +504,8 @@ This follows the UX design of Visual Studio Code."
   (define-key evil-normal-state-map (kbd "C-r") #'undo-fu-only-redo)
   (define-key evil-normal-state-map (kbd "C-u") #'(lambda () (interactive) (evil-scroll-up 0) (recenter)))
   (define-key evil-normal-state-map (kbd "C-d") #'(lambda () (interactive) (evil-scroll-down 0) (recenter)))
+  (define-key evil-normal-state-map (kbd "ZZ") nil)
+  (define-key evil-normal-state-map (kbd "ZQ") nil)
   (unless (display-graphic-p)
     (evil-define-key '(motion normal) profiler-report-mode-map (kbd "TAB") #'profiler-report-toggle-entry))
   (evil-define-key '(motion normal) prog-mode-map (kbd "gd")

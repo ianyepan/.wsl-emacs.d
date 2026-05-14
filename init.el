@@ -1224,25 +1224,26 @@ This follows the UX design of Visual Studio Code."
 (use-package dashboard
   :config
   (dashboard-setup-startup-hook)
-  (setq dashboard-startup-banner 'logo)
+  (setq dashboard-startup-banner
+        (if (display-graphic-p) 'official "~/.emacs.d/official-emacs-logo-braille.txt"))
   (setq dashboard-banner-logo-title "( E M A C S )")
   (setq dashboard-init-info "")
   (setq dashboard-items nil)
   (setq dashboard-set-footer t)
   (setq dashboard-footer-icon "")
-  (setq dashboard-footer-messages '("😈 Happy hacking!   "))
+  (setq dashboard-footer-messages '("😈 Happy hacking! "))
   (define-key dashboard-mode-map (kbd "<f5>") #'(lambda ()
                                                   (interactive)
                                                   (dashboard-refresh-buffer)
                                                   (message "Refreshing Dashboard...done"))))
 
-(use-package avy
-  :config
-  (setq avy-keys (number-sequence ?a ?z))
-  (setq avy-background nil)
-  (setq avy-all-windows nil)
-  (with-eval-after-load 'evil
-    (evil-define-key '(motion normal) 'global (kbd "C-f") #'avy-goto-char)))
+;; (use-package avy
+;;   :config
+;;   (setq avy-keys (number-sequence ?a ?z))
+;;   (setq avy-background nil)
+;;   (setq avy-all-windows nil)
+;;   (with-eval-after-load 'evil
+;;     (evil-define-key '(motion normal) 'global (kbd "C-f") #'avy-goto-char)))
 
 (use-package emojify
   :config

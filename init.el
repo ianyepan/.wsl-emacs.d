@@ -679,17 +679,18 @@ This follows the UX design of Visual Studio Code."
   :config
   (add-hook 'minibuffer-setup-hook
             (lambda ()
-              ;; Snapshot all live windows, except minibuffers, in a list
-              ;; of (<#window> . (window-start . window-point))
-              (setq ian/pre-ivy-all-windows
-                    (mapcar (lambda (w) (cons w (cons (window-start w) (window-point w))))
-                            (seq-remove #'window-minibuffer-p (window-list))))
-              ;; Park all live windows' points at their window-start to avoid shifting buffer
-              ;; view when minibuffer is active and window-point is near bottom of screen.
-              (dolist (entry ian/pre-ivy-all-windows)
-                (let ((w (car entry)))
-                  (when (window-live-p w)
-                    (set-window-point w (window-start w)))))))
+              (when (not (eq this-command 'evil-ex))
+                ;; Snapshot all live windows, except minibuffers, in a list
+                ;; of (<#window> . (window-start . window-point))
+                (setq ian/pre-ivy-all-windows
+                      (mapcar (lambda (w) (cons w (cons (window-start w) (window-point w))))
+                              (seq-remove #'window-minibuffer-p (window-list))))
+                ;; Park all live windows' points at their window-start to avoid shifting buffer
+                ;; view when minibuffer is active and window-point is near bottom of screen.
+                (dolist (entry ian/pre-ivy-all-windows)
+                  (let ((w (car entry)))
+                    (when (window-live-p w)
+                      (set-window-point w (window-start w))))))))
   (add-hook 'minibuffer-exit-hook
             (lambda ()
               (dolist (entry ian/pre-ivy-all-windows)

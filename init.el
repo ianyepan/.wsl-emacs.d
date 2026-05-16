@@ -701,6 +701,7 @@ This follows the UX design of Visual Studio Code."
                     (set-window-start w wstart)
                     (set-window-point w wpoint))))
               (setq ian/pre-ivy-all-windows nil)))
+  (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
   (setq ivy-height 15)
   (setq ivy-display-style nil)
   (setq ivy-re-builders-alist
@@ -1273,7 +1274,6 @@ This follows the UX design of Visual Studio Code."
 (use-package ivy-rich
   :after ivy
   :config
-  (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
   (ivy-rich-mode +1))
 
 (use-package minions

@@ -370,7 +370,7 @@ Reference: https://www.emacswiki.org/emacs/TrampMode#h5o-19"
 (use-package xref
   :ensure nil
   :preface
-  (defun ian/xref-recenter-quarter-top-in-new-buffer (func &rest args)
+  (defun ian/xref-recenter-quarter-top-in-new-buffer-a (func &rest args)
     "When xref opens a new buffer, reposition the cursor at 1/4 window height from top.
 This follows the UX design of Visual Studio Code."
     (let ((original-buf (current-buffer)))
@@ -378,7 +378,7 @@ This follows the UX design of Visual Studio Code."
       (unless (eq (current-buffer) original-buf)
         (recenter-top-bottom (/ (window-body-height) 4)))))
   :config
-  (advice-add 'xref-find-definitions :around #'ian/xref-recenter-quarter-top-in-new-buffer)
+  (advice-add 'xref-find-definitions :around #'ian/xref-recenter-quarter-top-in-new-buffer-a)
   (setq xref-after-jump-hook '(xref-pulse-momentarily))
   (setq xref-after-return-hook '(xref-pulse-momentarily))
   (setq xref-prompt-for-identifier nil))
@@ -743,11 +743,11 @@ This follows the UX design of Visual Studio Code."
 
 (use-package counsel-projectile
   :preface
-  (defun ian/recenter-quarter-top ()
+  (defun ian/recenter-quarter-top-a ()
     "Recenter current line to 1/4 from the top."
     (recenter (/ (window-body-height) 4)))
   :config
-  (advice-add 'counsel-projectile-rg :after #'ian/recenter-quarter-top)
+  (advice-add 'counsel-projectile-rg :after #'ian/recenter-quarter-top-a)
   (counsel-projectile-mode +1))
 
 (use-package swiper

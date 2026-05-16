@@ -544,7 +544,7 @@ This follows the UX design of Visual Studio Code."
     (kbd "<leader>s")     #'counsel-grep-or-swiper
     (kbd "<leader>w")     #'save-buffer
     (kbd "<leader>f")     #'counsel-projectile-find-file
-    (kbd "<leader>F")     #'projectile-ripgrep
+    (kbd "<leader>F")     #'counsel-projectile-rg
     (kbd "<leader>r")     #'ranger
     (kbd "<leader>o")     #'other-window
     (kbd "<leader>0")     #'delete-window

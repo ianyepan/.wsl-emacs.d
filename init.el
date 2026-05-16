@@ -675,14 +675,6 @@ This follows the UX design of Visual Studio Code."
 (use-package ivy
   :preface
   (defvar ian/pre-ivy-all-windows nil)
-  (defun ian/counsel-rg-always-prompt-dir-a (orig-fun &rest args)
-    "Force `counsel-rg` to always prompt for a directory when called with M-x."
-    (if (called-interactively-p 'interactive)
-        (let ((target-dir (read-directory-name "Search in directory: "))
-              (initial-input (car args)))
-          ;; counsel-rg args: INITIAL-INPUT INITIAL-DIRECTORY EXTRA-RG-ARGS RG-PROMPT
-          (apply orig-fun initial-input target-dir (cddr args)))
-      (apply orig-fun args)))
   :hook (after-init . ivy-mode)
   :config
   (add-hook 'minibuffer-setup-hook
@@ -709,7 +701,6 @@ This follows the UX design of Visual Studio Code."
                     (set-window-start w wstart)
                     (set-window-point w wpoint))))
               (setq ian/pre-ivy-all-windows nil)))
-  (advice-add 'counsel-rg :around #'ian/counsel-rg-always-prompt-dir-a)
   (setq ivy-height 15)
   (setq ivy-display-style nil)
   (setq ivy-re-builders-alist
@@ -735,8 +726,18 @@ This follows the UX design of Visual Studio Code."
   (define-key ivy-minibuffer-map (kbd "C-c u") #'ivy-unmark))
 
 (use-package counsel
+  :preface
+  (defun ian/counsel-rg-always-prompt-dir-a (orig-fun &rest args)
+    "Force `counsel-rg` to always prompt for a directory when called with M-x."
+    (if (called-interactively-p 'interactive)
+        (let ((target-dir (read-directory-name "Search in directory: "))
+              (initial-input (car args)))
+          ;; counsel-rg args: INITIAL-INPUT INITIAL-DIRECTORY EXTRA-RG-ARGS RG-PROMPT
+          (apply orig-fun initial-input target-dir (cddr args)))
+      (apply orig-fun args)))
   :hook (ivy-mode . counsel-mode)
   :config
+  (advice-add 'counsel-rg :around #'ian/counsel-rg-always-prompt-dir-a)
   (setq counsel-rg-base-command "rg --vimgrep %s")
   (setq counsel-fzf-cmd "fd -H -c never \"%s\"")
   (global-set-key (kbd "C-S-p") #'counsel-M-x))

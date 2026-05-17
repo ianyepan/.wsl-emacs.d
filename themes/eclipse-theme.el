@@ -16,7 +16,7 @@
 (custom-theme-set-faces
  'eclipse
  '(default                                ((t (:background "#f7f7f7" :foreground "#222222"))))
- '(region                                 ((t (:background "#328ffe" :foreground "white" :extend nil))))
+ '(region                                 ((t (:background "#2169eb" :foreground "#ffffff" :extend nil))))
  '(secondary-selection                    ((t (:inherit region))))
  '(fringe                                 ((t (:background nil))))
  '(font-lock-keyword-face                 ((t (:foreground "#7f0055" :bold nil))))
@@ -52,6 +52,10 @@
  '(git-gutter-fr:added                    ((t (:foreground "#81b88b" :weight normal))))
  '(git-gutter-fr:deleted                  ((t (:foreground "#ca4b51" :weight normal))))
  '(git-gutter-fr:modified                 ((t (:foreground "#66afe0" :weight normal))))
+
+ '(diff-hl-insert                         ((t (:background "#81b88b" :foreground "#81b88b"))))
+ '(diff-hl-delete                         ((t (:background "#ca4b51" :foreground "#ca4b51"))))
+ '(diff-hl-change                         ((t (:background "#66afe0" :foreground "#66afe0"))))
 
  '(neo-dir-link-face                      ((t (:foreground "#111111"))))
  '(neo-header-face                        ((t (:foreground "#444444"))))

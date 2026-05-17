@@ -30,6 +30,8 @@
  '(show-paren-match                       ((t (:background "grey85"))))
  '(highlight                              ((t (:foreground "#0065c2" :underline t)))) ; link hover
  '(link                                   ((t (:foreground "#0065c2"))))
+ '(mode-line                              ((t (:foreground "#010101" :background "grey75" :box (:line-width -1 :style released-button)))))
+ '(mode-line-active                       ((t (:foreground "#010101" :background "grey75" :box (:line-width -1 :style released-button)))))
 
  '(company-tooltip                        ((t (:foreground "grey20" :background "grey94"))))
  '(company-tooltip-common                 ((t (:foreground "#0065c2" :bold nil))))

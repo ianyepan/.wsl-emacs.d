@@ -9,7 +9,7 @@
 </p>
 
 ### Thanks for dropping by! 🤘
-This is my personal Emacs 28.2 configuration when I'm using Arch and
+This is my personal Emacs 30.2 configuration when I'm using Arch and
 Ubuntu on WSL2. If you prefer an unopinionated lightweight Emacs
 config that you could build upon, check out [this
 page](https://github.com/ianyepan/yay-evil-emacs).

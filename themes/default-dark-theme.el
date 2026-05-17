@@ -37,7 +37,11 @@
  '(git-gutter-fr:deleted            ((t (:foreground "#a41511"))))
  '(git-gutter-fr:modified           ((t (:foreground "#207fa1"))))
 
- '(highlight-symbol-face            ((t (:background "#355266" :distant-foreground "white"))))
+ '(diff-hl-insert                   ((t (:background "#4a7f00" :foreground "#4a7f00"))))
+ '(diff-hl-delete                   ((t (:background "#a41511" :foreground "#a41511"))))
+ '(diff-hl-change                   ((t (:background "#207fa1" :foreground "#207fa1"))))
+
+ '(highlight-symbol-face            ((t (:background "#355266" :distant-foreground "#ffffff"))))
 
  '(term-color-blue                  ((t (:foreground "#0782f0"))))
 

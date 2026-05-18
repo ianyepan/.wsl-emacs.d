@@ -1279,8 +1279,7 @@ This follows the UX design of Visual Studio Code."
 (use-package minions
   :config
   (setq minions-mode-line-lighter "")
-  (setq minions-mode-line-delimiters '("" . ""))
-  (setq-default mode-line-buffer-identification '("%b // " (:eval (projectile-project-name))))
+  (setq-default mode-line-buffer-identification '("%b [" (:eval (projectile-project-name)) "]"))
   (minions-mode +1))
 
 (use-package neotree

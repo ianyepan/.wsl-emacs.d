@@ -679,7 +679,7 @@ This follows the UX design of Visual Studio Code."
   :config
   (add-hook 'minibuffer-setup-hook
             (lambda ()
-              (when (not (eq this-command 'evil-ex))
+              (when (not (memq this-command '(evil-ex ivy-done ivy-alt-done)))
                 ;; Snapshot all live windows, except minibuffers, in a list
                 ;; of (<#window> . (window-start . window-point))
                 (setq ian/pre-ivy-all-windows

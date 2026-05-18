@@ -1271,10 +1271,9 @@ This follows the UX design of Visual Studio Code."
   :config
   (setq all-the-icons-scale-factor 0.8))
 
-(use-package ivy-rich
-  :after ivy
-  :config
-  (ivy-rich-mode +1))
+(use-package marginalia
+  :init
+  (marginalia-mode))
 
 (use-package minions
   :config

@@ -600,13 +600,12 @@ This follows the UX design of Visual Studio Code."
   (advice-add 'magit-branch-and-checkout
               :after #'ian/run-projectile-invalidate-cache)
   (local-unset-key (kbd "f"))
-  (with-eval-after-load 'magit
-    (mapatoms
-     (lambda (sym)
-       (when (and (boundp sym)
-                  (keymapp (symbol-value sym))
-                  (string-match-p "\\`magit-.*-mode-map\\'" (symbol-name sym)))
-         (define-key (symbol-value sym) (kbd "SPC") nil)))))
+  (mapatoms
+   (lambda (sym)
+     (when (and (boundp sym)
+                (keymapp (symbol-value sym))
+                (string-match-p "\\`magit-.*-mode-map\\'" (symbol-name sym)))
+       (define-key (symbol-value sym) (kbd "SPC") nil))))
   (define-key magit-mode-map (kbd "<f5>") #'(lambda ()
                                               (interactive)
                                               (magit-refresh)

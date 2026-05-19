@@ -706,7 +706,7 @@ This follows the UX design of Visual Studio Code."
                       (wstart (cadr entry))
                       (wpoint (cddr entry)))
                   (when (window-live-p w)
-                    (set-window-start w wstart)
+                    (set-window-start w wstart t)
                     (set-window-point w wpoint))))
               (setq ian/pre-ivy-all-windows nil)))
   (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)

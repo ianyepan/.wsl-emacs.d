@@ -514,7 +514,7 @@
    `(elixir-attribute-face                   ((t (:foreground ,atom-one-dark-red-1))))
 
    ;; show-paren
-   `(show-paren-match                        ((,class (:foreground "white" :inherit bold :underline t))))
+   `(show-paren-match                        ((,class (:foreground "#ffffff" :inherit bold :underline t))))
    `(show-paren-mismatch                     ((,class (:foreground ,atom-one-dark-red-1 :inherit bold :underline t))))
 
    ;; sh-mode

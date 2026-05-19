@@ -111,7 +111,7 @@ background contrast. All other values default to \"medium\"."
 
   ;;;; Base theme face overrides
   ((button :foreground cyan :underline t :weight 'bold)
-   (cursor :background "white")
+   (cursor :background "#ffffff")
    (hl-line :background base3)
    ((line-number &override) :foreground base5)
    ((line-number-current-line &override) :background base3 :foreground yellow)
@@ -139,7 +139,7 @@ background contrast. All other values default to \"medium\"."
    ;;;; css-mode <built-in> / scss-mode
    (css-proprietary-property :foreground keywords)
    ;;;; doom-emacs
-   (+workspace-tab-selected-face :background dark-green :foreground "white")
+   (+workspace-tab-selected-face :background dark-green :foreground "#ffffff")
    ;;;; doom-modeline
    (doom-modeline-project-dir :bold t :foreground cyan)
    (doom-modeline-buffer-path :inherit 'bold :foreground green)
@@ -163,7 +163,7 @@ background contrast. All other values default to \"medium\"."
    (evil-search-highlight-persist-highlight-face :background yellow)
    (evil-ex-substitute-replacement :foreground cyan :strike-through nil :inherit 'evil-ex-substitute-matches)
    ;;;; evil-snipe
-   (evil-snipe-first-match-face :foreground "white" :background yellow)
+   (evil-snipe-first-match-face :foreground "#ffffff" :background yellow)
    (evil-snipe-matches-face     :foreground yellow :bold t :underline t)
    ;;;; flycheck
    (flycheck-error   :underline `(:style wave :color ,red)    :background base3)
@@ -264,7 +264,7 @@ background contrast. All other values default to \"medium\"."
    (undo-tree-visualizer-current-face :foreground yellow)
    ;;;; vimish-fold
    ((vimish-fold-overlay &override) :inherit 'font-lock-comment-face :background bg-alt2 :weight 'light)
-   ((vimish-fold-mouse-face &override) :foreground "white" :background yellow :weight 'light)
+   ((vimish-fold-mouse-face &override) :foreground "#ffffff" :background yellow :weight 'light)
    ((vimish-fold-fringe &override) :foreground magenta :background magenta)
    ;;;; web-mode
    (web-mode-html-tag-bracket-face :foreground blue)

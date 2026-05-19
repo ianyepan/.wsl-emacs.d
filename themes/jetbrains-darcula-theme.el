@@ -91,7 +91,7 @@
    `(highlight                                ((,class (:foreground ,bg3 :background ,fg3))))
    `(hl-line                                  ((,class (:background ,bg3))))
    `(fringe                                   ((,class (:background ,bg1 :foreground ,fg4))))
-   `(cursor                                   ((,class (:background "white"))))
+   `(cursor                                   ((,class (:background "#ffffff"))))
    `(show-paren-match-face                    ((,class (:background ,warning))))
    `(show-paren-match                         ((t (:foreground "yellow" :background ,bg4 :bold t))))
    `(show-paren-mismatch                      ((t (:background ,warning))))

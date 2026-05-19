@@ -612,6 +612,9 @@ This follows the UX design of Visual Studio Code."
                 (string-match-p "\\`magit-.*-mode-map\\'" (symbol-name sym)))
        (define-key (symbol-value sym) (kbd "SPC") nil))))
   (setq magit-revision-insert-related-refs nil)
+  (with-eval-after-load 'transient
+    (add-to-list 'transient-values
+                 '(magit-log:magit-log-mode "--decorate" "-n256")))
   (define-key magit-mode-map (kbd "<f5>") #'(lambda ()
                                               (interactive)
                                               (magit-refresh)

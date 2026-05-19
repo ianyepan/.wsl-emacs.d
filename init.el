@@ -413,6 +413,11 @@ This follows the UX design of Visual Studio Code."
                                (interactive)
                                (whitespace-mode 'toggle))))
 
+(use-package advice
+  :ensure nil
+  :init
+  (setq ad-redefinition-action 'accept))
+
 ;;; Third-party Packages
 
 ;; GUI enhancements

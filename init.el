@@ -565,6 +565,7 @@ This follows the UX design of Visual Studio Code."
     (kbd "<leader>2")     #'ian/split-and-follow-vertically
     (kbd "<leader>3")     #'ian/split-and-follow-horizontally
     (kbd "<leader>a")     #'evil-buffer
+    (kbd "<leader>/")     #'avy-goto-char-2
     (kbd "<leader><tab>") #'ian/lsp-execute-code-action
     (kbd "<leader>TAB")   #'ian/lsp-execute-code-action
     (kbd "<leader>e")     #'ian/neotree-project-toggle))
@@ -1264,13 +1265,11 @@ This follows the UX design of Visual Studio Code."
                                                   (dashboard-refresh-buffer)
                                                   (message "Refreshing Dashboard...done"))))
 
-;; (use-package avy
-;;   :config
-;;   (setq avy-keys (number-sequence ?a ?z))
-;;   (setq avy-background nil)
-;;   (setq avy-all-windows nil)
-;;   (with-eval-after-load 'evil
-;;     (evil-define-key '(motion normal) 'global (kbd "C-f") #'avy-goto-char)))
+(use-package avy
+  :config
+  (setq avy-keys (number-sequence ?a ?z))
+  (setq avy-background nil)
+  (setq avy-all-windows nil))
 
 (use-package emojify
   :config

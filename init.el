@@ -615,7 +615,9 @@ This follows the UX design of Visual Studio Code."
   (setq magit-revision-insert-related-refs nil)
   (with-eval-after-load 'transient
     (add-to-list 'transient-values
-                 '(magit-log:magit-log-mode "--decorate" "-n256")))
+                 '(magit-log:magit-log-mode "--decorate" "-n256"))
+    (add-to-list 'transient-values
+                 '(magit-pull "--rebase")))
   (define-key magit-mode-map (kbd "<f5>") #'(lambda ()
                                               (interactive)
                                               (magit-refresh)

@@ -122,7 +122,7 @@
    `(fringe                                   ((,class (:background nil :foreground ,fg4))))
    `(cursor                                   ((,class (:background ,fg1))))
    `(show-paren-match-face                    ((,class (:background ,warning))))
-   `(show-paren-match                         ((t (:foreground ,fg3 :background ,bg4 :bold t))))
+   `(show-paren-match                         ((t (:foreground ,fg0 :background ,bg2 :bold t))))
    `(show-paren-mismatch                      ((t (:background ,warning))))
    `(isearch                                  ((,class (:background ,bg-hl))))
    `(vertical-border                          ((,class (:foreground "#cecacd"))))

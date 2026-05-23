@@ -426,28 +426,50 @@ This follows the UX design of Visual Studio Code."
 ;;   :config
 ;;   (load-theme 'vscode-dark-plus t))
 
-;; (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
-;; (load-theme 'default-light t)
-
 ;; (use-package spacemacs-theme
-;;   :custom-face
-;;   (region ((t (:extend nil))))
-;;   :config
-;;   (load-theme 'spacemacs-light t))
+;; :custom-face
+;; (region ((t (:extend nil))))
+;; :config
+;; (load-theme 'spacemacs-light t))
 
-(use-package doom-themes
-  :custom-face
-  (region                         ((t (:extend nil))))
-  (highlight-symbol-face          ((t (:background "#355266" :distant-foreground "#bbbbbb"))))
-  (highlight                      ((t (:foreground "#4db2ff" :background nil :underline t)))) ; link hover
-  (link                           ((t (:foreground "#3794ff"))))
-  (evil-ex-substitute-replacement ((t (:strike-through nil))))
-  (vertical-border                ((t (:foreground "black" :background "black"))))
-  (fringe                         ((t (:background nil))))
+;; (use-package doom-themes
+;;   :custom-face
+;;   (region                         ((t (:extend nil))))
+;;   (highlight-symbol-face          ((t (:background "#254256" :distant-foreground "#bbbbbb"))))
+;;   (highlight                      ((t (:foreground "#4db2ff" :background nil :underline t)))) ; link hover
+;;   (link                           ((t (:foreground "#3794ff"))))
+;;   (evil-ex-substitute-replacement ((t (:strike-through nil))))
+;;   (vertical-border                ((t (:foreground "black" :background nil))))
+;;   (fringe                         ((t (:background nil))))
+;;   :config
+;;   (setq doom-themes-enable-bold nil)
+;;   (setq doom-themes-enable-italic nil)
+;;   (load-theme 'doom-gruvbox t))
+
+(use-package emacs
+  :ensure nil
+  :preface
+  (defvar ian/light-theme 'default-light)
+  (defvar ian/dark-theme 'default-dark)
+  (defun ian/toggle-theme ()
+    "Toggle between light and dark themes."
+    (interactive)
+    (let* ((current (car custom-enabled-themes))
+           (next-theme (if (eq current ian/dark-theme)
+                           ian/light-theme
+                         ian/dark-theme)))
+      (mapc #'disable-theme custom-enabled-themes)
+      (load-theme next-theme t)
+      (setq frame-background-mode
+            (if (eq next-theme ian/dark-theme) 'dark 'light))
+      (frame-set-background-mode (selected-frame))
+      (message "Switched to %s" next-theme)))
   :config
-  (setq doom-themes-enable-bold nil)
-  (setq doom-themes-enable-italic nil)
-  (load-theme 'doom-gruvbox t))
+  (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
+  (setq frame-background-mode 'light)
+  (frame-set-background-mode (selected-frame))
+  (load-theme ian/light-theme t)
+  (global-set-key (kbd "C-c t") #'ian/toggle-theme))
 
 (use-package highlight-symbol
   :hook (prog-mode . highlight-symbol-mode)

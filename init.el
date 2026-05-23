@@ -449,8 +449,8 @@ This follows the UX design of Visual Studio Code."
 (use-package emacs
   :ensure nil
   :preface
-  (defvar ian/light-theme 'default-light)
-  (defvar ian/dark-theme 'default-dark)
+  (defvar ian/light-theme 'modus-operandi)
+  (defvar ian/dark-theme 'modus-vivendi)
   (defun ian/toggle-theme ()
     "Toggle between light and dark themes."
     (interactive)
@@ -464,11 +464,16 @@ This follows the UX design of Visual Studio Code."
             (if (eq next-theme ian/dark-theme) 'dark 'light))
       (frame-set-background-mode (selected-frame))
       (message "Switched to %s" next-theme)))
+  :custom-face
+  (region             ((t (:extend nil))))
+  (mode-line          ((t (:underline nil))))
+  (mode-line-active   ((t (:underline nil))))
+  (mode-line-inactive ((t (:underline nil))))
   :config
   (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
-  (setq frame-background-mode 'light)
+  (setq frame-background-mode 'dark)
   (frame-set-background-mode (selected-frame))
-  (load-theme ian/light-theme t)
+  (load-theme ian/dark-theme t)
   (global-set-key (kbd "C-c t") #'ian/toggle-theme))
 
 (use-package highlight-symbol
@@ -684,9 +689,9 @@ This follows the UX design of Visual Studio Code."
 (use-package diff-hl
   :unless (display-graphic-p) ;; Prefer diff-hl over git-gutter-fringe in TUI Emacs
   :custom-face
-  (diff-hl-insert ((t (:background unspecified :slant normal))))
-  (diff-hl-delete ((t (:background unspecified :slant normal))))
-  (diff-hl-change ((t (:background unspecified :slant normal))))
+  (diff-hl-insert     ((t (:background unspecified :foreground "#81b88b" :slant normal))))
+  (diff-hl-delete     ((t (:background unspecified :foreground "#ca4b51" :slant normal))))
+  (diff-hl-change     ((t (:background unspecified :foreground "#66afe0" :slant normal))))
   :config
   (with-eval-after-load 'magit
     (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))

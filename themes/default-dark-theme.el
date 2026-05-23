@@ -30,6 +30,8 @@
  '(company-scrollbar-bg             ((t (:background "gray75"))))
  '(company-scrollbar-fg             ((t (:background "gray80"))))
 
+ '(ivy-match-required-face          ((t (:inherit error))))
+
  '(git-gutter:added                 ((t (:foreground "#4a7f00"))))
  '(git-gutter:deleted               ((t (:foreground "#a41511"))))
  '(git-gutter:modified              ((t (:foreground "#207fa1"))))

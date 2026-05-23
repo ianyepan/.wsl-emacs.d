@@ -1290,6 +1290,11 @@ This follows the UX design of Visual Studio Code."
                                                   (message "Refreshing Dashboard...done"))))
 
 (use-package avy
+  :custom-face
+  (avy-lead-face   ((t (:background "#ffdd63" :foreground "#000000" :bold t))))
+  (avy-lead-face-0 ((t (:background "#ffdd63" :foreground "#000000" :bold t))))
+  (avy-lead-face-1 ((t (:background "#ffdd63" :foreground "#000000" :bold t))))
+  (avy-lead-face-2 ((t (:background "#ffdd63" :foreground "#000000" :bold t))))
   :config
   (setq avy-keys (number-sequence ?a ?z))
   (setq avy-background nil)

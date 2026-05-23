@@ -116,7 +116,7 @@
    `(secondary-selection                      ((,class (:inherit region))))
    `(highlight                                ((,class (:foreground "#4db2ff" :underline t)))) ; link hover
    `(hl-line                                  ((,class (:background ,bg3))))
-   `(fringe                                   ((,class (:background nil :foreground ,fg4))))
+   `(fringe                                   ((,class (:background unspecified :foreground ,fg4))))
    `(cursor                                   ((,class (:background ,fg1))))
    `(show-paren-match-face                    ((,class (:background ,warning))))
    `(show-paren-match                         ((t (:foreground ,fg3 :background ,bg4 :bold t))))
@@ -135,7 +135,7 @@
 
    `(mode-line                                ((,class (:bold nil :foreground ,fg4 :background ,mode-line-bg))))
    `(mode-line-inactive                       ((,class (:bold nil :foreground ,fg1 :background ,mode-line-bg-dark))))
-   `(mode-line-buffer-id                      ((,class (:bold nil :foreground ,accent :background nil))))
+   `(mode-line-buffer-id                      ((,class (:bold nil :foreground ,accent :background unspecified))))
    `(mode-line-highlight                      ((,class (:foreground ,keyword :box nil :weight normal))))
    `(mode-line-emphasis                       ((,class (:foreground ,fg1))))
 
@@ -235,7 +235,7 @@
    `(icompletep-determined                    ((,class :foreground ,builtin)))
 
    `(slime-repl-inputed-output-face           ((,class (:foreground ,type))))
-   `(trailing-whitespace                      ((,class :foreground nil :background ,warning)))
+   `(trailing-whitespace                      ((,class :foreground unspecified :background ,warning)))
    `(lazy-highlight                           ((,class (:background ,bg-hl))))
 
    `(undo-tree-visualizer-current-face        ((,class :foreground ,builtin)))
@@ -381,7 +381,7 @@
    `(helm-grep-file                           ((,class (:foreground ,fg1 :background ,bg1))))
    `(helm-grep-finish                         ((,class (:foreground ,fg2 :background ,bg1))))
    `(helm-grep-lineno                         ((,class (:foreground ,fg1 :background ,bg1))))
-   `(helm-grep-match                          ((,class (:foreground nil :background nil :inherit helm-match))))
+   `(helm-grep-match                          ((,class (:foreground unspecified :background unspecified :inherit helm-match))))
    `(helm-grep-running                        ((,class (:foreground ,func :background ,bg1))))
    `(helm-moccur-buffer                       ((,class (:foreground ,func :background ,bg1))))
    `(helm-source-go-package-godoc-description ((,class (:foreground ,str))))
@@ -404,8 +404,8 @@
    `(web-mode-json-key-face                   ((,class (:foreground ,str))))
    `(web-mode-json-context-face               ((,class (:foreground ,str))))
 
-   `(diff-header                              ((t (:foreground ,ms-bluegreen :background nil))))
-   `(diff-file-header                         ((t (:foreground ,fg3 :background nil))))
+   `(diff-header                              ((t (:foreground ,ms-bluegreen :background unspecified))))
+   `(diff-file-header                         ((t (:foreground ,fg3 :background unspecified))))
    `(diff-hunk-header                         ((t (:foreground ,fg4 :background ,bg3))))
    `(diff-added                               ((t (:foreground ,fg2 :background ,ms-green-bg))))
    `(diff-removed                             ((t (:foreground ,fg2 :background ,ms-red-bg))))

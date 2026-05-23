@@ -32,7 +32,7 @@
          (colors `(("atom-one-dark-accent"   . "#528BFF")
                    ("atom-one-dark-fg"       . (if ,256color "color-248" "#ABB2BF"))
                    ("atom-one-dark-bg"       . (if ,256color "color-235" "#282C34"))
-                   ("atom-one-dark-bg-1"     . (if ,256color "color-234" "#121417"))
+                   ("atom-one-dark-bg-1"     . (if ,256color "color-234" "#20252e"))
                    ("atom-one-dark-bg-hl"    . (if ,256color "color-236" "#2C323C"))
                    ("atom-one-dark-gutter"   . (if ,256color "color-239" "#4B5363"))
                    ("atom-one-dark-mono-1"   . (if ,256color "color-248" "#ABB2BF"))
@@ -74,7 +74,7 @@
    `(link-visited                            ((t (:foreground ,atom-one-dark-blue :underline t :weight normal))))
    `(cursor                                  ((t (:background ,atom-one-dark-accent))))
    `(fringe                                  ((t (:background ,atom-one-dark-bg))))
-   `(region                                  ((t (:background ,atom-one-dark-gray :distant-foreground ,atom-one-dark-mono-2))))
+   `(region                                  ((t (:background ,atom-one-dark-gray :distant-foreground ,atom-one-dark-mono-2 :extend nil))))
    `(highlight                               ((t (:background ,atom-one-dark-gray :distant-foreground ,atom-one-dark-mono-2))))
    `(hl-line                                 ((t (:background ,atom-one-dark-bg-hl :distant-foreground nil))))
    `(header-line                             ((t (:background ,atom-one-dark-black))))
@@ -95,7 +95,7 @@
    `(font-lock-type-face                     ((t (:foreground ,atom-one-dark-yellow))))
    `(font-lock-constant-face                 ((t (:foreground ,atom-one-dark-cyan))))
    `(font-lock-variable-name-face            ((t (:foreground ,atom-one-dark-red-1))))
-   `(font-lock-warning-face                  ((t (:foreground ,atom-one-dark-mono-3 :bold nil))))
+   `(font-lock-warning-face                  ((t (:foreground ,atom-one-dark-red-1 :bold nil))))
    `(font-lock-negation-char-face            ((t (:foreground ,atom-one-dark-cyan :bold nil))))
 
    ;; mode-line
@@ -265,7 +265,7 @@
    `(ivy-minibuffer-match-face-4             ((t (:inherit ivy-minibuffer-match-face-2 :background ,atom-one-dark-black :foreground ,atom-one-dark-yellow :weight normal))))
    `(ivy-minibuffer-match-highlight          ((t (:inherit ivy-current-match))))
    `(ivy-modified-buffer                     ((t (:inherit default :foreground ,atom-one-dark-orange))))
-   `(ivy-virtual                             ((t (:inherit font-lock-comment-face :slant italic))))
+   `(ivy-virtual                             ((t (:foreground ,atom-one-dark-mono-2 :slant italic :distant-foreground ,atom-one-dark-mono-2))))
 
    ;; counsel
    `(counsel-key-binding                     ((t (:foreground ,atom-one-dark-yellow :weight normal))))

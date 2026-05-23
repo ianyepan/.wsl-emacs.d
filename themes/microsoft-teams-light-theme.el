@@ -49,7 +49,6 @@
       (fg4               "#484644")
 
       (bg0               "#e2e2f6")
-      ;; (bg1               "#f4f4fc") ; default bg
       (bg1               "#f7f7f7") ; default bg
       (bg2               "#e2e2f6")
       (bg3               "#e2e2f6")
@@ -65,13 +64,13 @@
       (numeric           "#585a96")
       (mode-line-bg      "#6264a7")
       (mode-line-bg-dark "#6264a7")
-      (line-num          "#b3b0ad")
+      (line-num          "#a3a09d")
       (builtin           "#6264a7")
       (keyword           "#6264a7")
       (const             "#585a96")
-      (comment           "#b3b0ad")
+      (comment           "#a3a09d")
       (doc               "#8b8cc7")
-      (doc-alt           "#b3b0ad")
+      (doc-alt           "#a3a09d")
       (func              "#585a96")
       (str               "#585a96")
       (type              "#33344a")
@@ -90,12 +89,12 @@
       (ms-lightred       "#d16969")
       (ms-lightgreen     "#b5cea8")
       (ms-lightblue      "#9cdcfe")
-      (ms-red-bg         "#551b1e")
-      (ms-green-bg       "#39422a")
-      (ms-blue-bg        "#040e3f")
-      (ms-red-bghl       "#74140f")
-      (ms-green-bghl     "#4b5332")
-      (ms-blue-bghl      "#141e4f"))
+      (ms-red-bg         "#ffdddd")
+      (ms-green-bg       "#ddffdd")
+      (ms-blue-bg        "#ddedff")
+      (ms-red-bghl       "#eecccc")
+      (ms-green-bghl     "#cceecc")
+      (ms-blue-bghl      "#ccdcee"))
 
   (custom-theme-set-faces
    'microsoft-teams-light
@@ -400,7 +399,7 @@
    `(ivy-minibuffer-match-face-4              ((t (:inherit ivy-minibuffer-match-face-2))))
    `(ivy-minibuffer-match-highlight           ((t (:inherit ivy-current-match))))
    `(ivy-modified-buffer                      ((t (:inherit default :foreground ,var))))
-   `(ivy-virtual                              ((t (:inherit default :foreground ,doc-alt))))
+   `(ivy-virtual                              ((t (:inherit default :foreground ,key3 :distant-foreground ,keyword))))
    `(ivy-posframe                             ((t (:background "#252526"))))
 
    `(counsel-key-binding                      ((t (:foreground ,var))))

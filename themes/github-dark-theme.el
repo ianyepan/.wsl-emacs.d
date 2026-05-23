@@ -166,7 +166,7 @@
    `(org-block                                ((,class (:foreground ,fg2 :background ,bg0 :extend t))))
    `(org-quote                                ((,class (:inherit org-block :slant italic))))
    `(org-verse                                ((,class (:inherit org-block :slant italic))))
-   `(org-todo                                 ((,class (,@(when github-dark-box-org-todo (list :box '(:line-width 1 :color ,gh-lightred)))
+   `(org-todo                                 ((,class (,@(when github-dark-box-org-todo (list :box `(:line-width 1 :color ,gh-lightred)))
                                                         :foreground ,gh-lightred :bold nil))))
    `(org-done                                 ((,class (:box (:line-width 1 :color ,gh-lightgreen) :foreground ,gh-lightgreen :bold nil ))))
    `(org-warning                              ((,class (:underline t :foreground ,warning))))

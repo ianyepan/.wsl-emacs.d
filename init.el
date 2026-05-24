@@ -449,8 +449,8 @@ This follows the UX design of Visual Studio Code."
 (use-package emacs
   :ensure nil
   :preface
-  (defvar ian/light-theme 'modus-operandi)
-  (defvar ian/dark-theme 'modus-vivendi)
+  (defconst ian/light-theme 'modus-operandi)
+  (defconst ian/dark-theme 'modus-vivendi)
   (defun ian/toggle-theme ()
     "Toggle between light and dark themes."
     (interactive)

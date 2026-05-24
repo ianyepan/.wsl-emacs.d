@@ -726,8 +726,8 @@ This follows the UX design of Visual Studio Code."
   (add-hook 'minibuffer-setup-hook
             (lambda ()
               (when (not (memq this-command '(evil-ex ivy-done ivy-alt-done)))
-                ;; Snapshot all live windows, except minibuffers, in a list
-                ;; of (<#window> . (window-start . window-point))
+                ;; Snapshot all live windows, except minibuffers or buffers with an active region,
+                ;; in a list of (<#window> . (window-start . window-point))
                 (setq ian/pre-ivy-all-windows
                       (mapcar (lambda (w) (cons w (cons (window-start w) (window-point w))))
                               (seq-remove (lambda (w)

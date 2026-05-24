@@ -730,7 +730,10 @@ This follows the UX design of Visual Studio Code."
                 ;; of (<#window> . (window-start . window-point))
                 (setq ian/pre-ivy-all-windows
                       (mapcar (lambda (w) (cons w (cons (window-start w) (window-point w))))
-                              (seq-remove #'window-minibuffer-p (window-list))))
+                              (seq-remove (lambda (w)
+                                            (or (window-minibuffer-p w)
+                                                (with-current-buffer (window-buffer w) (region-active-p))))
+                                          (window-list))))
                 ;; Park all live windows' points at their window-start to avoid shifting buffer
                 ;; view when minibuffer is active and window-point is near bottom of screen.
                 (dolist (entry ian/pre-ivy-all-windows)

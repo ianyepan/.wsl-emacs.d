@@ -602,7 +602,7 @@ This follows the UX design of Visual Studio Code."
   :config
   (setq evil-collection-company-use-tng nil)
   (setq evil-collection-repl-submit-state 'insert)
-  (setq evil-collection-key-blacklist '("SPC"))
+  (setq evil-collection-key-blacklist '("SPC" "0"))
   (evil-collection-init))
 
 (use-package evil-commentary

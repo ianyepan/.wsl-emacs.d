@@ -418,6 +418,12 @@ This follows the UX design of Visual Studio Code."
   :init
   (setq ad-redefinition-action 'accept))
 
+(use-package ielm
+  :ensure nil
+  :config
+  (with-eval-after-load 'evil
+    (evil-set-initial-state 'inferior-emacs-lisp-mode 'emacs)))
+
 ;;; Third-party Packages
 
 ;; GUI enhancements

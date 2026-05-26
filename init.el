@@ -422,7 +422,8 @@ This follows the UX design of Visual Studio Code."
   :ensure nil
   :config
   (with-eval-after-load 'evil
-    (evil-set-initial-state 'inferior-emacs-lisp-mode 'emacs)))
+    (evil-define-key '(insert) inferior-emacs-lisp-mode-map
+      (kbd "RET") #'ielm-return)))
 
 ;;; Third-party Packages
 

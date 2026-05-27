@@ -1236,11 +1236,11 @@ after the jump."
   ;; `dired-get-subdir' to always return nil via `cl-letf', forcing
   ;; `dired-mark' into the correct single-file branch.
   ;; Opened bug report at https://github.com/punassuming/ranger.el/issues/256
-  (defmacro ianpan/dired-no-subdir (fn)
-    `(lambda (&optional arg)
-       (interactive "p")
-       (cl-letf (((symbol-function 'dired-get-subdir) (lambda () nil)))
-         (,fn arg))))
+  (defun ianpan/dired-no-subdir (fn)
+    (lambda (arg)
+      (interactive "p")
+      (cl-letf (((symbol-function 'dired-get-subdir) (lambda () nil)))
+        (funcall fn arg))))
   :config
   (setq ranger-width-preview 0.5)
   (setq ranger-width-parents 0.167)
@@ -1249,12 +1249,12 @@ after the jump."
   (define-key ranger-mode-map (kbd "H") #'evil-window-top)
   (define-key ranger-mode-map (kbd "L") #'evil-window-bottom)
   (define-key ranger-mode-map (kbd "?") #'evil-search-backward)
-  (define-key ranger-mode-map (kbd "d") (ianpan/dired-no-subdir dired-flag-file-deletion))
-  (define-key ranger-mode-map (kbd "u") (ianpan/dired-no-subdir dired-unmark))
+  (define-key ranger-mode-map (kbd "d") (ianpan/dired-no-subdir #'dired-flag-file-deletion))
+  (define-key ranger-mode-map (kbd "u") (ianpan/dired-no-subdir #'dired-unmark))
   (define-key ranger-mode-map (kbd "U") #'dired-unmark-all-marks)
   (define-key ranger-mode-map (kbd "x") #'dired-do-flagged-delete)
   (define-key ranger-mode-map (kbd "i") #'dired-toggle-read-only)
-  (define-key ranger-mode-map (kbd "m") (ianpan/dired-no-subdir dired-mark))
+  (define-key ranger-mode-map (kbd "m") (ianpan/dired-no-subdir #'dired-mark))
   (define-key ranger-mode-map (kbd "R") #'dired-do-rename)
   (define-key ranger-mode-map (kbd "C") #'dired-do-copy)
   (define-key ranger-mode-map (kbd "C-h") nil))

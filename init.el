@@ -418,12 +418,6 @@ This follows the UX design of Visual Studio Code."
   :init
   (setq ad-redefinition-action 'accept))
 
-(use-package ielm
-  :ensure nil
-  :config
-  (with-eval-after-load 'evil
-    (evil-define-key '(insert) inferior-emacs-lisp-mode-map
-      (kbd "RET") #'ielm-return)))
 
 ;;; Third-party Packages
 

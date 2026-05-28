@@ -32,13 +32,12 @@
   (defvar ian/indent-width-compact 2)
   (defun ian/maybe-set-default-browser ()
     "When in WSL Emacs, open links in default Windows 11 browser."
-    (cond
-     ((eq system-type 'gnu/linux)
-      (when (string-match "Linux.*microsoft.*Linux"
-                          (shell-command-to-string "uname -a"))
-        (setq browse-url-generic-program "/mnt/c/Windows/System32/cmd.exe"
-              browse-url-generic-args '("/c" "start" "")
-              browse-url-browser-function 'browse-url-generic)))))
+    (when (and (eq system-type 'gnu/linux)
+               (string-match "Linux.*microsoft.*Linux"
+                             (shell-command-to-string "uname -a")))
+      (setq browse-url-generic-program "/mnt/c/Windows/System32/cmd.exe"
+            browse-url-generic-args '("/c" "start" "")
+            browse-url-browser-function 'browse-url-generic)))
   (defun ian/split-and-follow-vertically ()
     "Split window vertically (below)."
     (interactive)
@@ -94,39 +93,25 @@
                 (when buffer-file-name (ignore-errors (recenter)))))
 
   ;;; Fix annoying vertical window splitting.
-  ;;; https://lists.gnu.org/archive/html/help-gnu-emacs/2015-08/msg00339.html
+  ;;; Ref: https://lists.gnu.org/archive/html/help-gnu-emacs/2015-08/msg00339.html
   (with-eval-after-load "window"
-    (defcustom split-window-below nil
-      "If non-nil, vertical splits produce new windows below."
-      :group 'windows
-      :type 'boolean)
-    (defcustom split-window-right nil
-      "If non-nil, horizontal splits produce new windows to the right."
-      :group 'windows
-      :type 'boolean)
     (fmakunbound #'split-window-sensibly)
-    (defun split-window-sensibly
-        (&optional window)
+    (defun split-window-sensibly (&optional window)
       (setq window (or window (selected-window)))
-      (or (and (window-splittable-p window t)
-               ;; Split window horizontally.
-               (split-window window nil (if split-window-right 'left  'right)))
-          (and (window-splittable-p window)
-               ;; Split window vertically.
-               (split-window window nil (if split-window-below 'above 'below)))
-          (and (eq window (frame-root-window (window-frame window)))
-               (not (window-minibuffer-p window))
-               ;; If WINDOW is the only window on its frame and is not the
-               ;; minibuffer window, try to split it horizontally disregarding the
-               ;; value of `split-width-threshold'.
-               (let ((split-width-threshold 0))
-                 (when (window-splittable-p window t)
-                   (split-window window nil (if split-window-right
-                                                'left
-                                              'right))))))))
+      (cond ((window-splittable-p window t)
+             (split-window window nil 'right))
+            ((window-splittable-p window)
+             (split-window window nil 'below))
+            ((and (eq window (frame-root-window (window-frame window)))
+                  (not (window-minibuffer-p window)))
+             ;; If WINDOW is the only window in its frame and is not the
+             ;; minibuffer window, try to split it horizontally disregarding the
+             ;; value of `split-width-threshold'.
+             (let ((split-width-threshold 0))
+               (when (window-splittable-p window t)
+                 (split-window window nil 'right)))))))
   (setq-default split-height-threshold  4
                 split-width-threshold   160) ; the reasonable limit for horizontal splits
-
 
   (setq max-specpdl-size 10000)
   (setq max-lisp-eval-depth 10000)
@@ -392,7 +377,8 @@ This follows the UX design of Visual Studio Code."
                                                       zone-pgm-rotate-LR-lockstep
                                                       zone-pgm-drip
                                                       zone-pgm-whack-chars))))
-    (let ((zone-programs (vector (intern pgm)))) (zone))))
+    (let ((zone-programs (vector (intern pgm))))
+      (zone))))
 
 (use-package tooltip
   :ensure nil
@@ -1347,7 +1333,7 @@ This follows the UX design of Visual Studio Code."
           (when (neo-global--window-exists-p)
             (neotree-dir project-dir)
             (neotree-find file-name))
-        (message "Could not find projectile project root."))))
+        (message "Could not find Projectile project root."))))
   :custom-face
   (neo-dir-link-face  ((t (:inherit variable-pitch))))
   (neo-header-face    ((t (:inherit variable-pitch))))

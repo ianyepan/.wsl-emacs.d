@@ -1204,6 +1204,7 @@ This follows the UX design of Visual Studio Code."
   ;; Fix: wrap affected dired commands with a temporary override of
   ;; `dired-get-subdir' to always return nil via `cl-letf', forcing
   ;; `dired-mark' into the correct single-file branch.
+  ;; Opened bug report at https://github.com/punassuming/ranger.el/issues/256
   (defmacro ianpan/dired-no-subdir (fn)
     `(lambda (&optional arg)
        (interactive "p")

@@ -714,9 +714,9 @@ This follows the UX design of Visual Studio Code."
             (lambda ()
               (when (not (memq this-command '(evil-ex ivy-done ivy-alt-done)))
                 ;; Snapshot all live windows, except minibuffers or buffers with an active region,
-                ;; in a list of (<#window> . (window-start . window-point))
+                ;; in a list of vectors with the form [<#window> window-start window-point]
                 (setq ian/pre-ivy-all-windows
-                      (mapcar (lambda (w) (cons w (cons (window-start w) (window-point w))))
+                      (mapcar (lambda (w) (vector w (window-start w) (window-point w)))
                               (seq-remove (lambda (w)
                                             (or (window-minibuffer-p w)
                                                 (with-current-buffer (window-buffer w) (region-active-p))))
@@ -724,15 +724,15 @@ This follows the UX design of Visual Studio Code."
                 ;; Park all live windows' points at their window-start to avoid shifting buffer
                 ;; view when minibuffer is active and window-point is near bottom of screen.
                 (dolist (entry ian/pre-ivy-all-windows)
-                  (let ((w (car entry)))
+                  (let ((w (aref entry 0)))
                     (when (window-live-p w)
                       (set-window-point w (window-start w))))))))
   (add-hook 'minibuffer-exit-hook
             (lambda ()
               (dolist (entry ian/pre-ivy-all-windows)
-                (let ((w (car entry))
-                      (wstart (cadr entry))
-                      (wpoint (cddr entry)))
+                (let ((w      (aref entry 0))
+                      (wstart (aref entry 1))
+                      (wpoint (aref entry 2)))
                   (when (window-live-p w)
                     (set-window-start w wstart t)
                     (set-window-point w wpoint))))

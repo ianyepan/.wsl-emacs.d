@@ -18,14 +18,13 @@
 
 (defun company-turbo-shadow--patch-lines (lines)
   "Append right shadow character(s) to each line in LINES except the first two."
-  (cond
-   ((null lines) nil)
-   ((null (cdr lines)) lines) ; Only 1 line? Return as-is
-   (t
-    ;; Keep the first two lines untouched and add right shadow to the rest
+  (if (< (length lines) 2)
+      lines
     (append
-     (list (car lines) (cadr lines))
-     (mapcar (lambda (line) (concat line company-turbo-right-shadow--char)) (cddr lines))))))
+     ;; Keep the first 2 lines untouched.
+     (list (nth 0 lines) (nth 1 lines))
+     (mapcar (lambda (line) (concat line company-turbo-right-shadow--char))
+             (cddr lines)))))
 
 (defun company-turbo-shadow--remove-bottom (&rest _)
   "Clean up the bottom shadow overlay."

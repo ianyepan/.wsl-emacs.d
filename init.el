@@ -713,16 +713,19 @@ This follows the UX design of Visual Studio Code."
   (add-hook 'minibuffer-setup-hook
             (lambda ()
               (when (not (memq this-command '(evil-ex ivy-done ivy-alt-done)))
-                ;; Snapshot all live windows, except minibuffers or buffers with an active region,
-                ;; in a list of vectors with the form [<#window> window-start window-point]
+                ;; Snapshot all live windows, except minibuffers or buffers with
+                ;; an active region, in a list of vectors with the form
+                ;; [<#window> window-start window-point]
                 (setq ian/pre-ivy-all-windows
                       (mapcar (lambda (w) (vector w (window-start w) (window-point w)))
                               (seq-remove (lambda (w)
                                             (or (window-minibuffer-p w)
-                                                (with-current-buffer (window-buffer w) (region-active-p))))
+                                                (with-current-buffer (window-buffer w)
+                                                  (region-active-p))))
                                           (window-list))))
-                ;; Park all live windows' points at their window-start to avoid shifting buffer
-                ;; view when minibuffer is active and window-point is near bottom of screen.
+                ;; Park all live windows' points at their window-start to avoid
+                ;; shifting buffer view when minibuffer is active and window-point
+                ;; is near the bottom of screen.
                 (dolist (entry ian/pre-ivy-all-windows)
                   (let ((w (aref entry 0)))
                     (when (window-live-p w)
@@ -764,17 +767,16 @@ This follows the UX design of Visual Studio Code."
 
 (use-package counsel
   :preface
-  (defun ian/counsel-rg-always-prompt-dir-a (orig-fun &rest args)
+  (defun ian/counsel-rg-mx-prompt-dir-a (orig-fun &rest args)
     "Force `counsel-rg` to always prompt for a directory when called with M-x."
     (if (called-interactively-p 'interactive)
-        (let ((target-dir (read-directory-name "Search in directory: "))
-              (initial-input (car args)))
+        (let ((init-dir (read-directory-name "Search in directory: ")))
           ;; counsel-rg args: INITIAL-INPUT INITIAL-DIRECTORY EXTRA-RG-ARGS RG-PROMPT
-          (apply orig-fun initial-input target-dir (cddr args)))
+          (apply orig-fun (car args) init-dir (cddr args)))
       (apply orig-fun args)))
   :hook (ivy-mode . counsel-mode)
   :config
-  (advice-add 'counsel-rg :around #'ian/counsel-rg-always-prompt-dir-a)
+  (advice-add 'counsel-rg :around #'ian/counsel-rg-mx-prompt-dir-a)
   (setq counsel-rg-base-command "rg --vimgrep %s")
   (setq counsel-fzf-cmd "fd -H -c never \"%s\"")
   (global-set-key (kbd "C-S-p") #'counsel-M-x))

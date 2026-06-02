@@ -364,6 +364,7 @@ This follows the UX design of Visual Studio Code."
         (recenter-top-bottom (/ (window-body-height) 4)))))
   :config
   (advice-add 'xref-find-definitions :around #'ian/xref-recenter-quarter-top-in-new-buffer-a)
+  (setq xref-search-program 'ripgrep)
   (setq xref-after-jump-hook '(xref-pulse-momentarily))
   (setq xref-after-return-hook '(xref-pulse-momentarily))
   (setq xref-prompt-for-identifier nil))

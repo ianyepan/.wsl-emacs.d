@@ -978,7 +978,8 @@ This follows the UX design of Visual Studio Code."
   (pyvenv-mode +1))
 
 (use-package company
-  :hook (prog-mode . company-mode)
+  :hook ((prog-mode . company-mode)
+         (inferior-emacs-lisp-mode . company-mode))
   :config
   (setq company-idle-delay 0.0)
   (setq company-tooltip-minimum-width 60)

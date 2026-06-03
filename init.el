@@ -1046,8 +1046,16 @@ This follows the UX design of Visual Studio Code."
 
 (use-package dts-mode)
 
-;; (use-package rust-mode)
+(use-package kdl-mode)
 
+(use-package meson-mode
+  :config
+  ;; Unbind f1 key and let f1 key fallthrough as <help> in global-map.
+  (define-key meson-mode-map (kbd "<f1>") nil))
+
+(use-package rust-mode
+  :config
+  (add-to-list 'auto-mode-alist '("Cargo\\.lock\\'" . conf-toml-mode)))
 
 ;; (use-package go-mode
 ;;   :config

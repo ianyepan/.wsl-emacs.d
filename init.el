@@ -1347,14 +1347,14 @@ This follows the UX design of Visual Studio Code."
   :config
   (add-hook 'neotree-mode-hook (lambda ()
                                  (hl-line-mode +1)
-                                 (define-key evil-normal-state-local-map (kbd "TAB") 'neotree-enter)
                                  (with-eval-after-load 'evil
+                                   (define-key evil-normal-state-local-map (kbd "TAB") 'neotree-enter)
                                    (define-key evil-normal-state-local-map (kbd "H") 'evil-window-top))
                                  (setq-local line-spacing 1)))
-  (setq neo-theme 'icons)
-  (setq neo-autorefresh t) ; neotree.el: change delay to (run-with-idle-timer 0.1 ...)
+  (setq neo-theme 'nerd)
+  (setq neo-autorefresh t) ; In neotree.el: change delay to (run-with-idle-timer 0.1 ...)
   (setq neo-show-hidden-files t)
-  (setq neo-window-width 35))
+  (setq neo-window-width 50))
 
 ;; Org and LaTeX export
 ;;;; Ubuntu needs to have these installed:

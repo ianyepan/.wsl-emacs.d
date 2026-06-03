@@ -503,13 +503,13 @@ This follows the UX design of Visual Studio Code."
     (interactive)
     (pulse-momentary-highlight-one-line (point) 'region))
   :config
-  (setq evil-normal-state-tag   " -- NORMAL -- "
-        evil-insert-state-tag   " -- INSERT -- "
-        evil-visual-state-tag   " -- VISUAL -- "
-        evil-replace-state-tag  " -- REPLACE -- "
-        evil-motion-state-tag   " -- MOTION -- "
-        evil-operator-state-tag " -- OPERATOR -- "
-        evil-emacs-state-tag    " -- EMACS -- ")
+  (setq evil-normal-state-tag   "  -- NORMAL --  "
+        evil-insert-state-tag   "  -- INSERT --  "
+        evil-visual-state-tag   "  -- VISUAL --  "
+        evil-replace-state-tag  "  -- REPLACE -- "
+        evil-motion-state-tag   "  -- MOTION --  "
+        evil-operator-state-tag "  -- OPERATOR --"
+        evil-emacs-state-tag    "  -- EMACS --   ")
   (setq evil-mode-line-format '(after . mode-line-buffer-identification))
   (setq evil-insert-state-cursor '(bar . 1))
   (setq evil-kill-on-visual-paste nil)

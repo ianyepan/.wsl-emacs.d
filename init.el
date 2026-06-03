@@ -62,7 +62,7 @@
   (setq hscroll-margin 0)
   (setq load-prefer-newer t)
   (setq inhibit-compacting-font-caches t)
-  (setq echo-keystrokes 0.02)
+  (setq echo-keystrokes 0.4)
   (setq kill-buffer-query-functions nil)
   (setq delete-by-moving-to-trash t)
   (put 'downcase-region 'disabled nil)

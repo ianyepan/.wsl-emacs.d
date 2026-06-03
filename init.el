@@ -589,6 +589,7 @@ This follows the UX design of Visual Studio Code."
   :after evil
   :config
   (setq evil-collection-company-use-tng nil)
+  (setq evil-collection-ielm-move-cursor-back t)
   (setq evil-collection-repl-submit-state 'insert)
   (setq evil-collection-key-blacklist '("SPC"))
   (evil-collection-init))

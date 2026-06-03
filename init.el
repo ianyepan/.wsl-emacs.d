@@ -309,7 +309,7 @@ Reference: https://www.emacswiki.org/emacs/TrampMode#h5o-19"
   (setq default-frame-alist (append (list '(width . 74) '(height . 35) '(internal-border-width . 2))))
   (if (display-graphic-p)
       (add-to-list 'default-frame-alist '(inhibit-double-buffering . t)))
-  (blink-cursor-mode -1)
+  (blink-cursor-mode +1)
   (setq blink-cursor-blinks -1) ; blink forever
   (ian/set-big-fonts))
 

@@ -808,7 +808,6 @@ This follows the UX design of Visual Studio Code."
   (projectile-mode +1)
   (define-key projectile-mode-map (kbd "C-c p") #'projectile-command-map))
 
-(use-package rg)
 
 (use-package wgrep
   :commands wgrep-change-to-wgrep-mode

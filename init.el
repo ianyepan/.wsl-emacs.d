@@ -276,19 +276,15 @@ Reference: https://www.emacswiki.org/emacs/TrampMode#h5o-19"
   (defun ian/set-default-fonts (english-font chinese-font font-size font-weight)
     "Set the default Latin and CJK font families, as well as the line height."
     (interactive)
-    (defvar is-using-undersized-font nil)
-    (if (member english-font small-fonts-list)
-        (progn
-          (setq font-size (round (* font-size 1.1)))
-          (setq is-using-undersized-font t))
-      (setq is-using-undersized-font nil))
+    (when (member english-font small-fonts-list)
+      (setq font-size (round (* font-size 1.1))))
     (when (member english-font (font-family-list))
       (set-face-attribute 'default nil :family english-font :height font-size :weight font-weight))
     (when (member chinese-font (font-family-list))
       (dolist (charset '(kana han symbol cjk-misc bopomofo))
         (set-fontset-font (frame-parameter nil 'font)
                           charset (font-spec :family chinese-font
-                                             :size (*(/ font-size 10) 1.0)))))
+                                             :size (* (/ font-size 10) 1.0)))))
     (setq-default line-spacing (if (member english-font tight-fonts-list) 2 1)))
   (defun ian/set-big-fonts ()
     (interactive)

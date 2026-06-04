@@ -1092,6 +1092,8 @@ If not in a project, prompt user to enter initial dir."
 
 (use-package vimrc-mode)
 
+(use-package git-modes)
+
 (use-package cmake-font-lock)
 
 (use-package yaml-mode)

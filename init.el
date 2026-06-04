@@ -1273,7 +1273,7 @@ If not in a project, prompt user to enter initial dir."
   :config
   (dashboard-setup-startup-hook)
   (setq dashboard-startup-banner
-        (if (display-graphic-p) 'official "~/.emacs.d/official-emacs-logo-braille.txt"))
+        (if (display-graphic-p) 'official "~/.emacs.d/logos/official-emacs-logo-braille.txt"))
   (setq dashboard-banner-logo-title "( E M A C S )")
   (setq dashboard-init-info "")
   (setq dashboard-items nil)

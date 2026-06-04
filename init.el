@@ -571,8 +571,8 @@ This follows the UX design of Visual Studio Code."
     (kbd "<leader>b")     #'ivy-switch-buffer
     (kbd "<leader>s")     #'counsel-grep-or-swiper
     (kbd "<leader>w")     #'save-buffer
-    (kbd "<leader>f")     #'counsel-projectile-find-file
-    (kbd "<leader>F")     #'counsel-projectile-rg
+    (kbd "<leader>f")     #'project-find-file
+    (kbd "<leader>F")     #'ian/counsel-project-rg-or-rg
     (kbd "<leader>r")     #'ranger
     (kbd "<leader>o")     #'other-window
     (kbd "<leader>0")     #'delete-window
@@ -610,17 +610,10 @@ This follows the UX design of Visual Studio Code."
 ;; Git integration
 
 (use-package magit
-  :preface
-  (defun ian/run-projectile-invalidate-cache (&rest _args)
-    (projectile-invalidate-cache nil))
   :bind (("C-x g" . magit-status)
          ("C-c b" . magit-blame-addition))
   :config
   (add-hook 'with-editor-mode-hook #'evil-insert-state)
-  (advice-add 'magit-checkout
-              :after #'ian/run-projectile-invalidate-cache)
-  (advice-add 'magit-branch-and-checkout
-              :after #'ian/run-projectile-invalidate-cache)
   (local-unset-key (kbd "f"))
   (mapatoms
    (lambda (sym)
@@ -746,11 +739,10 @@ This follows the UX design of Visual Studio Code."
   (setq ivy-height 15)
   (setq ivy-display-style nil)
   (setq ivy-re-builders-alist
-        '((counsel-rg                   . ivy--regex-plus)
-          (counsel-projectile-rg        . ivy--regex-plus)
-          (counsel-projectile-find-file . ivy--regex-plus)
-          (swiper                       . ivy--regex-plus)
-          (t                            . ivy--regex-fuzzy)))
+        '((counsel-rg        . ivy--regex-plus)
+          (project-find-file . ivy--regex-plus)
+          (swiper            . ivy--regex-plus)
+          (t                 . ivy--regex-fuzzy)))
   (setq ivy-use-virtual-buffers t)
   (setq ivy-count-format "(%d/%d) ")
   (setq ivy-initial-inputs-alist nil)
@@ -776,6 +768,18 @@ This follows the UX design of Visual Studio Code."
           ;; counsel-rg args: INITIAL-INPUT INITIAL-DIRECTORY EXTRA-RG-ARGS RG-PROMPT
           (apply orig-fun (car args) init-dir (cddr args)))
       (apply orig-fun args)))
+  (defun ian/counsel-project-rg-or-rg ()
+    "Search the current project.el root using rg.
+If not in a project, prompt user to enter initial dir."
+    (interactive)
+    (let ((curr-project (project-current nil)))
+      (if curr-project
+          (counsel-rg nil (project-root curr-project))
+        (let ((init-dir (read-directory-name "Search in directory: ")))
+          ;; counsel-rg args: INITIAL-INPUT INITIAL-DIRECTORY EXTRA-RG-ARGS RG-PROMPT
+          (counsel-rg nil init-dir)))
+      (pulse-momentary-highlight-one-line (point) 'region)
+      (recenter (/ (window-body-height) 4))))
   :hook (ivy-mode . counsel-mode)
   :config
   (advice-add 'counsel-rg :around #'ian/counsel-rg-mx-prompt-dir-a)
@@ -783,31 +787,15 @@ This follows the UX design of Visual Studio Code."
   (setq counsel-fzf-cmd "fd -H -c never \"%s\"")
   (global-set-key (kbd "C-S-p") #'counsel-M-x))
 
-(use-package counsel-projectile
-  :preface
-  (defun ian/recenter-quarter-top-a ()
-    "Recenter current line to 1/4 from the top."
-    (recenter (/ (window-body-height) 4)))
-  :config
-  (advice-add 'counsel-projectile-rg :after #'ian/recenter-quarter-top-a)
-  (counsel-projectile-mode +1))
-
 (use-package swiper
   :after ivy
   :config
   (setq swiper-action-recenter t)
   (setq swiper-goto-start-of-match t))
 
-(use-package projectile
+(use-package project
   :config
-  (setq projectile-sort-order 'recentf)
-  (setq projectile-indexing-method 'hybrid)
-  (setq projectile-completion-system 'ivy)
-  (setq projectile-mode-line-prefix " ")
-  (setq projectile-enable-caching t)
-  (projectile-mode +1)
-  (define-key projectile-mode-map (kbd "C-c p") #'projectile-command-map))
-
+  (setq project-vc-extra-root-markers '(".project.el" ".projectile" ".project")))
 
 (use-package wgrep
   :commands wgrep-change-to-wgrep-mode
@@ -1327,25 +1315,52 @@ This follows the UX design of Visual Studio Code."
   (marginalia-mode))
 
 (use-package minions
+  :preface
+  (defvar-local ian--cached-project-data nil
+    "Cached cons cell of '(last-checked-directory . project-name) for mode-line efficiency.")
+  (defun ian/curr-project-name ()
+    "Return the current project name, using a cache when appropriate."
+    (if (and ian--cached-project-data
+             (string= default-directory (car ian--cached-project-data)))
+        (cdr ian--cached-project-data)
+      (let* ((curr-project (project-current nil))
+             (project-dir (and curr-project (project-root curr-project)))
+             (project-name (if project-dir
+                               (file-name-nondirectory (directory-file-name project-dir))
+                             "-")))
+        (setq-local ian--cached-project-data (cons default-directory project-name))
+        project-name)))
+  (defun ian/project-name-refresh-cache ()
+    "Refresh cached project data of current file."
+    (interactive)
+    (setq-local ian--cached-project-data nil)
+    (vc-file-clearprops default-directory)
+    (when (buffer-file-name)
+      (vc-file-clearprops (buffer-file-name)))
+    (vc-refresh-state)
+    (force-mode-line-update))
   :config
   (setq minions-mode-line-lighter "")
-  (setq-default mode-line-buffer-identification '("%b [" (:eval (projectile-project-name)) "]"))
+  (setq-default mode-line-buffer-identification '("%b [" (:eval (ian/curr-project-name)) "]"))
   (minions-mode +1))
 
 (use-package neotree
-  :after projectile
   :preface
   (defun ian/neotree-project-toggle ()
-    "Open NeoTree using the projectile root."
+    "Open NeoTree, using the project root if within a project."
     (interactive)
-    (let ((project-dir (projectile-project-root))
-          (file-name (buffer-file-name)))
-      (neotree-toggle)
-      (if project-dir
-          (when (neo-global--window-exists-p)
-            (neotree-dir project-dir)
-            (neotree-find file-name))
-        (message "Could not find Projectile project root."))))
+    (if (neo-global--window-exists-p)
+        (neotree-hide)
+      (let* ((curr-project (project-current nil))
+             (project-dir (if curr-project (project-root curr-project) nil))
+             (curr-file-name (buffer-file-name)))
+        (neotree-show)
+        (if project-dir
+            (progn
+              (neotree-dir project-dir)
+              (neotree-find curr-file-name))
+          (neotree-find curr-file-name)
+          (message "Not in a project... default to current directory.")))))
   :custom-face
   (neo-dir-link-face  ((t (:inherit variable-pitch))))
   (neo-header-face    ((t (:inherit variable-pitch))))

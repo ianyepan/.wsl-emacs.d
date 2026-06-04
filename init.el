@@ -1376,6 +1376,18 @@ If not in a project, prompt user to enter initial dir."
   (setq neo-show-hidden-files t)
   (setq neo-window-width 50))
 
+(use-package outline-indent
+  ;; The following keybindings work with evil-collection OOTB:
+  ;; - zo: open fold
+  ;; - zO: open folds recursively
+  ;; - zc: close fold
+  ;; - za: toggle fold
+  ;; - zr: open all folds
+  ;; - zm: close all folds
+  :config
+  (setq outline-indent-ellipsis " ▶ ...")
+  (add-hook 'yaml-mode-hook #'outline-indent-minor-mode))
+
 ;; Org and LaTeX export
 ;;;; Ubuntu needs to have these installed:
 ;;;; 1. texlive-latex-extra

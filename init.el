@@ -860,6 +860,7 @@ If not in a project, prompt user to enter initial dir."
            web-mode        ; ts-ls/HTML/CSS
            rust-mode       ; rust-analyzer
            go-mode         ; gopls
+           lua-mode        ; lua-language-server
            ) . lsp-deferred)
          (js-mode . ian/lsp-deferred-js-mode) ; ts-ls (tsserver wrapper)
         )

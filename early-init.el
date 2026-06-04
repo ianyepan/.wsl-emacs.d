@@ -2,7 +2,12 @@
 ;;  Author: Ian Y.E. Pan
 ;;; Commentary:
 ;;; Code:
+
+;; Ref: https://emacs-lsp.github.io/lsp-mode/page/performance/#use-plists-for-deserialization
+(setenv "LSP_USE_PLISTS" "true")
+
 (menu-bar-mode -1)
+
 (unless (and (display-graphic-p) (eq system-type 'darwin))
   (push '(menu-bar-lines . 0) default-frame-alist))
 (push '(tool-bar-lines . 0) default-frame-alist)

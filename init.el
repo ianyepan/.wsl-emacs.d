@@ -324,7 +324,8 @@ Reference: https://www.emacswiki.org/emacs/TrampMode#h5o-19"
   :hook ((markdown-mode . flyspell-mode)
          (org-mode      . flyspell-mode))
   :config
-  (setq ispell-program-name "/usr/bin/aspell"))
+  (setq ispell-program-name "/usr/bin/aspell")
+  (add-hook 'git-commit-setup-hook 'git-commit-setup-flyspell))
 
 (use-package elec-pair
   :ensure nil

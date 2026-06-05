@@ -1161,6 +1161,9 @@ If not in a project, prompt user to enter initial dir."
   :config
   (bind-key* (kbd "C-c r") #'rainbow-mode))
 
+(use-package rainbow-delimiters
+  :hook (emacs-lisp-mode . rainbow-delimiters-mode))
+
 (use-package hl-todo
   :custom-face
   (hl-todo                        ((t (:inverse-video nil :italic t :bold nil))))

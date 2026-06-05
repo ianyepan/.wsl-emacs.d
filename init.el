@@ -812,7 +812,7 @@ If not in a project, prompt user to enter initial dir."
         '(:not swiper
                counsel-grep
                counsel-rg
-               counsel-projectile-rg
+               ian/counsel-project-rg-or-rg
                ivy-switch-buffer
                counsel-switch-buffer))
   (setq ivy-prescient-retain-classic-highlighting t)

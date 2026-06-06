@@ -604,6 +604,11 @@ This follows the UX design of Visual Studio Code."
           typescript-mode
           ) . turn-on-evil-matchit-mode))
 
+(use-package evil-surround
+ :after evil
+ :config
+ (global-evil-surround-mode +1))
+
 ;; Git integration
 
 (use-package magit

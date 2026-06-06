@@ -1319,6 +1319,16 @@ If not in a project, prompt user to enter initial dir."
   :init
   (marginalia-mode))
 
+(use-package helpful
+  :after counsel
+  :init
+  (setq counsel-describe-function-function #'helpful-callable)
+  (setq counsel-describe-variable-function #'helpful-variable)
+  :config
+  (define-key global-map [remap describe-key]     #'helpful-key)
+  (define-key global-map [remap describe-command] #'helpful-command)
+  (define-key help-map "F" #'helpful-function))
+
 (use-package minions
   :preface
   (defvar-local ian--cached-project-data nil

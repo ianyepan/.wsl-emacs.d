@@ -704,39 +704,41 @@ This follows the UX design of Visual Studio Code."
 
 (use-package ivy
   :preface
-  (defvar ian/pre-ivy-all-windows nil)
+  ;; Buffer-local to each minibuffer buffer: a list of [window start point]
+  ;; vectors, snapshotted when that minibuffer opens.
+  (defvar-local ian/pre-ivy-all-windows nil)
   :hook (after-init . ivy-mode)
   :config
   (add-hook 'minibuffer-setup-hook
             (lambda ()
-              (when (not (memq this-command '(evil-ex ivy-done ivy-alt-done)))
-                ;; Snapshot all live windows, except minibuffers or buffers with
-                ;; an active region, in a list of vectors with the form
-                ;; [<#window> window-start window-point]
-                (setq ian/pre-ivy-all-windows
-                      (mapcar (lambda (w) (vector w (window-start w) (window-point w)))
-                              (seq-remove (lambda (w)
-                                            (or (window-minibuffer-p w)
-                                                (with-current-buffer (window-buffer w)
-                                                  (region-active-p))))
-                                          (window-list))))
-                ;; Park all live windows' points at their window-start to avoid
-                ;; shifting buffer view when minibuffer is active and window-point
-                ;; is near the bottom of screen.
-                (dolist (entry ian/pre-ivy-all-windows)
-                  (let ((w (aref entry 0)))
-                    (when (window-live-p w)
-                      (set-window-point w (window-start w))))))))
+              ;; Runs with the minibuffer as `current-buffer', so `setq-local'
+              ;; pins the snapshot to this specific minibuffer. Excluded commands
+              ;; store nil, which makes the exit hook a no-op -- a symmetric guard.
+              (setq-local ian/pre-ivy-all-windows
+                          (unless (memq this-command '(evil-ex ivy-done ivy-alt-done))
+                            (let (snapshot)
+                              (dolist (w (window-list))
+                                (unless (or (window-minibuffer-p w)
+                                            (with-current-buffer (window-buffer w)
+                                              (region-active-p)))
+                                  (push (vector w (window-start w) (window-point w)) snapshot)
+                                  ;; Park point at window-start so a tall minibuffer
+                                  ;; can't scroll the window to keep point on screen.
+                                  (set-window-point w (window-start w))))
+                              snapshot)))))
   (add-hook 'minibuffer-exit-hook
             (lambda ()
-              (dolist (entry ian/pre-ivy-all-windows)
-                (let ((w      (aref entry 0))
-                      (wstart (aref entry 1))
-                      (wpoint (aref entry 2)))
-                  (when (window-live-p w)
-                    (set-window-start w wstart t)
-                    (set-window-point w wpoint))))
-              (setq ian/pre-ivy-all-windows nil)))
+              ;; Also runs with the minibuffer as `current-buffer'. The
+              ;; `unwind-protect' clears the snapshot even if a `set-window-*'
+              ;; errors (e.g. a window whose buffer was swapped mid-session), so a
+              ;; failed restore can never leave a stale snapshot behind.
+              (unwind-protect
+                  (dolist (entry ian/pre-ivy-all-windows)
+                    (let ((w (aref entry 0)))
+                      (when (window-live-p w)
+                        (set-window-start w (aref entry 1) t)
+                        (set-window-point w (aref entry 2)))))
+                (setq-local ian/pre-ivy-all-windows nil))))
   (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
   (setq ivy-height 15)
   (setq ivy-display-style nil)

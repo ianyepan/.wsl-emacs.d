@@ -767,21 +767,23 @@ This follows the UX design of Visual Studio Code."
     "Force `counsel-rg` to always prompt for a directory when called with M-x."
     (if (called-interactively-p 'interactive)
         (let ((init-dir (read-directory-name "Search in directory: ")))
-          ;; counsel-rg args: INITIAL-INPUT INITIAL-DIRECTORY EXTRA-RG-ARGS RG-PROMPT
           (apply orig-fun (car args) init-dir (cddr args)))
-      (apply orig-fun args)))
+      (apply orig-fun args))
+      (pulse-momentary-highlight-one-line (point) 'region)
+      (recenter (/ (window-body-height) 4)))
   (defun ian/counsel-project-rg-or-rg ()
     "Search the current project.el root using rg.
-If not in a project, prompt user to enter initial dir."
+If not in a project, prompt user to enter initial dir.
+
+No explicit pulse/recenter here: this calls `counsel-rg', which is
+already advised by `ian/counsel-rg-mx-prompt-dir-a' to pulse and recenter
+after the jump."
     (interactive)
     (let ((curr-project (project-current nil)))
       (if curr-project
           (counsel-rg nil (project-root curr-project))
         (let ((init-dir (read-directory-name "Search in directory: ")))
-          ;; counsel-rg args: INITIAL-INPUT INITIAL-DIRECTORY EXTRA-RG-ARGS RG-PROMPT
-          (counsel-rg nil init-dir)))
-      (pulse-momentary-highlight-one-line (point) 'region)
-      (recenter (/ (window-body-height) 4))))
+          (counsel-rg nil init-dir)))))
   :hook (ivy-mode . counsel-mode)
   :config
   (advice-add 'counsel-rg :around #'ian/counsel-rg-mx-prompt-dir-a)

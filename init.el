@@ -628,6 +628,8 @@ This follows the UX design of Visual Studio Code."
     (add-to-list 'transient-values
                  '(magit-log:magit-log-mode "--decorate" "-n256"))
     (add-to-list 'transient-values
+                 '(magit-log:magit-log-select-mode "--decorate" "-n256"))
+    (add-to-list 'transient-values
                  '(magit-pull "--rebase")))
   (define-key magit-mode-map (kbd "<f5>") #'(lambda ()
                                               (interactive)

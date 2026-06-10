@@ -1282,7 +1282,7 @@ after the jump."
   :config
   (dashboard-setup-startup-hook)
   (setq dashboard-startup-banner
-        (if (display-graphic-p) 'official "~/.emacs.d/logos/official-emacs-logo-braille.txt"))
+        (if (display-graphic-p) 'official "~/.emacs.d/logos/emacs-artistic-text-logo.txt"))
   (setq dashboard-banner-logo-title "( E M A C S )")
   (setq dashboard-init-info "")
   (setq dashboard-items nil)

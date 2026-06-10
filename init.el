@@ -1104,7 +1104,9 @@ after the jump."
 
 (use-package cmake-font-lock)
 
-(use-package yaml-mode)
+(use-package yaml-mode
+  :config
+  (setq yaml-block-literal-electric-alist '()))
 
 ;; (use-package haskell-mode)
 

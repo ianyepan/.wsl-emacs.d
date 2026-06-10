@@ -345,7 +345,8 @@ Reference: https://www.emacswiki.org/emacs/TrampMode#h5o-19"
 
 (use-package display-line-numbers
   :ensure nil
-  :hook (prog-mode . display-line-numbers-mode)
+  :hook ((prog-mode . display-line-numbers-mode)
+         (yaml-mode . display-line-numbers-mode))
   :config
   (setq-default display-line-numbers-width 3))
 

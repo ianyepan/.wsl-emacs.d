@@ -1058,7 +1058,7 @@ after the jump."
   (define-key flycheck-mode-map (kbd "<f8>") #'flycheck-next-error)
   (define-key flycheck-mode-map (kbd "S-<f8>") #'flycheck-previous-error)
   (flycheck-define-checker proselint
-    "A linter for prose. Install the executable with `pip3 install proselint'."
+    "A linter for prose. Install the executable with `pipx install proselint'."
     :command ("proselint" source-inplace)
     :error-patterns
     ((warning line-start (file-name) ":" line ":" column ": "

@@ -30,6 +30,16 @@
   :preface
   (defvar ian/indent-width-standard 4)
   (defvar ian/indent-width-compact 2)
+  (defvar ian/ellipsis " ▶ ...")
+  ;; Ref: https://www.jamescherti.com/emacs-customize-ellipsis-outline-minor-mode/
+  (defun ian/set-buffer-local-ellipsis (ellipsis)
+    (let* ((display-table (or buffer-display-table (make-display-table)))
+           (face-offset (* (face-id 'shadow) (ash 1 22)))
+           (value (vconcat (mapcar (lambda (c)
+                                     (+ face-offset c))
+                                   (string-trim-right ellipsis)))))
+      (set-display-table-slot display-table 'selective-display value)
+      (setq buffer-display-table display-table)))
   (defun ian/maybe-set-default-browser ()
     "When in WSL Emacs, open links in default Windows 11 browser."
     (when (and (eq system-type 'gnu/linux)
@@ -1070,7 +1080,10 @@ after the jump."
 (use-package markdown-mode
   :hook (markdown-mode . auto-fill-mode)
   :custom-face
-  (markdown-code-face ((t (:background unspecified :inherit lsp-ui-doc-background)))))
+  (markdown-code-face ((t (:background unspecified :inherit lsp-ui-doc-background))))
+  :config
+  (add-hook 'markdown-mode-hook
+            #'(lambda () (ian/set-buffer-local-ellipsis ian/ellipsis))))
 
 (use-package typescript-mode
   :mode ("\\.tsx?\\'" . typescript-mode)
@@ -1407,29 +1420,9 @@ after the jump."
 
 (use-package outline
   :ensure nil
-  :preface
-  ;; Ref: https://www.jamescherti.com/emacs-customize-ellipsis-outline-minor-mode/
-  (defun ian/outline-set-buffer-local-ellipsis (ellipsis)
-    "Set a buffer-local ellipsis string ELLIPSIS for outline folding display.
-
-This function configures the current buffer to use a custom ellipsis string for
-selective display, typically in `outline-mode' or `outline-minor-mode'.
-
-The string ELLIPSIS is trimmed of trailing whitespace before use, as such
-whitespace can be misleading when lines are truncated or visually wrapped. In
-those cases, the trailing space may appear on a new visual line, creating the
-false impression of an additional line. Deleting this apparent line can
-inadvertently remove the entire folded logical line."
-    (let* ((display-table (or buffer-display-table (make-display-table)))
-           (face-offset (* (face-id 'shadow) (ash 1 22)))
-           (value (vconcat (mapcar (lambda (c)
-                                     (+ face-offset c))
-                                   (string-trim-right ellipsis)))))
-      (set-display-table-slot display-table 'selective-display value)
-      (setq buffer-display-table display-table)))
   :config
   (add-hook 'outline-minor-mode-hook
-            #'(lambda () (ian/outline-set-buffer-local-ellipsis " ▶ ..."))))
+            #'(lambda () (ian/set-buffer-local-ellipsis ian/ellipsis))))
 
 (use-package outline-indent
   ;; The following keybindings work with evil-collection OOTB:
@@ -1440,7 +1433,7 @@ inadvertently remove the entire folded logical line."
   ;; - zr: open all folds
   ;; - zm: close all folds
   :config
-  (setq outline-indent-ellipsis " ▶ ...")
+  (setq outline-indent-ellipsis ian/ellipsis)
   (add-hook 'yaml-mode-hook #'outline-indent-minor-mode))
 
 ;; Org and LaTeX export
@@ -1458,6 +1451,7 @@ inadvertently remove the entire folded logical line."
                        (setq-local evil-auto-indent nil))))
   :config
   (require 'org-tempo)
+  (setq org-ellipsis ian/ellipsis)
   (setq org-link-descriptive nil)
   (setq org-startup-folded nil)
   (setq org-todo-keywords '((sequence "TODO" "DOING" "DONE")))

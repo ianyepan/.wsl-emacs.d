@@ -48,16 +48,34 @@
       (setq browse-url-generic-program "/mnt/c/Windows/System32/cmd.exe"
             browse-url-generic-args '("/c" "start" "")
             browse-url-browser-function 'browse-url-generic)))
-  (defun ian/split-and-follow-vertically ()
-    "Split window vertically (below)."
+  (defun ian/split-window-below-and-follow ()
+    "Split window below and follow, keeping both windows aligned
+with the original view (no horizontal/vertical jump)."
     (interactive)
-    (split-window-below)
-    (other-window 1))
-  (defun ian/split-and-follow-horizontally ()
-    "Split window horizontally (right)."
+    (let ((win-start (window-start))
+          (win-hscroll (window-hscroll))
+          (curr-window (selected-window)))
+      (split-window-below)
+      (other-window 1)
+      (let ((new-window (selected-window)))
+        (set-window-start curr-window win-start)
+        (set-window-hscroll curr-window win-hscroll)
+        (set-window-start new-window win-start)
+        (set-window-hscroll new-window win-hscroll))))
+  (defun ian/split-window-right-and-follow ()
+    "Split window to the right and follow, keeping both windows aligned
+with the original view (no horizontal/vertical jump)."
     (interactive)
-    (split-window-right)
-    (other-window 1))
+    (let ((win-start (window-start))
+          (win-hscroll (window-hscroll))
+          (curr-window (selected-window)))
+      (split-window-right)
+      (other-window 1)
+      (let ((new-window (selected-window)))
+        (set-window-start curr-window win-start)
+        (set-window-hscroll curr-window win-hscroll)
+        (set-window-start new-window win-start)
+        (set-window-hscroll new-window win-hscroll))))
   :config
   (setq user-full-name "Ian Y.E. Pan")
   (setq frame-title-format '("Emacs " emacs-version))
@@ -79,8 +97,8 @@
   (put 'upcase-region 'disabled nil)
   (put 'scroll-right 'disabled nil)
   (put 'scroll-left 'disabled nil)
-  (global-set-key (kbd "C-x 2") #'ian/split-and-follow-vertically)
-  (global-set-key (kbd "C-x 3") #'ian/split-and-follow-horizontally)
+  (global-set-key (kbd "C-x 2") #'ian/split-window-below-and-follow)
+  (global-set-key (kbd "C-x 3") #'ian/split-window-right-and-follow)
   (global-set-key (kbd "C-s")   #'save-buffer)
   (unless (display-graphic-p)
     (global-set-key (kbd "C-h") #'backward-kill-word))
@@ -587,8 +605,8 @@ This follows the UX design of Visual Studio Code."
     (kbd "<leader>o")     #'other-window
     (kbd "<leader>0")     #'delete-window
     (kbd "<leader>1")     #'delete-other-windows
-    (kbd "<leader>2")     #'ian/split-and-follow-vertically
-    (kbd "<leader>3")     #'ian/split-and-follow-horizontally
+    (kbd "<leader>2")     #'ian/split-window-below-and-follow
+    (kbd "<leader>3")     #'ian/split-window-right-and-follow
     (kbd "<leader>a")     #'evil-buffer
     (kbd "<leader>/")     #'avy-goto-word-1
     (kbd "<leader><tab>") #'ian/lsp-execute-code-action

@@ -58,9 +58,9 @@ with the original view (no horizontal/vertical jump)."
       (split-window-below)
       (other-window 1)
       (let ((new-window (selected-window)))
-        (set-window-start curr-window win-start)
+        (set-window-start curr-window win-start t)
         (set-window-hscroll curr-window win-hscroll)
-        (set-window-start new-window win-start)
+        (set-window-start new-window win-start t)
         (set-window-hscroll new-window win-hscroll))))
   (defun ian/split-window-right-and-follow ()
     "Split window to the right and follow, keeping both windows aligned
@@ -72,9 +72,9 @@ with the original view (no horizontal/vertical jump)."
       (split-window-right)
       (other-window 1)
       (let ((new-window (selected-window)))
-        (set-window-start curr-window win-start)
+        (set-window-start curr-window win-start t)
         (set-window-hscroll curr-window win-hscroll)
-        (set-window-start new-window win-start)
+        (set-window-start new-window win-start t)
         (set-window-hscroll new-window win-hscroll))))
   :config
   (setq user-full-name "Ian Y.E. Pan")

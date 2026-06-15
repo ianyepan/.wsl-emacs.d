@@ -365,8 +365,8 @@ Reference: https://www.emacswiki.org/emacs/TrampMode#h5o-19"
 (use-package recentf
   :ensure nil
   :config
-  (add-to-list 'recentf-exclude (format "%s/\\.emacs.d/.*" (getenv "HOME")))
-  (add-to-list 'recentf-exclude (format "%s/\\.local/lib/.*" (getenv "HOME")))
+  (add-to-list 'recentf-exclude (format "~/.local/lib/.*"))
+  (add-to-list 'recentf-exclude (format "%s/.local/lib/.*" (getenv "HOME")))
   (add-to-list 'recentf-exclude "/usr/lib/.*")
   (add-to-list 'recentf-exclude "/usr/include/.*")
   (recentf-mode +1))

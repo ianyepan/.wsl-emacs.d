@@ -968,6 +968,7 @@ after the jump."
   (setq read-process-output-max (* 1024 1024)) ;; 1MB
   (setq lsp-idle-delay 0.25)
   (setq lsp-auto-execute-action nil)
+  (setq lsp-rust-analyzer-cargo-watch-command "clippy")
   (with-eval-after-load 'lsp-clangd
     (setq lsp-clients-clangd-args '("--header-insertion=never" "-j=4" "-background-index")))
   (add-to-list 'lsp-language-id-configuration '(js-jsx-mode . "javascriptreact")))

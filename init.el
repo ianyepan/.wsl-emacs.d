@@ -601,7 +601,7 @@ This follows the UX design of Visual Studio Code."
     (kbd "<leader>w")     #'save-buffer
     (kbd "<leader>f")     #'project-find-file
     (kbd "<leader>F")     #'ian/counsel-project-rg-or-rg
-    (kbd "<leader>r")     #'ranger
+    (kbd "<leader>r")     #'dirvish
     (kbd "<leader>o")     #'other-window
     (kbd "<leader>0")     #'delete-window
     (kbd "<leader>1")     #'delete-other-windows
@@ -1255,48 +1255,111 @@ after the jump."
   :config
   (setq wdired-allow-to-change-permissions 'advanced))
 
-(use-package ranger
-  :after dired
+(use-package dirvish
   :preface
-  ;; Workaround for a ranger bug affecting dired mark commands (d, u, m)
-  ;; on the topmost file in the ranger buffer.
+  ;; NOTE: workaround dirvish bug: With `dirvish-hide-cursor', a
+  ;; pre-redisplay hook snaps point to the start of the filename after
+  ;; every command, which sits before the search match.  Forward
+  ;; `evil-search-next' then keeps re-finding the current line.
   ;;
-  ;; Root cause: ranger omits the directory header line that vanilla dired
-  ;; normally places at the top of the buffer. As a result, the first file
-  ;; entry starts at buffer position 1 with no preceding newline, causing
-  ;; `line-beginning-position' to return 1 when point is on that line.
-  ;; `dired-get-subdir' searches backward from point for a subdir header;
-  ;; when it hits the buffer boundary without finding one, it erroneously
-  ;; returns the current directory path (a truthy value) instead of nil.
-  ;; This causes `dired-mark' to take the "mark all subdir files" branch,
-  ;; flagging every file in the directory instead of just the one at point.
-  ;;
-  ;; Fix: wrap affected dired commands with a temporary override of
-  ;; `dired-get-subdir' to always return nil via `cl-letf', forcing
-  ;; `dired-mark' into the correct single-file branch.
-  ;; Opened bug report at https://github.com/punassuming/ranger.el/issues/256
-  (defun ianpan/dired-no-subdir (fn)
-    (lambda (arg)
-      (interactive "p")
-      (cl-letf (((symbol-function 'dired-get-subdir) (lambda () nil)))
-        (funcall fn arg))))
+  ;; Skip to end-of-line first so the search advances to the next
+  ;; file's match.
+  (defun ian/dirvish-evil-search-next ()
+    "Like `evil-search-next', but reliable under `dirvish-hide-cursor'."
+    (interactive)
+    (end-of-line)
+    (evil-search-next)
+    (dired-move-to-filename))
+  ;; NOTE: workaround dirvish bug: `find-file' (C-x C-f) bypasses
+  ;; dirvish's open path, so the fullframe's dedicated dired window
+  ;; forces the new file into a cramped side window, and the dirvish
+  ;; session is never torn down (its stale `dv-winconf' then makes
+  ;; later `dirvish' calls restore the old layout instead of opening
+  ;; fresh).  Keep dirvish visible during the prompt, then once a file
+  ;; is chosen, quit the session (via its still-live dired window) and
+  ;; show the file fullscreen.
+  (defun ian/dirvish-find-file ()
+    "Create/visit a file, keeping Dirvish visible during the prompt, then quit
+Dirvish and visit the file.  Honors `counsel-find-file' or any other `find-file' remaps."
+    (interactive)
+    (let ((dv (dirvish-curr)))
+      (call-interactively (or (command-remapping #'find-file) #'find-file))
+      (let ((buf (current-buffer))
+            (win (and dv (get-buffer-window (cdr (dv-index dv))))))
+        (when (window-live-p win)
+          (with-selected-window win (dirvish-quit)))
+        (switch-to-buffer buf))))
+  :custom-face
+  (dirvish-hl-line-inactive ((t (:inherit dirvish-hl-line))))
   :config
-  (setq ranger-width-preview 0.5)
-  (setq ranger-width-parents 0.167)
-  (setq ranger-preview-delay 0.02)
-  (setq ranger-show-hidden t)
-  (define-key ranger-mode-map (kbd "H") #'evil-window-top)
-  (define-key ranger-mode-map (kbd "L") #'evil-window-bottom)
-  (define-key ranger-mode-map (kbd "?") #'evil-search-backward)
-  (define-key ranger-mode-map (kbd "d") (ianpan/dired-no-subdir #'dired-flag-file-deletion))
-  (define-key ranger-mode-map (kbd "u") (ianpan/dired-no-subdir #'dired-unmark))
-  (define-key ranger-mode-map (kbd "U") #'dired-unmark-all-marks)
-  (define-key ranger-mode-map (kbd "x") #'dired-do-flagged-delete)
-  (define-key ranger-mode-map (kbd "i") #'dired-toggle-read-only)
-  (define-key ranger-mode-map (kbd "m") (ianpan/dired-no-subdir #'dired-mark))
-  (define-key ranger-mode-map (kbd "R") #'dired-do-rename)
-  (define-key ranger-mode-map (kbd "C") #'dired-do-copy)
-  (define-key ranger-mode-map (kbd "C-h") nil))
+  ;; NOTE: workaround dirvish bug: Dirvish's file preview sets
+  ;; `buffer-file-name' on a throwaway buffer parked at point
+  ;; 1. Killing it runs `save-place-to-alist', which deletes the
+  ;; file's saved position (saveplace forgets point-1 visits) -- so
+  ;; previewing a file wipes its saveplace entry.
+  ;;
+  ;; TODO: Open one-liner PR for dirvish. dirvish maintainer currently
+  ;; inactive, holding off PR.
+  (advice-add 'dirvish--kill-buffer :around
+              (lambda (orig buffer)
+                (cl-letf (((symbol-function 'save-place-to-alist) #'ignore))
+                  (funcall orig buffer))))
+  (define-key dirvish-mode-map (kbd "C-x C-f") #'ian/dirvish-find-file)
+  (with-eval-after-load 'evil
+    (evil-define-key '(motion normal) dirvish-mode-map (kbd "o") #'dirvish-quicksort)
+    (evil-define-key '(motion normal) dirvish-mode-map (kbd "q") #'dirvish-quit)
+    (evil-define-key '(motion normal) dirvish-mode-map (kbd "n") #'ian/dirvish-evil-search-next)
+    (evil-define-key '(motion normal) dirvish-mode-map (kbd "h") #'dired-up-directory)
+    (evil-define-key '(motion normal) dirvish-mode-map (kbd "l") #'dired-find-file))
+  (setq dirvish-default-layout '(1 0.167 0.5))
+  (setq dirvish-input-throttle 0.02)
+  (setq dirvish-reuse-session nil)
+  (setq dirvish-hide-cursor t)
+  (dirvish-override-dired-mode +1))
+
+;; (use-package ranger
+;;   :after dired
+;;   :preface
+;;   ;; Workaround for a ranger bug affecting dired mark commands (d, u, m)
+;;   ;; on the topmost file in the ranger buffer.
+;;   ;;
+;;   ;; Root cause: ranger omits the directory header line that vanilla dired
+;;   ;; normally places at the top of the buffer. As a result, the first file
+;;   ;; entry starts at buffer position 1 with no preceding newline, causing
+;;   ;; `line-beginning-position' to return 1 when point is on that line.
+;;   ;; `dired-get-subdir' searches backward from point for a subdir header;
+;;   ;; when it hits the buffer boundary without finding one, it erroneously
+;;   ;; returns the current directory path (a truthy value) instead of nil.
+;;   ;; This causes `dired-mark' to take the "mark all subdir files" branch,
+;;   ;; flagging every file in the directory instead of just the one at point.
+;;   ;;
+;;   ;; Fix: wrap affected dired commands with a temporary override of
+;;   ;; `dired-get-subdir' to always return nil via `cl-letf', forcing
+;;   ;; `dired-mark' into the correct single-file branch.
+;;   ;; Opened bug report at https://github.com/punassuming/ranger.el/issues/256
+;;   (defun ianpan/dired-no-subdir (fn)
+;;     (lambda (arg)
+;;       (interactive "p")
+;;       (cl-letf (((symbol-function 'dired-get-subdir) (lambda () nil)))
+;;         (funcall fn arg))))
+;;   :config
+;;   (setq ranger-width-preview 0.5)
+;;   (setq ranger-width-parents 0.167)
+;;   (setq ranger-preview-delay 0.02)
+;;   (setq ranger-show-hidden t)
+;;   (setq ranger-cleanup-eagerly t)
+;;   (define-key ranger-mode-map (kbd "H") #'evil-window-top)
+;;   (define-key ranger-mode-map (kbd "L") #'evil-window-bottom)
+;;   (define-key ranger-mode-map (kbd "?") #'evil-search-backward)
+;;   (define-key ranger-mode-map (kbd "d") (ianpan/dired-no-subdir #'dired-flag-file-deletion))
+;;   (define-key ranger-mode-map (kbd "u") (ianpan/dired-no-subdir #'dired-unmark))
+;;   (define-key ranger-mode-map (kbd "U") #'dired-unmark-all-marks)
+;;   (define-key ranger-mode-map (kbd "x") #'dired-do-flagged-delete)
+;;   (define-key ranger-mode-map (kbd "i") #'dired-toggle-read-only)
+;;   (define-key ranger-mode-map (kbd "m") (ianpan/dired-no-subdir #'dired-mark))
+;;   (define-key ranger-mode-map (kbd "R") #'dired-do-rename)
+;;   (define-key ranger-mode-map (kbd "C") #'dired-do-copy)
+;;   (define-key ranger-mode-map (kbd "C-h") nil))
 
 ;; Misc
 

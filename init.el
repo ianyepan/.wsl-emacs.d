@@ -540,10 +540,9 @@ This follows the UX design of Visual Studio Code."
   (setq evil-insert-state-cursor '(bar . 1))
   (setq evil-kill-on-visual-paste nil)
   (setq-default evil-symbol-word-search t)
-  (define-key evil-normal-state-map (kbd "C-w C-o") #'(lambda () (interactive) (neotree-hide) (delete-other-windows)))
   (define-key evil-normal-state-map (kbd "C-o") #'(lambda () (interactive) (evil-jump-backward) (ian/pulse-line)))
   (define-key evil-normal-state-map (kbd "C-i") #'(lambda () (interactive) (evil-jump-forward) (ian/pulse-line)))
-  (unless (display-graphic-p) ;; TAB and C-i are indistinguishable in the terminal, hence the following workaround.
+  (unless (display-graphic-p) ;; TAB and C-i are indistinguishable in the terminal, hence the following workarounds.
     (evil-define-key '(motion normal) profiler-report-mode-map (kbd "TAB") #'profiler-report-toggle-entry)
     (evil-define-key '(motion normal) org-mode-map (kbd "TAB") #'org-cycle)
     (evil-define-key '(motion normal) markdown-mode-map (kbd "TAB") #'markdown-cycle))
@@ -611,7 +610,7 @@ This follows the UX design of Visual Studio Code."
     (kbd "<leader>/")     #'avy-goto-word-1
     (kbd "<leader><tab>") #'ian/lsp-execute-code-action
     (kbd "<leader>TAB")   #'ian/lsp-execute-code-action
-    (kbd "<leader>e")     #'ian/neotree-project-toggle))
+    (kbd "<leader>e")     #'ian/dirvish-side))
 
 (use-package evil-collection
   :after evil
@@ -1248,6 +1247,8 @@ after the jump."
   :config
   (setq dired-kill-when-opening-new-dired-buffer t)
   (setq dired-clean-confirm-killing-deleted-buffers nil)
+  (setq dired-listing-switches
+        "-l --almost-all --human-readable --group-directories-first --no-group")
   (put 'dired-find-alternate-file 'disabled nil))
 
 (use-package wdired
@@ -1257,6 +1258,12 @@ after the jump."
 
 (use-package dirvish
   :preface
+  (defun ian/dirvish-side ()
+    "Like `dirvish-side', but root at the project root when inside a project."
+    (interactive)
+    (if-let* ((proj (project-current nil)))
+        (dirvish-side (project-root proj))
+      (dirvish-side)))
   ;; NOTE: workaround dirvish bug: With `dirvish-hide-cursor', a
   ;; pre-redisplay hook snaps point to the start of the filename after
   ;; every command, which sits before the search match.  Forward
@@ -1306,6 +1313,13 @@ Dirvish and visit the file.  Honors `counsel-find-file' or any other `find-file'
                   (funcall orig buffer))))
   (define-key dirvish-mode-map (kbd "C-x C-f") #'ian/dirvish-find-file)
   (with-eval-after-load 'evil
+    (evil-define-key '(motion normal) dirvish-mode-map (kbd "<tab>") #'dirvish-subtree-toggle)
+    (evil-define-key '(motion normal) dirvish-mode-map (kbd "TAB") #'dirvish-subtree-toggle)
+    (evil-define-key '(motion normal) dirvish-mode-map (kbd "<backtab>") #'dirvish-subtree-clear)
+    (evil-define-key '(motion normal) dirvish-mode-map (kbd "=") #'dirvish-side-increase-width)
+    (evil-define-key '(motion normal) dirvish-mode-map (kbd "-") #'dirvish-side-decrease-width)
+    (evil-define-key '(motion normal) dirvish-mode-map (kbd "a") #'dirvish-quick-access)
+    (evil-define-key '(motion normal) dirvish-mode-map (kbd "f") #'dirvish-file-info-menu)
     (evil-define-key '(motion normal) dirvish-mode-map (kbd "o") #'dirvish-quicksort)
     (evil-define-key '(motion normal) dirvish-mode-map (kbd "q") #'dirvish-quit)
     (evil-define-key '(motion normal) dirvish-mode-map (kbd "n") #'ian/dirvish-evil-search-next)
@@ -1313,8 +1327,12 @@ Dirvish and visit the file.  Honors `counsel-find-file' or any other `find-file'
     (evil-define-key '(motion normal) dirvish-mode-map (kbd "l") #'dired-find-file))
   (setq dirvish-default-layout '(1 0.167 0.5))
   (setq dirvish-input-throttle 0.02)
+  (setq dirvish-attributes '(file-time file-size subtree-state))
+  (setq dirvish-side-attributes '(subtree-state))
   (setq dirvish-reuse-session nil)
   (setq dirvish-hide-cursor t)
+  (setq dirvish-side-width 50)
+  (setq dirvish-subtree-state-style 'plus)
   (dirvish-override-dired-mode +1))
 
 ;; Misc
@@ -1420,41 +1438,6 @@ Dirvish and visit the file.  Honors `counsel-find-file' or any other `find-file'
   (setq minions-mode-line-lighter "")
   (setq-default mode-line-buffer-identification '("%b [" (:eval (ian/curr-project-name)) "]"))
   (minions-mode +1))
-
-(use-package neotree
-  :preface
-  (defun ian/neotree-project-toggle ()
-    "Open NeoTree, using the project root if within a project."
-    (interactive)
-    (if (neo-global--window-exists-p)
-        (neotree-hide)
-      (let* ((curr-project (project-current nil))
-             (project-dir (if curr-project (project-root curr-project) nil))
-             (curr-file-name (buffer-file-name)))
-        (neotree-show)
-        (if project-dir
-            (progn
-              (neotree-dir project-dir)
-              (neotree-find curr-file-name))
-          (neotree-find curr-file-name)
-          (message "Not in a project... default to current directory.")))))
-  :custom-face
-  (neo-dir-link-face  ((t (:inherit variable-pitch))))
-  (neo-header-face    ((t (:inherit variable-pitch))))
-  (neo-banner-face    ((t (:inherit variable-pitch))))
-  (neo-root-dir-face  ((t (:inherit variable-pitch))))
-  (neo-file-link-face ((t (:inherit variable-pitch))))
-  :config
-  (add-hook 'neotree-mode-hook (lambda ()
-                                 (hl-line-mode +1)
-                                 (with-eval-after-load 'evil
-                                   (define-key evil-normal-state-local-map (kbd "TAB") 'neotree-enter)
-                                   (define-key evil-normal-state-local-map (kbd "H") 'evil-window-top))
-                                 (setq-local line-spacing 1)))
-  (setq neo-theme 'nerd)
-  (setq neo-autorefresh t) ; In neotree.el: change delay to (run-with-idle-timer 0.1 ...)
-  (setq neo-show-hidden-files t)
-  (setq neo-window-width 50))
 
 (use-package outline
   :ensure nil

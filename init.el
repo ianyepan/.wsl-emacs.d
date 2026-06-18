@@ -1332,7 +1332,11 @@ Dirvish and visit the file.  Honors `counsel-find-file' or any other `find-file'
   (setq dirvish-reuse-session nil)
   (setq dirvish-hide-cursor t)
   (setq dirvish-side-width 50)
-  (setq dirvish-subtree-state-style 'plus)
+  (setq dirvish-path-separators '(" ~" " /" " / "))
+  (with-eval-after-load 'dirvish-subtree
+    (setq dirvish-subtree--state-icons
+          (cons (propertize "▼" 'face 'dirvish-subtree-state)
+                (propertize "▶" 'face 'dirvish-subtree-state))))
   (dirvish-override-dired-mode +1))
 
 ;; Misc

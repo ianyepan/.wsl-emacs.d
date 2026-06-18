@@ -27,12 +27,13 @@
 ;;; Settings without corresponding packages
 
 (use-package emacs
+  :ensure nil
   :preface
   (defvar ian/indent-width-standard 4)
   (defvar ian/indent-width-compact 2)
   (defvar ian/ellipsis " ▶ ...")
   ;; Ref: https://www.jamescherti.com/emacs-customize-ellipsis-outline-minor-mode/
-  (defun ian/set-buffer-local-ellipsis (ellipsis)
+  (defun ian/--set-buffer-local-ellipsis (ellipsis)
     (let* ((display-table (or buffer-display-table (make-display-table)))
            (face-offset (* (face-id 'shadow) (ash 1 22)))
            (value (vconcat (mapcar (lambda (c)
@@ -40,7 +41,7 @@
                                    (string-trim-right ellipsis)))))
       (set-display-table-slot display-table 'selective-display value)
       (setq buffer-display-table display-table)))
-  (defun ian/maybe-set-default-browser ()
+  (defun ian/--maybe-set-default-browser ()
     "When in WSL Emacs, open links in default Windows 11 browser."
     (when (and (eq system-type 'gnu/linux)
                (string-match "Linux.*microsoft.*Linux"
@@ -48,34 +49,27 @@
       (setq browse-url-generic-program "/mnt/c/Windows/System32/cmd.exe"
             browse-url-generic-args '("/c" "start" "")
             browse-url-browser-function 'browse-url-generic)))
+  (defun ian/--split-window-and-follow (split-fn)
+    "Split via SPLIT-FN and follow, keeping both windows aligned
+with the original view (no horizontal/vertical jump)."
+    (let ((win-start (window-start))
+          (win-hscroll (window-hscroll))
+          (curr-window (selected-window)))
+      (funcall split-fn)
+      (other-window 1)
+      (let ((new-window (selected-window)))
+        (set-window-start curr-window win-start t)
+        (set-window-hscroll curr-window win-hscroll)
+        (set-window-start new-window win-start t)
+        (set-window-hscroll new-window win-hscroll))))
   (defun ian/split-window-below-and-follow ()
-    "Split window below and follow, keeping both windows aligned
-with the original view (no horizontal/vertical jump)."
+    "Split window below and follow, keeping the view aligned."
     (interactive)
-    (let ((win-start (window-start))
-          (win-hscroll (window-hscroll))
-          (curr-window (selected-window)))
-      (split-window-below)
-      (other-window 1)
-      (let ((new-window (selected-window)))
-        (set-window-start curr-window win-start t)
-        (set-window-hscroll curr-window win-hscroll)
-        (set-window-start new-window win-start t)
-        (set-window-hscroll new-window win-hscroll))))
+    (ian/--split-window-and-follow #'split-window-below))
   (defun ian/split-window-right-and-follow ()
-    "Split window to the right and follow, keeping both windows aligned
-with the original view (no horizontal/vertical jump)."
+    "Split window to the right and follow, keeping the view aligned."
     (interactive)
-    (let ((win-start (window-start))
-          (win-hscroll (window-hscroll))
-          (curr-window (selected-window)))
-      (split-window-right)
-      (other-window 1)
-      (let ((new-window (selected-window)))
-        (set-window-start curr-window win-start t)
-        (set-window-hscroll curr-window win-hscroll)
-        (set-window-start new-window win-start t)
-        (set-window-hscroll new-window win-hscroll))))
+    (ian/--split-window-and-follow #'split-window-right))
   :config
   (setq user-full-name "Ian Y.E. Pan")
   (setq frame-title-format '("Emacs " emacs-version))
@@ -141,8 +135,8 @@ with the original view (no horizontal/vertical jump)."
 
   (setq max-specpdl-size 10000)
   (setq max-lisp-eval-depth 10000)
-  (set-default 'truncate-lines t)
-  (ian/maybe-set-default-browser)
+  (set-default 'truncate-lines nil)
+  (ian/--maybe-set-default-browser)
   (setq jit-lock-defer-time 0)
   (setq fast-but-imprecise-scrolling t)
   (xterm-mouse-mode +1)
@@ -299,7 +293,7 @@ Reference: https://www.emacswiki.org/emacs/TrampMode#h5o-19"
   :preface
   (defconst small-fonts-list '("Consolas" "Ubuntu Mono" "Fixedsys Excelsior" "Inconsolata"))
   (defconst tight-fonts-list '("Consolas" "Ubuntu Mono" "Monaco" "Comic Mono"))
-  (defun ian/set-default-fonts (english-font chinese-font font-size font-weight)
+  (defun ian/--set-default-fonts (english-font chinese-font font-size font-weight)
     "Set the default Latin and CJK font families, as well as the line height."
     (interactive)
     (when (member english-font small-fonts-list)
@@ -314,14 +308,14 @@ Reference: https://www.emacswiki.org/emacs/TrampMode#h5o-19"
     (setq-default line-spacing (if (member english-font tight-fonts-list) 2 1)))
   (defun ian/set-big-fonts ()
     (interactive)
-    (ian/set-default-fonts "Consolas" "YaHei Consolas Hybrid" 95 'normal)
+    (ian/--set-default-fonts "Ubuntu Mono" "YaHei Consolas Hybrid" 200 'normal)
     (when (member "Inconsolata" (font-family-list))
       (set-face-attribute 'fixed-pitch nil :family "Inconsolata" :height 1.0))
     (when (member "Segoe UI Variable Static Small" (font-family-list))
       (set-face-attribute 'variable-pitch nil :family "Segoe UI Variable Static Small" :height 95 :weight 'normal)))
   (defun ian/set-small-fonts ()
     (interactive)
-    (ian/set-default-fonts "Consolas" "YaHei Consolas Hybrid" 85 'normal)
+    (ian/--set-default-fonts "Consolas" "YaHei Consolas Hybrid" 220 'normal)
     (when (member "Inconsolata" (font-family-list))
       (set-face-attribute 'fixed-pitch nil :family "Inconsolata" :height 1.0))
     (when (member "Segoe UI Variable Static Small" (font-family-list))
@@ -379,7 +373,7 @@ Reference: https://www.emacswiki.org/emacs/TrampMode#h5o-19"
 (use-package xref
   :ensure nil
   :preface
-  (defun ian/xref-recenter-quarter-top-in-new-buffer-a (func &rest args)
+  (defun ian/--xref-recenter-quarter-top-in-new-buffer-a (func &rest args)
     "When xref opens a new buffer, reposition the cursor at 1/4 window height from top.
 This follows the UX design of Visual Studio Code."
     (let ((original-buf (current-buffer)))
@@ -387,7 +381,7 @@ This follows the UX design of Visual Studio Code."
       (unless (eq (current-buffer) original-buf)
         (recenter-top-bottom (/ (window-body-height) 4)))))
   :config
-  (advice-add 'xref-find-definitions :around #'ian/xref-recenter-quarter-top-in-new-buffer-a)
+  (advice-add 'xref-find-definitions :around #'ian/--xref-recenter-quarter-top-in-new-buffer-a)
   (setq xref-search-program 'ripgrep)
   (setq xref-after-jump-hook '(xref-pulse-momentarily))
   (setq xref-after-return-hook '(xref-pulse-momentarily))
@@ -736,7 +730,7 @@ This follows the UX design of Visual Studio Code."
   :preface
   ;; Buffer-local to each minibuffer buffer: a list of [window start point]
   ;; vectors, snapshotted when that minibuffer opens.
-  (defvar-local ian/pre-ivy-all-windows nil)
+  (defvar-local ian/--pre-ivy-all-windows nil)
   :hook (after-init . ivy-mode)
   :config
   (add-hook 'minibuffer-setup-hook
@@ -744,7 +738,7 @@ This follows the UX design of Visual Studio Code."
               ;; Runs with the minibuffer as `current-buffer', so `setq-local'
               ;; pins the snapshot to this specific minibuffer. Excluded commands
               ;; store nil, which makes the exit hook a no-op -- a symmetric guard.
-              (setq-local ian/pre-ivy-all-windows
+              (setq-local ian/--pre-ivy-all-windows
                           (unless (memq this-command '(evil-ex ivy-done ivy-alt-done))
                             (let (snapshot)
                               (dolist (w (window-list))
@@ -763,12 +757,12 @@ This follows the UX design of Visual Studio Code."
               ;; errors (e.g. a window whose buffer was swapped mid-session), so a
               ;; failed restore can never leave a stale snapshot behind.
               (unwind-protect
-                  (dolist (entry ian/pre-ivy-all-windows)
+                  (dolist (entry ian/--pre-ivy-all-windows)
                     (let ((w (aref entry 0)))
                       (when (window-live-p w)
                         (set-window-start w (aref entry 1) t)
                         (set-window-point w (aref entry 2)))))
-                (setq-local ian/pre-ivy-all-windows nil))))
+                (setq-local ian/--pre-ivy-all-windows nil))))
   (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
   (setq ivy-height 15)
   (setq ivy-display-style nil)
@@ -795,7 +789,7 @@ This follows the UX design of Visual Studio Code."
 
 (use-package counsel
   :preface
-  (defun ian/counsel-rg-mx-prompt-dir-a (orig-fun &rest args)
+  (defun ian/--counsel-rg-mx-prompt-dir-a (orig-fun &rest args)
     "Force `counsel-rg` to always prompt for a directory when called with M-x."
     (if (called-interactively-p 'interactive)
         (let ((init-dir (read-directory-name "Search in directory: ")))
@@ -808,7 +802,7 @@ This follows the UX design of Visual Studio Code."
 If not in a project, prompt user to enter initial dir.
 
 No explicit pulse/recenter here: this calls `counsel-rg', which is
-already advised by `ian/counsel-rg-mx-prompt-dir-a' to pulse and recenter
+already advised by `ian/--counsel-rg-mx-prompt-dir-a' to pulse and recenter
 after the jump."
     (interactive)
     (let ((curr-project (project-current nil)))
@@ -818,7 +812,7 @@ after the jump."
           (counsel-rg nil init-dir)))))
   :hook (ivy-mode . counsel-mode)
   :config
-  (advice-add 'counsel-rg :around #'ian/counsel-rg-mx-prompt-dir-a)
+  (advice-add 'counsel-rg :around #'ian/--counsel-rg-mx-prompt-dir-a)
   (setq counsel-rg-base-command "rg --vimgrep %s")
   (setq counsel-fzf-cmd "fd -H -c never \"%s\"")
   (global-set-key (kbd "C-S-p") #'counsel-M-x))
@@ -879,7 +873,7 @@ after the jump."
     (interactive)
     (ian/pulse-line)
     (call-interactively 'lsp-execute-code-action))
-  (defun ian/lsp-deferred-js-mode ()
+  (defun ian/--lsp-deferred-js-mode ()
     "Enable lsp-deferred for js-mode but not json-mode."
     (unless (derived-mode-p 'json-mode)
       (lsp-deferred)))
@@ -897,7 +891,7 @@ after the jump."
            go-mode         ; gopls
            lua-mode        ; lua-language-server
            ) . lsp-deferred)
-         (js-mode . ian/lsp-deferred-js-mode) ; ts-ls (tsserver wrapper)
+         (js-mode . ian/--lsp-deferred-js-mode) ; ts-ls (tsserver wrapper)
         )
   :custom-face
   (lsp-headerline-breadcrumb-symbols-face                ((t (:inherit variable-pitch))))
@@ -1098,7 +1092,7 @@ after the jump."
   (markdown-code-face ((t (:background unspecified :inherit lsp-ui-doc-background))))
   :config
   (add-hook 'markdown-mode-hook
-            #'(lambda () (ian/set-buffer-local-ellipsis ian/ellipsis))))
+            #'(lambda () (ian/--set-buffer-local-ellipsis ian/ellipsis))))
 
 (use-package typescript-mode
   :mode ("\\.tsx?\\'" . typescript-mode)
@@ -1412,24 +1406,24 @@ Dirvish and visit the file.  Honors `counsel-find-file' or any other `find-file'
 
 (use-package minions
   :preface
-  (defvar-local ian--cached-project-data nil
+  (defvar-local ian/--cached-project-data nil
     "Cached cons cell of '(last-checked-directory . project-name) for mode-line efficiency.")
-  (defun ian/curr-project-name ()
+  (defun ian/--curr-project-name ()
     "Return the current project name, using a cache when appropriate."
-    (if (and ian--cached-project-data
-             (string= default-directory (car ian--cached-project-data)))
-        (cdr ian--cached-project-data)
+    (if (and ian/--cached-project-data
+             (string= default-directory (car ian/--cached-project-data)))
+        (cdr ian/--cached-project-data)
       (let* ((curr-project (project-current nil))
              (project-dir (and curr-project (project-root curr-project)))
              (project-name (if project-dir
                                (file-name-nondirectory (directory-file-name project-dir))
                              "-")))
-        (setq-local ian--cached-project-data (cons default-directory project-name))
+        (setq-local ian/--cached-project-data (cons default-directory project-name))
         project-name)))
   (defun ian/project-name-refresh-cache ()
     "Refresh cached project data of current file."
     (interactive)
-    (setq-local ian--cached-project-data nil)
+    (setq-local ian/--cached-project-data nil)
     (vc-file-clearprops default-directory)
     (when (buffer-file-name)
       (vc-file-clearprops (buffer-file-name)))
@@ -1437,14 +1431,14 @@ Dirvish and visit the file.  Honors `counsel-find-file' or any other `find-file'
     (force-mode-line-update))
   :config
   (setq minions-mode-line-lighter "")
-  (setq-default mode-line-buffer-identification '("%b [" (:eval (ian/curr-project-name)) "]"))
+  (setq-default mode-line-buffer-identification '("%b [" (:eval (ian/--curr-project-name)) "]"))
   (minions-mode +1))
 
 (use-package outline
   :ensure nil
   :config
   (add-hook 'outline-minor-mode-hook
-            #'(lambda () (ian/set-buffer-local-ellipsis ian/ellipsis))))
+            #'(lambda () (ian/--set-buffer-local-ellipsis ian/ellipsis))))
 
 (use-package outline-indent
   ;; The following keybindings work with evil-collection OOTB:

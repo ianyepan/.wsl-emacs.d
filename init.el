@@ -762,10 +762,10 @@ This follows the UX design of Visual Studio Code."
               ;; failed restore can never leave a stale snapshot behind.
               (unwind-protect
                   (dolist (entry ian/--pre-ivy-all-windows)
-                    (let ((w (aref entry 0)))
-                      (when (window-live-p w)
-                        (set-window-start w (aref entry 1) t)
-                        (set-window-point w (aref entry 2)))))
+                    (when-let* ((w (aref entry 0))
+                                ((window-live-p w)))
+                      (set-window-start w (aref entry 1) t)
+                      (set-window-point w (aref entry 2))))
                 (setq-local ian/--pre-ivy-all-windows nil))))
   (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
   (setq ivy-height 15)

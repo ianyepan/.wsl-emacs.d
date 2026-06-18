@@ -1175,15 +1175,22 @@ after the jump."
 (use-package cpp-auto-include ; Copyright (C) 2015 by Syohei Yoshida / Ben Deane
   :bind (:map c++-mode-map ("C-c i" . cpp-auto-include/ensure-includes-for-file)))
 
+(use-package elisp-autofmt)
+
 (use-package format-all
   :preface
   (defun ian/format-code ()
     "Auto-format region if active, otherwise format whole buffer."
     (interactive)
     (let ((windowstart (window-start)))
-      (if (derived-mode-p 'prolog-mode)
-          (prolog-indent-buffer)
-        (format-all-region-or-buffer))
+      (cond ((derived-mode-p 'prolog-mode)
+             (prolog-indent-buffer))
+            ((derived-mode-p 'emacs-lisp-mode)
+             (if (region-active-p)
+                 (elisp-autofmt-region)
+               (elisp-autofmt-buffer)))
+            (t
+             (format-all-region-or-buffer)))
       (set-window-start (selected-window) windowstart)))
   (defalias 'format-document #'ian/format-code)
   :config

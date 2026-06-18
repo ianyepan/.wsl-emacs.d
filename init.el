@@ -111,14 +111,12 @@ with the original view (no horizontal/vertical jump)."
   ;; Ref: https://emacsredux.com/blog/2026/04/07/stealing-from-the-best-emacs-configs/
   (setq-default bidi-display-reordering 'left-to-right
                 bidi-paragraph-direction 'left-to-right)
-  (setq bidi-inhibit-bpa t)
   (setq redisplay-skip-fontification-on-input t)
-  (setq read-process-output-max (* 4 1024 1024)) ; 4MB
   (setq-default cursor-in-non-selected-windows nil)
   (setq window-combination-resize t)
   (advice-add 'save-place-find-file-hook :after
               (lambda (&rest _)
-                (when buffer-file-name (ignore-errors (recenter)))))
+                (when buffer-file-name (ignore-errors (recenter (/ (window-body-height) 4))))))
 
   ;;; Fix annoying vertical window splitting.
   ;;; Ref: https://lists.gnu.org/archive/html/help-gnu-emacs/2015-08/msg00339.html
@@ -964,7 +962,6 @@ after the jump."
   (setq lsp-enable-snippet nil)
   (setq lsp-enable-file-watchers nil)
   (setq lsp-keep-workspace-alive nil)
-  (setq read-process-output-max (* 1024 1024)) ;; 1MB
   (setq lsp-idle-delay 0.25)
   (setq lsp-auto-execute-action nil)
   (setq lsp-rust-analyzer-cargo-watch-command "clippy")

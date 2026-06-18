@@ -19,7 +19,7 @@
       gc-cons-percentage 0.6
       file-name-handler-alist nil
       site-run-file nil
-      read-process-output-max (* 10 1024 1024)
+      read-process-output-max (* 4 1024 1024) ; 4MB
       bidi-inhibit-bpa t)
 
 (defvar ian/gc-cons-threshold (* 100 1024 1024))

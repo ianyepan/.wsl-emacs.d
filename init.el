@@ -423,6 +423,10 @@ This follows the UX design of Visual Studio Code."
   :init
   (setq ad-redefinition-action 'accept))
 
+(use-package help
+  :ensure nil
+  :config
+  (setq help-window-select t))
 
 ;;; Third-party Packages
 

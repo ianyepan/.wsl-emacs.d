@@ -1179,23 +1179,32 @@ after the jump."
 (use-package cpp-auto-include ; Copyright (C) 2015 by Syohei Yoshida / Ben Deane
   :bind (:map c++-mode-map ("C-c i" . cpp-auto-include/ensure-includes-for-file)))
 
-(use-package elisp-autofmt)
+;; NOTE: Vendored + locally patched; not from ELPA so updates can't
+;; clobber it. See the header in lisp/srefactor-lisp.el for what
+;; diverges from upstream.
+(use-package srefactor-lisp
+  :ensure nil
+  :load-path "lisp/")
 
 (use-package format-all
   :preface
   (defun ian/format-code ()
     "Auto-format region if active, otherwise format whole buffer."
     (interactive)
-    (let ((windowstart (window-start)))
-      (cond ((derived-mode-p 'prolog-mode)
-             (prolog-indent-buffer))
-            ((derived-mode-p 'emacs-lisp-mode)
-             (if (region-active-p)
-                 (elisp-autofmt-region)
-               (elisp-autofmt-buffer)))
-            (t
-             (format-all-region-or-buffer)))
-      (set-window-start (selected-window) windowstart)))
+    (let ((winstart (window-start)))
+      (cond
+       ((derived-mode-p 'prolog-mode)
+        (prolog-indent-buffer))
+       ((derived-mode-p 'emacs-lisp-mode)
+        ;; srefactor formats by calling `kill-region' once per (sub)form;
+        ;; with clipboard integration that spawns an `xclip' process per
+        ;; kill, exhausting Emacs's 1024-fd limit on huge formats.
+        (let ((interprogram-cut-function nil))
+          (if (region-active-p)
+              (srefactor-lisp-format-region (region-beginning) (region-end))
+            (message "Formatting entire buffer with srefactor is not recommended..."))))
+       (t (format-all-region-or-buffer)))
+      (set-window-start (selected-window) winstart t)))
   (defalias 'format-document #'ian/format-code)
   :config
   (global-set-key (kbd "<f6>") #'ian/format-code)

@@ -428,6 +428,21 @@ This follows the UX design of Visual Studio Code."
   :config
   (setq help-window-select t))
 
+(use-package comint
+  :ensure nil
+  :preface
+  (defun ian/--comint-dedup-all-history-a (cmd)
+    "Remove all existing occurrences of CMD from `comint-input-ring'."
+    (when (ring-p comint-input-ring)
+      (let ((i 0))
+        (while (< i (ring-length comint-input-ring))
+          (if (string= (ring-ref comint-input-ring i) cmd)
+              (ring-remove comint-input-ring i)
+            (setq i (1+ i)))))))
+  :config
+  (setq comint-input-ignoredups t)
+  (advice-add 'comint-add-to-input-history :before #'ian/--comint-dedup-all-history-a))
+
 ;;; Third-party Packages
 
 ;; GUI enhancements

@@ -1396,15 +1396,6 @@ Dirvish and visit the file.  Honors `counsel-find-file' or any other `find-file'
   (setq avy-background nil)
   (setq avy-all-windows nil))
 
-(use-package emojify
-  :config
-  (when (member "Segoe UI Emoji" (font-family-list))
-    (set-fontset-font
-     t 'symbol (font-spec :family "Segoe UI Emoji") nil 'prepend))
-  (setq emojify-display-style 'unicode)
-  (setq emojify-emoji-styles '(unicode))
-  (bind-key* (kbd "C-c .") #'emojify-insert-emoji)) ; override binding in any mode
-
 (use-package all-the-icons
   :if (display-graphic-p)
   :config

@@ -290,6 +290,7 @@ Reference: https://www.emacswiki.org/emacs/TrampMode#h5o-19"
   (show-paren-mode +1))
 
 (use-package frame
+  :ensure nil
   :preface
   (defconst small-fonts-list '("Consolas" "Ubuntu Mono" "Fixedsys Excelsior" "Inconsolata"))
   (defconst tight-fonts-list '("Consolas" "Ubuntu Mono" "Monaco" "Comic Mono"))
@@ -320,7 +321,6 @@ Reference: https://www.emacswiki.org/emacs/TrampMode#h5o-19"
       (set-face-attribute 'fixed-pitch nil :family "Inconsolata" :height 1.0))
     (when (member "Segoe UI Variable Static Small" (font-family-list))
       (set-face-attribute 'variable-pitch nil :family "Segoe UI Variable Static Small" :height 0.9 :weight 'normal)))
-  :ensure nil
   :config
   (setq default-frame-alist (append (list '(width . 74) '(height . 35) '(internal-border-width . 2))))
   (if (display-graphic-p)
@@ -1388,7 +1388,7 @@ Dirvish and visit the file.  Honors `counsel-find-file' or any other `find-file'
   :config
   (dashboard-setup-startup-hook)
   (setq dashboard-startup-banner
-        (if (display-graphic-p) 'official "~/.emacs.d/logos/emacs-artistic-text-logo.txt"))
+        (if (display-graphic-p) 'official "~/.emacs.d/logos/gnu-logo-braille.txt"))
   (setq dashboard-banner-logo-title "( E M A C S )")
   (setq dashboard-init-info "")
   (setq dashboard-items nil)

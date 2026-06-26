@@ -1090,7 +1090,7 @@ after the jump."
   :config
   (setq flycheck-check-syntax-automatically '(save mode-enabled))
   (setq flycheck-display-errors-delay 0.1)
-  (setq-default flycheck-disabled-checkers '(python-pylint))
+  (setq-default flycheck-disabled-checkers '(python-pylint org-lint))
   (setq flycheck-flake8rc "~/.config/flake8")
   (setq flycheck-checker-error-threshold 1000)
   (setq flycheck-indication-mode nil)

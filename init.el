@@ -347,7 +347,7 @@ Reference: https://www.emacswiki.org/emacs/TrampMode#h5o-19"
   :ensure nil
   :hook (prog-mode . electric-pair-local-mode)
   :config
-  (setq electric-pair-preserve-balance nil))
+  (setq electric-pair-preserve-balance t))
 
 (use-package saveplace
   :ensure nil

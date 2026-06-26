@@ -1352,7 +1352,7 @@ Dirvish and visit the file.  Honors `counsel-find-file' or any other `find-file'
     (evil-define-key '(motion normal) dirvish-mode-map (kbd "n") #'ian/dirvish-evil-search-next)
     (evil-define-key '(motion normal) dirvish-mode-map (kbd "h") #'dired-up-directory)
     (evil-define-key '(motion normal) dirvish-mode-map (kbd "l") #'dired-find-file))
-  (setq dirvish-default-layout '(1 0.167 0.5))
+  (setq dirvish-default-layout '(1 0.167 0.55))
   (setq dirvish-input-throttle 0.02)
   (setq dirvish-attributes '(file-time file-size subtree-state))
   (setq dirvish-side-attributes '(subtree-state))

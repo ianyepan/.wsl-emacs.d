@@ -556,6 +556,7 @@ This follows the UX design of Visual Studio Code."
   (unless (display-graphic-p) ;; TAB and C-i are indistinguishable in the terminal, hence the following workarounds.
     (evil-define-key '(motion normal) profiler-report-mode-map (kbd "TAB") #'profiler-report-toggle-entry)
     (evil-define-key '(motion normal) org-mode-map (kbd "TAB") #'org-cycle)
+    (evil-define-key '(motion normal) Info-mode-map (kbd "C-i") #'Info-history-forward)
     (evil-define-key '(motion normal) markdown-mode-map (kbd "TAB") #'markdown-cycle))
   (bind-key* (kbd "M-<up>") #'(lambda () (interactive) (scroll-down 2)))
   (bind-key* (kbd "M-<down>") #'(lambda () (interactive) (scroll-up 2)))

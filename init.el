@@ -292,39 +292,43 @@ Reference: https://www.emacswiki.org/emacs/TrampMode#h5o-19"
 (use-package frame
   :ensure nil
   :preface
-  (defconst small-fonts-list '("Consolas" "Ubuntu Mono" "Fixedsys Excelsior" "Inconsolata"))
-  (defconst tight-fonts-list '("Consolas" "Ubuntu Mono" "Monaco" "Comic Mono"))
-  (defun ian/--set-default-fonts (english-font chinese-font font-size font-weight)
-    "Set the default Latin and CJK font families, as well as the line height."
-    (interactive)
-    (when (member english-font small-fonts-list)
-      (setq font-size (round (* font-size 1.1))))
-    (when (member english-font (font-family-list))
-      (set-face-attribute 'default nil :family english-font :height font-size :weight font-weight))
-    (when (member chinese-font (font-family-list))
-      (dolist (charset '(kana han symbol cjk-misc bopomofo))
-        (set-fontset-font (frame-parameter nil 'font)
-                          charset (font-spec :family chinese-font
-                                             :size (* (/ font-size 10) 1.0)))))
-    (setq-default line-spacing (if (member english-font tight-fonts-list) 2 1)))
+  (defconst ian/small-fonts-list '("Consolas" "Ubuntu Mono" "Fixedsys Excelsior" "Inconsolata")
+    "English fonts whose default height should be scaled up by 10%.")
+  (defconst ian/tight-fonts-list '("Consolas" "Ubuntu Mono" "Monaco" "Comic Mono")
+    "English fonts that need extra line-spacing to breathe.")
+  (defconst ian/cjk-font "YaHei Consolas Hybrid"
+    "Font family used for CJK charsets.")
+  (defun ian/--set-fonts (english-font font-size variable-pitch-height)
+    "Set the default Latin/CJK fonts plus the fixed- and variable-pitch faces.
+ENGLISH-FONT is the Latin family, FONT-SIZE its height (1/10 pt), and
+VARIABLE-PITCH-HEIGHT the height for the variable-pitch face."
+    (let ((font-families (font-family-list))
+          (font-size (if (member english-font ian/small-fonts-list)
+                         (round (* font-size 1.1))
+                       font-size)))
+      (set-face-attribute 'default nil :height font-size :weight 'normal)
+      (when (member english-font font-families)
+        (set-face-attribute 'default nil :family english-font))
+      (when (member ian/cjk-font font-families)
+        (dolist (charset '(kana han symbol cjk-misc bopomofo))
+          (set-fontset-font (frame-parameter nil 'font)
+                            charset (font-spec :family ian/cjk-font
+                                               :size (* (/ font-size 10) 1.0)))))
+      (when (member "Inconsolata" font-families)
+        (set-face-attribute 'fixed-pitch nil :family "Inconsolata" :height 1.0))
+      (when (member "Segoe UI Variable Static Small" font-families)
+        (set-face-attribute 'variable-pitch nil :family "Segoe UI Variable Static Small"
+                            :height variable-pitch-height :weight 'normal))
+      (setq-default line-spacing (if (member english-font ian/tight-fonts-list) 2 1))))
   (defun ian/set-big-fonts ()
     (interactive)
-    (ian/--set-default-fonts "Ubuntu Mono" "YaHei Consolas Hybrid" 200 'normal)
-    (when (member "Inconsolata" (font-family-list))
-      (set-face-attribute 'fixed-pitch nil :family "Inconsolata" :height 1.0))
-    (when (member "Segoe UI Variable Static Small" (font-family-list))
-      (set-face-attribute 'variable-pitch nil :family "Segoe UI Variable Static Small" :height 95 :weight 'normal)))
+    (ian/--set-fonts "Ubuntu Mono" 200 95))
   (defun ian/set-small-fonts ()
     (interactive)
-    (ian/--set-default-fonts "Consolas" "YaHei Consolas Hybrid" 220 'normal)
-    (when (member "Inconsolata" (font-family-list))
-      (set-face-attribute 'fixed-pitch nil :family "Inconsolata" :height 1.0))
-    (when (member "Segoe UI Variable Static Small" (font-family-list))
-      (set-face-attribute 'variable-pitch nil :family "Segoe UI Variable Static Small" :height 0.9 :weight 'normal)))
+    (ian/--set-fonts "Consolas" 220 0.9))
   :config
   (setq default-frame-alist (append (list '(width . 74) '(height . 35) '(internal-border-width . 2))))
-  (if (display-graphic-p)
-      (add-to-list 'default-frame-alist '(inhibit-double-buffering . t)))
+  (add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
   (blink-cursor-mode +1)
   (setq blink-cursor-blinks -1) ; blink forever
   (ian/set-big-fonts))
